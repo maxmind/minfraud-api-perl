@@ -33,6 +33,8 @@ our @EXPORT_OK = qw(
     Str
     URIObject
     UserAgentObject
+    IssuerObject
+    IssuerObjectCoercion
     object_can_type
     object_isa_type
 );
@@ -86,6 +88,13 @@ sub HashRef () {
                && Scalar::Util::reftype( $_[0] ) eq 'HASH'
                && ! Scalar::Util::blessed( $_[0] ); }
     );
+}
+
+sub is_HashRef () {
+    defined $_[0]
+        && ref $_[0]
+        && Scalar::Util::reftype( $_[0] ) eq 'HASH'
+        && !Scalar::Util::blessed( $_[0] );
 }
 
 sub IPAddress {
@@ -212,6 +221,24 @@ sub URIObject () {
 sub UserAgentObject () {
     return quote_sub(
         q{ WebService::MinFraud::Types::object_can_type( $_[0], 'agent', 'request' ) }
+    );
+}
+
+sub IssuerObject () {
+    return quote_sub(
+        q{ WebService::MinFraud::Types::object_isa_type( $_[0], 'WebService::MinFraud::Record::Issuer' ) }
+    );
+}
+
+sub IssuerObjectCoercion () {
+    return quote_sub(
+        q{
+            defined $_[0]
+            && Scalar::Util::blessed($_[0])
+            && $_[0]->isa('WebService::MinFraud::Record::Issuer')
+            ? $_[0]
+            : WebService::MinFraud::Record::Issuer->new($_[0]);
+        }
     );
 }
 

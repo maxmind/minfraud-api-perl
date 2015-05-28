@@ -5,7 +5,7 @@ use warnings;
 
 our $VERSION = '0.001001';
 
-use  WebService::MinFraud::Types qw( Str );
+use WebService::MinFraud::Types qw( Str );
 
 use Moo;
 

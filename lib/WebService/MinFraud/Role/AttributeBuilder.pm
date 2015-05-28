@@ -6,20 +6,26 @@ use warnings;
 our $VERSION = '0.001001';
 
 use B;
-use GeoIP2::Record::City;
-use GeoIP2::Record::Continent;
-use GeoIP2::Record::Country;
-use GeoIP2::Record::Location;
-use GeoIP2::Record::MaxMind;
-use GeoIP2::Record::Postal;
-use GeoIP2::Record::RepresentedCountry;
-use GeoIP2::Record::Traits;
-use GeoIP2::Types qw( ArrayRef HashRef );
+
+#use GeoIP2::Record::City;
+#use GeoIP2::Record::Continent;
+#use GeoIP2::Record::Country;
+#use GeoIP2::Record::Location;
+#use GeoIP2::Record::Postal;
+#use GeoIP2::Record::RepresentedCountry;
+#use GeoIP2::Record::Traits;
+use WebService::MinFraud::Record::BillingAddress;
+use WebService::MinFraud::Record::CreditCard;
+use WebService::MinFraud::Record::Issuer;
+use WebService::MinFraud::Record::MaxMind;
+use WebService::MinFraud::Record::ShippingAddress;
+use WebService::MinFraud::Types qw( ArrayRef HashRef );
 use Sub::Quote qw( quote_sub );
 
 use Moo::Role;
 
-with 'GeoIP2::Role::Model', 'GeoIP2::Role::HasLocales';
+with 'WebService::MinFraud::Role::Model',
+    'WebService::MinFraud::Role::HasLocales';
 
 sub _define_attributes_for_keys {
     my $class = shift;
@@ -47,7 +53,7 @@ sub _define_attributes_for_keys {
                 is  => 'ro',
                 isa => quote_sub(
                     sprintf(
-                        q{ GeoIP2::Types::object_isa_type( $_[0], %s ) },
+                        q{ WebService::MinFraud::Types::object_isa_type( $_[0], %s ) },
                         B::perlstring($record_class)
                     )
                 ),
@@ -67,16 +73,11 @@ sub _define_attributes_for_keys {
 
 sub _all_record_names {
     return qw(
-        city
-        continent
-        country
-        location
+        billing_address
+        credit_card
+        issuer
         maxmind
-        postal
-        registered_country
-        represented_country
-        traits
-        risk_score
+        shipping_address
     );
 }
 
@@ -107,16 +108,20 @@ sub _build_record {
 
 {
     my %key_to_class = (
+        billing_address     => 'BillingAddress',
+        credit_card         => 'CreditCard',
         maxmind             => 'MaxMind',
         registered_country  => 'Country',
         represented_country => 'RepresentedCountry',
+        shipping_address    => 'ShippingAddress',
     );
 
     sub _record_class_for_key {
         my $self = shift;
         my $key  = shift;
 
-        return 'GeoIP2::Record::' . ( $key_to_class{$key} || ucfirst $key );
+        return 'WebService::MinFraud::Record::'
+            . ( $key_to_class{$key} || ucfirst $key );
     }
 }
 

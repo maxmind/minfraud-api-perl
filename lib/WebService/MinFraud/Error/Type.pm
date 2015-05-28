@@ -31,7 +31,7 @@ __END__
 
   use 5.008;
 
-  use WebService::MinFraud::WebService::Client;
+  use WebService::MinFraud::Client;
   use Scalar::Util qw( blessed );
   use Try::Tiny;
 

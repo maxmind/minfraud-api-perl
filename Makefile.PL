@@ -18,6 +18,20 @@ my %WriteMakefileArgs = (
   "MIN_PERL_VERSION" => "5.010",
   "NAME" => "WebService::MinFraud",
   "PREREQ_PM" => {
+    "B" => 0,
+    "Data::Validate::IP" => 0,
+    "Exporter" => 0,
+    "JSON" => 0,
+    "LWP::UserAgent" => 0,
+    "List::MoreUtils" => 0,
+    "Moo" => 0,
+    "Moo::Role" => 0,
+    "Params::Validate" => 0,
+    "Scalar::Util" => 0,
+    "Sub::Quote" => 0,
+    "Throwable::Error" => 0,
+    "Try::Tiny" => 0,
+    "URI" => 0,
     "strict" => 0,
     "warnings" => 0
   },
@@ -34,9 +48,23 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
+  "B" => 0,
+  "Data::Validate::IP" => 0,
+  "Exporter" => 0,
   "ExtUtils::MakeMaker" => 0,
   "File::Spec" => 0,
+  "JSON" => 0,
+  "LWP::UserAgent" => 0,
+  "List::MoreUtils" => 0,
+  "Moo" => 0,
+  "Moo::Role" => 0,
+  "Params::Validate" => 0,
+  "Scalar::Util" => 0,
+  "Sub::Quote" => 0,
   "Test::More" => "0.96",
+  "Throwable::Error" => 0,
+  "Try::Tiny" => 0,
+  "URI" => 0,
   "strict" => 0,
   "warnings" => 0
 );
