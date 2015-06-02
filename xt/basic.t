@@ -44,7 +44,11 @@ ok(
 );
 ok(
     defined $response_insights->risk_score,
-    'sugary risk_score is defined (insights)'
+    'sugary risk_score is defined'
+);
+ok(
+    defined $response_insights->credits_remaining,
+    'credits_remaining is defined'
 );
 ok( $response_insights->billing_address, 'billing address record exists' );
 ok(

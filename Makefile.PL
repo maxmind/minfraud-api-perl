@@ -19,7 +19,6 @@ my %WriteMakefileArgs = (
   "NAME" => "WebService::MinFraud",
   "PREREQ_PM" => {
     "B" => 0,
-    "Data::Dumper" => 0,
     "Data::Validate::IP" => 0,
     "Exporter" => 0,
     "GeoIP2::Record::City" => 0,
@@ -41,6 +40,7 @@ my %WriteMakefileArgs = (
     "Try::Tiny" => 0,
     "Types::Standard" => 0,
     "URI" => 0,
+    "WebService::MinFraud::Role::HasCommonAttributes" => 0,
     "strict" => 0,
     "warnings" => 0
   },
@@ -58,7 +58,6 @@ my %WriteMakefileArgs = (
 
 my %FallbackPrereqs = (
   "B" => 0,
-  "Data::Dumper" => 0,
   "Data::Validate::IP" => 0,
   "Exporter" => 0,
   "ExtUtils::MakeMaker" => 0,
@@ -83,6 +82,7 @@ my %FallbackPrereqs = (
   "Try::Tiny" => 0,
   "Types::Standard" => 0,
   "URI" => 0,
+  "WebService::MinFraud::Role::HasCommonAttributes" => 0,
   "strict" => 0,
   "warnings" => 0
 );

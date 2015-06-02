@@ -1,5 +1,4 @@
 requires "B" => "0";
-requires "Data::Dumper" => "0";
 requires "Data::Validate::IP" => "0";
 requires "Exporter" => "0";
 requires "GeoIP2::Record::City" => "0";
@@ -21,6 +20,7 @@ requires "Throwable::Error" => "0";
 requires "Try::Tiny" => "0";
 requires "Types::Standard" => "0";
 requires "URI" => "0";
+requires "WebService::MinFraud::Role::HasCommonAttributes" => "0";
 requires "perl" => "5.010";
 requires "strict" => "0";
 requires "warnings" => "0";

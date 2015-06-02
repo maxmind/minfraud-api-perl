@@ -7,19 +7,19 @@ our $VERSION = '0.001001';
 
 use B;
 use Sub::Quote qw( quote_sub );
-use Types::Standard qw( ArrayRef HashRef InstanceOf Num Str );
 use WebService::MinFraud::Record::BillingAddress;
 use WebService::MinFraud::Record::CreditCard;
 use WebService::MinFraud::Record::IPLocation;
 use WebService::MinFraud::Record::Issuer;
 use WebService::MinFraud::Record::ShippingAddress;
 use WebService::MinFraud::Record::Warning;
-use WebService::MinFraud::Types qw( NonNegativeInt );
+use WebService::MinFraud::Types qw( HashRef );
 
 use Moo::Role;
 
 with 'WebService::MinFraud::Role::Model',
-    'WebService::MinFraud::Role::HasLocales';
+    'WebService::MinFraud::Role::HasLocales',
+    'WebService::MinFraud::Role::HasCommonAttributes';
 
 requires '_all_record_names';
 
@@ -108,36 +108,5 @@ sub _build_record {
             . ( $key_to_class{$key} || ucfirst $key );
     }
 }
-
-has id => (
-    is       => 'lazy',
-    isa      => Str,
-    init_arg => undef,
-    builder  => sub { my $self = shift; $self->{raw}->{id} },
-);
-
-has risk_score => (
-    is       => 'lazy',
-    isa      => Num,
-    init_arg => undef,
-    builder  => sub { my $self = shift; $self->{raw}->{risk_score} },
-);
-
-has credits_remaining => (
-    is       => 'lazy',
-    isa      => NonNegativeInt,
-    init_arg => undef,
-    builder  => sub { my $self = shift; $self->{raw}->{credits_remaining} },
-);
-
-has warnings => (
-    is  => 'lazy',
-    isa => ArrayRef [ InstanceOf ['WebService::MinFraud::Record::Warning'] ],
-    init_arg => undef,
-    builder  => sub {
-        [ map { WebService::MinFraud::Record::Warning->new($_) }
-                @{ $_[0]->{raw}->{warnings} } ];
-    },
-);
 
 1;
