@@ -6,11 +6,18 @@ use warnings;
 our $VERSION = '2.001004';
 
 use Data::Validate::IP ();
-use WebService::MinFraud::Error::Type;
+use GeoIP2::Record::City;
+use GeoIP2::Record::Continent;
+use GeoIP2::Record::Country;
+use GeoIP2::Record::Location;
+use GeoIP2::Record::Postal;
+use GeoIP2::Record::Subdivision;
+use GeoIP2::Record::Traits;
 use List::MoreUtils ();
 use Scalar::Util    ();
 use Sub::Quote qw( quote_sub );
 use URI;
+use WebService::MinFraud::Error::Type;
 
 use Exporter qw( import );
 
@@ -18,11 +25,17 @@ our @EXPORT_OK = qw(
     ArrayRef
     Bool
     BoolCoercion
+    CityCoercion
+    ContinentCoercion
+    CountryCoercion
     HTTPStatus
     HashRef
     IPAddress
+    IssuerObject
+    IssuerObjectCoercion
     JSONObject
     LocalesArrayRef
+    LocationCoercion
     MaxMindID
     MaxMindLicenseKey
     MaybeStr
@@ -30,11 +43,12 @@ our @EXPORT_OK = qw(
     NonNegativeInt
     Num
     PositiveInt
+    PostalCoercion
     Str
+    SubdivisionCoercion
+    TraitsCoercion
     URIObject
     UserAgentObject
-    IssuerObject
-    IssuerObjectCoercion
     object_can_type
     object_isa_type
 );
@@ -68,6 +82,42 @@ sub BoolCoercion () {
                     || $_[0]->isa('JSON::XS::Boolean')
                   )
                 ? $_[0] + 0 : $_[0] }
+    );
+}
+
+sub CityCoercion () {
+    return quote_sub(
+        q{
+            defined $_[0]
+            && Scalar::Util::blessed($_[0])
+            && $_[0]->isa('GeoIP2::Record::City')
+            ? $_[0]
+            : GeoIP2::Record::City->new($_[0]);
+        }
+    );
+}
+
+sub ContinentCoercion () {
+    return quote_sub(
+        q{
+            defined $_[0]
+            && Scalar::Util::blessed($_[0])
+            && $_[0]->isa('GeoIP2::Record::Continent')
+            ? $_[0]
+            : GeoIP2::Record::Continent->new($_[0]);
+        }
+    );
+}
+
+sub CountryCoercion () {
+    return quote_sub(
+        q{
+            defined $_[0]
+            && Scalar::Util::blessed($_[0])
+            && $_[0]->isa('GeoIP2::Record::Country')
+            ? $_[0]
+            : GeoIP2::Record::Country->new($_[0]);
+        }
     );
 }
 
@@ -105,6 +155,24 @@ sub IPAddress {
     );
 }
 
+sub IssuerObject () {
+    return quote_sub(
+        q{ WebService::MinFraud::Types::object_isa_type( $_[0], 'WebService::MinFraud::Record::Issuer' ) }
+    );
+}
+
+sub IssuerObjectCoercion () {
+    return quote_sub(
+        q{
+            defined $_[0]
+            && Scalar::Util::blessed($_[0])
+            && $_[0]->isa('WebService::MinFraud::Record::Issuer')
+            ? $_[0]
+            : WebService::MinFraud::Record::Issuer->new($_[0]);
+        }
+    );
+}
+
 sub JSONObject () {
     return quote_sub(
         q{ WebService::MinFraud::Types::object_can_type( $_[0], 'decode' ) });
@@ -136,6 +204,18 @@ sub JSONObject () {
                    ); }
         );
     }
+}
+
+sub LocationCoercion () {
+    return quote_sub(
+        q{
+            defined $_[0]
+            && Scalar::Util::blessed($_[0])
+            && $_[0]->isa('GeoIP2::Record::Location')
+            ? $_[0]
+            : GeoIP2::Record::Location->new($_[0]);
+        }
+    );
 }
 
 # Same as PositiveInt
@@ -205,11 +285,47 @@ sub PositiveInt () {
     );
 }
 
+sub PostalCoercion () {
+    return quote_sub(
+        q{
+            defined $_[0]
+            && Scalar::Util::blessed($_[0])
+            && $_[0]->isa('GeoIP2::Record::Postal')
+            ? $_[0]
+            : GeoIP2::Record::Postal->new($_[0]);
+        }
+    );
+}
+
 sub Str () {
     return quote_sub(
         q{ WebService::MinFraud::Types::_tc_fail( $_[0], 'Str' )
                unless defined $_[0]
                && ! ref $_[0]; }
+    );
+}
+
+sub SubdivisionCoercion () {
+    return quote_sub(
+        q{
+            defined $_[0]
+            && Scalar::Util::blessed($_[0])
+            && $_[0]->isa('GeoIP2::Record::Subdivision')
+            ? $_[0]
+            : GeoIP2::Record::Subdivision->new($_[0]);
+        }
+    );
+}
+
+sub TraitsCoercion () {
+    return quote_sub(
+        q{
+            defined $_[0]
+            && Scalar::Util::blessed($_[0])
+            && $_[0]->isa('GeoIP2::Record::Traits')
+            ? $_[0]
+            : GeoIP2::Record::Traits->new($_[0]);
+        }
     );
 }
 
@@ -221,24 +337,6 @@ sub URIObject () {
 sub UserAgentObject () {
     return quote_sub(
         q{ WebService::MinFraud::Types::object_can_type( $_[0], 'agent', 'request' ) }
-    );
-}
-
-sub IssuerObject () {
-    return quote_sub(
-        q{ WebService::MinFraud::Types::object_isa_type( $_[0], 'WebService::MinFraud::Record::Issuer' ) }
-    );
-}
-
-sub IssuerObjectCoercion () {
-    return quote_sub(
-        q{
-            defined $_[0]
-            && Scalar::Util::blessed($_[0])
-            && $_[0]->isa('WebService::MinFraud::Record::Issuer')
-            ? $_[0]
-            : WebService::MinFraud::Record::Issuer->new($_[0]);
-        }
     );
 }
 

@@ -5,11 +5,15 @@ use warnings;
 
 our $VERSION = '0.001001';
 
-#use WebService::MinFraud::Types qw( HashRef object_isa_type );
-
 use Moo;
 
 with 'WebService::MinFraud::Role::AttributeBuilder';
+
+sub _all_record_names {
+    return qw(
+        maxmind
+    );
+}
 
 __PACKAGE__->_define_attributes_for_keys( __PACKAGE__->_all_record_names() );
 
@@ -35,7 +39,7 @@ __END__
 
 =head1 DESCRIPTION
 
-This class provides a model for the data returned by the minFraud Insights
+This class provides a model for the data returned by the minFraud Score
 web service.
 
 The only difference between the Score and Insights model classes is

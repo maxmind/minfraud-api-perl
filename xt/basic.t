@@ -30,9 +30,9 @@ my $request_json = do {
 };
 my $request        = decode_json($request_json);
 my $response_score = $client->score($request);
-ok( exists $response_score->raw->{risk_score}, 'risk_score exists' );
-my $response_insights = $client->insights($request);
+ok( exists $response_score->raw->{risk_score}, 'raw risk_score exists' );
 
+my $response_insights = $client->insights($request);
 ok( exists $response_insights->raw->{risk_score}, 'risk_score exists' );
 ok( $response_insights,                           'insights response' );
 ok( $response_insights->billing_address, 'billing address record exists' );
@@ -54,6 +54,12 @@ ok( $response_insights->shipping_address, 'shipping address record exists' );
 ok(
     $response_insights->shipping_address->latitude,
     'shipping latitude exists'
+);
+ok( $response_insights->ip_location,       'ip_location record exists' );
+ok( $response_insights->ip_location->city, 'city exists' );
+ok(
+    $response_insights->ip_location->city->geoname_id,
+    'city geoname id exists'
 );
 
 done_testing();

@@ -5,11 +5,20 @@ use warnings;
 
 our $VERSION = '0.001001';
 
-use WebService::MinFraud::Types qw( HashRef object_isa_type );
-
 use Moo;
 
 with 'WebService::MinFraud::Role::AttributeBuilder';
+
+sub _all_record_names {
+    return qw(
+        billing_address
+        credit_card
+        ip_location
+        issuer
+        maxmind
+        shipping_address
+    );
+}
 
 __PACKAGE__->_define_attributes_for_keys( __PACKAGE__->_all_record_names() );
 

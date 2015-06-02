@@ -9,7 +9,7 @@ use WebService::MinFraud::Types qw( NonNegativeInt );
 
 use Moo;
 
-has queries_remaining => (
+has credits_remaining => (
     is  => 'ro',
     isa => NonNegativeInt,
 );

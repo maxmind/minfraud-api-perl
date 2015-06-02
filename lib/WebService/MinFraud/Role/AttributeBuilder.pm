@@ -7,15 +7,9 @@ our $VERSION = '0.001001';
 
 use B;
 
-#use GeoIP2::Record::City;
-#use GeoIP2::Record::Continent;
-#use GeoIP2::Record::Country;
-#use GeoIP2::Record::Location;
-#use GeoIP2::Record::Postal;
-#use GeoIP2::Record::RepresentedCountry;
-#use GeoIP2::Record::Traits;
 use WebService::MinFraud::Record::BillingAddress;
 use WebService::MinFraud::Record::CreditCard;
+use WebService::MinFraud::Record::IPLocation;
 use WebService::MinFraud::Record::Issuer;
 use WebService::MinFraud::Record::MaxMind;
 use WebService::MinFraud::Record::ShippingAddress;
@@ -26,6 +20,8 @@ use Moo::Role;
 
 with 'WebService::MinFraud::Role::Model',
     'WebService::MinFraud::Role::HasLocales';
+
+requires '_all_record_names';
 
 sub _define_attributes_for_keys {
     my $class = shift;
@@ -71,16 +67,6 @@ sub _define_attributes_for_keys {
     }
 }
 
-sub _all_record_names {
-    return qw(
-        billing_address
-        credit_card
-        issuer
-        maxmind
-        shipping_address
-    );
-}
-
 around BUILDARGS => sub {
     my $orig = shift;
     my $self = shift;
@@ -108,12 +94,11 @@ sub _build_record {
 
 {
     my %key_to_class = (
-        billing_address     => 'BillingAddress',
-        credit_card         => 'CreditCard',
-        maxmind             => 'MaxMind',
-        registered_country  => 'Country',
-        represented_country => 'RepresentedCountry',
-        shipping_address    => 'ShippingAddress',
+        billing_address  => 'BillingAddress',
+        credit_card      => 'CreditCard',
+        ip_location      => 'IPLocation',
+        maxmind          => 'MaxMind',
+        shipping_address => 'ShippingAddress',
     );
 
     sub _record_class_for_key {
