@@ -29,7 +29,7 @@ __END__
 
 =head1 SYNOPSIS
 
-  use 5.008;
+  use 5.010;
 
   use WebService::MinFraud::Client;
   use Scalar::Util qw( blessed );
@@ -65,11 +65,11 @@ L<Throwable::Error> and adds attributes of its own.
 The C<< $error->message() >>, and C<< $error->stack_trace() >> methods are
 inherited from L<Throwable::Error>. It also provide two methods of its own:
 
-=head2 $error->name()
+=head2 name
 
 Returns the name of the type which failed validation.
 
-=head2 $error->value()
+=head2 value
 
 Returns the value which triggered the validation failure.
 

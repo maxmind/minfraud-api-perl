@@ -46,7 +46,7 @@ has registered_country => (
     coerce => CountryCoercion,
 );
 
-has subvisions => (
+has subdivision => (
     is     => 'ro',
     isa    => InstanceOf ['GeoIP2::Record::Subdivision'],
     coerce => SubdivisionCoercion,
@@ -77,13 +77,41 @@ __END__
 
   my $insights = $client->insights( ip => '24.24.24.24' );
 
-  my $ip_location = $insights->ip_location();
-  print $ip_location->city->name(), "\n";
+  my $ip_location = $insights->ip_location;
+  say $ip_location->city->name;
 
 =head1 DESCRIPTION
 
-This class contains the maxmind record data returned from a web service query.
+This class contains the GeoIP2 location data returned from a minFraud service query.
 
 =head1 METHODS
 
 This class provides the following methods:
+
+=head2 city
+
+Returns a L<GeoIP2::Record::City>
+
+=head2 continent
+
+Returns a L<GeoIP2::Record::Continent>
+
+=head2 country
+
+Returns a L<GeoIP2::Record::Country>
+
+=head2 location
+
+Returns a L<GeoIP2::Record::Location>
+
+=head2 registered_country
+
+Returns a L<GeoIP2::Record::Country>
+
+=head2 subdivision
+
+Returns a L<GeoIP2::Record::Subdivision>
+
+=head2 traits
+
+Returns a L<GeoIP2::Record::Traits>

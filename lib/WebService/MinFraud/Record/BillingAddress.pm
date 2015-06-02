@@ -59,14 +59,36 @@ __END__
   my $insights = $client->insights( ip => '24.24.24.24' );
 
   my $billing_address_rec = $insights->billing_address;
-  print $billing_address_rec->distance_to_ip_location, "\n";
+  say $billing_address_rec->distance_to_ip_location;
 
 =head1 DESCRIPTION
 
+This class contains the billing address data associated with a transaction.
 
+This record is returned by the insights end point.
 
 =head1 METHODS
 
 This class provides the following methods:
 
-=head2
+=head2 distance_to_billing_address
+
+The distance from the shipping address to the billing address.
+
+=head2 is_postal_in_city
+
+A boolean indicating whether or not the billing postal code is in the
+billing city.
+
+=head2 is_in_ip_country
+
+A boolean indicating whether or not the billing address is in the same country
+as that of the IP address.
+
+=head2 latitude
+
+The latitude of the billing address
+
+=head2 longitude
+
+The longitude of the billing address

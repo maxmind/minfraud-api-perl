@@ -71,14 +71,36 @@ __END__
   my $insights = $client->insights( ip => '24.24.24.24' );
 
   my $shipping_address_rec = $insights->shipping_address;
-  print $shipping_address_rec->distance_to_ip_location, "\n";
+  say $shipping_address_rec->distance_to_ip_location;
 
 =head1 DESCRIPTION
 
+This class contains the shipping address data associated with a transaction.
 
+This record is returned by the insights end point.
 
 =head1 METHODS
 
 This class provides the following methods:
 
-=head2
+=head2 distance_to_billing_address
+
+The distance from the shipping address to the billing address.
+
+=head2 distance_to_ip_location
+
+The distance from the shipping address to the location of the IP address.
+
+=head2 is_in_ip_country
+
+A boolean indicating whether or not the shipping address is in the same country
+as that of the IP address.
+
+=head2 latitude
+
+The latitude of the shipping address
+
+=head2 longitude
+
+The longitude of the shipping address
+

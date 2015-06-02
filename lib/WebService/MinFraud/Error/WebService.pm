@@ -27,7 +27,7 @@ __END__
 
 =head1 SYNOPSIS
 
-  use 5.008;
+  use 5.010;
 
   use WebService::MinFraud::Client;
   use Scalar::Util qw( blessed );
@@ -68,14 +68,14 @@ details.
 
 It also provides three methods of its own:
 
-=head2 $error->code()
+=head2 code
 
 Returns the code returned by the MaxMind minFraud web service.
 
-=head2 $error->http_status()
+=head2 http_status
 
 Returns the HTTP status. This should be either a 4xx or 5xx error.
 
-=head2 $error->uri()
+=head2 uri
 
 Returns the URI which gave the HTTP error.

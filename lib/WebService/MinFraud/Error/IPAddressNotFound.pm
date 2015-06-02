@@ -25,7 +25,7 @@ __END__
 
 =head1 SYNOPSIS
 
-  use 5.008;
+  use 5.010;
 
   use  WebService::MinFraud::Client;
   use Scalar::Util qw( blessed );
@@ -58,6 +58,6 @@ the MaxMind minFraud service.
 The C<< $error->message() >>, and C<< $error->stack_trace() >> methods are
 inherited from L<Throwable::Error>. It also provide two methods of its own:
 
-=head2 $error->ip_address()
+=head2 ip_address
 
 Returns the IP address that could not be found.

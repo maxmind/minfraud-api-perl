@@ -17,7 +17,7 @@ __END__
 
 =head1 SYNOPSIS
 
-  use 5.008;
+  use 5.010;
 
   use WebService::MinFraud::Client;
   use Scalar::Util qw( blessed );

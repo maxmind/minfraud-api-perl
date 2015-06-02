@@ -6,7 +6,7 @@ use warnings;
 our $VERSION = '0.001001';
 
 use B;
-
+use Sub::Quote qw( quote_sub );
 use WebService::MinFraud::Record::BillingAddress;
 use WebService::MinFraud::Record::CreditCard;
 use WebService::MinFraud::Record::IPLocation;
@@ -14,7 +14,6 @@ use WebService::MinFraud::Record::Issuer;
 use WebService::MinFraud::Record::MaxMind;
 use WebService::MinFraud::Record::ShippingAddress;
 use WebService::MinFraud::Types qw( ArrayRef HashRef );
-use Sub::Quote qw( quote_sub );
 
 use Moo::Role;
 

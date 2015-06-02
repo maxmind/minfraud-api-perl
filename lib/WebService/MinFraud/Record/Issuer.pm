@@ -10,23 +10,11 @@ use WebService::MinFraud::Types qw( Bool BoolCoercion Str );
 
 use Moo;
 
-has name => (
-    is        => 'ro',
-    isa       => Str,
-    predicate => 'has_name',
-);
-
 has matches_provided_name => (
     is      => 'ro',
     isa     => Bool,
     default => quote_sub(q{ 0 }),
     coerce  => BoolCoercion,
-);
-
-has phone_number => (
-    is        => 'ro',
-    isa       => Str,
-    predicate => 'has_phone_number',
 );
 
 has matches_provided_phone_number => (
@@ -36,15 +24,28 @@ has matches_provided_phone_number => (
     coerce  => BoolCoercion,
 );
 
+has name => (
+    is        => 'ro',
+    isa       => Str,
+    predicate => 'has_name',
+);
+
+has phone_number => (
+    is        => 'ro',
+    isa       => Str,
+    predicate => 'has_phone_number',
+);
+
 1;
 
-# ABSTRACT: Contains data for the postal code record associated with an IP address
+# ABSTRACT: Contains data for the issuer of the credit card associated with a
+# transaction.
 
 __END__
 
 =head1 SYNOPSIS
 
-  use 5.001001;
+  use 5.010;
 
   use WebService::MinFraud::Client;
 
@@ -55,30 +56,33 @@ __END__
 
   my $insights = $client->insights( ip => '24.24.24.24' );
 
-  my $issuer_rec = $insights->issuer();
-  print $issuer_rec->name(), "\n";
+  my $issuer_rec = $insights->issuer;
+  say $issuer_rec->name;
 
 =head1 DESCRIPTION
 
-This class contains the postal code data associated with an IP address.
-
-This record is returned by all the end points except the Country end point.
+This class contains the data for the issuer of the credit card associated with
+a transaction.
 
 =head1 METHODS
 
 This class provides the following methods:
 
-=head2 $postal_rec->code()
+=head2 matches_provided_name
 
-This returns the postal code associated with the IP address. Postal codes are
-not available for all countries. In some countries, this will only contain
-part of the postal code.
+Returns a boolean indicating whether the name provided matches the known bank
+name associated with the credit card
 
-This attribute is returned by all end points except the Country end point.
+=head2 matches_provided_phone_number
 
-=head2 $postal_rec->confidence()
+Returns a boolean indicating whether the phone provided matches the known bank
+phone associated with the credit card
 
-This returns a value from 0-100 indicating MaxMind's confidence that the
-postal code is correct.
+=head2 name
 
-This attribute is only available from the Insights end point.
+Returns the name of the issuer of the credit card.
+
+=head2 phone_number
+
+Returns the phone number of the issuer of the credit card.
+

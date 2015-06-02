@@ -51,26 +51,24 @@ has license_key => (
     required => 1,
 );
 
-#has locales => (
-#    is      => 'ro',
-#    isa     => Str,
-#    default => quote_sub(q{ 'en' }),
-#);
 has timeout => (
     is      => 'ro',
     isa     => Str,
     default => quote_sub(q{ q{} }),
 );
+
 has ua => (
     is      => 'lazy',
     isa     => UserAgentObject,
     builder => sub { LWP::UserAgent->new },
 );
+
 has uri_scheme => (
     is      => 'ro',
     isa     => Str,
     default => quote_sub(q{ 'https' }),
 );
+
 has user_id => (
     is       => 'ro',
     isa      => MaxMindID,
@@ -353,35 +351,35 @@ __END__
   my $insights = $client->insights( ip => '24.24.24.24' );
 
   my $shipping_address = $insights->shipping_adress;
-  print $shipping_address->is_high_risk, "\n";
+  say $shipping_address->is_high_risk;
 
 =head1 DESCRIPTION
 
 This class provides a client API for all the minFraud web service end
-points. The end points are Country, City, and Insights. Each end point returns
-a different set of data about an IP address, with Country returning the least
-data and Insights the most.
+points. The end points are Score and Insights. Each end point returns
+a different set of data about a transaction, with B<Score> returning the least
+data and B<Insights> the most.
 
 Each web service end point is represented by a different model class, and
 these model classes in turn contain multiple Record classes. The record
-classes have attributes which contain data about the IP address.
+classes have attributes which contain data about the transaction or IP address.
 
-If the web service does not return a particular piece of data for an IP
-address, the associated attribute is not populated.
+If the web service does not return a particular piece of data for a
+transaction or IP address, the associated attribute is not populated.
 
 The web service may not return any information for an entire record, in which
 case all of the attributes for that record class will be empty.
 
 =head1 SSL
 
-Requests to the GeoIP2 web service are always made with SSL.
+Requests to the minFraud web service are always made with SSL.
 
 =head1 USAGE
 
 The basic API for this class is the same for all of the web service end
 points. First you create a web service object with your MaxMind C<user_id> and
 C<license_key>, then you call the method corresponding to a specific end
-point, passing it the IP address you want to look up.
+point, passing it the transaction you want analyzed.
 
 If the request succeeds, the method call will return a model class for the end
 point you called. This model in turn contains multiple record classes, each of
@@ -393,7 +391,7 @@ If the request fails, the client class throws an exception.
 
 This class has a single constructor method:
 
-=head2 GeoIP2::WebService::Client->new()
+=head2 WebService::MinFraud::Client->new()
 
 This method creates a new client object. It accepts the following arguments:
 
@@ -476,36 +474,24 @@ only argument. This method must return an L<HTTP::Response> object.
 
 =head1 REQUEST METHODS
 
-All of the request methods accept a single argument:
+All of the request methods accept [TODO]
 
 =over 4
 
-=item * ip
-
-This must be a valid IPv4 or IPv6 address, or the string "me". This is the
-address that you want to look up using the GeoIP2 web service.
-
-If you pass the string "me" then the web service returns data on the client
-system's IP address. Note that this is the IP address that the web service
-sees. If you are using a proxy, the web service will not see the client
-system's actual IP address.
+=item *
 
 =back
 
-=head2 $client->country()
+=head2 score
 
-This method calls the GeoIP2 Precision: Country end point. It returns a
-L<GeoIP2::Model::Country> object.
+This method calls the minFraud Score end point. It returns a
+L<WebService::MinFraud::Model::Score> object.
 
-=head2 $client->city()
 
-This method calls the GeoIP2 Precision: City end point. It returns a
-L<GeoIP2::Model::City> object.
+=head2 insights
 
-=head2 $client->insights()
-
-This method calls the GeoIP2 Precision: Insights end point. It returns a
-L<GeoIP2::Model::Insights> object.
+This method calls the minFraud Insights end point. It returns a
+L<WebService::MinFraud::Model::Insights> object.
 
 =head1 User-Agent HEADER
 
@@ -519,21 +505,21 @@ support policies for dependencies and Perl itself.
 =head1 EXCEPTIONS
 
 For details on the possible errors returned by the web service itself, see
-L<http://dev.maxmind.com/geoip/geoip2/web-services> for the GeoIP2 web service
+L<http://dev.maxmind.com/minfraud> for the minFraud web service
 docs.
 
 If the web service returns an explicit error document, this is thrown as a
-L<GeoIP2::Error::WebService> exception object. If some other sort of error
-occurs, this is thrown as a L<GeoIP2::Error::HTTP> object. The difference is
+L<WebService::MinFraud::Error::WebService> exception object. If some other sort of error
+occurs, this is thrown as a L<WebService::MinFraud::Error::HTTP> object. The difference is
 that the web service error includes an error message and error code delivered
 by the web service. The latter is thrown when some sort of unanticipated error
 occurs, such as the web service returning a 500 or an invalid error document.
 
 If the web service returns any status code besides 200, 4xx, or 5xx, this also
-becomes a L<GeoIP2::Error::HTTP> object.
+becomes a L<WebService::MinFraud::Error::HTTP> object.
 
 Finally, if the web service returns a 200 but the body is invalid, the client
-throws a L<GeoIP2::Error::Generic> object.
+throws a L<WebService::MinFraud::Error::Generic> object.
 
 All of these error classes have an C<< $error->message() >> method and
 overload stringification to show that message. This means that if you don't
@@ -542,19 +528,8 @@ sort of (hopefully) useful error message.
 
 =head1 WHAT DATA IS RETURNED?
 
-While many of the end points return the same basic records, the attributes
-which can be populated vary between end points. In addition, while an end
-point may offer a particular piece of data, MaxMind does not always have every
-piece of data for any given IP address.
-
-Because of these factors, it is possible for any end point to return a record
-where some or all of the attributes are unpopulated.
-
-See L<http://dev.maxmind.com/geoip/geoip2/web-services> for details on what data each end
+See L<http://dev.maxmind.com/minfraud> for details on what data each end
 point I<may> return.
-
-The only piece of data which is always returned is the C<ip_address> key in
-the C<GeoIP2::Record::Traits> record.
 
 Every record class attribute has a corresponding predicate method so you can
 check to see if the attribute is set.

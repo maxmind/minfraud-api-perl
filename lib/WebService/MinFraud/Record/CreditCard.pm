@@ -55,30 +55,34 @@ __END__
 
   my $insights = $client->insights( ip => '24.24.24.24' );
 
-  my $credit_card_rec = $insights->credit_card();
-  print $credit_card_rec->issuer->name(), "\n";
+  my $credit_card_rec = $insights->credit_card;
+  say $credit_card_rec->is_prepaid;
+  say $credit_card_rec->issuer->name;
 
 =head1 DESCRIPTION
 
-This class contains the postal code data associated with an IP address.
+This class contains the credit card data associated with a transaction
 
-This record is returned by all the end points except the Country end point.
+This record is returned by all the insights end point.
 
 =head1 METHODS
 
 This class provides the following methods:
 
-=head2 $postal_rec->code()
+=head2 issuer
 
-This returns the postal code associated with the IP address. Postal codes are
-not available for all countries. In some countries, this will only contain
-part of the postal code.
+This returns the issuer of the credit card.
 
-This attribute is returned by all end points except the Country end point.
+=head2 country
 
-=head2 $postal_rec->confidence()
+This returns a country of the credit card.
 
-This returns a value from 0-100 indicating MaxMind's confidence that the
-postal code is correct.
+=head2 is_issued_in_billing_address_country
 
-This attribute is only available from the Insights end point.
+This returns a boolean indicating whether or not the issuer of the credit card
+is in the same country as the billing address.
+
+=head2 is_prepaid
+
+This returns a boolean indicating whether or not the credit card is prepaid.
+

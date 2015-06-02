@@ -19,7 +19,7 @@ __END__
 
 =head1 SYNOPSIS
 
-  use 5.008;
+  use 5.010;
 
   use WebService::MinFraud::Client;
   use Scalar::Util qw( blessed );
@@ -55,10 +55,10 @@ and adds attributes of its own.
 The C<< $error->message() >>, and C<< $error->stack_trace() >> methods are
 inherited from L<Throwable::Error>. It also provide two methods of its own:
 
-=head2 $error->http_status()
+=head2 http_status
 
 Returns the HTTP status. This should be either a 4xx or 5xx error.
 
-=head2 $error->uri()
+=head2 uri
 
 Returns the URI which gave the HTTP error.

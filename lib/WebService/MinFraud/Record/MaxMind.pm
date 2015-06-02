@@ -22,7 +22,7 @@ __END__
 
 =head1 SYNOPSIS
 
-  use 5.008;
+  use 5.010;
 
   use WebService::MinFraud::Client;
 
@@ -34,24 +34,25 @@ __END__
   my $insights = $client->insights( ip => '24.24.24.24' );
 
   my $maxmind_rec = $insights->maxmind();
-  print $maxmind_rec->queries_remaining(), "\n";
+  say $maxmind_rec->credits_remaining();
 
 =head1 DESCRIPTION
 
-This class contains the maxmind record data returned from a web service query.
+This class contains the maxmind record data returned from a minFraud web
+service query.
 
 Unlike other record classes, the data in this record is associated with your
-MaxMind account, not with an IP address.
+MaxMind account, not with a transaction or IP address.
 
-This record is returned by all the end points.
+This record is returned by all the end points. [TODO - correct?]
 
 =head1 METHODS
 
 This class provides the following methods:
 
-=head2 $maxmind_rec->queries_remaining()
+=head2 credits_remaining
 
-The number of queries remaining for the end point you just queried. Note that
-this is an approximation as query counts are only periodically synced across
-all of MaxMind's servers.
+The number of credits remaining for your account. Note that this is an
+approximation as credit counts are only periodically synced across all
+of MaxMind's servers.
 
