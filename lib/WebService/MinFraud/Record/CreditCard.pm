@@ -45,16 +45,14 @@ __END__
 =head1 SYNOPSIS
 
   use 5.010;
-
   use WebService::MinFraud::Client;
 
   my $client = WebService::MinFraud::Client->new(
       user_id     => 42,
       license_key => 'abcdef123456',
   );
-
-  my $insights = $client->insights( ip => '24.24.24.24' );
-
+  my $request = { device => { ip_address => '24.24.24.24'} };
+  my $insights = $client->insights( $request);
   my $credit_card_rec = $insights->credit_card;
   say $credit_card_rec->is_prepaid;
   say $credit_card_rec->issuer->name;
@@ -71,7 +69,7 @@ This class provides the following methods:
 
 =head2 issuer
 
-This returns the issuer of the credit card.
+This returns the issuer object, L<WebService::MinFraud::Record::Issuer>, for the credit card,
 
 =head2 country
 

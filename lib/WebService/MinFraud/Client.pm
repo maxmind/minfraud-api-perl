@@ -474,7 +474,7 @@ only argument. This method must return an L<HTTP::Response> object.
 
 =head1 REQUEST METHODS
 
-All of the request methods accept [TODO]
+All of the request methods accept ...
 
 =over 4
 

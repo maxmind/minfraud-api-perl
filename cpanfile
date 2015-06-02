@@ -1,4 +1,5 @@
 requires "B" => "0";
+requires "Data::Dumper" => "0";
 requires "Data::Validate::IP" => "0";
 requires "Exporter" => "0";
 requires "GeoIP2::Record::City" => "0";

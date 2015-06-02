@@ -43,16 +43,13 @@ This class provides a model for the data returned by the minFraud Score
 web service.
 
 The only difference between the Score and Insights model classes is
-which fields in each record may be populated. See
-L<http://dev.maxmind.com/minfraud> for more details.
+which fields in each record may be populated. For more details, see
+L<http://dev.maxmind.com/minfraud>.
 
 =head1 METHODS
 
 This class provides the following methods, each of which returns a record
 object.
 
-=head2 maxmind
-
-Returns a L<WebService::MinFraud::Record::MaxMind> object representing data about your
-MaxMind account.
+=head2
 

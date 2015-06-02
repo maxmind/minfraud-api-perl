@@ -14,8 +14,6 @@ sub _all_record_names {
         billing_address
         credit_card
         ip_location
-        issuer
-        maxmind
         shipping_address
     );
 }
@@ -46,7 +44,7 @@ __END__
   say $shipping_address_rec->is_high_risk;
 
   my $ip_location_rec = $insights->ip_location;
-  my $postal_rec = $ip_location->postal;
+  my $postal_rec = $ip_location_rec->postal;
   say $postal_rec->code;
 
 =head1 DESCRIPTION
@@ -79,12 +77,6 @@ Returns a L<WebService::MinFraud::Record::IPLocation> object representing
 IP location data for the transaction.  In turn the IP location object consists
 of the following methods that return GeoIP2::Record::* objects: city, continent,
 country, postal, registered_country, subdivisions, traits.
-
-
-=head2 maxmind
-
-Returns a L<WebService::MinFraud::Record::MaxMind> object representing [TODO] for the
-transaction.
 
 =head2 shipping_address
 

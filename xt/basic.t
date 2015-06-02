@@ -30,11 +30,22 @@ my $request_json = do {
 };
 my $request        = decode_json($request_json);
 my $response_score = $client->score($request);
-ok( exists $response_score->raw->{risk_score}, 'raw risk_score exists' );
+ok( $response_score, 'score response' );
+ok(
+    exists $response_score->raw->{risk_score},
+    'raw risk_score exists (score)'
+);
 
 my $response_insights = $client->insights($request);
-ok( exists $response_insights->raw->{risk_score}, 'risk_score exists' );
-ok( $response_insights,                           'insights response' );
+ok( $response_insights, 'insights response' );
+ok(
+    exists $response_insights->raw->{risk_score},
+    'raw risk_score exists (insights)'
+);
+ok(
+    defined $response_insights->risk_score,
+    'sugary risk_score is defined (insights)'
+);
 ok( $response_insights->billing_address, 'billing address record exists' );
 ok(
     $response_insights->billing_address->latitude,
@@ -49,7 +60,6 @@ ok(
     $response_insights->credit_card->issuer->name,
     'credit card issuer name exists'
 );
-ok( $response_insights->maxmind,          'maxmind record exists' );
 ok( $response_insights->shipping_address, 'shipping address record exists' );
 ok(
     $response_insights->shipping_address->latitude,

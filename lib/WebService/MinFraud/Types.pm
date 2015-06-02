@@ -308,11 +308,7 @@ sub Str () {
 sub SubdivisionCoercion () {
     return quote_sub(
         q{
-            defined $_[0]
-            && Scalar::Util::blessed($_[0])
-            && $_[0]->isa('GeoIP2::Record::Subdivision')
-            ? $_[0]
-            : GeoIP2::Record::Subdivision->new($_[0]);
+            [ map { GeoIP2::Record::Subdivision->new($_) }  @{$_[0]} ];
         }
     );
 }

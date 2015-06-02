@@ -6,7 +6,7 @@ use warnings;
 our $VERSION = '0.001001';
 
 use Moo;
-use Types::Standard qw( InstanceOf );
+use Types::Standard qw( ArrayRef InstanceOf );
 use WebService::MinFraud::Types
     qw( CityCoercion ContinentCoercion CountryCoercion LocationCoercion PostalCoercion SubdivisionCoercion TraitsCoercion);
 
@@ -46,9 +46,9 @@ has registered_country => (
     coerce => CountryCoercion,
 );
 
-has subdivision => (
+has subdivisions => (
     is     => 'ro',
-    isa    => InstanceOf ['GeoIP2::Record::Subdivision'],
+    isa    => ArrayRef [ InstanceOf ['GeoIP2::Record::Subdivision'] ],
     coerce => SubdivisionCoercion,
 );
 
@@ -67,16 +67,14 @@ __END__
 =head1 SYNOPSIS
 
   use 5.010;
-
   use WebService::MinFraud::Client;
 
   my $client = WebService::MinFraud::Client->new(
       user_id     => 42,
       license_key => 'abcdef123456',
   );
-
-  my $insights = $client->insights( ip => '24.24.24.24' );
-
+  my $request = { device => { ip_address => '24.24.24.24'} };
+  my $insights = $client->insights( $request);
   my $ip_location = $insights->ip_location;
   say $ip_location->city->name;
 
@@ -90,28 +88,28 @@ This class provides the following methods:
 
 =head2 city
 
-Returns a L<GeoIP2::Record::City>
+Returns a L<GeoIP2::Record::City> object.
 
 =head2 continent
 
-Returns a L<GeoIP2::Record::Continent>
+Returns a L<GeoIP2::Record::Continent> object.
 
 =head2 country
 
-Returns a L<GeoIP2::Record::Country>
+Returns a L<GeoIP2::Record::Country> object.
 
 =head2 location
 
-Returns a L<GeoIP2::Record::Location>
+Returns a L<GeoIP2::Record::Location> object.
 
 =head2 registered_country
 
-Returns a L<GeoIP2::Record::Country>
+Returns a L<GeoIP2::Record::Country> object.
 
-=head2 subdivision
+=head2 subdivisions
 
-Returns a L<GeoIP2::Record::Subdivision>
+Returns an ArrayRef of L<GeoIP2::Record::Subdivision> objects.
 
 =head2 traits
 
-Returns a L<GeoIP2::Record::Traits>
+Returns a L<GeoIP2::Record::Traits> object.
