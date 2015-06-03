@@ -7,15 +7,9 @@ our $VERSION = '0.001001';
 
 use Moo;
 
-with 'WebService::MinFraud::Role::AttributeBuilder';
-
-sub _all_record_names {
-    return qw(
-        maxmind
-    );
-}
-
-__PACKAGE__->_define_attributes_for_keys( __PACKAGE__->_all_record_names() );
+with 'WebService::MinFraud::Role::HasCommonAttributes',
+    'WebService::MinFraud::Role::HasLocales',
+    'WebService::MinFraud::Role::Model';
 
 1;
 
@@ -36,6 +30,7 @@ __END__
 
   my $request = { device => { ip_address => '24.24.24.24'} };
   my $score = $client->score( $request );
+  say $score->risk_score;
 
 =head1 DESCRIPTION
 
@@ -48,8 +43,25 @@ L<http://dev.maxmind.com/minfraud>.
 
 =head1 METHODS
 
-This class provides the following methods, each of which returns a record
-object.
+This class provides the following methods:
 
-=head2
+=head2 id
 
+Returns a UUID that identifies the minFraud request.  Please use this ID in bug
+reports or support requests to MaxMind so that we can easily identify a
+particular request.
+
+=head2 risk_score
+
+Returns the risk score, a number between 0.01 and 99. A higher score indicates a
+higher risk of fraud.
+
+=head2 credits_remaining
+
+Returns the I<approximate> number of service credits remaining on your account.
+
+=head2 warnings
+
+Returns an ArrayRef of L<WebService::MinFraud::Record::Warning> objects.  It is
+highly recommended that you check this array for issues when integrating the web
+service.

@@ -35,6 +35,10 @@ ok(
     exists $response_score->raw->{risk_score},
     'raw risk_score exists (score)'
 );
+ok(
+    defined $response_score->risk_score,
+    'sugary risk_score is defined (score)'
+);
 
 my $response_insights = $client->insights($request);
 ok( $response_insights, 'insights response' );
@@ -44,7 +48,7 @@ ok(
 );
 ok(
     defined $response_insights->risk_score,
-    'sugary risk_score is defined'
+    'sugary risk_score is defined (insights)'
 );
 ok(
     defined $response_insights->credits_remaining,

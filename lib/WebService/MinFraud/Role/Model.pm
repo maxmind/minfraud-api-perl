@@ -15,4 +15,17 @@ has raw => (
     required => 1,
 );
 
+around BUILDARGS => sub {
+    my $orig = shift;
+    my $self = shift;
+
+    my $p = $self->$orig(@_);
+    delete $p->{raw};
+
+    # We make a copy to avoid a circular reference
+    $p->{raw} = { %{$p} };
+
+    return $p;
+};
+
 1;

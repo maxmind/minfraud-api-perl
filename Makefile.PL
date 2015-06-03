@@ -40,7 +40,6 @@ my %WriteMakefileArgs = (
     "Try::Tiny" => 0,
     "Types::Standard" => 0,
     "URI" => 0,
-    "WebService::MinFraud::Role::HasCommonAttributes" => 0,
     "strict" => 0,
     "warnings" => 0
   },
@@ -82,7 +81,6 @@ my %FallbackPrereqs = (
   "Try::Tiny" => 0,
   "Types::Standard" => 0,
   "URI" => 0,
-  "WebService::MinFraud::Role::HasCommonAttributes" => 0,
   "strict" => 0,
   "warnings" => 0
 );

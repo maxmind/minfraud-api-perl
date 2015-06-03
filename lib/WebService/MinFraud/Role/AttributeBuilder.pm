@@ -67,19 +67,6 @@ sub _define_attributes_for_keys {
     }
 }
 
-around BUILDARGS => sub {
-    my $orig = shift;
-    my $self = shift;
-
-    my $p = $self->$orig(@_);
-    delete $p->{raw};
-
-    # We make a copy to avoid a circular reference
-    $p->{raw} = { %{$p} };
-
-    return $p;
-};
-
 sub _build_record {
     my $self   = shift;
     my $key    = shift;
