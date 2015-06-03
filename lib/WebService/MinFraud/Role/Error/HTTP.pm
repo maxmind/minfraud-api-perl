@@ -5,7 +5,7 @@ use warnings;
 
 our $VERSION = '0.001001';
 
-use WebService::MinFraud::Types qw( HTTPStatus Str URIObject );
+use WebService::MinFraud::Types qw( HTTPStatus URIObject );
 
 use Moo::Role;
 

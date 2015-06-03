@@ -9,8 +9,8 @@ use Moo;
 
 extends 'Throwable::Error';
 
-# We can't load WebService::MinFraud::Types to get types here because we'd have a circular
-# use in that case.
+# We can't load WebService::MinFraud::Types to get types here because we'd have
+# a circular use in that case.
 has type => (
     is       => 'ro',
     required => 1,
@@ -41,7 +41,8 @@ __END__
   );
 
   try {
-      $client->insights( ip => '24.24.24.24' );
+      my $request = { device => { ip_address => '24.24.24.24'} };
+      $client->insights( $request );
   }
   catch {
       die $_ unless blessed $_;

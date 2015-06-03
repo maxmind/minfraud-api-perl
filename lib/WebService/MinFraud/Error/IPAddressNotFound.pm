@@ -19,7 +19,8 @@ has ip_address => (
 
 1;
 
-# ABSTRACT: An exception thrown when an IP address is not in the MaxMind minFraud service
+# ABSTRACT: An exception thrown when an IP address is not in the MaxMind
+# minFraud service
 
 __END__
 
@@ -37,7 +38,8 @@ __END__
   );
 
   try {
-      $client->insights( ip => '24.24.24.24' );
+      my $request = { device => { ip_address => '24.24.24.24'} };
+      $client->insights( $request );
   }
   catch {
       die $_ unless blessed $_;

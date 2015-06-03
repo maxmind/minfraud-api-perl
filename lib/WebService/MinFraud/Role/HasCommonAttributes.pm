@@ -16,21 +16,21 @@ has id => (
     is       => 'lazy',
     isa      => Str,
     init_arg => undef,
-    builder  => sub { my $self = shift; $self->raw->{id} },
+    builder  => sub { $_[0]->raw->{id} },
 );
 
 has risk_score => (
     is       => 'lazy',
     isa      => Num,
     init_arg => undef,
-    builder  => sub { my $self = shift; $self->raw->{risk_score} },
+    builder  => sub { $_[0]->raw->{risk_score} },
 );
 
 has credits_remaining => (
     is       => 'lazy',
     isa      => NonNegativeInt,
     init_arg => undef,
-    builder  => sub { my $self = shift; $self->raw->{credits_remaining} },
+    builder  => sub { $_[0]->raw->{credits_remaining} },
 );
 
 has warnings => (

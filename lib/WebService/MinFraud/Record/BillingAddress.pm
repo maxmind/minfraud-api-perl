@@ -41,7 +41,8 @@ has longitude => (
 
 1;
 
-# ABSTRACT: Contains data for the billing address record associated with a transaction
+# ABSTRACT: Contains data for the billing address record associated with a
+# transaction
 
 __END__
 
@@ -71,22 +72,22 @@ This class provides the following methods:
 
 =head2 distance_to_billing_address
 
-The distance from the shipping address to the billing address.
+Returns the distance from the shipping address to the billing address.
 
 =head2 is_postal_in_city
 
-A boolean indicating whether or not the billing postal code is in the
+Returns a boolean indicating whether or not the billing postal code is in the
 billing city.
 
 =head2 is_in_ip_country
 
-A boolean indicating whether or not the billing address is in the same country
+Returns a boolean indicating whether or not the billing address is in the same country
 as that of the IP address.
 
 =head2 latitude
 
-The latitude of the billing address
+Returns the latitude of the billing address
 
 =head2 longitude
 
-The longitude of the billing address
+Returns the longitude of the billing address

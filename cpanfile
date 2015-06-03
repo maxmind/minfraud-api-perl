@@ -6,6 +6,7 @@ requires "GeoIP2::Record::Continent" => "0";
 requires "GeoIP2::Record::Country" => "0";
 requires "GeoIP2::Record::Location" => "0";
 requires "GeoIP2::Record::Postal" => "0";
+requires "GeoIP2::Record::RepresentedCountry" => "0";
 requires "GeoIP2::Record::Subdivision" => "0";
 requires "GeoIP2::Record::Traits" => "0";
 requires "JSON" => "0";

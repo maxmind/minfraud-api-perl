@@ -45,6 +45,10 @@ L<http://dev.maxmind.com/minfraud>.
 
 This class provides the following methods:
 
+=head2 credits_remaining
+
+Returns the I<approximate> number of service credits remaining on your account.
+
 =head2 id
 
 Returns a UUID that identifies the minFraud request.  Please use this ID in bug
@@ -55,10 +59,6 @@ particular request.
 
 Returns the risk score, a number between 0.01 and 99. A higher score indicates a
 higher risk of fraud.
-
-=head2 credits_remaining
-
-Returns the I<approximate> number of service credits remaining on your account.
 
 =head2 warnings
 

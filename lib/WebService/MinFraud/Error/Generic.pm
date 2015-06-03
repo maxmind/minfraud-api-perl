@@ -29,7 +29,8 @@ __END__
   );
 
   try {
-      $client->insights( ip => '24.24.24.24' );
+      my $request = { device => { ip_address => '24.24.24.24'} };
+      $client->insights( $request );
   }
   catch {
       die $_ unless blessed $_;

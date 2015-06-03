@@ -83,7 +83,6 @@ sub _build_record {
         billing_address  => 'BillingAddress',
         credit_card      => 'CreditCard',
         ip_location      => 'IPLocation',
-        maxmind          => 'MaxMind',
         shipping_address => 'ShippingAddress',
     );
 

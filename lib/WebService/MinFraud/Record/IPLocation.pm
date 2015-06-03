@@ -8,7 +8,9 @@ our $VERSION = '0.001001';
 use Moo;
 use Types::Standard qw( ArrayRef InstanceOf );
 use WebService::MinFraud::Types
-    qw( CityCoercion ContinentCoercion CountryCoercion LocationCoercion PostalCoercion SubdivisionCoercion TraitsCoercion);
+    qw( CityCoercion ContinentCoercion CountryCoercion LocationCoercion
+    PostalCoercion RepresentedCountryCoercion SubdivisionCoercion
+    TraitsCoercion);
 
 has city => (
     is     => 'ro',
@@ -46,6 +48,12 @@ has registered_country => (
     coerce => CountryCoercion,
 );
 
+has represented_country => (
+    is     => 'ro',
+    isa    => InstanceOf ['GeoIP2::Record::Country'],
+    coerce => RepresentedCountryCoercion,
+);
+
 has subdivisions => (
     is     => 'ro',
     isa    => ArrayRef [ InstanceOf ['GeoIP2::Record::Subdivision'] ],
@@ -60,7 +68,8 @@ has traits => (
 
 1;
 
-# ABSTRACT: Contains data for the IPLocation record returned from a minFraud web service query
+# ABSTRACT: Contains data for the IPLocation record returned from a minFraud web
+# service query
 
 __END__
 
@@ -80,7 +89,8 @@ __END__
 
 =head1 DESCRIPTION
 
-This class contains the GeoIP2 location data returned from a minFraud service query.
+This class contains the GeoIP2 location data returned from a minFraud service
+query.
 
 =head1 METHODS
 
@@ -105,6 +115,10 @@ Returns a L<GeoIP2::Record::Location> object.
 =head2 registered_country
 
 Returns a L<GeoIP2::Record::Country> object.
+
+=head2 represented_country
+
+Returns a L<GeoIP2::Record::RepresentedCountry> object.
 
 =head2 subdivisions
 

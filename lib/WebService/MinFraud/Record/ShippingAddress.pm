@@ -83,22 +83,22 @@ This class provides the following methods:
 
 =head2 distance_to_billing_address
 
-The distance from the shipping address to the billing address.
+Returns the distance from the shipping address to the billing address.
 
 =head2 distance_to_ip_location
 
-The distance from the shipping address to the location of the IP address.
+Returns the distance from the shipping address to the location of the IP address.
 
 =head2 is_in_ip_country
 
-A boolean indicating whether or not the shipping address is in the same country
+Returns a boolean indicating whether or not the shipping address is in the same country
 as that of the IP address.
 
 =head2 latitude
 
-The latitude of the shipping address
+Returns the latitude of the shipping address
 
 =head2 longitude
 
-The longitude of the shipping address
+Returns the longitude of the shipping address
 

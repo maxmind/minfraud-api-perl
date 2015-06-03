@@ -38,7 +38,8 @@ has is_prepaid => (
 
 1;
 
-# ABSTRACT: Contains data for the credit card record associated with a transaction
+# ABSTRACT: Contains data for the credit card record associated with a
+# transaction
 
 __END__
 
@@ -69,18 +70,19 @@ This class provides the following methods:
 
 =head2 issuer
 
-This returns the issuer object, L<WebService::MinFraud::Record::Issuer>, for the credit card,
+Returns the issuer object, L<WebService::MinFraud::Record::Issuer>, for the
+credit card,
 
 =head2 country
 
-This returns a country of the credit card.
+Returns a country of the credit card.
 
 =head2 is_issued_in_billing_address_country
 
-This returns a boolean indicating whether or not the issuer of the credit card
+Returns a boolean indicating whether or not the issuer of the credit card
 is in the same country as the billing address.
 
 =head2 is_prepaid
 
-This returns a boolean indicating whether or not the credit card is prepaid.
+Returns a boolean indicating whether or not the credit card is prepaid.
 

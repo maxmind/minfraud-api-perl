@@ -11,6 +11,7 @@ use GeoIP2::Record::Continent;
 use GeoIP2::Record::Country;
 use GeoIP2::Record::Location;
 use GeoIP2::Record::Postal;
+use GeoIP2::Record::RepresentedCountry;
 use GeoIP2::Record::Subdivision;
 use GeoIP2::Record::Traits;
 use List::MoreUtils ();
@@ -44,6 +45,7 @@ our @EXPORT_OK = qw(
     Num
     PositiveInt
     PostalCoercion
+    RepresentedCountryCoercion
     Str
     SubdivisionCoercion
     TraitsCoercion
@@ -293,6 +295,18 @@ sub PostalCoercion () {
             && $_[0]->isa('GeoIP2::Record::Postal')
             ? $_[0]
             : GeoIP2::Record::Postal->new($_[0]);
+        }
+    );
+}
+
+sub RepresentedCountryCoercion () {
+    return quote_sub(
+        q{
+            defined $_[0]
+            && Scalar::Util::blessed($_[0])
+            && $_[0]->isa('GeoIP2::Record::Country')
+            ? $_[0]
+            : GeoIP2::Record::RepresentedCountry->new($_[0]);
         }
     );
 }
