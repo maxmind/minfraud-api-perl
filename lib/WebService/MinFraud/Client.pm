@@ -9,10 +9,10 @@ our $VERSION = '0.001001';
 
 use JSON;
 use LWP::UserAgent;
-use Params::Validate qw( validate );
 use Scalar::Util qw( blessed );
 use Sub::Quote qw( quote_sub );
 use Try::Tiny;
+use Types::Standard qw( InstanceOf );
 use WebService::MinFraud::Error::HTTP;
 use WebService::MinFraud::Error::IPAddressNotFound;
 use WebService::MinFraud::Error::WebService;
@@ -20,6 +20,7 @@ use WebService::MinFraud::Model::Insights;
 use WebService::MinFraud::Model::Score;
 use WebService::MinFraud::Types
     qw( JSONObject MaxMindID MaxMindLicenseKey Str URIObject UserAgentObject );
+use WebService::MinFraud::Validator;
 
 use Moo;
 
@@ -75,13 +76,19 @@ has user_id => (
     required => 1,
 );
 
+has validator => (
+    is      => 'lazy',
+    isa     => InstanceOf ['WebService::MinFraud::Validator'],
+    builder => sub { WebService::MinFraud::Validator->new },
+    handles => [qw( validate_request )],
+);
+
 sub insights {
     my $self = shift;
 
     return $self->_response_for(
         'insights',
-        'WebService::MinFraud::Model::Insights',
-        @_,
+        'WebService::MinFraud::Model::Insights', @_,
     );
 }
 
@@ -90,88 +97,20 @@ sub score {
 
     return $self->_response_for(
         'score',
-        'WebService::MinFraud::Model::Score',
-        @_,
+        'WebService::MinFraud::Model::Score', @_,
     );
 }
 
-my %spec = (
-    account => {
-        callbacks => {
-            'is a shipping address' => sub { 1 }
-        }
-    },
-    billing => {
-        callbacks => {
-            'is a shipping address' => sub { 1 }
-        }
-    },
-    credit_card => {
-        callbacks => {
-            'is a shipping address' => sub { 1 }
-        }
-    },
-    device => {
-        callbacks => {
-            'is a shipping address' => sub { 1 }
-        }
-    },
-    email => {
-        callbacks => {
-            'is a shipping address' => sub { 1 }
-        }
-    },
-    event => {
-        callbacks => {
-            'is a shipping address' => sub { 1 }
-        }
-    },
-
-    #    ip => {
-    #        callbacks => {
-    #            'is a public IP address or me' => sub {
-    #                return defined $_[0]
-    #                    && ( $_[0] eq 'me'
-    #                    || is_public_ipv4( $_[0] )
-    #                    || is_public_ipv6( $_[0] ) );
-    #            }
-    #        },
-    #    },
-    order => {
-        callbacks => {
-            'is a shipping address' => sub { 1 }
-        }
-    },
-    payment => {
-        callbacks => {
-            'is a shipping address' => sub { 1 }
-        }
-    },
-    shipping => {
-        callbacks => {
-            'is a shipping address' => sub { 1 }
-        }
-    },
-    shopping_cart => {
-        callbacks => {
-            'is a shipping address' => sub { 1 }
-        }
-    },
-);
-
 sub _response_for {
-    my $self        = shift;
-    my $path        = shift;
-    my $model_class = shift;
+    my ( $self, $path, $model_class, $content ) = @_;
 
-    my %content = validate( @_, \%spec );
+    $self->validate_request($content);
     my $uri = $self->_base_uri()->clone();
     $uri->path_segments( $uri->path_segments(), $path );
     my $request = HTTP::Request->new(
-        'POST',
-        $uri,
+        'POST', $uri,
         HTTP::Headers->new( Accept => 'application/json' ),
-        $self->_json->encode( \%content )
+        $self->_json->encode($content)
     );
 
     $request->authorization_basic( $self->user_id(), $self->license_key() );
@@ -180,16 +119,13 @@ sub _response_for {
 
     if ( $response->code() == 200 ) {
         my $body = $self->_handle_success( $response, $uri );
-        return $model_class->new(
-            %{$body},
-            locales => $self->locales(),
-        );
+        return $model_class->new( %{$body}, locales => $self->locales(), );
     }
     else {
         # all other error codes throw an exception
         $self->_handle_error_status(
             $response, $uri,
-            $content{device}{ip_address}
+            $content->{device}{ip_address}
         );
     }
 }
@@ -346,8 +282,8 @@ __END__
       license_key => 'abcdef123456',
   );
 
-  # Replace "insights" with the method corresponding to the web service
-  # that you are using, e.g., "country", "city".
+  # Replace "insights" with the method score if that's the web service
+  # that you are using.
   my $insights = $client->insights( ip => '24.24.24.24' );
 
   my $shipping_address = $insights->shipping_adress;
@@ -421,7 +357,7 @@ The order of the locales is significant. When a record class has multiple
 names (country, city, etc.), its C<name()> method will look at each element of
 this array ref and return the first locale for which it has a name.
 
-Note that the only locale which is always present in the GeoIP2 data in "en".
+Note that the only locale which is always present in the minFraud data is "en".
 If you do not include this locale, the C<name()> method may end up returning
 C<undef> even when the record in question has an English name.
 
@@ -457,7 +393,7 @@ The default value for this argument is C<['en']>.
 =item * host
 
 The hostname to make a request against. This defaults to
-"geoip.maxmind.com". In most cases, you should not need to set this
+"minfraud.maxmind.com". In most cases, you should not need to set this
 explicitly.
 
 =item * ua
@@ -474,11 +410,19 @@ only argument. This method must return an L<HTTP::Response> object.
 
 =head1 REQUEST METHODS
 
-All of the request methods accept ...
+All of the request methods require a device ip_address
 
 =over 4
 
-=item *
+=item * ip_address
+
+This must be a valid IPv4 or IPv6 address, or the string "me". This is the
+address that you want to look up using the GeoIP2 web service.
+
+If you pass the string "me" then the web service returns data on the client
+system's IP address. Note that this is the IP address that the web service
+sees. If you are using a proxy, the web service will not see the client
+system's actual IP address.
 
 =back
 
@@ -486,7 +430,6 @@ All of the request methods accept ...
 
 This method calls the minFraud Score end point. It returns a
 L<WebService::MinFraud::Model::Score> object.
-
 
 =head2 insights
 
