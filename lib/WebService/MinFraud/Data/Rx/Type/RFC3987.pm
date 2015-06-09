@@ -58,7 +58,7 @@ NEED ONE
 
 =head1 DESCRIPTION
 
-A type to check if a value is a valid URI per RFC3987
+A type to check for a valid URI per RFC3987
 
 =head1 METHODS
 

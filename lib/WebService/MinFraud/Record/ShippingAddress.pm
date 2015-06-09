@@ -11,13 +11,15 @@ use WebService::MinFraud::Types qw( Bool BoolCoercion Num);
 use Moo;
 
 has distance_to_billing_address => (
-    is  => 'ro',
-    isa => Num,
+    is        => 'ro',
+    isa       => Num,
+    predicate => 1,
 );
 
 has distance_to_ip_location => (
-    is  => 'ro',
-    isa => Num,
+    is        => 'ro',
+    isa       => Num,
+    predicate => 1,
 );
 
 has is_high_risk => (
@@ -42,18 +44,21 @@ has is_postal_in_city => (
 );
 
 has latitude => (
-    is  => 'ro',
-    isa => Num,
+    is        => 'ro',
+    isa       => Num,
+    predicate => 1,
 );
 
 has longitude => (
-    is  => 'ro',
-    isa => Num,
+    is        => 'ro',
+    isa       => Num,
+    predicate => 1,
 );
 
 1;
 
-# ABSTRACT: Contains data for the shipping address record associated with a transaction
+# ABSTRACT: Contains data for the shipping address record associated with a
+# transaction
 
 __END__
 
@@ -87,12 +92,13 @@ Returns the distance from the shipping address to the billing address.
 
 =head2 distance_to_ip_location
 
-Returns the distance from the shipping address to the location of the IP address.
+Returns the distance from the shipping address to the location of the IP
+address.
 
 =head2 is_in_ip_country
 
-Returns a boolean indicating whether or not the shipping address is in the same country
-as that of the IP address.
+Returns a boolean indicating whether or not the shipping address is in the same
+country as that of the IP address.
 
 =head2 latitude
 

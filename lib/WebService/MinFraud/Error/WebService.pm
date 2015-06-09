@@ -44,7 +44,7 @@ __END__
   }
   catch {
       die $_ unless blessed $_;
-      if ( $_->isa('WebService::MinFraud::Error::HTTP') ) {
+      if ( $_->isa('WebService::MinFraud::Error::WebService') ) {
           log_web_service_error(
               maxmind_code => $_->code(),
               status       => $_->http_status(),
@@ -62,7 +62,7 @@ extends L<Throwable::Error> and adds attributes of its own.
 
 =head1 METHODS
 
-The C<< $error->message() >>, and C<< $error->stack_trace() >> methods are
+The C<< message >>, and C<< stack_trace >> methods are
 inherited from L<Throwable::Error>. The message will be the value provided by
 the MaxMind web service. See L<ttp://dev.maxmind.com/minfraud> for
 details.

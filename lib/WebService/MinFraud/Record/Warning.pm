@@ -27,18 +27,21 @@ has code => (
 );
 
 has warning => (
-    is  => 'ro',
-    isa => Str,
+    is        => 'ro',
+    isa       => Str,
+    predicate => 1,
 );
 
 has input => (
-    is  => 'ro',
-    isa => ArrayRef [Str],
+    is        => 'ro',
+    isa       => ArrayRef [Str],
+    predicate => 1,
 );
 
 1;
 
-# ABSTRACT: Contains data for the warning record returned from a web service query
+# ABSTRACT: Contains data for the warning record returned from a web service
+# query
 
 __END__
 

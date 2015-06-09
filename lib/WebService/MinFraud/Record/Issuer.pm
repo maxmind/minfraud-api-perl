@@ -27,13 +27,13 @@ has matches_provided_phone_number => (
 has name => (
     is        => 'ro',
     isa       => Str,
-    predicate => 'has_name',
+    predicate => 1,
 );
 
 has phone_number => (
     is        => 'ro',
     isa       => Str,
-    predicate => 'has_phone_number',
+    predicate => 1,
 );
 
 1;

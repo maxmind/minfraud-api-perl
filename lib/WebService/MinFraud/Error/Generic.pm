@@ -46,6 +46,10 @@ not add any additional attributes.
 
 =head1 METHODS
 
-This class has two methods, C<< $error->message() >>, and C<<
-$error->stack_trace() >>. Both methods are inherited from L<Throwable::Error>.
+This class has two methods, both of which are inherited from
+L<Throwable::Error>.
+
+=head2 message
+
+=head2 stack_trace
 

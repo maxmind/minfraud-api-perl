@@ -51,7 +51,7 @@ NEED ONE
 
 =head1 DESCRIPTION
 
-A type to check if a value is a 32 digit hexadecimal.
+A type to check for a 32 digit hexadecimal.
 
 =head1 METHODS
 

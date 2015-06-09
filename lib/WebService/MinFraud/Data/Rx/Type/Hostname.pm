@@ -56,7 +56,7 @@ NEED ONE
 
 =head1 DESCRIPTION
 
-A type to check if a value is a valid host name
+A type to check for a valid host name
 
 =head1 METHODS
 

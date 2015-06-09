@@ -11,8 +11,9 @@ use WebService::MinFraud::Types qw( Bool BoolCoercion Num);
 use Moo;
 
 has distance_to_ip_location => (
-    is  => 'ro',
-    isa => Num,
+    is        => 'ro',
+    isa       => Num,
+    predicate => 1,
 );
 
 has is_in_ip_country => (
@@ -30,13 +31,15 @@ has is_postal_in_city => (
 );
 
 has latitude => (
-    is  => 'ro',
-    isa => Num,
+    is        => 'ro',
+    isa       => Num,
+    predicate => 1,
 );
 
 has longitude => (
-    is  => 'ro',
-    isa => Num,
+    is        => 'ro',
+    isa       => Num,
+    predicate => 1,
 );
 
 1;
@@ -74,15 +77,15 @@ This class provides the following methods:
 
 Returns the distance from the shipping address to the billing address.
 
+=head2 is_in_ip_country
+
+Returns a boolean indicating whether or not the billing address is in the same
+country as that of the IP address.
+
 =head2 is_postal_in_city
 
 Returns a boolean indicating whether or not the billing postal code is in the
 billing city.
-
-=head2 is_in_ip_country
-
-Returns a boolean indicating whether or not the billing address is in the same country
-as that of the IP address.
 
 =head2 latitude
 

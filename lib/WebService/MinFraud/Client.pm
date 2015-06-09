@@ -284,17 +284,17 @@ __END__
 
   # Replace "insights" with the method score if that's the web service
   # that you are using.
-  my $insights = $client->insights( ip => '24.24.24.24' );
-
+  my $insights = $client->insights( device { ip_address => '24.24.24.24' } );
+  say $insights->risk_score;
   my $shipping_address = $insights->shipping_adress;
   say $shipping_address->is_high_risk;
 
 =head1 DESCRIPTION
 
 This class provides a client API for all the minFraud web service end
-points. The end points are Score and Insights. Each end point returns
-a different set of data about a transaction, with B<Score> returning the least
-data and B<Insights> the most.
+points. The end points are Score and Insights. The B<Insights> end point returns
+additional data about a transaction than the B<Score> end point. See
+L<http://dev.maxmind.com/minfraud> for more details.
 
 Each web service end point is represented by a different model class, and
 these model classes in turn contain multiple Record classes. The record
@@ -410,7 +410,9 @@ only argument. This method must return an L<HTTP::Response> object.
 
 =head1 REQUEST METHODS
 
-All of the request methods require a device ip_address
+All of the request methods require a device ip_address.  See
+L<http://dev/mamxind.com/minfraud> for details on all the values that can be
+part of the request.
 
 =over 4
 
@@ -452,11 +454,12 @@ L<http://dev.maxmind.com/minfraud> for the minFraud web service
 docs.
 
 If the web service returns an explicit error document, this is thrown as a
-L<WebService::MinFraud::Error::WebService> exception object. If some other sort of error
-occurs, this is thrown as a L<WebService::MinFraud::Error::HTTP> object. The difference is
-that the web service error includes an error message and error code delivered
-by the web service. The latter is thrown when some sort of unanticipated error
-occurs, such as the web service returning a 500 or an invalid error document.
+L<WebService::MinFraud::Error::WebService> exception object. If some other
+sort of error occurs, this is thrown as a L<WebService::MinFraud::Error::HTTP>
+object. The difference is that the web service error includes an error message
+and error code delivered by the web service. The latter is thrown when some sort
+of unanticipated error occurs, such as the web service returning a 500 or an
+invalid error document.
 
 If the web service returns any status code besides 200, 4xx, or 5xx, this also
 becomes a L<WebService::MinFraud::Error::HTTP> object.
@@ -464,7 +467,7 @@ becomes a L<WebService::MinFraud::Error::HTTP> object.
 Finally, if the web service returns a 200 but the body is invalid, the client
 throws a L<WebService::MinFraud::Error::Generic> object.
 
-All of these error classes have an C<< $error->message() >> method and
+All of these error classes have an C<< message >> method and
 overload stringification to show that message. This means that if you don't
 explicitly catch errors they will ultimately be sent to C<STDERR> with some
 sort of (hopefully) useful error message.

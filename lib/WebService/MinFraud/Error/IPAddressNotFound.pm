@@ -57,7 +57,7 @@ the MaxMind minFraud service.
 
 =head1 METHODS
 
-The C<< $error->message() >>, and C<< $error->stack_trace() >> methods are
+The C<< message >>, and C<< stack_trace >> methods are
 inherited from L<Throwable::Error>. It also provide two methods of its own:
 
 =head2 ip_address

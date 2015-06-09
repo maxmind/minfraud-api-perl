@@ -13,14 +13,16 @@ use WebService::MinFraud::Types
 use Moo;
 
 has issuer => (
-    is     => 'ro',
-    isa    => IssuerObject,
-    coerce => IssuerObjectCoercion,
+    is        => 'ro',
+    isa       => IssuerObject,
+    coerce    => IssuerObjectCoercion,
+    predicate => 1,
 );
 
 has country => (
-    is  => 'ro',
-    isa => Str,
+    is        => 'ro',
+    isa       => Str,
+    predicate => 1,
 );
 
 has is_issued_in_billing_address_country => (
@@ -63,7 +65,7 @@ __END__
 
 This class contains the credit card data associated with a transaction
 
-This record is returned by all the insights end point.
+This record is returned by the insights end point.
 
 =head1 METHODS
 
@@ -76,7 +78,7 @@ credit card,
 
 =head2 country
 
-Returns a country of the credit card.
+Returns the country of the credit card.
 
 =head2 is_issued_in_billing_address_country
 

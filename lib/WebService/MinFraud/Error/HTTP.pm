@@ -53,7 +53,7 @@ and adds attributes of its own.
 
 =head1 METHODS
 
-The C<< $error->message() >>, and C<< $error->stack_trace() >> methods are
+The C<< message >>, and C<< stack_trace >> methods are
 inherited from L<Throwable::Error>. It also provide two methods of its own:
 
 =head2 http_status

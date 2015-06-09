@@ -13,28 +13,32 @@ use WebService::MinFraud::Types
     SubdivisionsCoercion TraitsCoercion);
 
 has city => (
-    is      => 'lazy',
-    isa     => InstanceOf ['GeoIP2::Record::City'],
-    coerce  => CityCoercion,
-    builder => sub { GeoIP2::Record::City->new },
+    is        => 'lazy',
+    isa       => InstanceOf ['GeoIP2::Record::City'],
+    coerce    => CityCoercion,
+    builder   => sub { GeoIP2::Record::City->new },
+    predicate => 1,
 );
 
 has continent => (
-    is     => 'ro',
-    isa    => InstanceOf ['GeoIP2::Record::Continent'],
-    coerce => ContinentCoercion,
+    is        => 'ro',
+    isa       => InstanceOf ['GeoIP2::Record::Continent'],
+    coerce    => ContinentCoercion,
+    predicate => 1,
 );
 
 has country => (
-    is     => 'ro',
-    isa    => InstanceOf ['GeoIP2::Record::Country'],
-    coerce => CountryCoercion,
+    is        => 'ro',
+    isa       => InstanceOf ['GeoIP2::Record::Country'],
+    coerce    => CountryCoercion,
+    predicate => 1,
 );
 
 has location => (
-    is     => 'ro',
-    isa    => InstanceOf ['GeoIP2::Record::Location'],
-    coerce => LocationCoercion,
+    is        => 'ro',
+    isa       => InstanceOf ['GeoIP2::Record::Location'],
+    coerce    => LocationCoercion,
+    predicate => 1,
 );
 
 has most_specific_subdivision => (
@@ -47,24 +51,28 @@ has most_specific_subdivision => (
             ? $subdivisions[-1]
             : undef;
     },
+    predicate => 1,
 );
 
 has postal => (
-    is     => 'ro',
-    isa    => InstanceOf ['GeoIP2::Record::Postal'],
-    coerce => PostalCoercion,
+    is        => 'ro',
+    isa       => InstanceOf ['GeoIP2::Record::Postal'],
+    coerce    => PostalCoercion,
+    predicate => 1,
 );
 
 has registered_country => (
-    is     => 'ro',
-    isa    => InstanceOf ['GeoIP2::Record::Country'],
-    coerce => CountryCoercion,
+    is        => 'ro',
+    isa       => InstanceOf ['GeoIP2::Record::Country'],
+    coerce    => CountryCoercion,
+    predicate => 1,
 );
 
 has represented_country => (
-    is     => 'ro',
-    isa    => InstanceOf ['GeoIP2::Record::RepresentedCountry'],
-    coerce => RepresentedCountryCoercion,
+    is        => 'ro',
+    isa       => InstanceOf ['GeoIP2::Record::RepresentedCountry'],
+    coerce    => RepresentedCountryCoercion,
+    predicate => 1,
 );
 
 has _subdivisions => (
@@ -82,9 +90,10 @@ sub subdivisions {
 }
 
 has traits => (
-    is     => 'ro',
-    isa    => InstanceOf ['GeoIP2::Record::Traits'],
-    coerce => TraitsCoercion,
+    is        => 'ro',
+    isa       => InstanceOf ['GeoIP2::Record::Traits'],
+    coerce    => TraitsCoercion,
+    predicate => 1,
 );
 
 1;
@@ -111,7 +120,7 @@ __END__
 =head1 DESCRIPTION
 
 This class contains the GeoIP2 location data returned from a minFraud service
-query.
+query for the given ip_address.
 
 =head1 METHODS
 
@@ -132,6 +141,11 @@ Returns a L<GeoIP2::Record::Country> object.
 =head2 location
 
 Returns a L<GeoIP2::Record::Location> object.
+
+=head2 most_specific_subdivision
+
+Returns a L<GeoIP2::Record::Subdivision> object which is the most specific
+(smallest) subdivision.
 
 =head2 registered_country
 

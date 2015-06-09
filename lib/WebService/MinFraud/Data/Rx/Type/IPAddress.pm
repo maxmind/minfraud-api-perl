@@ -41,7 +41,7 @@ sub assert_valid {
         {
             error => [qw(type)],
             message =>
-                'Found value is not an IP addres, neither version 4 or 6.',
+                'Found value is not an IP addres, neither version 4 nor 6.',
             value => $value,
         }
     );
@@ -56,7 +56,7 @@ NEED ONE
 
 =head1 DESCRIPTION
 
-A type to check if a value is a valid IP address, version 4 or 6.
+A type to check for a valid IP address, version 4 or 6.
 
 =head1 METHODS
 

@@ -4,6 +4,7 @@ WebService::MinFraud::Client - MaxMind minFraud client in Perl
 
 =head1 SYNOPSIS
 
+ use 5.010;
  use WebService::MinFraud::Client;
     
  my $client = WebService::MinFraud::Client(42, 'licensekey');
@@ -88,14 +89,14 @@ WebService::MinFraud::Client - MaxMind minFraud client in Perl
      discount_code => 'FIRST',
      currency => 'USD',
      amount => 323.21
- }
-};
+ } };
 
-$client->score($request)
-# output: Score(credits_remaining=5077062248, id='FB49B8E0-F987-11E4-8AD9-8B1442B6BA89', risk_score=56.41, warnings=())
+  my $response = $client->score($request);
+  # $response: Score(credits_remaining=5077062248, id='FB49B8E0-F987-11E4-8AD9-8B1442B6BA89', risk_score=56.41, warnings=())
+  say $response->risk_score;
 
-$client->insights($request)
-# output: Insights(...)
+  $client->insights($request);
+  # output: Insights(...)
 
 =head1 REQUIREMENTS
 

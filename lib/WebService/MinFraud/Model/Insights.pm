@@ -52,14 +52,12 @@ __END__
 This class provides a model for the data returned by the minFraud insights web
 service.
 
-The only difference between the Score and Insights model classes is
-which fields in each record may be populated. See
+The Insights model class includes more data than the Score model class.  See
 L<http://dev.maxmind.com/minfraud> for more details.
 
 =head1 METHODS
 
-This class provides the following methods, each of which returns a record
-object.
+This model class provides the following methods:
 
 =head2 billing_address
 
@@ -74,6 +72,7 @@ credit card data for the transaction.
 =head2 credits_remaining
 
 Returns the I<approximate> number of service credits remaining on your account.
+The service credit counts are near realtime so they may not be exact.
 
 =head2 id
 
@@ -86,7 +85,7 @@ particular request.
 Returns a L<WebService::MinFraud::Record::IPLocation> object representing
 IP location data for the transaction.  In turn the IP location object consists
 of the following methods that return GeoIP2::Record::* objects: city, continent,
-country, postal, registered_country, subdivisions, traits.
+country, postal, registered_country, represented_country, subdivisions, traits.
 
 =head2 risk_score
 
@@ -101,5 +100,5 @@ shipping data for the transaction.
 =head2 warnings
 
 Returns an ArrayRef of L<WebService::MinFraud::Record::Warning> objects.  It is
-highly recommended that you check this array for issues when integrating the web
-service.
+B<highly recommended that you check this array> for issues when integrating the
+web service.

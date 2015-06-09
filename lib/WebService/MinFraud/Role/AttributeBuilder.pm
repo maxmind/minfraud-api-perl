@@ -61,6 +61,7 @@ sub _define_attributes_for_keys {
                         map { B::perlstring($_) } $key, $raw_attr
                     )
                 ),
+                predicate => 1,
             ),
         );
         ## use critic

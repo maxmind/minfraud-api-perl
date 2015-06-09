@@ -37,9 +37,7 @@ __END__
 This class provides a model for the data returned by the minFraud Score
 web service.
 
-The only difference between the Score and Insights model classes is
-which fields in each record may be populated. For more details, see
-L<http://dev.maxmind.com/minfraud>.
+For more details, see L<http://dev.maxmind.com/minfraud>.
 
 =head1 METHODS
 
@@ -63,5 +61,5 @@ higher risk of fraud.
 =head2 warnings
 
 Returns an ArrayRef of L<WebService::MinFraud::Record::Warning> objects.  It is
-highly recommended that you check this array for issues when integrating the web
-service.
+B<highly recommended that you check this array> for issues when integrating the
+web service.

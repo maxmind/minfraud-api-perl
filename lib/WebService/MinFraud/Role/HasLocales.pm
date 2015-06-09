@@ -11,9 +11,10 @@ use WebService::MinFraud::Types qw( LocalesArrayRef );
 use Moo::Role;
 
 has locales => (
-    is      => 'ro',
-    isa     => LocalesArrayRef,
-    default => quote_sub(q{ ['en'] }),
+    is        => 'ro',
+    isa       => LocalesArrayRef,
+    default   => quote_sub(q{ ['en'] }),
+    predicate => 1,
 );
 
 1;
