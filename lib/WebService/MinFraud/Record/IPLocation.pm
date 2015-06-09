@@ -6,16 +6,17 @@ use warnings;
 our $VERSION = '0.001001';
 
 use Moo;
-use Types::Standard qw( ArrayRef InstanceOf );
+use Types::Standard qw( ArrayRef InstanceOf Maybe );
 use WebService::MinFraud::Types
     qw( CityCoercion ContinentCoercion CountryCoercion LocationCoercion
-    PostalCoercion RepresentedCountryCoercion SubdivisionCoercion
-    TraitsCoercion);
+    MostSpecificSubdivisionCoercion PostalCoercion RepresentedCountryCoercion
+    SubdivisionsCoercion TraitsCoercion);
 
 has city => (
-    is     => 'ro',
-    isa    => InstanceOf ['GeoIP2::Record::City'],
-    coerce => CityCoercion,
+    is      => 'lazy',
+    isa     => InstanceOf ['GeoIP2::Record::City'],
+    coerce  => CityCoercion,
+    builder => sub { GeoIP2::Record::City->new },
 );
 
 has continent => (
@@ -36,6 +37,18 @@ has location => (
     coerce => LocationCoercion,
 );
 
+has most_specific_subdivision => (
+    is      => 'lazy',
+    isa     => Maybe [ InstanceOf ['GeoIP2::Record::Subdivision'] ],
+    builder => sub {
+        my $self         = shift;
+        my @subdivisions = $self->subdivisions;
+        return defined $subdivisions[0]
+            ? $subdivisions[-1]
+            : undef;
+    },
+);
+
 has postal => (
     is     => 'ro',
     isa    => InstanceOf ['GeoIP2::Record::Postal'],
@@ -50,15 +63,23 @@ has registered_country => (
 
 has represented_country => (
     is     => 'ro',
-    isa    => InstanceOf ['GeoIP2::Record::Country'],
+    isa    => InstanceOf ['GeoIP2::Record::RepresentedCountry'],
     coerce => RepresentedCountryCoercion,
 );
 
-has subdivisions => (
-    is     => 'ro',
-    isa    => ArrayRef [ InstanceOf ['GeoIP2::Record::Subdivision'] ],
-    coerce => SubdivisionCoercion,
+has _subdivisions => (
+    is  => 'ro',
+    isa => Maybe [ ArrayRef [ InstanceOf ['GeoIP2::Record::Subdivision'] ] ],
+    coerce => SubdivisionsCoercion,
 );
+
+sub subdivisions {
+    my ( $self, ) = @_;
+    return
+        defined $self->_subdivisions && @{ $self->_subdivisions }
+        ? @{ $self->_subdivisions }
+        : ();
+}
 
 has traits => (
     is     => 'ro',

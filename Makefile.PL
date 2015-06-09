@@ -53,12 +53,14 @@ my %WriteMakefileArgs = (
   "TEST_REQUIRES" => {
     "ExtUtils::MakeMaker" => 0,
     "File::Spec" => 0,
+    "JSON::PP" => 0,
     "Test::Fatal" => 0,
-    "Test::More" => "0.96"
+    "Test::More" => "0.96",
+    "lib" => 0
   },
   "VERSION" => "0.001001",
   "test" => {
-    "TESTS" => "t/*.t"
+    "TESTS" => "t/*.t t/WebService/MinFraud/*.t t/WebService/MinFraud/Model/*.t t/WebService/MinFraud/Record/*.t"
   }
 );
 
@@ -83,6 +85,7 @@ my %FallbackPrereqs = (
   "GeoIP2::Record::Traits" => 0,
   "IRI" => 0,
   "JSON" => 0,
+  "JSON::PP" => 0,
   "LWP::UserAgent" => 0,
   "List::MoreUtils" => 0,
   "List::Util" => 0,
@@ -96,6 +99,7 @@ my %FallbackPrereqs = (
   "Try::Tiny" => 0,
   "Types::Standard" => 0,
   "URI" => 0,
+  "lib" => 0,
   "parent" => 0,
   "strict" => 0,
   "warnings" => 0

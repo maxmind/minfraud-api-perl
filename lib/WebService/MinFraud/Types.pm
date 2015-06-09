@@ -3,7 +3,7 @@ package WebService::MinFraud::Types;
 use strict;
 use warnings;
 
-our $VERSION = '2.001004';
+our $VERSION = '0.001001';
 
 use Data::Validate::IP ();
 use GeoIP2::Record::City;
@@ -40,6 +40,7 @@ our @EXPORT_OK = qw(
     MaxMindID
     MaxMindLicenseKey
     MaybeStr
+    MostSpecificSubdivisionCoercion
     NameHashRef
     NonNegativeInt
     Num
@@ -47,7 +48,7 @@ our @EXPORT_OK = qw(
     PostalCoercion
     RepresentedCountryCoercion
     Str
-    SubdivisionCoercion
+    SubdivisionsCoercion
     TraitsCoercion
     URIObject
     UserAgentObject
@@ -247,6 +248,14 @@ sub MaybeStr () {
     );
 }
 
+sub MostSpecificSubdivisionCoercion () {
+    return quote_sub(
+        q{
+            GeoIP2::Record::Subdivision->new($_[0])
+        }
+    );
+}
+
 sub NameHashRef () {
     return quote_sub(
         q{ WebService::MinFraud::Types::_tc_fail( $_[0], 'NameHashRef' )
@@ -304,7 +313,7 @@ sub RepresentedCountryCoercion () {
         q{
             defined $_[0]
             && Scalar::Util::blessed($_[0])
-            && $_[0]->isa('GeoIP2::Record::Country')
+            && $_[0]->isa('GeoIP2::Record::RepresentedCountry')
             ? $_[0]
             : GeoIP2::Record::RepresentedCountry->new($_[0]);
         }
@@ -319,9 +328,10 @@ sub Str () {
     );
 }
 
-sub SubdivisionCoercion () {
+sub SubdivisionsCoercion () {
     return quote_sub(
         q{
+            warn "COERCE!!!";
             [ map { GeoIP2::Record::Subdivision->new($_) }  @{$_[0]} ];
         }
     );

@@ -6,6 +6,7 @@ use warnings;
 our $VERSION = '0.001001';
 
 use Sub::Quote qw( quote_sub );
+use WebService::MinFraud::Record::Issuer;
 use WebService::MinFraud::Types
     qw( Bool BoolCoercion HashRef IssuerObject IssuerObjectCoercion Str );
 

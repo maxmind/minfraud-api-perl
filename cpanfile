@@ -34,8 +34,10 @@ requires "warnings" => "0";
 on 'test' => sub {
   requires "ExtUtils::MakeMaker" => "0";
   requires "File::Spec" => "0";
+  requires "JSON::PP" => "0";
   requires "Test::Fatal" => "0";
   requires "Test::More" => "0.96";
+  requires "lib" => "0";
   requires "perl" => "5.010";
 };
 
