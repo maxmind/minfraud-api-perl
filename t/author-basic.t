@@ -6,7 +6,8 @@ use Test::More 0.88;
 use WebService::MinFraud::Client;
 
 BEGIN {
-    unless ( $ENV{AUTHOR_TESTING} ) {
+    # dzil test turns author testing on by default, so we use RELEASE_TESTING
+    unless ( $ENV{RELEASE_TESTING} ) {
         Test::More::plan( skip_all =>
                 'These tests are for testing by the author as they require a live minFraud service.'
         );
@@ -21,7 +22,10 @@ if ( $ENV{MM_LICENSE_KEY} ) {
         license_key => $ENV{MM_LICENSE_KEY},
     );
 }
-my $request_file = 'xt/data/full-request.json';
+else {
+    BAIL_OUT "License key not found";
+}
+my $request_file = 't/data/full-request.json';
 my $request_json = do {
     local $/ = undef;
     open my $fh, '<', $request_file

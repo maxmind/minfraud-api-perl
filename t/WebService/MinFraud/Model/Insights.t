@@ -3,136 +3,81 @@ use warnings;
 
 use lib 't/lib';
 
+use JSON;
+use Test::More 0.88;
 use Test::WebService::MinFraud qw(
+    test_common_attributes
     test_model_class
     test_model_class_with_empty_record
     test_model_class_with_unknown_keys
 );
-use Test::More 0.88;
-
 use WebService::MinFraud::Model::Insights;
 
-{
-    my %raw = (
-        id                => '5bc5d6c2-b2c8-40af-87f4-6d61af86b6ae',
-        risk_score        => 0.01,
-        credits_remaining => 1212,
+my $response_file = 't/data/insights-response.json';
+my $response_json = do {
+    local $/ = undef;
+    open my $fh, '<', $response_file
+        or die "Could not open $response_file: $!";
+    <$fh>;
+};
+my $response = decode_json($response_json);
+my $class    = 'WebService::MinFraud::Model::Insights';
+my $model    = WebService::MinFraud::Model::Insights->new($response);
+test_model_class( $class, $response );
+test_common_attributes( $model, $class, $response );
+is_deeply( $model->raw, $response, 'response gets stored as raw' );
 
-        billing_address => {
-            is_postal_in_city       => 1,
-            latitude                => 37.545,
-            longitude               => -122.421,
-            distance_to_ip_location => 100,
-            is_in_ip_country        => 1
+# We create a response structure to help us test the various attributes
+# that we create from the response.
+my @top_level          = keys %{ $response->{ip_location} };
+my @ip_location_hashes = map {
+    { $_ => [ keys %{ $response->{ip_location}{$_} } ] }
+    }
+    grep {
+           ref( $response->{ip_location}{$_} )
+        && ref( $response->{ip_location}{$_} ) eq 'HASH'
+    } @top_level;
+my $response_structure = {
+    billing_address  => [ keys %{ $response->{billing_address} } ],
+    shipping_address => [ keys %{ $response->{shipping_address} } ],
+    credit_card      => [
+        'country',
+        'is_issued_in_billing_address_country',
+        'is_prepaid',
+        {
+            issuer => [ keys %{ $response->{credit_card}{issuer} } ],
         },
-        credit_card => {
-            issuer => {
-                name                          => 'Bank of America',
-                matches_provided_name         => 1,
-                phone_number                  => '800-732-9194',
-                matches_provided_phone_number => 1,
-            },
-            country                              => 'US',
-            is_issued_in_billing_address_country => 1,
-            is_prepaid                           => 1,
-        },
-        shipping_address => {
-            is_high_risk                => 1,
-            is_postal_in_city           => 1,
-            latitude                    => 37.632,
-            longitude                   => -122.313,
-            distance_to_ip_location     => 15,
-            distance_to_billing_address => 22,
-            is_in_ip_country            => 1
-        },
-        ip_location => {
-            city => {
-                confidence => 76,
-                geoname_id => 9876,
-                names      => { en => 'Minneapolis' },
-            },
-            continent => {
-                code       => 'NA',
-                geoname_id => 42,
-                names      => { en => 'North America' },
-            },
-            country => {
-                confidence => 99,
-                geoname_id => 1,
-                iso_code   => 'US',
-                names      => {
-                    'de'    => 'Nordamerika',
-                    'en'    => 'North America',
-                    'ja'    => '北米',
-                    'es'    => 'América del Norte',
-                    'fr'    => 'Amérique du Nord',
-                    'ja'    => '北アメリカ',
-                    'pt-BR' => 'América do Norte',
-                    'ru'    => 'Северная Америка',
-                    'zh-CN' => '北美洲',
-                },
-            },
-            location => {
-                accuracy_radius => 1500,
-                latitude        => 44.98,
-                longitude       => 93.2636,
-                metro_code      => 765,
-                time_zone       => 'America/Chicago',
-            },
-            maxmind => {
-                queries_remaining => 42,
-            },
-            postal => {
-                code       => '12345',
-                confidence => 57,
-            },
-            registered_country => {
-                geoname_id => 2,
-                iso_code   => 'CA',
-                names      => { en => 'Canada' },
-            },
-            represented_country => {
-                geoname_id => 3,
-                iso_code   => 'GB',
-                names      => { en => 'United Kingdom' },
-            },
-            subdivisions => [
-                {
-                    confidence => 88,
-                    geoname_id => 574635,
-                    iso_code   => 'MN',
-                    names      => { en => 'Minnesota' },
+    ],
+    ip_location => \@ip_location_hashes,
+};
+
+foreach my $attribute ( keys %{$response_structure} ) {
+    my @subattributes = @{ $response_structure->{$attribute} };
+    foreach my $subattribute (@subattributes) {
+        if ( ref($subattribute) and ref($subattribute) eq 'HASH' ) {
+
+            # get the key its value(s)
+            foreach my $subsubattribute ( keys %{$subattribute} ) {
+                foreach my $value ( @{ $subattribute->{$subsubattribute} } ) {
+                    is(
+                        $model->$attribute->$subsubattribute->$value,
+                        $response->{$attribute}->{$subsubattribute}->{$value},
+                        "${attribute} > ${subsubattribute} > ${value}"
+                    );
                 }
-            ],
-            traits => {
-                autonomous_system_number       => 1234,
-                autonomous_system_organization => 'AS Organization',
-                domain                         => 'example.com',
-                ip_address                     => '1.2.3.4',
-                is_satellite_provider          => 1,
-                isp                            => 'Comcast',
-                organization                   => 'Blorg',
-                user_type                      => 'college',
-            },
-        },
-        warnings => [
-            {
-                code => 'INPUT_INVALID',
-                warning =>
-                    'Encountered value at /shipping/city that does meet the required constraints',
-                input => [ 'shipping', 'city' ],
-            },
-        ],
-    );
-
-    test_model_class( 'WebService::MinFraud::Model::Insights', \%raw );
+            }
+        }
+        else {
+            is(
+                $model->$attribute->$subattribute,
+                $response->{$attribute}->{$subattribute},
+                "${attribute} > ${subattribute}"
+            );
+        }
+    }
 }
 
-{
-    test_model_class_with_empty_record(
-        'WebService::MinFraud::Model::Insights');
-    test_model_class_with_unknown_keys(
-        'WebService::MinFraud::Model::Insights');
-}
+test_model_class_with_empty_record($class);
+test_model_class_with_unknown_keys($class);
 
 done_testing();

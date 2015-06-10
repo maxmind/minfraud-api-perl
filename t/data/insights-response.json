@@ -53,6 +53,10 @@
       "longitude": -0.0931,
       "time_zone": "Europe\/London"
     },
+    "postal": {
+        "code": "12345",
+        "confidence": 57
+     },
     "registered_country": {
       "geoname_id": 6252001,
       "iso_code": "US",
@@ -66,6 +70,11 @@
         "ru": "\u0421\u0428\u0410",
         "zh-CN": "\u7f8e\u56fd"
       }
+    },
+    "represented_country": {
+                "geoname_id": 3,
+                "iso_code": "GB",
+                "names": { "en": "United Kingdom" }
     },
     "subdivisions": [
       {

@@ -8,15 +8,16 @@ our $VERSION = '0.001001';
 use Moo;
 use Types::Standard qw( ArrayRef InstanceOf Maybe );
 use WebService::MinFraud::Types
-    qw( CityCoercion ContinentCoercion CountryCoercion LocationCoercion
-    MostSpecificSubdivisionCoercion PostalCoercion RepresentedCountryCoercion
-    SubdivisionsCoercion TraitsCoercion);
+    qw( CityCoercion ContinentCoercion CountryCoercion MinFraudCountryCoercion
+    MinFraudLocationCoercion MostSpecificSubdivisionCoercion PostalCoercion
+    RepresentedCountryCoercion SubdivisionsCoercion TraitsCoercion);
+use WebService::MinFraud::Record::Location;
+use WebService::MinFraud::Record::Country;
 
 has city => (
     is        => 'lazy',
     isa       => InstanceOf ['GeoIP2::Record::City'],
     coerce    => CityCoercion,
-    builder   => sub { GeoIP2::Record::City->new },
     predicate => 1,
 );
 
@@ -29,15 +30,15 @@ has continent => (
 
 has country => (
     is        => 'ro',
-    isa       => InstanceOf ['GeoIP2::Record::Country'],
-    coerce    => CountryCoercion,
+    isa       => InstanceOf ['WebService::MinFraud::Record::Country'],
+    coerce    => MinFraudCountryCoercion,
     predicate => 1,
 );
 
 has location => (
     is        => 'ro',
-    isa       => InstanceOf ['GeoIP2::Record::Location'],
-    coerce    => LocationCoercion,
+    isa       => InstanceOf ['WebService::MinFraud::Record::Location'],
+    coerce    => MinFraudLocationCoercion,
     predicate => 1,
 );
 

@@ -6,6 +6,7 @@ use warnings;
 our $VERSION = '0.001001';
 
 use Types::Standard qw( ArrayRef InstanceOf Num Str );
+use WebService::MinFraud::Record::Warning;
 use WebService::MinFraud::Types qw( NonNegativeInt );
 
 use Moo::Role;
