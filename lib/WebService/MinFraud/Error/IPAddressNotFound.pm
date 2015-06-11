@@ -42,7 +42,7 @@ __END__
   }
   catch {
       die $_ unless blessed $_;
-      if ( $_->isa(' WebService::MinFraud::Error::IPAddressNotFound') ) {
+      if ( $_->isa('WebService::MinFraud::Error::IPAddressNotFound') ) {
           log_ip_address_not_found_error( ip_address => $_->ip_address );
       }
 

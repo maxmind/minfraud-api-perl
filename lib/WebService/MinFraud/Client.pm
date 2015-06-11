@@ -238,12 +238,6 @@ sub _handle_4xx_status {
         );
     }
 
-    WebService::MinFraud::Error::WebService->throw(
-        message => delete $body->{error},
-        %{$body},
-        http_status => $status,
-        uri         => $uri,
-    );
 }
 
 sub _handle_5xx_status {
@@ -267,7 +261,7 @@ sub _handle_non_200_status {
 
     WebService::MinFraud::Error::HTTP->throw(
         message =>
-            "Received a very surprising HTTP status ($status) for $uri",
+            "Received an uncommon HTTP status ($status) for $uri that is neither 2xx, 4xx nor 5xx",
         http_status => $status,
         uri         => $uri,
     );
