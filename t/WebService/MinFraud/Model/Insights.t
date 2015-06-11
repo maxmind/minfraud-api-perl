@@ -22,20 +22,20 @@ my $response_json = do {
 };
 my $response = decode_json($response_json);
 my $class    = 'WebService::MinFraud::Model::Insights';
-my $model    = WebService::MinFraud::Model::Insights->new($response);
+my $model    = $class->new($response);
 test_model_class( $class, $response );
 test_common_attributes( $model, $class, $response );
 is_deeply( $model->raw, $response, 'response gets stored as raw' );
 
 # We create a response structure to help us test the various attributes
 # that we create from the response.
-my @top_level          = keys %{ $response->{ip_location} };
-my @ip_location_hashes = map {
-    { $_ => [ keys %{ $response->{ip_location}{$_} } ] }
+my @top_level         = keys %{ $response->{ip_address} };
+my @ip_address_hashes = map {
+    { $_ => [ keys %{ $response->{ip_address}{$_} } ] }
     }
     grep {
-           ref( $response->{ip_location}{$_} )
-        && ref( $response->{ip_location}{$_} ) eq 'HASH'
+           ref( $response->{ip_address}{$_} )
+        && ref( $response->{ip_address}{$_} ) eq 'HASH'
     } @top_level;
 my $response_structure = {
     billing_address  => [ keys %{ $response->{billing_address} } ],
@@ -48,7 +48,7 @@ my $response_structure = {
             issuer => [ keys %{ $response->{credit_card}{issuer} } ],
         },
     ],
-    ip_location => \@ip_location_hashes,
+    ip_address => \@ip_address_hashes,
 };
 
 foreach my $attribute ( keys %{$response_structure} ) {
@@ -80,4 +80,4 @@ foreach my $attribute ( keys %{$response_structure} ) {
 test_model_class_with_empty_record($class);
 test_model_class_with_unknown_keys($class);
 
-done_testing();
+done_testing;

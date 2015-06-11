@@ -20,4 +20,4 @@ my $model_class = 'WebService::MinFraud::Model::Score';
 my $score_model = $model_class->new($response);
 test_common_attributes( $score_model, $model_class, $response );
 
-done_testing();
+done_testing;

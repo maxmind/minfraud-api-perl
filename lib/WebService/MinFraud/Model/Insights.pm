@@ -13,12 +13,12 @@ sub _all_record_names {
     return qw(
         billing_address
         credit_card
-        ip_location
+        ip_address
         shipping_address
     );
 }
 
-__PACKAGE__->_define_attributes_for_keys( __PACKAGE__->_all_record_names() );
+__PACKAGE__->_define_attributes_for_keys( __PACKAGE__->_all_record_names );
 
 1;
 
@@ -40,16 +40,16 @@ __END__
   my $request = { device => { ip_address => '24.24.24.24'} };
   my $insights = $client->insights( $request );
 
-  my $shipping_address_rec = $insights->shipping_address;
-  say $shipping_address_rec->is_high_risk;
+  my $shipping_address = $insights->shipping_address;
+  say $shipping_address->is_high_risk;
 
-  my $ip_location_rec = $insights->ip_location;
-  my $postal_rec = $ip_location_rec->postal;
-  say $postal_rec->code;
+  my $ip_address = $insights->ip_address;
+  my $postal = $ip_address->postal;
+  say $postal->code;
 
 =head1 DESCRIPTION
 
-This class provides a model for the data returned by the minFraud insights web
+This class provides a model for the data returned by the minFraud Insights web
 service.
 
 The Insights model class includes more data than the Score model class.  See
@@ -76,21 +76,22 @@ The service credit counts are near realtime so they may not be exact.
 
 =head2 id
 
-Returns a UUID that identifies the minFraud request.  Please use this ID in bug
-reports or support requests to MaxMind so that we can easily identify a
+Returns a UUID that identifies the minFraud request.  Please use this UUID in
+bug reports or support requests to MaxMind so that we can easily identify a
 particular request.
 
-=head2 ip_location
+=head2 ip_address
 
-Returns a L<WebService::MinFraud::Record::IPLocation> object representing
-IP location data for the transaction.  In turn the IP location object consists
+Returns a L<WebService::MinFraud::Record::IPAddress> object representing
+IP address data for the transaction.  In turn the IP address object consists
 of the following methods that return GeoIP2::Record::* objects: city, continent,
-country, postal, registered_country, represented_country, subdivisions, traits.
+country, postal, registered_country, represented_country, subdivisions and
+traits.
 
 =head2 risk_score
 
-Returns the risk score, a number between 0.01 and 99. A higher score indicates a
-higher risk of fraud.
+Returns the risk score which is a number between 0.01 and 99. A higher score
+indicates a higher risk of fraud.
 
 =head2 shipping_address
 

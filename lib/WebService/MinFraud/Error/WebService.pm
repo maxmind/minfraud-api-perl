@@ -21,7 +21,7 @@ has code => (
 
 1;
 
-# ABSTRACT: An explicit error from the minFraud web service
+# ABSTRACT: An explicit error returned by the minFraud web service
 
 __END__
 
@@ -46,9 +46,9 @@ __END__
       die $_ unless blessed $_;
       if ( $_->isa('WebService::MinFraud::Error::WebService') ) {
           log_web_service_error(
-              maxmind_code => $_->code(),
-              status       => $_->http_status(),
-              uri          => $_->uri(),
+              maxmind_code => $_->code,
+              status       => $_->http_status,
+              uri          => $_->uri,
           );
       }
 
@@ -62,9 +62,9 @@ extends L<Throwable::Error> and adds attributes of its own.
 
 =head1 METHODS
 
-The C<< message >>, and C<< stack_trace >> methods are
+The C<< message >> and C<< stack_trace >> methods are
 inherited from L<Throwable::Error>. The message will be the value provided by
-the MaxMind web service. See L<ttp://dev.maxmind.com/minfraud> for
+the MaxMind web service. See L<http://dev.maxmind.com/minfraud> for
 details.
 
 It also provides three methods of its own:

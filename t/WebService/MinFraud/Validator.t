@@ -15,4 +15,4 @@ like(
     'bad request throws an exception'
 );
 
-done_testing();
+done_testing;

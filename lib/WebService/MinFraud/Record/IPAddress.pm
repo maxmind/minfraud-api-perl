@@ -1,18 +1,27 @@
-package WebService::MinFraud::Record::IPLocation;
+package WebService::MinFraud::Record::IPAddress;
 
 use strict;
 use warnings;
 
 our $VERSION = '0.001001';
 
-use Moo;
 use Types::Standard qw( ArrayRef InstanceOf Maybe );
-use WebService::MinFraud::Types
-    qw( CityCoercion ContinentCoercion CountryCoercion MinFraudCountryCoercion
-    MinFraudLocationCoercion MostSpecificSubdivisionCoercion PostalCoercion
-    RepresentedCountryCoercion SubdivisionsCoercion TraitsCoercion);
 use WebService::MinFraud::Record::Location;
 use WebService::MinFraud::Record::Country;
+use WebService::MinFraud::Types qw(
+    CityCoercion
+    ContinentCoercion
+    CountryCoercion
+    MinFraudCountryCoercion
+    MinFraudLocationCoercion
+    MostSpecificSubdivisionCoercion
+    PostalCoercion
+    RepresentedCountryCoercion
+    SubdivisionsCoercion
+    TraitsCoercion
+);
+
+use Moo;
 
 has city => (
     is        => 'lazy',
@@ -99,8 +108,7 @@ has traits => (
 
 1;
 
-# ABSTRACT: Contains data for the IPLocation record returned from a minFraud web
-# service query
+# ABSTRACT: Contains data for the IPAddress record returned from a minFraud web service query
 
 __END__
 
@@ -115,13 +123,13 @@ __END__
   );
   my $request = { device => { ip_address => '24.24.24.24'} };
   my $insights = $client->insights( $request);
-  my $ip_location = $insights->ip_location;
-  say $ip_location->city->name;
+  my $ip_address = $insights->ip_address;
+  say $ip_address->city->name;
 
 =head1 DESCRIPTION
 
 This class contains the GeoIP2 location data returned from a minFraud service
-query for the given ip_address.
+query for the given C<ip_address>.
 
 =head1 METHODS
 

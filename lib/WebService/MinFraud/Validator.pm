@@ -317,6 +317,9 @@ sub validate_request {
 }
 
 1;
+
+# ABSTRACT: Validation for the minFraud requests
+
 __END__
 
 =head1 SYNOPSIS

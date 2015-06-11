@@ -28,11 +28,11 @@ __END__
 
   use 5.010;
 
-  use  WebService::MinFraud::Client;
+  use WebService::MinFraud::Client;
   use Scalar::Util qw( blessed );
   use Try::Tiny;
 
-  my $client =  WebService::MinFraud::Client->new(
+  my $client = WebService::MinFraud::Client->new(
       user_id     => 42,
       license_key => 'abcdef123456',
   );
@@ -44,7 +44,7 @@ __END__
   catch {
       die $_ unless blessed $_;
       if ( $_->isa(' WebService::MinFraud::Error::IPAddressNotFound') ) {
-          log_ip_address_not_found_error( ip_address => $_->ip_address() );
+          log_ip_address_not_found_error( ip_address => $_->ip_address );
       }
 
       # handle other exceptions
@@ -52,13 +52,13 @@ __END__
 
 =head1 DESCRIPTION
 
-This class represents an error that occurs when an IP address is not found in
+This class represents an error that occurs when an IP address is not found by
 the MaxMind minFraud service.
 
 =head1 METHODS
 
-The C<< message >>, and C<< stack_trace >> methods are
-inherited from L<Throwable::Error>. It also provide two methods of its own:
+The C<< message >> and C<< stack_trace >> methods are
+inherited from L<Throwable::Error>. It also provide one method of its own:
 
 =head2 ip_address
 

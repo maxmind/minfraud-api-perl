@@ -41,7 +41,7 @@ sub assert_valid {
         {
             error => [qw(type)],
             message =>
-                'Found value is not an IP addres, neither version 4 nor 6.',
+                'Found value is not an IP address, neither version 4 nor 6.',
             value => $value,
         }
     );
@@ -54,11 +54,20 @@ __END__
 
 NEED ONE
 
-=head1 DESCRIPTION
+    device => {
+        type     => '//rec',
+        required => {
+            ip_address => {
+                type => '/maxmind/ip',
+            },
+        },
+    }
 
 A type to check for a valid IP address, version 4 or 6.
 
 =head1 METHODS
+
+These methods are specific to L<Data::Rx>.
 
 =head2 assert_valid
 

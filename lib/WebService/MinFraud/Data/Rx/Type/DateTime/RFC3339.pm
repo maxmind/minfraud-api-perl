@@ -48,13 +48,20 @@ __END__
 
 =head1 SYNOPSIS
 
-NEED ONE
+    event => {
+        type     => '//rec',
+        optional => {
+             time           => '/maxmind/datetime/rfc3339',
+        }
+    }
 
 =head1 DESCRIPTION
 
 A type to check if a string parses as a RFC3339 datetime
 
 =head1 METHODS
+
+These methods are specific to L<Data::Rx>.
 
 =head2 assert_valid
 

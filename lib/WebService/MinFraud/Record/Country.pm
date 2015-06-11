@@ -5,15 +5,16 @@ use warnings;
 
 our $VERSION = '0.001001';
 
-use Moo;
-use Sub::Quote qw( quote_sub );
 use WebService::MinFraud::Types qw( Bool BoolCoercion );
+
+use Moo;
+
 extends 'GeoIP2::Record::Country';
 
 has is_high_risk => (
     is      => 'ro',
     isa     => Bool,
-    default => quote_sub(q{ 0 }),
+    default => 0,
     coerce  => BoolCoercion,
 );
 
@@ -31,14 +32,14 @@ __END__
   );
   my $request = { device => { ip_address => '24.24.24.24'} };
   my $insights = $client->insights( $request);
-  my $country_rec = $insights->country;
-  say $country_rec->is_high_risk;
+  my $country = $insights->country;
+  say $country->is_high_risk;
 
 =head1 DESCRIPTION
 
 This class contains the country data associated with a transaction
 
-This record is returned by the insights end point.
+This record is returned by the Insights end point.
 
 =head1 METHODS
 

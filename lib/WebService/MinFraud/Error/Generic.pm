@@ -11,7 +11,7 @@ extends 'Throwable::Error';
 
 1;
 
-# ABSTRACT: A generic exception
+# ABSTRACT: A generic exception class for WebService::MinFraud errors
 
 __END__
 

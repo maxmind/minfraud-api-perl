@@ -2,6 +2,7 @@ requires "B" => "0";
 requires "Carp" => "0";
 requires "Data::Rx" => "0";
 requires "Data::Rx::CommonType::EasyNew" => "0";
+requires "Data::Validate::Domain" => "0";
 requires "Data::Validate::IP" => "0";
 requires "DateTime::Format::RFC3339" => "0";
 requires "Exporter" => "0";

@@ -22,3 +22,5 @@ has uri => (
 );
 
 1;
+
+# ABSTRACT: An HTTP Error role

@@ -21,4 +21,4 @@ is(
     'matches_provided_phone_number'
 );
 
-done_testing();
+done_testing;

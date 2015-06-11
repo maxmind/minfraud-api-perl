@@ -144,13 +144,6 @@ sub HashRef () {
     );
 }
 
-sub is_HashRef () {
-    defined $_[0]
-        && ref $_[0]
-        && Scalar::Util::reftype( $_[0] ) eq 'HASH'
-        && !Scalar::Util::blessed( $_[0] );
-}
-
 sub IPAddress {
     return quote_sub(
         q{ WebService::MinFraud::Types::_tc_fail( $_[0], 'IPAddress' )
@@ -414,5 +407,7 @@ sub _tc_fail {
         value   => $value
     );
 }
+
+# ABSTRACT: Custom types for the minFraud service
 
 1;

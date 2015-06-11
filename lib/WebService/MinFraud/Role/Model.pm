@@ -5,7 +5,7 @@ use warnings;
 
 our $VERSION = '0.001001';
 
-use WebService::MinFraud::Types qw( HashRef );
+use Types::Standard qw( HashRef );
 
 use Moo::Role;
 
@@ -29,3 +29,5 @@ around BUILDARGS => sub {
 };
 
 1;
+
+# ABSTRACT: A role for storing there original response in the raw attribute

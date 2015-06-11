@@ -32,19 +32,19 @@ has _base_uri => (
     builder => sub {
         my $self = shift;
         URI->new(
-            $self->uri_scheme . '://' . $self->host() . '/minfraud/v2.0' );
+            $self->uri_scheme . '://' . $self->host . '/minfraud/v2.0' );
     },
 );
 has host => (
     is      => 'ro',
     isa     => Str,
-    default => quote_sub(q{ 'minfraud.maxmind.com' }),
+    default => q{minfraud.maxmind.com},
 );
 has _json => (
     is       => 'ro',
     isa      => JSONObject,
     init_arg => undef,
-    default  => quote_sub(q{ JSON->new()->utf8() }),
+    default  => quote_sub(q{ JSON->new->utf8 }),
 );
 has license_key => (
     is       => 'ro',
@@ -55,7 +55,7 @@ has license_key => (
 has timeout => (
     is      => 'ro',
     isa     => Str,
-    default => quote_sub(q{ q{} }),
+    default => q{},
 );
 
 has ua => (
@@ -67,7 +67,7 @@ has ua => (
 has uri_scheme => (
     is      => 'ro',
     isa     => Str,
-    default => quote_sub(q{ 'https' }),
+    default => q{https},
 );
 
 has user_id => (
@@ -82,6 +82,24 @@ has validator => (
     builder => sub { WebService::MinFraud::Validator->new },
     handles => [qw( validate_request )],
 );
+
+sub BUILD {
+    my $self = shift;
+
+    my $self_version = try { 'v' . $self->VERSION() } || 'v?';
+
+    my $ua = $self->ua();
+    my $ua_version = try { 'v' . $ua->VERSION() } || 'v?';
+
+    my $agent
+        = blessed($self)
+        . " $self_version" . ' ('
+        . blessed($ua) . q{ }
+        . $ua_version . q{ / }
+        . "Perl $^V)";
+
+    $ua->agent($agent);
+}
 
 sub insights {
     my $self = shift;
@@ -105,21 +123,21 @@ sub _response_for {
     my ( $self, $path, $model_class, $content ) = @_;
 
     $self->validate_request($content);
-    my $uri = $self->_base_uri()->clone();
-    $uri->path_segments( $uri->path_segments(), $path );
+    my $uri = $self->_base_uri->clone;
+    $uri->path_segments( $uri->path_segments, $path );
     my $request = HTTP::Request->new(
         'POST', $uri,
         HTTP::Headers->new( Accept => 'application/json' ),
         $self->_json->encode($content)
     );
 
-    $request->authorization_basic( $self->user_id(), $self->license_key() );
+    $request->authorization_basic( $self->user_id, $self->license_key );
 
-    my $response = $self->ua()->request($request);
+    my $response = $self->ua->request($request);
 
-    if ( $response->code() == 200 ) {
+    if ( $response->code == 200 ) {
         my $body = $self->_handle_success( $response, $uri );
-        return $model_class->new( %{$body}, locales => $self->locales(), );
+        return $model_class->new( %{$body}, locales => $self->locales, );
     }
     else {
         # all other error codes throw an exception
@@ -137,7 +155,7 @@ sub _handle_success {
 
     my $body;
     try {
-        $body = $self->_json()->decode( $response->decoded_content() );
+        $body = $self->_json->decode( $response->decoded_content );
     }
     catch {
         WebService::MinFraud::Error::Generic->throw(
@@ -155,7 +173,7 @@ sub _handle_error_status {
     my $uri      = shift;
     my $ip       = shift;
 
-    my $status = $response->code();
+    my $status = $response->code;
 
     if ( $status =~ /^4/ ) {
         $self->_handle_4xx_status( $response, $status, $uri, $ip );
@@ -182,14 +200,14 @@ sub _handle_4xx_status {
         );
     }
 
-    my $content = $response->decoded_content();
+    my $content = $response->decoded_content;
 
     my $body = {};
 
     if ( defined $content && length $content ) {
-        if ( $response->content_type() =~ /json/ ) {
+        if ( $response->content_type =~ /json/ ) {
             try {
-                $body = $self->_json()->decode($content);
+                $body = $self->_json->decode($content);
                 WebService::MinFraud::Error::Generic->throw( message =>
                         'Response contains JSON but it does not specify code or error keys'
                 ) unless $body->{code} && $body->{error};
@@ -259,12 +277,12 @@ sub _build_base_uri {
     my $self = shift;
 
     return URI->new(
-        $self->uri_scheme . '://' . $self->host() . '/minfraud/v2.0' );
+        $self->uri_scheme . '://' . $self->host . '/minfraud/v2.0' );
 }
 
 1;
 
-# ABSTRACT: Perl API for the GeoIP2 Precision web services
+# ABSTRACT: Perl API for the minFraud Precision web services
 
 __END__
 
@@ -282,9 +300,9 @@ __END__
       license_key => 'abcdef123456',
   );
 
-  # Replace "insights" with the method score if that's the web service
+  # Replace "insights" below with the "score" method if that's the web service
   # that you are using.
-  my $insights = $client->insights( device { ip_address => '24.24.24.24' } );
+  my $insights = $client->insights( device => { ip_address => '24.24.24.24' } );
   say $insights->risk_score;
   my $shipping_address = $insights->shipping_adress;
   say $shipping_address->is_high_risk;
@@ -293,11 +311,11 @@ __END__
 
 This class provides a client API for all the minFraud web service end
 points. The end points are Score and Insights. The B<Insights> end point returns
-additional data about a transaction than the B<Score> end point. See
+more data about a transaction than the B<Score> end point. See
 L<http://dev.maxmind.com/minfraud> for more details.
 
 Each web service end point is represented by a different model class, and
-these model classes in turn contain multiple Record classes. The record
+these model classes in turn contain multiple Record classes. The Record
 classes have attributes which contain data about the transaction or IP address.
 
 If the web service does not return a particular piece of data for a
@@ -327,7 +345,7 @@ If the request fails, the client class throws an exception.
 
 This class has a single constructor method:
 
-=head2 WebService::MinFraud::Client->new()
+=head2 WebService::MinFraud::Client->new
 
 This method creates a new client object. It accepts the following arguments:
 
@@ -350,15 +368,15 @@ This argument is required.
 =item * locales
 
 This is an array reference where each value is a string indicating a locale.
-This argument will be passed onto record classes to use when their C<name()>
+This argument will be passed on to record classes to use when their C<name>
 methods are called.
 
 The order of the locales is significant. When a record class has multiple
-names (country, city, etc.), its C<name()> method will look at each element of
-this array ref and return the first locale for which it has a name.
+names (country, city, etc.), its C<name> method will look at each element of
+this array reference and return the first locale for which it has a name.
 
 Note that the only locale which is always present in the minFraud data is "en".
-If you do not include this locale, the C<name()> method may end up returning
+If you do not include this locale, the C<name> method may end up returning
 C<undef> even when the record in question has an English name.
 
 Currently, the valid list of locale codes is:
@@ -402,7 +420,7 @@ This argument allows you to your own L<LWP::UserAgent> object. This is useful
 if you cannot use a vanilla LWP object, for example if you need to set proxy
 parameters.
 
-This can actually be any object which supports C<agent()> and C<request()>
+This can actually be any object which supports C<agent> and C<request>
 methods. This method will be called with an L<HTTP::Request> object as its
 only argument. This method must return an L<HTTP::Response> object.
 
@@ -411,20 +429,14 @@ only argument. This method must return an L<HTTP::Response> object.
 =head1 REQUEST METHODS
 
 All of the request methods require a device ip_address.  See
-L<http://dev/mamxind.com/minfraud> for details on all the values that can be
+L<http://dev.mamxind.com/minfraud> for details on all the values that can be
 part of the request.
 
 =over 4
 
 =item * ip_address
 
-This must be a valid IPv4 or IPv6 address, or the string "me". This is the
-address that you want to look up using the GeoIP2 web service.
-
-If you pass the string "me" then the web service returns data on the client
-system's IP address. Note that this is the IP address that the web service
-sees. If you are using a proxy, the web service will not see the client
-system's actual IP address.
+This must be a valid IPv4 or IPv6 address.
 
 =back
 
@@ -467,7 +479,7 @@ becomes a L<WebService::MinFraud::Error::HTTP> object.
 Finally, if the web service returns a 200 but the body is invalid, the client
 throws a L<WebService::MinFraud::Error::Generic> object.
 
-All of these error classes have an C<< message >> method and
+All of these error classes have a C<< message >> method and
 overload stringification to show that message. This means that if you don't
 explicitly catch errors they will ultimately be sent to C<STDERR> with some
 sort of (hopefully) useful error message.
@@ -477,5 +489,5 @@ sort of (hopefully) useful error message.
 See L<http://dev.maxmind.com/minfraud> for details on what data each end
 point I<may> return.
 
-Every record class attribute has a corresponding predicate method so you can
-check to see if the attribute is set.
+Every record class attribute has a corresponding predicate method so that you
+can check to see if the attribute is set.

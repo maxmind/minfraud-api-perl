@@ -9,6 +9,7 @@ our $VERSION = '0.001001';
 
 use Carp ();
 use List::Util qw( all );
+use Data::Validate::Domain qw( is_domain );
 
 use parent 'Data::Rx::CommonType::EasyNew';
 
@@ -32,11 +33,8 @@ sub guts_from_arg {
 sub assert_valid {
     my ( $self, $value ) = @_;
 
-    my @labels = split /\./, $value;
     return 1
-        if $value
-        && ( length($value) < 256
-        && ( all { $_ =~ m/^(?!-)[A-Z\d-]{1,63}(?<!-)$/i } @labels ) );
+        if is_domain($value);
 
     $self->fail(
         {
@@ -52,13 +50,21 @@ __END__
 
 =head1 SYNOPSIS
 
-NEED ONE
+    email => {
+        type     => '//rec',
+        optional => {
+            address => '//str',
+            domain  => '/maxmind/hostname',
+        }
+    }
 
 =head1 DESCRIPTION
 
 A type to check for a valid host name
 
 =head1 METHODS
+
+These methods are specific to L<Data::Rx>.
 
 =head2 assert_valid
 

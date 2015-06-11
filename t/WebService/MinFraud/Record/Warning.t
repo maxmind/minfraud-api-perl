@@ -16,4 +16,4 @@ is( $warning->code, 'INPUT_INVALID', 'code' );
 like( $warning->warning, qr/city that does not meet/, 'city' );
 is_deeply( $warning->input, [ 'shipping', 'city' ], 'input' );
 
-done_testing();
+done_testing;

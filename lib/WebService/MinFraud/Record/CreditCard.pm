@@ -5,7 +5,6 @@ use warnings;
 
 our $VERSION = '0.001001';
 
-use Sub::Quote qw( quote_sub );
 use WebService::MinFraud::Record::Issuer;
 use WebService::MinFraud::Types
     qw( Bool BoolCoercion HashRef IssuerObject IssuerObjectCoercion Str );
@@ -28,21 +27,20 @@ has country => (
 has is_issued_in_billing_address_country => (
     is      => 'ro',
     isa     => Bool,
-    default => quote_sub(q{ 0 }),
+    default => 0,
     coerce  => BoolCoercion,
 );
 
 has is_prepaid => (
     is      => 'ro',
     isa     => Bool,
-    default => quote_sub(q{ 0 }),
+    default => 0,
     coerce  => BoolCoercion,
 );
 
 1;
 
-# ABSTRACT: Contains data for the credit card record associated with a
-# transaction
+# ABSTRACT: Contains data for the credit card record associated with a transaction
 
 __END__
 
@@ -57,15 +55,15 @@ __END__
   );
   my $request = { device => { ip_address => '24.24.24.24'} };
   my $insights = $client->insights( $request);
-  my $credit_card_rec = $insights->credit_card;
-  say $credit_card_rec->is_prepaid;
-  say $credit_card_rec->issuer->name;
+  my $credit_card = $insights->credit_card;
+  say $credit_card->is_prepaid;
+  say $credit_card->issuer->name;
 
 =head1 DESCRIPTION
 
-This class contains the credit card data associated with a transaction
+This class contains the credit card data associated with a transaction.
 
-This record is returned by the insights end point.
+This record is returned by the Insights end point.
 
 =head1 METHODS
 
@@ -73,8 +71,7 @@ This class provides the following methods:
 
 =head2 issuer
 
-Returns the issuer object, L<WebService::MinFraud::Record::Issuer>, for the
-credit card,
+Returns the L<WebService::MinFraud::Record::Issuer> object for the credit card.
 
 =head2 country
 

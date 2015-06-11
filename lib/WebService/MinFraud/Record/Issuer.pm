@@ -5,7 +5,6 @@ use warnings;
 
 our $VERSION = '0.001001';
 
-use Sub::Quote qw( quote_sub );
 use WebService::MinFraud::Types qw( Bool BoolCoercion Str );
 
 use Moo;
@@ -13,14 +12,14 @@ use Moo;
 has matches_provided_name => (
     is      => 'ro',
     isa     => Bool,
-    default => quote_sub(q{ 0 }),
+    default => 0,
     coerce  => BoolCoercion,
 );
 
 has matches_provided_phone_number => (
     is      => 'ro',
     isa     => Bool,
-    default => quote_sub(q{ 0 }),
+    default => 0,
     coerce  => BoolCoercion,
 );
 
@@ -38,8 +37,7 @@ has phone_number => (
 
 1;
 
-# ABSTRACT: Contains data for the issuer of the credit card associated with a
-# transaction.
+# ABSTRACT: Contains data for the issuer of the credit card associated with a transaction
 
 __END__
 
@@ -54,8 +52,8 @@ __END__
   );
   my $request = { device => { ip_address => '24.24.24.24'} };
   my $insights = $client->insights( $request);
-  my $issuer_rec = $insights->credit_card->issuer;
-  say $issuer_rec->name;
+  my $issuer = $insights->credit_card->issuer;
+  say $issuer->name;
 
 =head1 DESCRIPTION
 
@@ -69,12 +67,12 @@ This class provides the following methods:
 =head2 matches_provided_name
 
 Returns a boolean indicating whether the name provided matches the known bank
-name associated with the credit card
+name associated with the credit card.
 
 =head2 matches_provided_phone_number
 
 Returns a boolean indicating whether the phone provided matches the known bank
-phone associated with the credit card
+phone associated with the credit card.
 
 =head2 name
 

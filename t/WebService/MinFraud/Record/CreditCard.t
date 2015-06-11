@@ -21,4 +21,4 @@ is(
     'credit card issued in billing country'
 );
 
-done_testing();
+done_testing;

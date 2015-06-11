@@ -71,13 +71,30 @@ __END__
 
 =head1 SYNOPSIS
 
-NEED ONE
+    event => {
+        type     => '//rec',
+        optional => {
+            type           => {
+                type     => '/maxmind/enum',
+                contents => {
+                    type   => '//str',
+                    values => [
+                        'account_creation', 'account_login',
+                        'purchase',         'recurring_purchase',
+                        'referral',         'survey',
+                    ],
+                }
+            }
+        }
+    }
 
 =head1 DESCRIPTION
 
 A type that defines an enumeration
 
 =head1 METHODS
+
+These methods are specific to L<Data::Rx>.
 
 =head2 assert_valid
 

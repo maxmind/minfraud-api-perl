@@ -7,13 +7,13 @@ our $VERSION = '0.001001';
 
 use B;
 use Sub::Quote qw( quote_sub );
+use Types::Standard qw( HashRef );
 use WebService::MinFraud::Record::BillingAddress;
 use WebService::MinFraud::Record::CreditCard;
-use WebService::MinFraud::Record::IPLocation;
+use WebService::MinFraud::Record::IPAddress;
 use WebService::MinFraud::Record::Issuer;
 use WebService::MinFraud::Record::ShippingAddress;
 use WebService::MinFraud::Record::Warning;
-use WebService::MinFraud::Types qw( HashRef );
 
 use Moo::Role;
 
@@ -73,17 +73,17 @@ sub _build_record {
     my $key    = shift;
     my $method = shift;
 
-    my $raw = $self->$method();
+    my $raw = $self->$method;
 
     return $self->_record_class_for_key($key)
-        ->new( %{$raw}, locales => $self->locales() );
+        ->new( %{$raw}, locales => $self->locales );
 }
 
 {
     my %key_to_class = (
         billing_address  => 'BillingAddress',
         credit_card      => 'CreditCard',
-        ip_location      => 'IPLocation',
+        ip_address       => 'IPAddress',
         shipping_address => 'ShippingAddress',
     );
 
@@ -97,3 +97,5 @@ sub _build_record {
 }
 
 1;
+
+# ABSTRACT: A role that builds model attributes

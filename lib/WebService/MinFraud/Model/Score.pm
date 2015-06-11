@@ -49,8 +49,8 @@ Returns the I<approximate> number of service credits remaining on your account.
 
 =head2 id
 
-Returns a UUID that identifies the minFraud request.  Please use this ID in bug
-reports or support requests to MaxMind so that we can easily identify a
+Returns a UUID that identifies the minFraud request.  Please use this UUID in
+bug reports or support requests to MaxMind so that we can easily identify a
 particular request.
 
 =head2 risk_score

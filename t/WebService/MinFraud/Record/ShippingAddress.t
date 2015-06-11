@@ -24,4 +24,4 @@ is( 43.1, $ba->latitude,                    'latitude' );
 is( 1,    $ba->is_high_risk,                'is_high_risk' );
 is( 200,  $ba->distance_to_billing_address, 'distance_to_billing_address' );
 
-done_testing();
+done_testing;

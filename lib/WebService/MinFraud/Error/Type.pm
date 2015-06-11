@@ -23,7 +23,7 @@ has value => (
 
 1;
 
-# ABSTRACT: A type validation error.
+# ABSTRACT: A type validation error
 
 __END__
 
@@ -48,8 +48,8 @@ __END__
       die $_ unless blessed $_;
       if ( $_->isa('WebService::MinFraud::Error::Type') ) {
           log_validation_error(
-              type   => $_->name(),
-              value  => $_->value(),
+              type   => $_->name,
+              value  => $_->value,
           );
       }
 
@@ -63,7 +63,7 @@ L<Throwable::Error> and adds attributes of its own.
 
 =head1 METHODS
 
-The C<< message >>, and C<< stack_trace >> methods are
+The C<< message >> and C<< stack_trace >> methods are
 inherited from L<Throwable::Error>. It also provide two methods of its own:
 
 =head2 name

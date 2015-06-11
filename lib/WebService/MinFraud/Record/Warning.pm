@@ -40,8 +40,7 @@ has input => (
 
 1;
 
-# ABSTRACT: Contains data for the warning record returned from a web service
-# query
+# ABSTRACT: Contains data for the warning record returned from a web service query
 
 __END__
 
@@ -56,12 +55,12 @@ __END__
   );
   my $request = { device => { ip_address => '24.24.24.24'} };
   my $insights = $client->insights( $request );
-  my $warnings_rec = $insights->warning;
-  say $warnings_rec->warning;
+  my $warnings = $insights->warning;
+  say $warnings->warning;
 
 =head1 DESCRIPTION
 
-This class contains the maxmind warning (if any) from a web service query.
+This class contains the MaxMind warning (if any) from a web service query.
 
 =head1 METHODS
 

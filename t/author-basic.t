@@ -77,11 +77,11 @@ ok(
     $response_insights->shipping_address->latitude,
     'shipping latitude exists'
 );
-ok( $response_insights->ip_location,       'ip_location record exists' );
-ok( $response_insights->ip_location->city, 'city exists' );
+ok( $response_insights->ip_address,       'ip_address record exists' );
+ok( $response_insights->ip_address->city, 'city exists' );
 ok(
-    $response_insights->ip_location->city->geoname_id,
+    $response_insights->ip_address->city->geoname_id,
     'city geoname id exists'
 );
 
-done_testing();
+done_testing;

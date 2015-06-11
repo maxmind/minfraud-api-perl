@@ -5,7 +5,6 @@ use warnings;
 
 our $VERSION = '0.001001';
 
-use Sub::Quote qw( quote_sub );
 use WebService::MinFraud::Types qw( Bool BoolCoercion Num);
 
 use Moo;
@@ -25,21 +24,21 @@ has distance_to_ip_location => (
 has is_high_risk => (
     is      => 'ro',
     isa     => Bool,
-    default => quote_sub(q{ 0 }),
+    default => 0,
     coerce  => BoolCoercion,
 );
 
 has is_in_ip_country => (
     is      => 'ro',
     isa     => Bool,
-    default => quote_sub(q{ 0 }),
+    default => 0,
     coerce  => BoolCoercion,
 );
 
 has is_postal_in_city => (
     is      => 'ro',
     isa     => Bool,
-    default => quote_sub(q{ 0 }),
+    default => 0,
     coerce  => BoolCoercion,
 );
 
@@ -57,8 +56,7 @@ has longitude => (
 
 1;
 
-# ABSTRACT: Contains data for the shipping address record associated with a
-# transaction
+# ABSTRACT: Contains data for the shipping address record associated with a transaction
 
 __END__
 
@@ -73,14 +71,14 @@ __END__
   );
   my $request = { device => { ip_address => '24.24.24.24'} };
   my $insights = $client->insights( $request);
-  my $shipping_address_rec = $insights->shipping_address;
-  say $shipping_address_rec->distance_to_ip_location;
+  my $shipping_address = $insights->shipping_address;
+  say $shipping_address->distance_to_ip_location;
 
 =head1 DESCRIPTION
 
 This class contains the shipping address data associated with a transaction.
 
-This record is returned by the insights end point.
+This record is returned by the Insights end point.
 
 =head1 METHODS
 
@@ -102,9 +100,9 @@ country as that of the IP address.
 
 =head2 latitude
 
-Returns the latitude of the shipping address
+Returns the latitude of the shipping address.
 
 =head2 longitude
 
-Returns the longitude of the shipping address
+Returns the longitude of the shipping address.
 

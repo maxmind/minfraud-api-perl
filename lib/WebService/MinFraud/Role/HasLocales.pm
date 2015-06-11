@@ -18,3 +18,5 @@ has locales => (
 );
 
 1;
+
+# ABSTRACT: A role for (language) locales

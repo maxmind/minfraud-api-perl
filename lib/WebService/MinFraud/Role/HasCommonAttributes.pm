@@ -49,3 +49,5 @@ has warnings => (
 );
 
 1;
+
+# ABSTRACT: A role for attributes common to both the Insights and Score models

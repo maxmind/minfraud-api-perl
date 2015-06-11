@@ -19,4 +19,4 @@ is( 100,  $ba->distance_to_ip_location, 'distance_to_ip_location' );
 is( 32.1, $ba->longitude,               'longitude' );
 is( 43.1, $ba->latitude,                'latitude' );
 
-done_testing();
+done_testing;
