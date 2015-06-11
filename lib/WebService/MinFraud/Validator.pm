@@ -324,7 +324,10 @@ __END__
 
 =head1 SYNOPSIS
 
-NEED ONE
+    use WebService::MinFraud::Validator;
+    my $validator = WebService::MinFraud::Validator->new;
+    my $request = { device => { ip_address => '24.24.24.24' } };
+    $validator->validate_request($request);
 
 =head1 DESCRIPTION
 

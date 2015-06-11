@@ -55,8 +55,8 @@ particular request.
 
 =head2 risk_score
 
-Returns the risk score, a number between 0.01 and 99. A higher score indicates a
-higher risk of fraud.
+Returns the risk score which is a number between 0.01 and 99.  A higher score
+indicates a higher risk of fraud.
 
 =head2 warnings
 

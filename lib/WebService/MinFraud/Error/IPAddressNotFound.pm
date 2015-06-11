@@ -19,8 +19,7 @@ has ip_address => (
 
 1;
 
-# ABSTRACT: An exception thrown when an IP address is not in the MaxMind
-# minFraud service
+# ABSTRACT: An exception thrown when an IP address is not found by the MaxMind minFraud service
 
 __END__
 
