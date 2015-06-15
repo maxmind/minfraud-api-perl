@@ -83,5 +83,6 @@ ok(
     $response_insights->ip_address->city->geoname_id,
     'city geoname id exists'
 );
+ok( defined $response_insights->ip_address->risk, 'ip_address risk is defined');
 
 done_testing;

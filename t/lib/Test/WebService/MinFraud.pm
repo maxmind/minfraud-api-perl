@@ -150,12 +150,12 @@ sub test_model_class_with_empty_record {
         "$class object with no data except ip_adress.traits.ip_address"
     );
 
-        test_top_level( $model, $class, \%raw );
-        my @subdivisions = $model->ip_address->subdivisions;
-        is(
-            scalar @subdivisions,
-            0, '$model->ip_address->subdivisions returns an empty list'
-        );
+    test_top_level( $model, $class, \%raw );
+    my @subdivisions = $model->ip_address->subdivisions;
+    is(
+        scalar @subdivisions,
+        0, '$model->ip_address->subdivisions returns an empty list'
+    );
 }
 
 sub test_model_class_with_unknown_keys {

@@ -5,7 +5,7 @@ use warnings;
 
 our $VERSION = '0.001001';
 
-use Types::Standard qw( ArrayRef InstanceOf Maybe );
+use Types::Standard qw( ArrayRef InstanceOf Maybe Num);
 use WebService::MinFraud::Record::Location;
 use WebService::MinFraud::Record::Country;
 use WebService::MinFraud::Types qw(
@@ -82,6 +82,12 @@ has represented_country => (
     is        => 'ro',
     isa       => InstanceOf ['GeoIP2::Record::RepresentedCountry'],
     coerce    => RepresentedCountryCoercion,
+    predicate => 1,
+);
+
+has risk => (
+    is        => 'ro',
+    isa       => Num,
     predicate => 1,
 );
 
@@ -163,6 +169,11 @@ Returns a L<GeoIP2::Record::Country> object.
 =head2 represented_country
 
 Returns a L<GeoIP2::Record::RepresentedCountry> object.
+
+=head2 risk
+
+Returns the risk associated with the IP address. The value ranges from 0.01 to
+99. A higher value indicates a higher risk.
 
 =head2 subdivisions
 

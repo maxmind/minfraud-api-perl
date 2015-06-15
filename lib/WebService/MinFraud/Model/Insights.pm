@@ -86,7 +86,9 @@ Returns a L<WebService::MinFraud::Record::IPAddress> object representing
 IP address data for the transaction.  In turn the IP address object consists
 of the following methods that return GeoIP2::Record::* objects: city, continent,
 country, postal, registered_country, represented_country, subdivisions and
-traits.
+traits.  In addition, the IP address object has a risk attribute that is
+similar to the risk_score for the overall transaction, but specific to the IP
+address instead of the transaction.
 
 =head2 risk_score
 

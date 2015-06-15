@@ -76,6 +76,7 @@
                 "iso_code": "GB",
                 "names": { "en": "United Kingdom" }
     },
+    "risk": 0.01,
     "subdivisions": [
       {
         "confidence": 42,

@@ -77,6 +77,13 @@ foreach my $attribute ( keys %{$response_structure} ) {
     }
 }
 
+# Test ip_address.risk (which is just a number and not a HashRef like the other
+# ip_address attributes)
+is(
+    $model->ip_address->risk, $response->{ip_address}{risk},
+    'ip_address risk'
+);
+
 test_model_class_with_empty_record($class);
 test_model_class_with_unknown_keys($class);
 
