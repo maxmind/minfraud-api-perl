@@ -1,13 +1,10 @@
 package WebService::MinFraud::Role::Error::HTTP;
 
-use strict;
-use warnings;
+use Moo::Role;
 
 our $VERSION = '0.001001';
 
 use WebService::MinFraud::Types qw( HTTPStatus URIObject );
-
-use Moo::Role;
 
 has http_status => (
     is       => 'ro',

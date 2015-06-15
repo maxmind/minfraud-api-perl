@@ -1,45 +1,10 @@
 package WebService::MinFraud::Record::BillingAddress;
 
-use strict;
-use warnings;
+use Moo;
 
 our $VERSION = '0.001001';
 
-use WebService::MinFraud::Types qw( Bool BoolCoercion Num);
-
-use Moo;
-
-has distance_to_ip_location => (
-    is        => 'ro',
-    isa       => Num,
-    predicate => 1,
-);
-
-has is_in_ip_country => (
-    is      => 'ro',
-    isa     => Bool,
-    default => 0,
-    coerce  => BoolCoercion,
-);
-
-has is_postal_in_city => (
-    is      => 'ro',
-    isa     => Bool,
-    default => 0,
-    coerce  => BoolCoercion,
-);
-
-has latitude => (
-    is        => 'ro',
-    isa       => Num,
-    predicate => 1,
-);
-
-has longitude => (
-    is        => 'ro',
-    isa       => Num,
-    predicate => 1,
-);
+extends 'WebService::MinFraud::Record::Address';
 
 1;
 

@@ -7,28 +7,13 @@ use warnings;
 
 our $VERSION = '0.001001';
 
-use Carp ();
-use List::Util qw( all );
 use Data::Validate::Domain qw( is_domain );
 
 use parent 'Data::Rx::CommonType::EasyNew';
 
-sub type_uri {
-    ## no critic(ValuesAndExpressions::ProhibitCommaSeparatedStatements)
-    'tag:maxmind.com,MAXMIND:rx/hostname';
-}
+use Role::Tiny::With;
 
-sub guts_from_arg {
-    my ( $class, $arg, $rx ) = @_;
-    $arg ||= {};
-
-    if ( my @unexpected = keys %$arg ) {
-        Carp::croak sprintf 'Unknown arguments %s in constructing %s',
-            ( join ',' => @unexpected ), $class->type_uri;
-    }
-
-    return {};
-}
+with 'WebService::MinFraud::Role::Data::Rx::Type';
 
 sub assert_valid {
     my ( $self, $value ) = @_;
@@ -43,6 +28,11 @@ sub assert_valid {
             value   => $value,
         }
     );
+}
+
+sub type_uri {
+    ## no critic(ValuesAndExpressions::ProhibitCommaSeparatedStatements)
+    'tag:maxmind.com,MAXMIND:rx/hostname';
 }
 
 1;

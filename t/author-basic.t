@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-use JSON;
+use JSON::MaybeXS;
 use Test::More 0.88;
 use WebService::MinFraud::Client;
 

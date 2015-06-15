@@ -1,13 +1,10 @@
 package WebService::MinFraud::Record::Country;
 
-use strict;
-use warnings;
+use Moo;
 
 our $VERSION = '0.001001';
 
 use WebService::MinFraud::Types qw( Bool BoolCoercion );
-
-use Moo;
 
 extends 'GeoIP2::Record::Country';
 

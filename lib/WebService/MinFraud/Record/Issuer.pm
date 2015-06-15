@@ -1,13 +1,10 @@
 package WebService::MinFraud::Record::Issuer;
 
-use strict;
-use warnings;
+use Moo;
 
 our $VERSION = '0.001001';
 
 use WebService::MinFraud::Types qw( Bool BoolCoercion Str );
-
-use Moo;
 
 has matches_provided_name => (
     is      => 'ro',

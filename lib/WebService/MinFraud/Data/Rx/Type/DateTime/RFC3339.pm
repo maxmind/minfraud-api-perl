@@ -12,9 +12,18 @@ use DateTime::Format::RFC3339;
 
 use parent 'Data::Rx::CommonType::EasyNew';
 
-sub type_uri {
-    ## no critic(ValuesAndExpressions::ProhibitCommaSeparatedStatements)
-    'tag:maxmind.com,MAXMIND:rx/datetime/rfc3339';
+sub assert_valid {
+    my ( $self, $value ) = @_;
+
+    return 1 if $value && eval { $self->{dt}->parse_datetime($value); };
+
+    $self->fail(
+        {
+            error   => [qw(type)],
+            message => 'Found value is not a RFC3339 datetime',
+            value   => $value,
+        }
+    );
 }
 
 sub guts_from_arg {
@@ -29,18 +38,9 @@ sub guts_from_arg {
     return { dt => DateTime::Format::RFC3339->new, };
 }
 
-sub assert_valid {
-    my ( $self, $value ) = @_;
-
-    return 1 if $value && eval { $self->{dt}->parse_datetime($value); };
-
-    $self->fail(
-        {
-            error   => [qw(type)],
-            message => 'Found value is not a RFC3339 datetime',
-            value   => $value,
-        }
-    );
+sub type_uri {
+    ## no critic(ValuesAndExpressions::ProhibitCommaSeparatedStatements)
+    'tag:maxmind.com,MAXMIND:rx/datetime/rfc3339';
 }
 
 1;

@@ -9,9 +9,10 @@ our $VERSION = '0.001001';
 
 use parent 'Data::Rx::CommonType::EasyNew';
 
-sub type_uri {
-    ## no critic(ValuesAndExpressions::ProhibitCommaSeparatedStatements)
-    'tag:maxmind.com,MAXMIND:rx/enum';
+sub assert_valid {
+    my ( $self, $value ) = @_;
+
+    $self->{schema}->assert_valid($value);
 }
 
 sub guts_from_arg {
@@ -60,10 +61,9 @@ sub guts_from_arg {
     return { schema => $schema, };
 }
 
-sub assert_valid {
-    my ( $self, $value ) = @_;
-
-    $self->{schema}->assert_valid($value);
+sub type_uri {
+    ## no critic(ValuesAndExpressions::ProhibitCommaSeparatedStatements)
+    'tag:maxmind.com,MAXMIND:rx/enum';
 }
 
 1;

@@ -1,21 +1,14 @@
 package WebService::MinFraud::Record::ShippingAddress;
 
-use strict;
-use warnings;
+use Moo;
 
 our $VERSION = '0.001001';
 
+extends 'WebService::MinFraud::Record::Address';
+
 use WebService::MinFraud::Types qw( Bool BoolCoercion Num);
 
-use Moo;
-
 has distance_to_billing_address => (
-    is        => 'ro',
-    isa       => Num,
-    predicate => 1,
-);
-
-has distance_to_ip_location => (
     is        => 'ro',
     isa       => Num,
     predicate => 1,
@@ -26,32 +19,6 @@ has is_high_risk => (
     isa     => Bool,
     default => 0,
     coerce  => BoolCoercion,
-);
-
-has is_in_ip_country => (
-    is      => 'ro',
-    isa     => Bool,
-    default => 0,
-    coerce  => BoolCoercion,
-);
-
-has is_postal_in_city => (
-    is      => 'ro',
-    isa     => Bool,
-    default => 0,
-    coerce  => BoolCoercion,
-);
-
-has latitude => (
-    is        => 'ro',
-    isa       => Num,
-    predicate => 1,
-);
-
-has longitude => (
-    is        => 'ro',
-    isa       => Num,
-    predicate => 1,
 );
 
 1;
@@ -93,10 +60,20 @@ Returns the distance from the shipping address to the billing address.
 Returns the distance from the shipping address to the location of the IP
 address.
 
+=head2 is_high_risk
+
+Returns a boolean indicating whether or not the shipping address is considered
+high risk.
+
 =head2 is_in_ip_country
 
 Returns a boolean indicating whether or not the shipping address is in the same
 country as that of the IP address.
+
+=head2 is_postal_in_city
+
+Returns a boolean indicating whether or not the shipping postal code is in the
+shipping city.
 
 =head2 latitude
 

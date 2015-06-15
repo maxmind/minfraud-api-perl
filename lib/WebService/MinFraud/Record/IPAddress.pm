@@ -1,7 +1,6 @@
 package WebService::MinFraud::Record::IPAddress;
 
-use strict;
-use warnings;
+use Moo;
 
 our $VERSION = '0.001001';
 
@@ -20,8 +19,6 @@ use WebService::MinFraud::Types qw(
     SubdivisionsCoercion
     TraitsCoercion
 );
-
-use Moo;
 
 has city => (
     is        => 'lazy',

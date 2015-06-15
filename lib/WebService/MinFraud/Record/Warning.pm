@@ -1,29 +1,14 @@
 package WebService::MinFraud::Record::Warning;
 
-use strict;
-use warnings;
+use Moo;
 
 our $VERSION = '0.001001';
 
-use Types::Standard qw( ArrayRef Enum Str );
-
-use Moo;
+use Types::Standard qw( ArrayRef Str );
 
 has code => (
     is  => 'ro',
-    isa => Enum [
-        qw(
-            BILLING_CITY_NOT_FOUND
-            BILLING_COUNTRY_NOT_FOUND
-            BILLING_POSTAL_NOT_FOUND
-            INPUT_INVALID
-            INPUT_UNKNOWN
-            IP_ADDRESS_NOT_FOUND
-            SHIPPING_CITY_NOT_FOUND
-            SHIPPING_COUNTRY_NOT_FOUND
-            SHIPPING_POSTAL_NOT_FOUND
-            )
-    ],
+    isa => Str,
 );
 
 has warning => (

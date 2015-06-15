@@ -1,9 +1,6 @@
 package WebService::MinFraud::Validator;
 
-use 5.010;
-
-use strict;
-use warnings;
+use Moo;
 
 our $VERSION = '0.001001';
 
@@ -16,8 +13,6 @@ use WebService::MinFraud::Data::Rx::Type::Hex32;
 use WebService::MinFraud::Data::Rx::Type::Hostname;
 use WebService::MinFraud::Data::Rx::Type::IPAddress;
 use WebService::MinFraud::Data::Rx::Type::RFC3987;
-
-use Moo;
 
 has _request_schema_definition => (
     is      => 'lazy',
@@ -334,3 +329,10 @@ __END__
 This module defines the request schema for the minFraud API.  In addition, it
 provides a C<validate_request> method that is used to validate any request
 passed to the C<score> or C<insights> methods.
+
+=head1 METHODS
+
+=head2 validate_request
+
+This method takes a minFraud request as a HashRef and validates it against
+the minFraud request schema.

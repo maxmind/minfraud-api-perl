@@ -3,7 +3,7 @@ use warnings;
 
 use lib 't/lib';
 
-use JSON;
+use JSON::MaybeXS;
 use Test::More 0.88;
 use Test::WebService::MinFraud qw(
     test_common_attributes

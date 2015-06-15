@@ -1,13 +1,10 @@
 package WebService::MinFraud::Error::WebService;
 
-use strict;
-use warnings;
+use Moo;
 
 our $VERSION = '0.001001';
 
 use WebService::MinFraud::Types qw( Str );
-
-use Moo;
 
 with 'WebService::MinFraud::Role::Error::HTTP';
 

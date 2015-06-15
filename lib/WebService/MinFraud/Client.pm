@@ -1,13 +1,11 @@
 package WebService::MinFraud::Client;
 
 use 5.010;
-
-use strict;
-use warnings;
+use Moo 1.004005;
 
 our $VERSION = '0.001001';
 
-use JSON;
+use JSON::MaybeXS;
 use LWP::UserAgent;
 use Scalar::Util qw( blessed );
 use Sub::Quote qw( quote_sub );
@@ -21,8 +19,6 @@ use WebService::MinFraud::Model::Score;
 use WebService::MinFraud::Types
     qw( JSONObject MaxMindID MaxMindLicenseKey Str URIObject UserAgentObject );
 use WebService::MinFraud::Validator;
-
-use Moo;
 
 with 'WebService::MinFraud::Role::HasLocales';
 
@@ -76,11 +72,10 @@ has user_id => (
     required => 1,
 );
 
-has validator => (
+has _validator => (
     is      => 'lazy',
     isa     => InstanceOf ['WebService::MinFraud::Validator'],
     builder => sub { WebService::MinFraud::Validator->new },
-    handles => [qw( validate_request )],
 );
 
 sub BUILD {
@@ -122,7 +117,7 @@ sub score {
 sub _response_for {
     my ( $self, $path, $model_class, $content ) = @_;
 
-    $self->validate_request($content);
+    $self->_validator->validate_request($content);
     my $uri = $self->_base_uri->clone;
     $uri->path_segments( $uri->path_segments, $path );
     my $request = HTTP::Request->new(
@@ -283,7 +278,6 @@ __END__
 =head1 SYNOPSIS
 
   use 5.010;
-
   use WebService::MinFraud::Client;
 
   # This creates a Client object that can be reused across requests.
@@ -428,7 +422,7 @@ part of the request.
 
 =over 4
 
-=item * ip_address
+=item * device => ip_address
 
 This must be a valid IPv4 or IPv6 address.
 

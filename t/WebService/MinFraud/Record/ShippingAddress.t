@@ -12,16 +12,16 @@ my $ba = WebService::MinFraud::Record::ShippingAddress->new(
     longitude                   => 32.1,
     distance_to_ip_location     => 100,
     is_postal_in_city           => 1,
-    is_high_risk                => JSON::PP::true,
+    is_high_risk                => 1,
     distance_to_billing_address => 200,
 );
 
-is( 1,    $ba->is_in_ip_country,            'is_in_ip_country' );
-is( 1,    $ba->is_postal_in_city,           'is_postal_in_city' );
-is( 100,  $ba->distance_to_ip_location,     'distance_to_ip_location' );
-is( 32.1, $ba->longitude,                   'longitude' );
-is( 43.1, $ba->latitude,                    'latitude' );
-is( 1,    $ba->is_high_risk,                'is_high_risk' );
-is( 200,  $ba->distance_to_billing_address, 'distance_to_billing_address' );
+is( $ba->is_in_ip_country,            1,    'is_in_ip_country' );
+is( $ba->is_postal_in_city,           1,    'is_postal_in_city' );
+is( $ba->distance_to_ip_location,     100,  'distance_to_ip_location' );
+is( $ba->longitude,                   32.1, 'longitude' );
+is( $ba->latitude,                    43.1, 'latitude' );
+is( $ba->is_high_risk,                1,    'is_high_risk' );
+is( $ba->distance_to_billing_address, 200,  'distance_to_billing_address' );
 
 done_testing;

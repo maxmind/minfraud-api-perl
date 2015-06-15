@@ -12,12 +12,11 @@ my $cc = WebService::MinFraud::Record::CreditCard->new(
     is_prepaid                           => 1
 );
 
-is( 'Bank', $cc->issuer->name, 'credit card issuer name' );
-is( 'US',   $cc->country,      'credit card country' );
-is( 1,      $cc->is_prepaid,   'credit card is_prepaid' );
+is( $cc->issuer->name, 'Bank', 'credit card issuer name' );
+is( $cc->country,      'US',   'credit card country' );
+is( $cc->is_prepaid,   1,      'credit card is_prepaid' );
 is(
-    1,
-    $cc->is_issued_in_billing_address_country,
+    $cc->is_issued_in_billing_address_country, 1,
     'credit card issued in billing country'
 );
 

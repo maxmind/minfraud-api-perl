@@ -1,15 +1,12 @@
 package WebService::MinFraud::Record::CreditCard;
 
-use strict;
-use warnings;
+use Moo;
 
 our $VERSION = '0.001001';
 
 use WebService::MinFraud::Record::Issuer;
 use WebService::MinFraud::Types
-    qw( Bool BoolCoercion HashRef IssuerObject IssuerObjectCoercion Str );
-
-use Moo;
+    qw( Bool BoolCoercion IssuerObject IssuerObjectCoercion Str );
 
 has issuer => (
     is        => 'ro',

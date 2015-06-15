@@ -1,14 +1,11 @@
 package WebService::MinFraud::Role::HasLocales;
 
-use strict;
-use warnings;
+use Moo::Role;
 
 our $VERSION = '0.001001';
 
 use Sub::Quote qw( quote_sub );
 use WebService::MinFraud::Types qw( LocalesArrayRef );
-
-use Moo::Role;
 
 has locales => (
     is        => 'ro',

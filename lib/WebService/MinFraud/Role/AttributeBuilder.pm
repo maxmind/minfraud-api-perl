@@ -1,7 +1,6 @@
 package WebService::MinFraud::Role::AttributeBuilder;
 
-use strict;
-use warnings;
+use Moo::Role;
 
 our $VERSION = '0.001001';
 
@@ -14,8 +13,6 @@ use WebService::MinFraud::Record::IPAddress;
 use WebService::MinFraud::Record::Issuer;
 use WebService::MinFraud::Record::ShippingAddress;
 use WebService::MinFraud::Record::Warning;
-
-use Moo::Role;
 
 with 'WebService::MinFraud::Role::Model',
     'WebService::MinFraud::Role::HasLocales',

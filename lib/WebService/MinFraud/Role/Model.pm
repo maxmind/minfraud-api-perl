@@ -1,13 +1,10 @@
 package WebService::MinFraud::Role::Model;
 
-use strict;
-use warnings;
+use Moo::Role;
 
 our $VERSION = '0.001001';
 
 use Types::Standard qw( HashRef );
-
-use Moo::Role;
 
 has raw => (
     is       => 'ro',
