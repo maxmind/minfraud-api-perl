@@ -4,9 +4,9 @@ use Moo;
 
 our $VERSION = '0.001001';
 
-extends 'WebService::MinFraud::Record::Address';
-
 use WebService::MinFraud::Types qw( Bool BoolCoercion Num);
+
+with 'WebService::MinFraud::Role::Record::Address';
 
 has distance_to_billing_address => (
     is        => 'ro',

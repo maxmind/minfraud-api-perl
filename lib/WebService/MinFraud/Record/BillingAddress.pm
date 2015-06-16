@@ -4,7 +4,7 @@ use Moo;
 
 our $VERSION = '0.001001';
 
-extends 'WebService::MinFraud::Record::Address';
+with 'WebService::MinFraud::Role::Record::Address';
 
 1;
 

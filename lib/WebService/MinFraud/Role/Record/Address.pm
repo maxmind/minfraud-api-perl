@@ -1,6 +1,6 @@
-package WebService::MinFraud::Record::Address;
+package WebService::MinFraud::Role::Record::Address;
 
-use Moo;
+use Moo::Role;
 
 our $VERSION = '0.001001';
 
@@ -40,4 +40,4 @@ has longitude => (
 
 1;
 
-# ABSTRACT: This is a base address class that shipping and billing will use
+# ABSTRACT: This is an address role that shipping and billing will consume
