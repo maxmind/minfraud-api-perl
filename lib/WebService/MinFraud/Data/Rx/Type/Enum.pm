@@ -67,37 +67,5 @@ sub type_uri {
 }
 
 1;
-__END__
 
-=head1 SYNOPSIS
-
-    event => {
-        type     => '//rec',
-        optional => {
-            type           => {
-                type     => '/maxmind/enum',
-                contents => {
-                    type   => '//str',
-                    values => [
-                        'account_creation', 'account_login',
-                        'purchase',         'recurring_purchase',
-                        'referral',         'survey',
-                    ],
-                }
-            }
-        }
-    }
-
-=head1 DESCRIPTION
-
-A type that defines an enumeration
-
-=head1 METHODS
-
-These methods are specific to L<Data::Rx>.
-
-=head2 assert_valid
-
-=head2 guts_from_arg
-
-=head2 type_uri
+# ABSTRACT: A type that defines an enumeration

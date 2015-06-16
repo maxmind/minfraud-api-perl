@@ -39,27 +39,5 @@ sub type_uri {
 }
 
 1;
-__END__
 
-=head1 SYNOPSIS
-
-    device => {
-        type     => '//rec',
-        required => {
-            ip_address => {
-                type => '/maxmind/ip',
-            },
-        },
-    }
-
-A type to check for a valid IP address, version 4 or 6.
-
-=head1 METHODS
-
-These methods are specific to L<Data::Rx>.
-
-=head2 assert_valid
-
-=head2 guts_from_arg
-
-=head2 type_uri
+# ABSTRACT: A type to check for a valid IP address, version 4 or 6

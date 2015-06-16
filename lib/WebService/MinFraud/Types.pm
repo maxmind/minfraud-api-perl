@@ -200,6 +200,6 @@ sub TraitsCoercion () {
     );
 }
 
-# ABSTRACT: Custom types for the MaxMind minFraud service
-
 1;
+
+# ABSTRACT: Custom types for the MaxMind minFraud service

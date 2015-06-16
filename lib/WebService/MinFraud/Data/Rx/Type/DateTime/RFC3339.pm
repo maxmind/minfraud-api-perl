@@ -44,27 +44,5 @@ sub type_uri {
 }
 
 1;
-__END__
 
-=head1 SYNOPSIS
-
-    event => {
-        type     => '//rec',
-        optional => {
-             time           => '/maxmind/datetime/rfc3339',
-        }
-    }
-
-=head1 DESCRIPTION
-
-A type to check if a string parses as a RFC3339 datetime
-
-=head1 METHODS
-
-These methods are specific to L<Data::Rx>.
-
-=head2 assert_valid
-
-=head2 guts_from_arg
-
-=head2 type_uri
+# ABSTRACT: A type to check if a string parses as a RFC3339 datetime

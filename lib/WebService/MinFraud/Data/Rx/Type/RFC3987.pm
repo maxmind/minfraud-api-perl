@@ -41,27 +41,5 @@ sub type_uri {
 }
 
 1;
-__END__
 
-=head1 SYNOPSIS
-
-    order => {
-        type     => '//rec',
-        optional => {
-            referrer_uri    => '/maxmind/rfc3987',
-        },
-    }
-
-=head1 DESCRIPTION
-
-A type to check for a valid URI per RFC3987
-
-=head1 METHODS
-
-These methods are specific to L<Data::Rx>.
-
-=head2 assert_valid
-
-=head2 guts_from_arg
-
-=head2 type_uri
+# ABSTRACT: A type to check for a valid URI per RFC3987

@@ -33,27 +33,5 @@ sub type_uri {
 }
 
 1;
-__END__
 
-=head1 SYNOPSIS
-
-    account => {
-        type     => '//rec',
-        optional => {
-            username_md5 => '/maxmind/hex32',
-        }
-   }
-
-=head1 DESCRIPTION
-
-A type to check for a 32 digit hexadecimal.
-
-=head1 METHODS
-
-These methods are specific to L<Data::Rx>.
-
-=head2 assert_valid
-
-=head2 guts_from_arg
-
-=head2 type_uri
+# ABSTRACT: A type to check for a 32 digit hexadecimal
