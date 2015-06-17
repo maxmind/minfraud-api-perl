@@ -5,13 +5,6 @@ use warnings;
 
 our $VERSION = '0.001001';
 
-use GeoIP2::Record::City;
-use GeoIP2::Record::Continent;
-use GeoIP2::Record::Country;
-use GeoIP2::Record::Postal;
-use GeoIP2::Record::RepresentedCountry;
-use GeoIP2::Record::Subdivision;
-use GeoIP2::Record::Traits;
 use GeoIP2::Types qw(
     ArrayRef
     Bool
@@ -48,11 +41,11 @@ our @EXPORT_OK = qw(
     LocalesArrayRef
     MaxMindID
     MaxMindLicenseKey
-    MostSpecificSubdivisionCoercion
+    MinFraudCountryCoercion
+    MinFraudLocationCoercion
     NonNegativeInt
     Num
     Str
-    SubdivisionsCoercion
     URIObject
     UserAgentObject
     object_isa_type
@@ -61,7 +54,6 @@ our @EXPORT_OK = qw(
 our %EXPORT_TAGS = ( all => \@EXPORT_OK );
 
 ## no critic (NamingConventions::Capitalization, ValuesAndExpressions::ProhibitImplicitNewlines)
-
 sub IssuerObject () {
     return quote_sub(
         q{ WebService::MinFraud::Types::object_isa_type( $_[0], 'WebService::MinFraud::Record::Issuer' ) }
@@ -80,19 +72,26 @@ sub IssuerObjectCoercion () {
     );
 }
 
-sub MostSpecificSubdivisionCoercion () {
+sub MinFraudCountryCoercion () {
     return quote_sub(
         q{
-            GeoIP2::Record::Subdivision->new($_[0])
+            defined $_[0]
+            && Scalar::Util::blessed($_[0])
+            && $_[0]->isa('WebService::MinFraud::Record::Country')
+            ? $_[0]
+            : WebService::MinFraud::Record::Country->new($_[0]);
         }
     );
 }
 
-sub SubdivisionsCoercion () {
+sub MinFraudLocationCoercion () {
     return quote_sub(
         q{
-            warn "COERCE!!!";
-            [ map { GeoIP2::Record::Subdivision->new($_) }  @{$_[0]} ];
+            defined $_[0]
+            && Scalar::Util::blessed($_[0])
+            && $_[0]->isa('WebService::MinFraud::Record::Location')
+            ? $_[0]
+            : WebService::MinFraud::Record::Location->new($_[0]);
         }
     );
 }

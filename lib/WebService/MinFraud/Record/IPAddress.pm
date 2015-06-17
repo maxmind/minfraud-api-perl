@@ -4,92 +4,48 @@ use Moo;
 
 our $VERSION = '0.001001';
 
-use Types::Standard qw( ArrayRef InstanceOf Maybe Num);
+use GeoIP2::Role::Model::Location;
+use GeoIP2::Role::Model::HasSubdivisions;
+use Types::Standard qw( ArrayRef InstanceOf Num);
 use WebService::MinFraud::Record::Location;
 use WebService::MinFraud::Record::Country;
 use WebService::MinFraud::Types qw(
-    MostSpecificSubdivisionCoercion
-    SubdivisionsCoercion
+    MinFraudCountryCoercion
+    MinFraudLocationCoercion
 );
+with 'GeoIP2::Role::Model::Location', 'GeoIP2::Role::Model::HasSubdivisions';
 
-has city => (
-    is        => 'lazy',
-    isa       => InstanceOf ['GeoIP2::Record::City'],
-    predicate => 1,
-);
+__PACKAGE__->_define_attributes_for_keys(
+    __PACKAGE__->_record_names_from_geo );
 
-has continent => (
-    is        => 'ro',
-    isa       => InstanceOf ['GeoIP2::Record::Continent'],
-    predicate => 1,
-);
+sub _record_names_from_geo {
+    qw(
+        city
+        continent
+        postal
+        registered_country
+        represented_country
+        traits
+    );
+}
 
 has country => (
     is        => 'ro',
     isa       => InstanceOf ['WebService::MinFraud::Record::Country'],
+    coerce    => MinFraudCountryCoercion,
     predicate => 1,
 );
 
 has location => (
     is        => 'ro',
     isa       => InstanceOf ['WebService::MinFraud::Record::Location'],
-    predicate => 1,
-);
-
-has most_specific_subdivision => (
-    is      => 'lazy',
-    isa     => Maybe [ InstanceOf ['GeoIP2::Record::Subdivision'] ],
-    builder => sub {
-        my $self         = shift;
-        my @subdivisions = $self->subdivisions;
-        return defined $subdivisions[0]
-            ? $subdivisions[-1]
-            : undef;
-    },
-    predicate => 1,
-);
-
-has postal => (
-    is        => 'ro',
-    isa       => InstanceOf ['GeoIP2::Record::Postal'],
-    predicate => 1,
-);
-
-has registered_country => (
-    is        => 'ro',
-    isa       => InstanceOf ['GeoIP2::Record::Country'],
-    predicate => 1,
-);
-
-has represented_country => (
-    is        => 'ro',
-    isa       => InstanceOf ['GeoIP2::Record::RepresentedCountry'],
+    coerce    => MinFraudLocationCoercion,
     predicate => 1,
 );
 
 has risk => (
     is        => 'ro',
     isa       => Num,
-    predicate => 1,
-);
-
-has _subdivisions => (
-    is  => 'ro',
-    isa => Maybe [ ArrayRef [ InstanceOf ['GeoIP2::Record::Subdivision'] ] ],
-    coerce => SubdivisionsCoercion,
-);
-
-sub subdivisions {
-    my ( $self, ) = @_;
-    return
-        defined $self->_subdivisions && @{ $self->_subdivisions }
-        ? @{ $self->_subdivisions }
-        : ();
-}
-
-has traits => (
-    is        => 'ro',
-    isa       => InstanceOf ['GeoIP2::Record::Traits'],
     predicate => 1,
 );
 
