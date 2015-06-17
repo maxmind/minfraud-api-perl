@@ -18,7 +18,6 @@ my %WriteMakefileArgs = (
   "MIN_PERL_VERSION" => "5.010",
   "NAME" => "WebService::MinFraud",
   "PREREQ_PM" => {
-    "B" => 0,
     "Carp" => 0,
     "Data::Rx" => 0,
     "Data::Rx::CommonType::EasyNew" => 0,
@@ -67,7 +66,6 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
-  "B" => 0,
   "Carp" => 0,
   "Data::Rx" => 0,
   "Data::Rx::CommonType::EasyNew" => 0,

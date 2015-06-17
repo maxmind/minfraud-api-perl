@@ -4,18 +4,85 @@ use Moo;
 
 our $VERSION = '0.001001';
 
-with 'WebService::MinFraud::Role::AttributeBuilder';
+use GeoIP2::Record::City;
+use GeoIP2::Record::Continent;
+use GeoIP2::Record::Postal;
+use GeoIP2::Record::Country;
+use GeoIP2::Record::RepresentedCountry;
+use GeoIP2::Record::Traits;
+use Types::Standard qw( HashRef InstanceOf );
+use WebService::MinFraud::Record::BillingAddress;
+use WebService::MinFraud::Record::Country;
+use WebService::MinFraud::Record::CreditCard;
+use WebService::MinFraud::Record::IPAddress;
+use WebService::MinFraud::Record::Issuer;
+use WebService::MinFraud::Record::Location;
+use WebService::MinFraud::Record::ShippingAddress;
+use WebService::MinFraud::Record::Warning;
 
-sub _all_record_names {
-    return qw(
-        billing_address
-        credit_card
-        ip_address
-        shipping_address
+with 'WebService::MinFraud::Role::Model',
+    'WebService::MinFraud::Role::HasLocales',
+    'WebService::MinFraud::Role::HasCommonAttributes';
+
+{
+    my %attribute_to_single_class = (
+        billing_address  => 'WebService::MinFraud::Record::BillingAddress',
+        credit_card      => 'WebService::MinFraud::Record::CreditCard',
+        shipping_address => 'WebService::MinFraud::Record::ShippingAddress',
     );
+
+    # ip_address contains objects of its own
+    my %attribute_to_nested_class = (
+        city                => 'GeoIP2::Record::City',
+        continent           => 'GeoIP2::Record::Continent',
+        country             => 'WebService::MinFraud::Record::Country',
+        location            => 'WebService::MinFraud::Record::Location',
+        postal              => 'GeoIP2::Record::Postal',
+        registered_country  => 'GeoIP2::Record::Country',
+        represented_country => 'GeoIP2::Record::RepresentedCountry',
+        traits              => 'GeoIP2::Record::Traits',
+    );
+
+    foreach my $attribute ( keys %attribute_to_single_class ) {
+        has $attribute => (
+            is  => 'ro',
+            isa => InstanceOf [ $attribute_to_single_class{$attribute} ],
+        );
+    }
+    around BUILDARGS => sub {
+        my $orig  = shift;
+        my $class = shift;
+
+        my $args = $class->$orig(@_);
+
+        foreach my $attribute ( keys %attribute_to_single_class ) {
+            $args->{$attribute} //= {};
+            $args->{$attribute} = $attribute_to_single_class{$attribute}
+                ->new( $args->{$attribute} );
+        }
+
+        my $ip_address_args = {};
+
+        # Handle the risk attribute which is not an object like the others
+        $ip_address_args->{risk} = $args->{ip_address}{risk}
+            if defined $args->{ip_address}{risk};
+        foreach my $attribute ( keys %attribute_to_nested_class ) {
+            $args->{ip_address}{$attribute} //= {};
+            $ip_address_args->{$attribute}
+                = $attribute_to_nested_class{$attribute}
+                ->new( $args->{ip_address}{$attribute} );
+        }
+        $args->{ip_address}
+            = WebService::MinFraud::Record::IPAddress->new($ip_address_args);
+
+        return $args;
+    };
 }
 
-__PACKAGE__->_define_attributes_for_keys( __PACKAGE__->_all_record_names );
+has ip_address => (
+    is  => 'ro',
+    isa => InstanceOf ['WebService::MinFraud::Record::IPAddress'],
+);
 
 1;
 

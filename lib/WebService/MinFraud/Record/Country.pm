@@ -29,7 +29,7 @@ __END__
   );
   my $request = { device => { ip_address => '24.24.24.24'} };
   my $insights = $client->insights( $request);
-  my $country = $insights->country;
+  my $country = $insights->ip_address->country;
   say $country->is_high_risk;
 
 =head1 DESCRIPTION

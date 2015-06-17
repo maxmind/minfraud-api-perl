@@ -8,43 +8,31 @@ use Types::Standard qw( ArrayRef InstanceOf Maybe Num);
 use WebService::MinFraud::Record::Location;
 use WebService::MinFraud::Record::Country;
 use WebService::MinFraud::Types qw(
-    CityCoercion
-    ContinentCoercion
-    CountryCoercion
-    MinFraudCountryCoercion
-    MinFraudLocationCoercion
     MostSpecificSubdivisionCoercion
-    PostalCoercion
-    RepresentedCountryCoercion
     SubdivisionsCoercion
-    TraitsCoercion
 );
 
 has city => (
     is        => 'lazy',
     isa       => InstanceOf ['GeoIP2::Record::City'],
-    coerce    => CityCoercion,
     predicate => 1,
 );
 
 has continent => (
     is        => 'ro',
     isa       => InstanceOf ['GeoIP2::Record::Continent'],
-    coerce    => ContinentCoercion,
     predicate => 1,
 );
 
 has country => (
     is        => 'ro',
     isa       => InstanceOf ['WebService::MinFraud::Record::Country'],
-    coerce    => MinFraudCountryCoercion,
     predicate => 1,
 );
 
 has location => (
     is        => 'ro',
     isa       => InstanceOf ['WebService::MinFraud::Record::Location'],
-    coerce    => MinFraudLocationCoercion,
     predicate => 1,
 );
 
@@ -64,21 +52,18 @@ has most_specific_subdivision => (
 has postal => (
     is        => 'ro',
     isa       => InstanceOf ['GeoIP2::Record::Postal'],
-    coerce    => PostalCoercion,
     predicate => 1,
 );
 
 has registered_country => (
     is        => 'ro',
     isa       => InstanceOf ['GeoIP2::Record::Country'],
-    coerce    => CountryCoercion,
     predicate => 1,
 );
 
 has represented_country => (
     is        => 'ro',
     isa       => InstanceOf ['GeoIP2::Record::RepresentedCountry'],
-    coerce    => RepresentedCountryCoercion,
     predicate => 1,
 );
 
@@ -105,7 +90,6 @@ sub subdivisions {
 has traits => (
     is        => 'ro',
     isa       => InstanceOf ['GeoIP2::Record::Traits'],
-    coerce    => TraitsCoercion,
     predicate => 1,
 );
 

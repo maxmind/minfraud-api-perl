@@ -1,4 +1,3 @@
-requires "B" => "0";
 requires "Carp" => "0";
 requires "Data::Rx" => "0";
 requires "Data::Rx::CommonType::EasyNew" => "0";

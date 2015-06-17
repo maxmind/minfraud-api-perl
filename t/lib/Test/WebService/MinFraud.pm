@@ -84,8 +84,7 @@ sub test_ip_address {
 
     isa_ok(
         $model->ip_address->registered_country,
-        'GeoIP2::Record::Country',
-        '$model->ip_address->registered_country'
+        'GeoIP2::Record::Country', '$model->ip_address->registered_country'
     );
     if ( defined $model->ip_address->represented_country ) {
         isa_ok(
@@ -163,13 +162,15 @@ sub test_model_class_with_unknown_keys {
 
     my %raw = (
         new_top_level => { foo => 42 },
-        city          => {
-            confidence => 76,
-            geoname_id => 9876,
-            names      => { en => 'Minneapolis' },
-            population => 50,
+        ip_address    => {
+            city => {
+                confidence => 76,
+                geoname_id => 9876,
+                names      => { en => 'Minneapolis' },
+                population => 50,
+            },
+            traits => { ip_address => '5.6.7.8' },
         },
-        traits => { ip_address => '5.6.7.8' },
     );
 
     my $model;
@@ -178,7 +179,6 @@ sub test_model_class_with_unknown_keys {
         undef,
         "no exception when $class class gets raw data with unknown keys"
     );
-
     is_deeply( $model->raw, \%raw, 'raw method returns raw input' );
 }
 
