@@ -10,4 +10,3 @@ our $VERSION = '0.001001';
 
 # ABSTRACT: Perl API for MaxMind's minFraud web services
 
-__END__
