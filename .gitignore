@@ -6,6 +6,7 @@ inc/
 Build
 !Build/
 Build.bat
+.includepath
 .last_cover_stats
 /Makefile
 /Makefile.old
@@ -15,5 +16,9 @@ Build.bat
 /MYMETA.*
 nytprof.out
 /pm_to_blib
+.project
+.pydevproject
+.tidyall.d
+WebService-MinFraud-*
 *.o
 *.bs
