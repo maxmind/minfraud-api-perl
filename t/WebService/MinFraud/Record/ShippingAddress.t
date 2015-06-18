@@ -2,7 +2,6 @@ use strict;
 use warnings;
 
 use Test::More 0.88;
-use JSON::PP;
 
 use WebService::MinFraud::Record::ShippingAddress;
 
