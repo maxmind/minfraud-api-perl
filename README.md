@@ -10,6 +10,10 @@ version 0.001001
 
 Mateu Hunter <mhunter@maxmind.com>
 
+# CONTRIBUTOR
+
+Mateu X Hunter <hunter@missoula.org>
+
 # COPYRIGHT AND LICENSE
 
 This software is copyright (c) 2015 by MaxMind, Inc..

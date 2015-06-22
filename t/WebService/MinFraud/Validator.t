@@ -170,7 +170,7 @@ my $bad_referrer = {
 };
 like(
     exception { $validator->validate_request($bad_referrer); },
-    qr/Found value is not a valid URI/,
+    qr/Found value is not a valid Web URI/,
     'bad order referrer throws an exception'
 );
 

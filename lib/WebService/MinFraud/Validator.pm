@@ -12,7 +12,7 @@ use WebService::MinFraud::Data::Rx::Type::Enum;
 use WebService::MinFraud::Data::Rx::Type::Hex32;
 use WebService::MinFraud::Data::Rx::Type::Hostname;
 use WebService::MinFraud::Data::Rx::Type::IPAddress;
-use WebService::MinFraud::Data::Rx::Type::RFC3987;
+use WebService::MinFraud::Data::Rx::Type::WebURI;
 
 has _request_schema_definition => (
     is      => 'lazy',
@@ -36,7 +36,7 @@ has _rx => (
                         WebService::MinFraud::Data::Rx::Type::Hex32
                         WebService::MinFraud::Data::Rx::Type::Hostname
                         WebService::MinFraud::Data::Rx::Type::IPAddress
-                        WebService::MinFraud::Data::Rx::Type::RFC3987
+                        WebService::MinFraud::Data::Rx::Type::WebURI
                         )
                 ],
             }
@@ -161,7 +161,7 @@ sub _build_request_schema_definition {
                     discount_code   => '//str',
                     affiliate_id    => '//str',
                     subaffiliate_id => '//str',
-                    referrer_uri    => '/maxmind/rfc3987',
+                    referrer_uri    => '/maxmind/weburi',
                 },
             },
             payment => {
