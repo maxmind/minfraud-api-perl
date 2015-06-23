@@ -262,13 +262,6 @@ sub _handle_non_200_status {
     );
 }
 
-sub _build_base_uri {
-    my $self = shift;
-
-    return URI->new(
-        $self->uri_scheme . '://' . $self->host . '/minfraud/v2.0' );
-}
-
 1;
 
 # ABSTRACT: Perl API for the minFraud Precision web services
