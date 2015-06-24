@@ -47,9 +47,9 @@ __END__
       user_id     => 42,
       license_key => 'abcdef123456',
   );
-  my $request = { device => { ip_address => '24.24.24.24'} };
-  my $insights = $client->insights( $request);
-  my $issuer = $insights->credit_card->issuer;
+  my $request  = { device => { ip_address => '24.24.24.24' } };
+  my $insights = $client->insights( $request );
+  my $issuer   = $insights->credit_card->issuer;
   say $issuer->name;
 
 =head1 DESCRIPTION
