@@ -1,6 +1,6 @@
 # NAME
 
-WebService::MinFraud - Perl API for MaxMind's minFraud web services
+WebService::MinFraud - Perl API for MaxMind's minFraud Score and Insights web services
 
 # VERSION
 
@@ -13,7 +13,7 @@ version 0.001001
 
     # The Client object can be re-used across several requests.
     # Your MaxMind user_id and license_key are available at
-    # https://www.maxmind.com/en/account
+    # https://www.maxmind.com/en/my_license_key
     my $client = WebService::MinFraud::Client->new(
         user_id     => '42',
         license_key => 'abcdef123456',

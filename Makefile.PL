@@ -7,7 +7,7 @@ use 5.010;
 use ExtUtils::MakeMaker;
 
 my %WriteMakefileArgs = (
-  "ABSTRACT" => "Perl API for MaxMind's minFraud web services",
+  "ABSTRACT" => "Perl API for MaxMind's minFraud Score and Insights web services",
   "AUTHOR" => "Mateu Hunter <mhunter\@maxmind.com>",
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => 0
