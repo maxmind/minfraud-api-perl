@@ -31,6 +31,14 @@ This distribution provides an API for the
 See [WebService::MinFraud::Client](https://metacpan.org/pod/WebService::MinFraud::Client) for details on using the web service client
 API.
 
+# INSTALLATION
+
+The minFraud perl API and its dependencies can be installed with
+[cpanm](https://metacpan.org/pod/App::cpanminus).  `cpanm` itself has no
+dependencies.
+
+    cpanm WebService::MinFraud
+
 # VERSIONING POLICY
 
 The minFraud perl API uses [Semantic Versioning](http://semver.org/).
@@ -58,7 +66,7 @@ Mateu Hunter <mhunter@maxmind.com>
 
 # CONTRIBUTOR
 
-Mateu X Hunter <hunter@missoula.org>
+Andy Jack <ajack@maxmind.com>
 
 # COPYRIGHT AND LICENSE
 

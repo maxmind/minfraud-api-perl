@@ -39,6 +39,14 @@ L<MaxMind minFraud Score and Insights web services|http://dev.maxmind.com/minfra
 See L<WebService::MinFraud::Client> for details on using the web service client
 API.
 
+=head1 INSTALLATION
+
+The minFraud perl API and its dependencies can be installed with
+L<cpanm|https://metacpan.org/pod/App::cpanminus>.  C<< cpanm >> itself has no
+dependencies.
+
+  cpanm WebService::MinFraud
+
 =head1 VERSIONING POLICY
 
 The minFraud perl API uses L<Semantic Versioning|http://semver.org/>.
