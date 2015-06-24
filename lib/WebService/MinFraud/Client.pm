@@ -277,8 +277,8 @@ module.
 
 This class provides a client API for the MaxMind minFraud Score and Insights
 web services. The B<Insights> service returns more data about a transaction
-than the B<Score> service. See
-L<http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>
+than the B<Score> service. See the
+L<API documentation|http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>
 for more details.
 
 Each web service is represented by a different model class, and
@@ -407,8 +407,8 @@ described below.
 
 =head1 REQUEST METHODS
 
-All of the request methods require a device ip_address. See
-L<http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>
+All of the request methods require a device ip_address. See the
+L<API documentation|http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>
 for details on all the values that can be part of the request.
 
 =over 4
@@ -441,8 +441,8 @@ support policies for dependencies and Perl itself.
 =head1 EXCEPTIONS
 
 For details on the possible errors returned by the web service itself, please
-see
-L<http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>.
+refer to the
+L<API documentation|http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>.
 
 If the web service returns an explicit error document, this is thrown as a
 L<WebService::MinFraud::Error::WebService> exception object. If some other
@@ -465,8 +465,8 @@ sort of (hopefully) useful error message.
 
 =head1 WHAT DATA IS RETURNED?
 
-See
-L<http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>
+Please see the
+L<API documentation|http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>
 for details on what data each web service may return.
 
 Every record class attribute has a corresponding predicate method so that you
