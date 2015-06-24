@@ -11,13 +11,25 @@ version 0.001001
     use 5.010;
     use WebService::MinFraud::Client;
 
+    # The Client object can be re-used across several requests.
+    # Your MaxMind user_id and license_key are available at
+    # https://www.maxmind.com/en/account
     my $client = WebService::MinFraud::Client->new(
         user_id     => '42',
         license_key => 'abcdef123456',
     );
 
+    # Request hashref must contain a 'device' key, with a value that is a
+    # hashref containing an 'ip_address' key with a valid IPv4 or IPv6 address.
+    # All other keys/values are optional; see other modules in minFraud perl API
+    # distribution for details.
+
     my $request = { device => { ip_address => '24.24.24.24' } }:
-    my $score   = $client->score( $request );
+
+    # Use the 'score' or 'insights' client methods, depending on the minFraud
+    # web service you are using.
+
+    my $score = $client->score( $request );
     say $score->risk_score;
 
     my $insights = $client->insights( $request );
