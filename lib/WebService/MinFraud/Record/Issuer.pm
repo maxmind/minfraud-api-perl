@@ -41,6 +41,7 @@ __END__
 =head1 SYNOPSIS
 
   use 5.010;
+
   use WebService::MinFraud::Client;
 
   my $client = WebService::MinFraud::Client->new(
@@ -48,7 +49,7 @@ __END__
       license_key => 'abcdef123456',
   );
   my $request  = { device => { ip_address => '24.24.24.24' } };
-  my $insights = $client->insights( $request );
+  my $insights = $client->insights($request);
   my $issuer   = $insights->credit_card->issuer;
   say $issuer->name;
 

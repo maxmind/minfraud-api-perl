@@ -25,8 +25,8 @@ __END__
       license_key => 'abcdef123456',
   );
 
-  my $request = { device => { ip_address => '24.24.24.24'} };
-  my $score = $client->score( $request );
+  my $request = { device => { ip_address => '24.24.24.24' } };
+  my $score = $client->score($request);
   say $score->risk_score;
 
 =head1 DESCRIPTION
@@ -34,7 +34,8 @@ __END__
 This class provides a model for the data returned by the minFraud Score
 web service.
 
-For more details, see L<http://dev.maxmind.com/minfraud>.
+For more details, see the L<API
+documentation|http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>.
 
 =head1 METHODS
 

@@ -44,14 +44,15 @@ __END__
 =head1 SYNOPSIS
 
   use 5.010;
+
   use WebService::MinFraud::Client;
 
   my $client = WebService::MinFraud::Client->new(
       user_id     => 42,
       license_key => 'abcdef123456',
   );
-  my $request = { device => { ip_address => '24.24.24.24'} };
-  my $insights = $client->insights( $request);
+  my $request     = { device => { ip_address => '24.24.24.24' } };
+  my $insights    = $client->insights($request);
   my $credit_card = $insights->credit_card;
   say $credit_card->is_prepaid;
   say $credit_card->issuer->name;

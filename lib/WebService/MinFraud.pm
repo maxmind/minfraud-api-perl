@@ -17,6 +17,7 @@ __END__
 =head1 SYNOPSIS
 
   use 5.010;
+
   use WebService::MinFraud::Client;
 
   # The Client object can be re-used across several requests.

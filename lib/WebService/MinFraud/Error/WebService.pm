@@ -27,6 +27,7 @@ __END__
   use 5.010;
 
   use WebService::MinFraud::Client;
+
   use Scalar::Util qw( blessed );
   use Try::Tiny;
 
@@ -36,8 +37,8 @@ __END__
   );
 
   try {
-      my $request = { device => { ip_address => '24.24.24.24'} };
-      $client->insights( $request );
+      my $request = { device => { ip_address => '24.24.24.24' } };
+      $client->insights($request);
   }
   catch {
       die $_ unless blessed $_;
