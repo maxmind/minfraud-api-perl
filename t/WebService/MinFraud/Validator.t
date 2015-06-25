@@ -228,4 +228,41 @@ like(
     'bad shipping country throws an exception'
 );
 
+my $zero_boolean = {
+    device  => { ip_address => '24.24.24.24' },
+    payment => {
+        decline_code   => 'invalid number',
+        was_authorized => 0,
+        processor      => 'stripe'
+    },
+};
+ok(
+    $validator->validate_request($zero_boolean),
+    'zero as a boolean validates'
+);
+my $one_boolean = {
+    device  => { ip_address => '24.24.24.24' },
+    payment => {
+        decline_code   => 'invalid number',
+        was_authorized => 1,
+        processor      => 'stripe'
+    },
+};
+ok(
+    $validator->validate_request($one_boolean),
+    'one as a boolean validates'
+);
+my $undef_boolean = {
+    device  => { ip_address => '24.24.24.24' },
+    payment => {
+        decline_code   => 'invalid number',
+        was_authorized => undef,
+        processor      => 'stripe'
+    },
+};
+ok(
+    $validator->validate_request($undef_boolean),
+    'undef as a boolean validates'
+);
+
 done_testing;
