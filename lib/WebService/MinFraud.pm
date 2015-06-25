@@ -33,7 +33,7 @@ __END__
   # All other keys/values are optional; see other modules in minFraud perl API
   # distribution for details.
 
-  my $request = { device => { ip_address => '24.24.24.24' } }:
+  my $request = { device => { ip_address => '24.24.24.24' } };
 
   # Use the 'score' or 'insights' client methods, depending on the minFraud
   # web service you are using.
