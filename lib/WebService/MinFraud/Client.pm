@@ -282,8 +282,8 @@ __END__
       license_key => 'abcdef123456',
   );
 
-  # Request hashref must contain a 'device' key, with a value that is a
-  # hashref containing an 'ip_address' key with a valid IPv4 or IPv6 address.
+  # Request HashRef must contain a 'device' key, with a value that is a
+  # HashRef containing an 'ip_address' key with a valid IPv4 or IPv6 address.
   # All other keys/values are optional; see other modules in minFraud perl API
   # distribution for details.
 
@@ -443,6 +443,17 @@ for details on all the values that can be part of the request.
 This must be a valid IPv4 or IPv6 address in presentation format, i.e.,
 dotted-quad notation or the IPv6 hexadecimal-colon notation.
 
+=item * payment => was_authorized
+
+The optional
+L<Payment|http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/#Payment_payment>
+top-level field has a C<< was_authorized >> key. The minFraud web service
+expects a JSON boolean type which is distinct from values that perl evaluates
+as true.  We recommend using C<< 0 >> for false, C<< 1 >> for true, and C<<
+undef >> for unknown, when setting the value for C<< was_authorized >> in the
+request.  Other values may fail local validation or be rejected as invalid by
+the minFraud web service.
+
 =back
 
 =head2 score
@@ -469,6 +480,11 @@ support policies for dependencies and Perl itself.
 For details on the possible errors returned by the web service itself, please
 refer to the
 L<API documentation|http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>.
+
+Prior to making the request to the web service, the request HashRef is passed
+to L<WebService::MinFraud::Validator> for checks.  If the request fails
+validation an exception is thrown, containing a string describing all of the
+validation errors.
 
 If the web service returns an explicit error document, this is thrown as a
 L<WebService::MinFraud::Error::WebService> exception object. If some other

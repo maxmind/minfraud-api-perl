@@ -28,8 +28,8 @@ __END__
       license_key => 'abcdef123456',
   );
 
-  # Request hashref must contain a 'device' key, with a value that is a
-  # hashref containing an 'ip_address' key with a valid IPv4 or IPv6 address.
+  # Request HashRef must contain a 'device' key, with a value that is a
+  # HashRef containing an 'ip_address' key with a valid IPv4 or IPv6 address.
   # All other keys/values are optional; see other modules in minFraud perl API
   # distribution for details.
 
