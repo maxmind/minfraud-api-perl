@@ -44,6 +44,7 @@ This class provides the following methods:
 =head2 credits_remaining
 
 Returns the I<approximate> number of service credits remaining on your account.
+The service credit counts are near realtime so they may not be exact.
 
 =head2 id
 

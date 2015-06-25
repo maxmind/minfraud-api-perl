@@ -37,7 +37,7 @@ __END__
 
 This class contains the location data associated with a transaction.
 
-This record is returned by the Insights end point.
+This record is returned by the Insights web service.
 
 =head1 METHODS
 

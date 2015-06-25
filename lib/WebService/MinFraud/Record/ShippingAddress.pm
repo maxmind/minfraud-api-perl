@@ -54,26 +54,27 @@ This class provides the following methods:
 
 =head2 distance_to_billing_address
 
-Returns the distance from the shipping address to the billing address.
+Returns the distance in kilometers from the shipping address to the billing
+address.
 
 =head2 distance_to_ip_location
 
-Returns the distance from the shipping address to the location of the IP
-address.
+Returns the distance in kilometers from the shipping address to the location of
+the IP address.
 
 =head2 is_high_risk
 
-Returns a boolean indicating whether or not the shipping address is considered
-high risk.
+Returns a boolean indicating whether the shipping address is considered high
+risk.
 
 =head2 is_in_ip_country
 
-Returns a boolean indicating whether or not the shipping address is in the same
+Returns a boolean indicating whether the shipping address is in the same
 country as that of the IP address.
 
 =head2 is_postal_in_city
 
-Returns a boolean indicating whether or not the shipping postal code is in the
+Returns a boolean indicating whether the shipping postal code is in the
 shipping city.
 
 =head2 latitude

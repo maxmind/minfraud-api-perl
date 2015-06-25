@@ -35,9 +35,9 @@ __END__
 
 =head1 DESCRIPTION
 
-This class contains the country data associated with a transaction
+This class contains the country data associated with a transaction.
 
-This record is returned by the Insights end point.
+This record is returned by the Insights web service.
 
 =head1 METHODS
 
@@ -46,6 +46,5 @@ to:
 
 =head2 is_high_risk
 
-
-Returns a boolean indicating whether or not the country of the ip_address
-is considered high risk.
+Returns a boolean indicating whether the country of the ip_address is
+considered high risk.

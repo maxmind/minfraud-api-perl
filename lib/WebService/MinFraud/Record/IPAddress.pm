@@ -91,8 +91,12 @@ the IP address.
 
 =head2 country
 
-Returns a L<GeoIP2::Record::Country> object for the IP address. This record
-represents the country where MaxMind believes the IP is located.
+Returns a L<WebService::MinFraud::Record::Country> object for the IP address.
+This record represents the country where MaxMind believes the IP is located.
+
+=head2 location
+
+Returns a L<WebService::MinFraud::Record::Location> object for the IP address.
 
 =head2 most_specific_subdivision
 

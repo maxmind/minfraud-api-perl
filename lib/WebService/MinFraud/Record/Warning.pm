@@ -53,25 +53,19 @@ This class provides the following methods:
 
 =head2 code
 
-Returns a machine-readable code identifying the warning of the following types:
-
-        BILLING_CITY_NOT_FOUND
-        BILLING_COUNTRY_NOT_FOUND
-        BILLING_POSTAL_NOT_FOUND
-        INPUT_INVALID
-        INPUT_UNKNOWN
-        IP_ADDRESS_NOT_FOUND
-        SHIPPING_CITY_NOT_FOUND
-        SHIPPING_COUNTRY_NOT_FOUND
-        SHIPPING_POSTAL_NOT_FOUND
+Returns a machine-readable code identifying the warning. See the L<API
+documentation|http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/#Warning_Object>
+for the current list.
 
 =head2 warning
 
-Returns a human-readable explanation of the warning.
+Returns a human-readable explanation of the warning.  This description may
+change at any time and should not be matched against.
 
 =head2 input
 
-Returns an array of keys representing the path to the input that the warning is
-associated with. For instance, if the warning was about the billing city, the
-array would be ["billing", "city"]
+Returns a reference to an array of keys and array indexes representing the path
+to the input that the warning is associated with. For instance, if the warning
+was about the billing city, the returned reference would be C<< ["billing",
+"city"] >>.
 

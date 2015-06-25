@@ -270,8 +270,33 @@ __END__
 
 =head1 SYNOPSIS
 
-See L<WebService::MinFraud> for a short example on using the minFraud Client
-module.
+  use 5.010;
+
+  use WebService::MinFraud::Client;
+
+  # The Client object can be re-used across several requests.
+  # Your MaxMind user_id and license_key are available at
+  # https://www.maxmind.com/en/my_license_key
+  my $client = WebService::MinFraud::Client->new(
+      user_id     => '42',
+      license_key => 'abcdef123456',
+  );
+
+  # Request hashref must contain a 'device' key, with a value that is a
+  # hashref containing an 'ip_address' key with a valid IPv4 or IPv6 address.
+  # All other keys/values are optional; see other modules in minFraud perl API
+  # distribution for details.
+
+  my $request = { device => { ip_address => '24.24.24.24' } };
+
+  # Use the 'score' or 'insights' client methods, depending on the minFraud
+  # web service you are using.
+
+  my $score = $client->score( $request );
+  say $score->risk_score;
+
+  my $insights = $client->insights( $request );
+  say $insights->shipping_address->is_high_risk;
 
 =head1 DESCRIPTION
 
@@ -297,7 +322,7 @@ Requests to the minFraud web service are made over an HTTPS connection.
 
 =head1 USAGE
 
-The basic API for this class is the same for all of the web service. First you
+The basic API for this class is the same for all of the web services. First you
 create a web service object with your MaxMind C<user_id> and C<license_key>,
 then you call the method corresponding to the specific web service, passing it
 the transaction you want analyzed.
@@ -389,7 +414,7 @@ to set http proxy parameters, for example.
 This attribute can be any object which supports C<agent> and C<request>
 methods:
 
-=over 4
+=over 8
 
 =item * request
 
@@ -415,7 +440,8 @@ for details on all the values that can be part of the request.
 
 =item * device => ip_address
 
-This must be a valid IPv4 or IPv6 address.
+This must be a valid IPv4 or IPv6 address in presentation format, i.e.,
+dotted-quad notation or the IPv6 hexadecimal-colon notation.
 
 =back
 
