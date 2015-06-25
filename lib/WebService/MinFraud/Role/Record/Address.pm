@@ -13,17 +13,17 @@ has distance_to_ip_location => (
 );
 
 has is_in_ip_country => (
-    is      => 'ro',
-    isa     => Bool,
-    default => 0,
-    coerce  => BoolCoercion,
+    is        => 'ro',
+    isa       => Bool,
+    coerce    => BoolCoercion,
+    predicate => 1,
 );
 
 has is_postal_in_city => (
-    is      => 'ro',
-    isa     => Bool,
-    default => 0,
-    coerce  => BoolCoercion,
+    is        => 'ro',
+    isa       => Bool,
+    coerce    => BoolCoercion,
+    predicate => 1,
 );
 
 has latitude => (

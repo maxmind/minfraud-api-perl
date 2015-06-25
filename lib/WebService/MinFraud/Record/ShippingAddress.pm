@@ -15,10 +15,10 @@ has distance_to_billing_address => (
 );
 
 has is_high_risk => (
-    is      => 'ro',
-    isa     => Bool,
-    default => 0,
-    coerce  => BoolCoercion,
+    is        => 'ro',
+    isa       => Bool,
+    coerce    => BoolCoercion,
+    predicate => 1,
 );
 
 1;
