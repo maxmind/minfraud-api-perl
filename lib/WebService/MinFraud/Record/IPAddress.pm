@@ -143,3 +143,14 @@ administrative region.
 
 Returns a L<GeoIP2::Record::Traits> object representing traits for the IP
 address, such as autonomous system number (ASN).
+
+=head1 PREDICATE METHODS
+
+The following predicate methods are available, which return true if the related
+data was present in the response body, false if otherwise:
+
+=head2 has_country
+
+=head2 has_location
+
+=head2 has_risk

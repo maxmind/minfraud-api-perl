@@ -57,11 +57,6 @@ Returns a machine-readable code identifying the warning. See the L<API
 documentation|http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/#Warning_Object>
 for the current list.
 
-=head2 warning
-
-Returns a human-readable explanation of the warning.  This description may
-change at any time and should not be matched against.
-
 =head2 input
 
 Returns a reference to an array of keys and array indexes representing the path
@@ -69,3 +64,16 @@ to the input that the warning is associated with. For instance, if the warning
 was about the billing city, the returned reference would be C<< ["billing",
 "city"] >>.
 
+=head2 warning
+
+Returns a human-readable explanation of the warning.  This description may
+change at any time and should not be matched against.
+
+=head1 PREDICATE METHODS
+
+The following predicate methods are available, which return true if the related
+data was present in the response body, false if otherwise:
+
+=head2 has_input
+
+=head2 has_warning

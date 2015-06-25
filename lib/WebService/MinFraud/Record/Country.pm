@@ -48,3 +48,10 @@ to:
 
 Returns a boolean indicating whether the country of the ip_address is
 considered high risk.
+
+=head1 PREDICATE METHODS
+
+The following predicate methods are available, which return true if the related
+data was present in the response body, false if otherwise:
+
+=head2 has_is_high_risk

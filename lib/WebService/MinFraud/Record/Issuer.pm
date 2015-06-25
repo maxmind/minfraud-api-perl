@@ -80,3 +80,15 @@ Returns the name of the issuer of the credit card.
 
 Returns the phone number of the issuer of the credit card.
 
+=head1 PREDICATE METHODS
+
+The following predicate methods are available, which return true if the related
+data was present in the response body, false if otherwise:
+
+=head2 has_matches_provided_name
+
+=head2 has_matches_provided_phone_number
+
+=head2 has_name
+
+=head2 has_phone_number

@@ -86,3 +86,11 @@ same country as the billing address.
 
 Returns a boolean indicating whether the credit card is prepaid.
 
+=head1 PREDICATE METHODS
+
+The following predicate methods are available, which return true if the related
+data was present in the response body, false if otherwise:
+
+=head2 has_issuer
+
+=head2 has_country

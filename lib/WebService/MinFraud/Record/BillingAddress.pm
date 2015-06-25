@@ -58,3 +58,18 @@ Returns the latitude of the billing address.
 =head2 longitude
 
 Returns the longitude of the billing address.
+
+=head1 PREDICATE METHODS
+
+The following predicate methods are available, which return true if the related
+data was present in the response body, false if otherwise:
+
+=head2 has_distance_to_ip_location
+
+=head2 has_is_in_ip_country
+
+=head2 has_is_postal_in_city
+
+=head2 has_latitude
+
+=head2 has_longitude
