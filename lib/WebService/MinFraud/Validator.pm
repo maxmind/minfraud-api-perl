@@ -322,7 +322,10 @@ __END__
 
 =head1 SYNOPSIS
 
+    use 5.010;
+
     use WebService::MinFraud::Validator;
+
     my $validator = WebService::MinFraud::Validator->new;
     my $request = { device => { ip_address => '24.24.24.24' } };
     $validator->validate_request($request);
@@ -337,5 +340,6 @@ passed to the C<score> or C<insights> methods.
 
 =head2 validate_request
 
-This method takes a minFraud request as a HashRef and validates it against
-the minFraud request schema.
+This method takes a minFraud request as a HashRef and validates it against the
+minFraud request schema.  If the request HashRef fails validation, an exception
+is thrown, which is a string containing all of the validation errors.
