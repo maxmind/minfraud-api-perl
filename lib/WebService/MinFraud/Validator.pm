@@ -306,7 +306,7 @@ sub validate_request {
         my @error_strings
             = map { 'VALUE: ' . $_->value . ' caused ERROR: ' . $_->stringify }
             @{ $_->failures };
-        my $all_error_strings = join '\n', @error_strings;
+        my $all_error_strings = join "\n", @error_strings;
         die $all_error_strings;
     };
 }
