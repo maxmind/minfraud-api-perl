@@ -7,17 +7,17 @@ our $VERSION = '0.001001';
 use WebService::MinFraud::Types qw( Bool BoolCoercion Str );
 
 has matches_provided_name => (
-    is      => 'ro',
-    isa     => Bool,
-    default => 0,
-    coerce  => BoolCoercion,
+    is        => 'ro',
+    isa       => Bool,
+    coerce    => BoolCoercion,
+    predicate => 1,
 );
 
 has matches_provided_phone_number => (
-    is      => 'ro',
-    isa     => Bool,
-    default => 0,
-    coerce  => BoolCoercion,
+    is        => 'ro',
+    isa       => Bool,
+    coerce    => BoolCoercion,
+    predicate => 1,
 );
 
 has name => (

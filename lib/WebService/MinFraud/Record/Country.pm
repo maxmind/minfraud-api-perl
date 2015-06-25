@@ -9,10 +9,10 @@ use WebService::MinFraud::Types qw( Bool BoolCoercion );
 extends 'GeoIP2::Record::Country';
 
 has is_high_risk => (
-    is      => 'ro',
-    isa     => Bool,
-    default => 0,
-    coerce  => BoolCoercion,
+    is        => 'ro',
+    isa       => Bool,
+    coerce    => BoolCoercion,
+    predicate => 1,
 );
 
 1;
