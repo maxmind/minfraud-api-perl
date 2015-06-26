@@ -48,7 +48,7 @@ country as that of the IP address.
 
 =head2 is_postal_in_city
 
-Returns a boolean indicating whether or not the billing postal code is in the
+Returns a boolean indicating whether the billing postal code is in the
 billing city.
 
 =head2 latitude
