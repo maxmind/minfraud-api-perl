@@ -242,8 +242,11 @@ sub _build_request_schema_definition {
 
                         },
                     },
-                    was_authorized => '//bool',
-                    decline_code   => '//str',
+                    was_authorized => {
+                        type => '//any',
+                        of   => [ '//nil', '//bool', '//int' ]
+                    },
+                    decline_code => '//str',
                 },
             },
             shipping => {
