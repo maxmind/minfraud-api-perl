@@ -430,20 +430,16 @@ described below.
 
 =back
 
-=head1 REQUEST METHODS
+=head1 REQUEST
 
-All of the request methods require a device ip_address. See the
-L<API documentation|http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>
-for details on all the values that can be part of the request.
+The request methods are passed a HashRef as the only argument. See the L</SYNOPSIS> and L<WebService::MinFraud::Example> for detailed usage examples.  Some important notes regarding values passed to the minFraud web service via the perl API are described below.
 
-=over 4
-
-=item * device => ip_address
+=head2 device => ip_address
 
 This must be a valid IPv4 or IPv6 address in presentation format, i.e.,
 dotted-quad notation or the IPv6 hexadecimal-colon notation.
 
-=item * payment => was_authorized
+=head2 payment => was_authorized
 
 The optional
 L<Payment|http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/#Payment_payment>
@@ -454,7 +450,12 @@ C<< undef >> for unknown, when setting the value for C<< was_authorized >> in
 the request.  Other values may fail local validation or be rejected as invalid
 by the minFraud web service.
 
-=back
+=head1 REQUEST METHODS
+
+All of the request methods require a device ip_address. See the
+L<API documentation|http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>
+for details on all the values that can be part of the request.
+
 
 =head2 score
 
