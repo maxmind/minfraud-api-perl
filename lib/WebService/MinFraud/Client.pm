@@ -448,11 +448,11 @@ dotted-quad notation or the IPv6 hexadecimal-colon notation.
 The optional
 L<Payment|http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/#Payment_payment>
 top-level field has a C<< was_authorized >> key. The minFraud web service
-expects a JSON boolean type which is distinct from values that perl evaluates
-as true.  We recommend using C<< 0 >> for false, C<< 1 >> for true, and C<<
-undef >> for unknown, when setting the value for C<< was_authorized >> in the
-request.  Other values may fail local validation or be rejected as invalid by
-the minFraud web service.
+expects a JSON boolean type which is distinct from values that perl treats as
+true or false.  We recommend using C<< 0 >> for false, C<< 1 >> for true, and
+C<< undef >> for unknown, when setting the value for C<< was_authorized >> in
+the request.  Other values may fail local validation or be rejected as invalid
+by the minFraud web service.
 
 =back
 
