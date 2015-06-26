@@ -284,7 +284,7 @@ __END__
 
   # Request HashRef must contain a 'device' key, with a value that is a
   # HashRef containing an 'ip_address' key with a valid IPv4 or IPv6 address.
-  # All other keys/values are optional; see other modules in minFraud perl API
+  # All other keys/values are optional; see other modules in minFraud Perl API
   # distribution for details.
 
   my $request = { device => { ip_address => '24.24.24.24' } };
@@ -432,7 +432,7 @@ described below.
 
 =head1 REQUEST
 
-The request methods are passed a HashRef as the only argument. See the L</SYNOPSIS> and L<WebService::MinFraud::Example> for detailed usage examples.  Some important notes regarding values passed to the minFraud web service via the perl API are described below.
+The request methods are passed a HashRef as the only argument. See the L</SYNOPSIS> and L<WebService::MinFraud::Example> for detailed usage examples.  Some important notes regarding values passed to the minFraud web service via the Perl API are described below.
 
 =head2 device => ip_address
 
@@ -444,7 +444,7 @@ dotted-quad notation or the IPv6 hexadecimal-colon notation.
 The optional
 L<Payment|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/#Payment_payment>
 top-level field has a C<< was_authorized >> key. The minFraud web service
-expects a JSON boolean type which is distinct from values that perl treats as
+expects a JSON boolean type which is distinct from values that Perl treats as
 true or false.  We recommend using C<< 0 >> for false, C<< 1 >> for true, and
 C<< undef >> for unknown, when setting the value for C<< was_authorized >> in
 the request.  Other values may fail local validation or be rejected as invalid
@@ -469,7 +469,7 @@ L<WebService::MinFraud::Model::Insights> object.
 
 =head1 User-Agent HEADER
 
-Requests by the minFraud perl API will have a User-Agent header containing the
+Requests by the minFraud Perl API will have a User-Agent header containing the
 package name and version of this module (or a subclass if you use one), the
 package name and version of the user agent object, and the version of Perl.
 

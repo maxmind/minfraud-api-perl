@@ -30,7 +30,7 @@ __END__
 
   # Request HashRef must contain a 'device' key, with a value that is a
   # HashRef containing an 'ip_address' key with a valid IPv4 or IPv6 address.
-  # All other keys/values are optional; see other modules in minFraud perl API
+  # All other keys/values are optional; see other modules in minFraud Perl API
   # distribution for details.
 
   my $request = { device => { ip_address => '24.24.24.24' } };
@@ -54,7 +54,7 @@ API.
 
 =head1 INSTALLATION
 
-The minFraud perl API and its dependencies can be installed with
+The minFraud Perl API and its dependencies can be installed with
 L<cpanm|https://metacpan.org/pod/App::cpanminus>.  C<< cpanm >> itself has no
 dependencies.
 
@@ -62,16 +62,16 @@ dependencies.
 
 =head1 VERSIONING POLICY
 
-The minFraud perl API uses L<Semantic Versioning|http://semver.org/>.
+The minFraud Perl API uses L<Semantic Versioning|http://semver.org/>.
 
 =head1 PERL VERSION SUPPORT
 
-The minimum required perl version for the minFraud perl API is 5.10.0.
+The minimum required Perl version for the minFraud Perl API is 5.10.0.
 
 The data returned from the minFraud web services includes Unicode characters
-in several locales. This may expose bugs in earlier versions of perl.  If
+in several locales. This may expose bugs in earlier versions of Perl.  If
 Unicode is important to your work, we recommend that you use the most recent
-version of perl available.
+version of Perl available.
 
 =head1 SUPPORT
 
