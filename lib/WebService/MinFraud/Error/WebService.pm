@@ -44,9 +44,10 @@ __END__
       die $_ unless blessed $_;
       if ( $_->isa('WebService::MinFraud::Error::WebService') ) {
           log_web_service_error(
-              maxmind_code => $_->code,
-              status       => $_->http_status,
-              uri          => $_->uri,
+              error_message => $_->message,
+              maxmind_code  => $_->code,
+              status        => $_->http_status,
+              uri           => $_->uri,
           );
       }
 

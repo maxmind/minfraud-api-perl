@@ -11,6 +11,7 @@ use Scalar::Util qw( blessed );
 use Sub::Quote qw( quote_sub );
 use Try::Tiny;
 use Types::Standard qw( InstanceOf );
+use WebService::MinFraud::Error::Generic;
 use WebService::MinFraud::Error::HTTP;
 use WebService::MinFraud::Error::IPAddressNotFound;
 use WebService::MinFraud::Error::WebService;
@@ -203,14 +204,25 @@ sub _handle_4xx_status {
         if ( $response->content_type =~ /json/ ) {
             try {
                 $body = $self->_json->decode($content);
-                WebService::MinFraud::Error::Generic->throw( message =>
-                        'Response contains JSON but it does not specify code or error keys'
-                ) unless $body->{code} && $body->{error};
+                if ( !$body->{code} && !$body->{error} ) {
+                    WebService::MinFraud::Error::Generic->throw( message =>
+                            'Response contains JSON but it does not specify code or error keys'
+                    );
+                }
+                else {
+                    WebService::MinFraud::Error::WebService->throw(
+                        message => delete $body->{error},
+                        %{$body},
+                        http_status => $status,
+                        uri         => $uri,
+                    );
+                }
             }
             catch {
                 WebService::MinFraud::Error::HTTP->throw(
                     message =>
-                        "Received a $status error for $uri but it did not include the expected JSON body: $_",
+                        "Received a $status error for $uri with the following message: "
+                        . $_->message,
                     http_status => $status,
                     uri         => $uri,
                 );
