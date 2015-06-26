@@ -62,7 +62,7 @@ extends L<Throwable::Error> and adds attributes of its own.
 
 The C<< message >> and C<< stack_trace >> methods are
 inherited from L<Throwable::Error>. The message will be the value provided by
-the MaxMind web service. See L<http://dev.maxmind.com/minfraud> for
+the MaxMind web service. See L<https://dev.maxmind.com/minfraud> for
 details.
 
 It also provides three methods of its own:

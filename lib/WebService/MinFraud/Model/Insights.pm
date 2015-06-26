@@ -82,7 +82,7 @@ service.
 
 The Insights model class includes more data than the Score model class.  See
 the L<API
-documentation|http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>
+documentation|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>
 for more details.
 
 =head1 METHODS

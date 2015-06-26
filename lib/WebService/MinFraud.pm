@@ -47,7 +47,7 @@ __END__
 =head1 DESCRIPTION
 
 This distribution provides an API for the
-L<MaxMind minFraud Score and Insights web services|http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>.
+L<MaxMind minFraud Score and Insights web services|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>.
 
 See L<WebService::MinFraud::Client> for details on using the web service client
 API.

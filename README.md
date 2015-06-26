@@ -39,7 +39,7 @@ version 0.001001
 # DESCRIPTION
 
 This distribution provides an API for the
-[MaxMind minFraud Score and Insights web services](http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/).
+[MaxMind minFraud Score and Insights web services](https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/).
 
 See [WebService::MinFraud::Client](https://metacpan.org/pod/WebService::MinFraud::Client) for details on using the web service client
 API.

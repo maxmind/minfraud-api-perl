@@ -303,7 +303,7 @@ __END__
 This class provides a client API for the MaxMind minFraud Score and Insights
 web services. The B<Insights> service returns more data about a transaction
 than the B<Score> service. See the
-L<API documentation|http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>
+L<API documentation|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>
 for more details.
 
 Each web service is represented by a different model class, and
@@ -442,7 +442,7 @@ dotted-quad notation or the IPv6 hexadecimal-colon notation.
 =head2 payment => was_authorized
 
 The optional
-L<Payment|http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/#Payment_payment>
+L<Payment|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/#Payment_payment>
 top-level field has a C<< was_authorized >> key. The minFraud web service
 expects a JSON boolean type which is distinct from values that perl treats as
 true or false.  We recommend using C<< 0 >> for false, C<< 1 >> for true, and
@@ -453,7 +453,7 @@ by the minFraud web service.
 =head1 REQUEST METHODS
 
 All of the request methods require a device ip_address. See the
-L<API documentation|http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>
+L<API documentation|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>
 for details on all the values that can be part of the request.
 
 
@@ -480,7 +480,7 @@ support policies for dependencies and Perl itself.
 
 For details on the possible errors returned by the web service itself, please
 refer to the
-L<API documentation|http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>.
+L<API documentation|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>.
 
 Prior to making the request to the web service, the request HashRef is passed
 to L<WebService::MinFraud::Validator> for checks.  If the request fails
@@ -509,7 +509,7 @@ sort of (hopefully) useful error message.
 =head1 WHAT DATA IS RETURNED?
 
 Please see the
-L<API documentation|http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>
+L<API documentation|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>
 for details on what data each web service may return.
 
 Every record class attribute has a corresponding predicate method so that you

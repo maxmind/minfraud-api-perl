@@ -35,7 +35,7 @@ This class provides a model for the data returned by the minFraud Score
 web service.
 
 For more details, see the L<API
-documentation|http://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>.
+documentation|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>.
 
 =head1 METHODS
 
