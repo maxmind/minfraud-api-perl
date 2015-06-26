@@ -264,38 +264,49 @@ sub _handle_non_200_status {
 
 1;
 
-# ABSTRACT: Perl API for the minFraud Precision web services
+# ABSTRACT: Perl API for MaxMind's minFraud Score and Insights web services
 
 __END__
 
 =head1 SYNOPSIS
 
   use 5.010;
+
   use WebService::MinFraud::Client;
 
-  # This creates a Client object that can be reused across requests.
-  # Replace "42" with your user id and "abcdef123456" with your license
-  # key.
+  # The Client object can be re-used across several requests.
+  # Your MaxMind user_id and license_key are available at
+  # https://www.maxmind.com/en/my_license_key
   my $client = WebService::MinFraud::Client->new(
       user_id     => 42,
       license_key => 'abcdef123456',
   );
 
-  # Replace "insights" below with the "score" method if that's the web service
-  # that you are using.
-  my $insights = $client->insights( device => { ip_address => '24.24.24.24' } );
-  say $insights->risk_score;
-  my $shipping_address = $insights->shipping_adress;
-  say $shipping_address->is_high_risk;
+  # Request HashRef must contain a 'device' key, with a value that is a
+  # HashRef containing an 'ip_address' key with a valid IPv4 or IPv6 address.
+  # All other keys/values are optional; see other modules in minFraud Perl API
+  # distribution for details.
+
+  my $request = { device => { ip_address => '24.24.24.24' } };
+
+  # Use the 'score' or 'insights' client methods, depending on the minFraud
+  # web service you are using.
+
+  my $score = $client->score( $request );
+  say $score->risk_score;
+
+  my $insights = $client->insights( $request );
+  say $insights->shipping_address->is_high_risk;
 
 =head1 DESCRIPTION
 
-This class provides a client API for all the minFraud web service end
-points. The end points are Score and Insights. The B<Insights> end point returns
-more data about a transaction than the B<Score> end point. See
-L<http://dev.maxmind.com/minfraud> for more details.
+This class provides a client API for the MaxMind minFraud Score and Insights
+web services. The B<Insights> service returns more data about a transaction
+than the B<Score> service. See the
+L<API documentation|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>
+for more details.
 
-Each web service end point is represented by a different model class, and
+Each web service is represented by a different model class, and
 these model classes in turn contain multiple Record classes. The Record
 classes have attributes which contain data about the transaction or IP address.
 
@@ -305,19 +316,19 @@ transaction or IP address, the associated attribute is not populated.
 The web service may not return any information for an entire record, in which
 case all of the attributes for that record class will be empty.
 
-=head1 SSL
+=head1 TRANSPORT SECURITY
 
-Requests to the minFraud web service are always made with SSL.
+Requests to the minFraud web service are made over an HTTPS connection.
 
 =head1 USAGE
 
-The basic API for this class is the same for all of the web service end
-points. First you create a web service object with your MaxMind C<user_id> and
-C<license_key>, then you call the method corresponding to a specific end
-point, passing it the transaction you want analyzed.
+The basic API for this class is the same for all of the web services. First you
+create a web service object with your MaxMind C<user_id> and C<license_key>,
+then you call the method corresponding to the specific web service, passing it
+the transaction you want analyzed.
 
-If the request succeeds, the method call will return a model class for the end
-point you called. This model in turn contains multiple record classes, each of
+If the request succeeds, the method call will return a model class for the web
+service you called. This model in turn contains multiple record classes, each of
 which represents part of the data returned by the web service.
 
 If the request fails, the client class throws an exception.
@@ -341,8 +352,7 @@ This argument is required.
 
 =item * license_key
 
-Your MaxMind license key. Go to L<https://www.maxmind.com/en/my_license_key> to
-see your MaxMind User ID and license key.
+Your MaxMind license key.
 
 This argument is required.
 
@@ -356,8 +366,8 @@ The order of the locales is significant. When a record class has multiple
 names (country, city, etc.), its C<name> method will look at each element of
 this array reference and return the first locale for which it has a name.
 
-Note that the only locale which is always present in the minFraud data is "en".
-If you do not include this locale, the C<name> method may end up returning
+Note that the only locale which is always present in the minFraud data is
+C<en>. If you do not include this locale, the C<name> method may return
 C<undef> even when the record in question has an English name.
 
 Currently, the valid list of locale codes is:
@@ -381,7 +391,7 @@ spelling in English. In other words, English does not mean ASCII.
 
 =item * ru - Russian
 
-=item * zh-CN - simplified Chinese
+=item * zh-CN - Simplified Chinese
 
 =back
 
@@ -391,67 +401,98 @@ The default value for this argument is C<['en']>.
 
 =item * host
 
-The hostname to make a request against. This defaults to
-"minfraud.maxmind.com". In most cases, you should not need to set this
+The hostname of the minFraud web service used when making requests. This
+defaults to C<minfraud.maxmind.com>. In most cases, you do not need to set this
 explicitly.
 
 =item * ua
 
-This argument allows you to your own L<LWP::UserAgent> object. This is useful
-if you cannot use a vanilla LWP object, for example if you need to set proxy
-parameters.
+This argument allows you to set your own L<LWP::UserAgent> object. This is
+useful if you have to override the default object (C<< LWP::UserAgent->new() >>)
+to set http proxy parameters, for example.
 
-This can actually be any object which supports C<agent> and C<request>
-methods. This method will be called with an L<HTTP::Request> object as its
-only argument. This method must return an L<HTTP::Response> object.
+This attribute can be any object which supports C<agent> and C<request>
+methods:
+
+=over 8
+
+=item * request
+
+The C<request> method will be called with an L<HTTP::Request> object as its only
+argument. This method must return an L<HTTP::Response> object.
+
+=item * agent
+
+The C<agent> method will be called with a User-Agent string, constructed as
+described below.
 
 =back
+
+=back
+
+=head1 REQUEST
+
+The request methods are passed a HashRef as the only argument. See the L</SYNOPSIS> and L<WebService::MinFraud::Example> for detailed usage examples.  Some important notes regarding values passed to the minFraud web service via the Perl API are described below.
+
+=head2 device => ip_address
+
+This must be a valid IPv4 or IPv6 address in presentation format, i.e.,
+dotted-quad notation or the IPv6 hexadecimal-colon notation.
+
+=head2 payment => was_authorized
+
+The optional
+L<Payment|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/#Payment_payment>
+top-level field has a C<< was_authorized >> key. The minFraud web service
+expects a JSON boolean type which is distinct from values that Perl treats as
+true or false.  We recommend using C<< 0 >> for false, C<< 1 >> for true, and
+C<< undef >> for unknown, when setting the value for C<< was_authorized >> in
+the request.  Other values may fail local validation or be rejected as invalid
+by the minFraud web service.
 
 =head1 REQUEST METHODS
 
-All of the request methods require a device ip_address.  See
-L<http://dev.mamxind.com/minfraud> for details on all the values that can be
-part of the request.
+All of the request methods require a device ip_address. See the
+L<API documentation|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>
+for details on all the values that can be part of the request.
 
-=over 4
-
-=item * device => ip_address
-
-This must be a valid IPv4 or IPv6 address.
-
-=back
 
 =head2 score
 
-This method calls the minFraud Score end point. It returns a
+This method calls the minFraud Score web service. It returns a
 L<WebService::MinFraud::Model::Score> object.
 
 =head2 insights
 
-This method calls the minFraud Insights end point. It returns a
+This method calls the minFraud Insights web service. It returns a
 L<WebService::MinFraud::Model::Insights> object.
 
 =head1 User-Agent HEADER
 
-This module will set the User-Agent header to include the package name and
-version of this module (or a subclass if you use one), the package name and
-version of the user agent object, and the version of Perl.
+Requests by the minFraud Perl API will have a User-Agent header containing the
+package name and version of this module (or a subclass if you use one), the
+package name and version of the user agent object, and the version of Perl.
 
-This is set in order to help us support individual users, as well to determine
+This header is set in order to help us support individual users, as well to determine
 support policies for dependencies and Perl itself.
 
 =head1 EXCEPTIONS
 
-For details on the possible errors returned by the web service itself, see
-L<http://dev.maxmind.com/minfraud> for the minFraud web service
-docs.
+For details on the possible errors returned by the web service itself, please
+refer to the
+L<API documentation|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>.
+
+Prior to making the request to the web service, the request HashRef is passed
+to L<WebService::MinFraud::Validator> for checks.  If the request fails
+validation an exception is thrown, containing a string describing all of the
+validation errors.
 
 If the web service returns an explicit error document, this is thrown as a
 L<WebService::MinFraud::Error::WebService> exception object. If some other
 sort of error occurs, this is thrown as a L<WebService::MinFraud::Error::HTTP>
 object. The difference is that the web service error includes an error message
-and error code delivered by the web service. The latter is thrown when some sort
-of unanticipated error occurs, such as the web service returning a 500 or an
+and error code delivered by the web service. The latter is thrown when an
+unanticipated error occurs, such as the web service returning a 500 status or an
 invalid error document.
 
 If the web service returns any status code besides 200, 4xx, or 5xx, this also
@@ -467,8 +508,19 @@ sort of (hopefully) useful error message.
 
 =head1 WHAT DATA IS RETURNED?
 
-See L<http://dev.maxmind.com/minfraud> for details on what data each end
-point I<may> return.
+Please see the
+L<API documentation|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>
+for details on what data each web service may return.
 
 Every record class attribute has a corresponding predicate method so that you
 can check to see if the attribute is set.
+
+  my $insights = $client->insights( $request );
+  my $issuer   = $insights->issuer;
+  # phone_number attribute, with has_phone_number predicate method
+  if ( $issuer->has_phone_number ) {
+      say "issuer phone number: " . $issuer->phone_number;
+  }
+  else {
+      say "no phone number found for issuer";
+  }

@@ -65,14 +65,14 @@ __END__
       license_key => 'abcdef123456',
   );
 
-  my $request = { device => { ip_address => '24.24.24.24'} };
-  my $insights = $client->insights( $request );
+  my $request = { device => { ip_address => '24.24.24.24' } };
+  my $insights = $client->insights($request);
 
   my $shipping_address = $insights->shipping_address;
   say $shipping_address->is_high_risk;
 
   my $ip_address = $insights->ip_address;
-  my $postal = $ip_address->postal;
+  my $postal     = $ip_address->postal;
   say $postal->code;
 
 =head1 DESCRIPTION
@@ -81,7 +81,9 @@ This class provides a model for the data returned by the minFraud Insights web
 service.
 
 The Insights model class includes more data than the Score model class.  See
-L<http://dev.maxmind.com/minfraud> for more details.
+the L<API
+documentation|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>
+for more details.
 
 =head1 METHODS
 
@@ -110,13 +112,34 @@ particular request.
 
 =head2 ip_address
 
-Returns a L<WebService::MinFraud::Record::IPAddress> object representing
-IP address data for the transaction.  In turn the IP address object consists
-of the following methods that return GeoIP2::Record::* objects: city, continent,
-country, postal, registered_country, represented_country, subdivisions and
-traits.  In addition, the IP address object has a risk attribute that is
-similar to the risk_score for the overall transaction, but specific to the IP
-address instead of the transaction.
+Returns a L<WebService::MinFraud::Record::IPAddress> object representing IP
+address data for the transaction.  This object has the following methods:
+
+=over 4
+
+=item * C<< city >>
+
+=item * C<< continent >>
+
+=item * C<< country >>
+
+=item * C<< most_specific_subdivision >>
+
+=item * C<< postal >>
+
+=item * C<< registered_country >>
+
+=item * C<< represented_country >>
+
+=item * C<< risk >>
+
+=item * C<< subdivisions >>
+
+=item * C<< traits >>
+
+=back
+
+For details, please refer to L<WebService::MinFraud::Record::IPAddress/METHODS>.
 
 =head2 risk_score
 
@@ -133,3 +156,16 @@ shipping data for the transaction.
 Returns an ArrayRef of L<WebService::MinFraud::Record::Warning> objects.  It is
 B<highly recommended that you check this array> for issues when integrating the
 web service.
+
+=head1 PREDICATE METHODS
+
+The following predicate methods are available, which return true if the related
+data was present in the response body, false if otherwise:
+
+=head2 has_credits_remaining
+
+=head2 has_id
+
+=head2 has_risk_score
+
+=head2 has_warnings

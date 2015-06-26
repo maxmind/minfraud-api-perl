@@ -15,14 +15,15 @@ __END__
 =head1 SYNOPSIS
 
   use 5.010;
+
   use WebService::MinFraud::Client;
 
   my $client = WebService::MinFraud::Client->new(
       user_id     => 42,
       license_key => 'abcdef123456',
   );
-  my $request = { device => { ip_address => '24.24.24.24'} };
-  my $insights = $client->insights( $request);
+  my $request         = { device => { ip_address => '24.24.24.24' } };
+  my $insights        = $client->insights($request);
   my $billing_address = $insights->billing_address;
   say $billing_address->distance_to_ip_location;
 
@@ -30,24 +31,24 @@ __END__
 
 This class contains the billing address data associated with a transaction.
 
-This record is returned by the Insights end point.
+This record is returned by the L<WebService::MinFraud::Model::Insights#billing_address> method.
 
 =head1 METHODS
 
 This class provides the following methods:
 
-=head2 distance_to_billing_address
+=head2 distance_to_ip_location
 
-Returns the distance from the shipping address to the billing address.
+Returns the distance in kilometers from the billing address to the IP location.
 
 =head2 is_in_ip_country
 
-Returns a boolean indicating whether or not the billing address is in the same
+Returns a boolean indicating whether the billing address is in the same
 country as that of the IP address.
 
 =head2 is_postal_in_city
 
-Returns a boolean indicating whether or not the billing postal code is in the
+Returns a boolean indicating whether the billing postal code is in the
 billing city.
 
 =head2 latitude
@@ -57,3 +58,18 @@ Returns the latitude of the billing address.
 =head2 longitude
 
 Returns the longitude of the billing address.
+
+=head1 PREDICATE METHODS
+
+The following predicate methods are available, which return true if the related
+data was present in the response body, false if otherwise:
+
+=head2 has_distance_to_ip_location
+
+=head2 has_is_in_ip_country
+
+=head2 has_is_postal_in_city
+
+=head2 has_latitude
+
+=head2 has_longitude
