@@ -2,7 +2,7 @@ package WebService::MinFraud::Record::Warning;
 
 use Moo;
 
-our $VERSION = '0.001001';
+our $VERSION = '0.001002';
 
 use Types::Standard qw( ArrayRef Str );
 

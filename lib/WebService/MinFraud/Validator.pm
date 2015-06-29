@@ -2,7 +2,7 @@ package WebService::MinFraud::Validator;
 
 use Moo;
 
-our $VERSION = '0.001001';
+our $VERSION = '0.001002';
 
 use Data::Rx;
 use Try::Tiny;

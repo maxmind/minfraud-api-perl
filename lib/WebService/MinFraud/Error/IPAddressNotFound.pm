@@ -2,7 +2,7 @@ package WebService::MinFraud::Error::IPAddressNotFound;
 
 use Moo;
 
-our $VERSION = '0.001001';
+our $VERSION = '0.001002';
 
 use WebService::MinFraud::Types qw( Str );
 

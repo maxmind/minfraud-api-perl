@@ -2,7 +2,7 @@ package WebService::MinFraud::Error::HTTP;
 
 use Moo;
 
-our $VERSION = '0.001001';
+our $VERSION = '0.001002';
 
 with 'WebService::MinFraud::Role::Error::HTTP';
 

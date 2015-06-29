@@ -2,7 +2,7 @@ package WebService::MinFraud::Model::Insights;
 
 use Moo;
 
-our $VERSION = '0.001001';
+our $VERSION = '0.001002';
 
 use Types::Standard qw( HashRef InstanceOf );
 use WebService::MinFraud::Record::BillingAddress;

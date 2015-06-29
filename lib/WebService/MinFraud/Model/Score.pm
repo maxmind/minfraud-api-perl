@@ -2,7 +2,7 @@ package WebService::MinFraud::Model::Score;
 
 use Moo;
 
-our $VERSION = '0.001001';
+our $VERSION = '0.001002';
 
 with 'WebService::MinFraud::Role::HasCommonAttributes',
     'WebService::MinFraud::Role::HasLocales',
