@@ -8,14 +8,14 @@ our $VERSION = '0.001001';
 
 1;
 
-# ABSTRACT: Perl API for MaxMind's minFraud Score and Insights web services
+# ABSTRACT: BETA Perl API for MaxMind's minFraud Score and Insights web services
 
 __END__
 
 =pod
 
 =head1 SYNOPSIS
-
+  # This is a BETA release
   use 5.010;
 
   use WebService::MinFraud::Client;
@@ -46,7 +46,7 @@ __END__
 
 =head1 DESCRIPTION
 
-This distribution provides an API for the
+This distribution provides a BETA API for the
 L<MaxMind minFraud Score and Insights web services|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>.
 
 See L<WebService::MinFraud::Client> for details on using the web service client

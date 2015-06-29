@@ -1,14 +1,22 @@
 # NAME
 
-WebService::MinFraud - Perl API for MaxMind's minFraud Score and Insights web services
+WebService::MinFraud - BETA Perl API for MaxMind's minFraud Score and Insights web services
 
 # VERSION
 
 version 0.001001
 
-# SYNOPSIS
+# DESCRIPTION
 
-    use 5.010;
+This distribution provides a BETA API for the
+[MaxMind minFraud Score and Insights web services](https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/).
+
+See [WebService::MinFraud::Client](https://metacpan.org/pod/WebService::MinFraud::Client) for details on using the web service client
+API.
+
+# SYNOPSIS
+  # This is a BETA release
+  use 5.010;
 
     use WebService::MinFraud::Client;
 
@@ -35,14 +43,6 @@ version 0.001001
 
     my $insights = $client->insights( $request );
     say $insights->shipping_address->is_high_risk;
-
-# DESCRIPTION
-
-This distribution provides an API for the
-[MaxMind minFraud Score and Insights web services](https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/).
-
-See [WebService::MinFraud::Client](https://metacpan.org/pod/WebService::MinFraud::Client) for details on using the web service client
-API.
 
 # INSTALLATION
 
