@@ -2,6 +2,7 @@ use strict;
 use warnings;
 
 use JSON::MaybeXS;
+use Test::Fatal;
 use Test::More 0.88;
 use WebService::MinFraud::Client;
 
@@ -9,7 +10,7 @@ BEGIN {
     # dzil test turns author testing on by default, so we use RELEASE_TESTING
     unless ( $ENV{RELEASE_TESTING} ) {
         Test::More::plan( skip_all =>
-                'These tests are for testing by the author as they require a live minFraud service.'
+'These tests are for testing by the author as they require a live minFraud service.'
         );
     }
 }
@@ -29,16 +30,14 @@ my $request_file = 't/data/full-request.json';
 my $request_json = do {
     local $/ = undef;
     open my $fh, '<', $request_file
-        or die "Could not open $request_file: $!";
+      or die "Could not open $request_file: $!";
     <$fh>;
 };
 my $request        = decode_json($request_json);
 my $response_score = $client->score($request);
 ok( $response_score, 'score response' );
-ok(
-    exists $response_score->raw->{risk_score},
-    'raw risk_score exists (score)'
-);
+ok( exists $response_score->raw->{risk_score},
+    'raw risk_score exists (score)' );
 ok(
     defined $response_score->risk_score,
     'sugary risk_score is defined (score)'
@@ -54,35 +53,40 @@ ok(
     defined $response_insights->risk_score,
     'sugary risk_score is defined (insights)'
 );
-ok(
-    defined $response_insights->credits_remaining,
-    'credits_remaining is defined'
-);
+ok( defined $response_insights->credits_remaining,
+    'credits_remaining is defined' );
 ok( $response_insights->billing_address, 'billing address record exists' );
-ok(
-    $response_insights->billing_address->latitude,
-    'billing latitude exists'
-);
+ok( $response_insights->billing_address->latitude, 'billing latitude exists' );
 ok( $response_insights->credit_card, 'credit card record exists' );
 ok(
     $response_insights->credit_card->issuer,
     'credit card issuer record exists'
 );
-ok(
-    $response_insights->credit_card->issuer->name,
-    'credit card issuer name exists'
-);
+ok( $response_insights->credit_card->issuer->name,
+    'credit card issuer name exists' );
 ok( $response_insights->shipping_address, 'shipping address record exists' );
-ok(
-    $response_insights->shipping_address->latitude,
-    'shipping latitude exists'
-);
+ok( $response_insights->shipping_address->latitude,
+    'shipping latitude exists' );
 ok( $response_insights->ip_address,       'ip_address record exists' );
 ok( $response_insights->ip_address->city, 'city exists' );
-ok(
-    $response_insights->ip_address->city->geoname_id,
-    'city geoname id exists'
+ok( $response_insights->ip_address->city->geoname_id,
+    'city geoname id exists' );
+ok( defined $response_insights->ip_address->risk,
+    'ip_address risk is defined' );
+like(
+    exception {
+        # Choose a user_id that is valid in type, but way too big to real,
+        # unless we hit the jackpot of users :)
+        my $big_user_id = 900_000_000;
+        my $test_client = WebService::MinFraud::Client->new(
+            host    => $ENV{MM_MINFRAUD_HOST} || 'ct100-test.maxmind.com',
+            user_id => $big_user_id,
+            license_key => $ENV{MM_LICENSE_KEY},
+        );
+        $test_client->score($request);
+    },
+    qr/Invalid user_id or license_key/,
+    'bad user_id throws an exception'
 );
-ok( defined $response_insights->ip_address->risk, 'ip_address risk is defined');
 
 done_testing;

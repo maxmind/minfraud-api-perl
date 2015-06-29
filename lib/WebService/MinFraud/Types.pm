@@ -24,7 +24,6 @@ use GeoIP2::Types qw(
     object_isa_type
 );
 use Sub::Quote qw( quote_sub );
-use WebService::MinFraud::Error::Type;
 
 use Exporter qw( import );
 
