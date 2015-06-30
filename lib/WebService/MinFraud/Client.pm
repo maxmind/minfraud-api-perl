@@ -3,7 +3,7 @@ package WebService::MinFraud::Client;
 use 5.010;
 use Moo 1.004005;
 
-our $VERSION = '0.001002';
+our $VERSION = '0.001003';
 
 use JSON::MaybeXS;
 use LWP::UserAgent;

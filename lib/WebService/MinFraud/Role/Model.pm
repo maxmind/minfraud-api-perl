@@ -2,7 +2,7 @@ package WebService::MinFraud::Role::Model;
 
 use Moo::Role;
 
-our $VERSION = '0.001002';
+our $VERSION = '0.001003';
 
 use Types::Standard qw( HashRef );
 

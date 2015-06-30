@@ -2,7 +2,7 @@ package WebService::MinFraud::Role::HasCommonAttributes;
 
 use Moo::Role;
 
-our $VERSION = '0.001002';
+our $VERSION = '0.001003';
 
 use Types::Standard qw( ArrayRef InstanceOf Num Str );
 use WebService::MinFraud::Record::Warning;

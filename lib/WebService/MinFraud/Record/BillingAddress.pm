@@ -2,7 +2,7 @@ package WebService::MinFraud::Record::BillingAddress;
 
 use Moo;
 
-our $VERSION = '0.001002';
+our $VERSION = '0.001003';
 
 with 'WebService::MinFraud::Role::Record::Address';
 
