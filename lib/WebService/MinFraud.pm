@@ -15,6 +15,7 @@ __END__
 =pod
 
 =head1 SYNOPSIS
+
   # This is a BETA release
   use 5.010;
 

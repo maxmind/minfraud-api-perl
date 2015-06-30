@@ -16,6 +16,9 @@ has is_high_risk => (
 );
 
 1;
+
+# ABSTRACT: Contains data for the country record associated with an IP address
+
 __END__
 
 =head1 SYNOPSIS
