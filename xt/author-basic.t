@@ -8,9 +8,9 @@ use WebService::MinFraud::Client;
 
 BEGIN {
     # dzil test turns author testing on by default, so we use RELEASE_TESTING
-    unless ( $ENV{RELEASE_TESTING} ) {
+    unless ( $ENV{LIVE_TESTING} ) {
         Test::More::plan( skip_all =>
-'These tests are for testing by the author as they require a live minFraud service.'
+'These tests are for live testing by the author as they require a minFraud service.'
         );
     }
 }
