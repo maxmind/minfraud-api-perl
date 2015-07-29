@@ -160,7 +160,6 @@ sub _response_for {
 
         for my $boolean (@Booleans) {
             my ( $object, $key ) = @{$boolean};
-            say "$object $key $content->{$object}{$key}";
             next unless exists $content->{$object}{$key};
 
             $content->{$object}{$key}
