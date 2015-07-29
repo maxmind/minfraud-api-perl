@@ -233,7 +233,7 @@ my $false_boolean = {
     device  => { ip_address => '24.24.24.24' },
     payment => {
         decline_code   => 'invalid number',
-        was_authorized => JSON->false,
+        was_authorized => JSON()->false,
         processor      => 'stripe'
     },
 };
@@ -245,7 +245,7 @@ my $true_boolean = {
     device  => { ip_address => '24.24.24.24' },
     payment => {
         decline_code   => 'invalid number',
-        was_authorized => JSON->true,
+        was_authorized => JSON()->true,
         processor      => 'stripe'
     },
 };

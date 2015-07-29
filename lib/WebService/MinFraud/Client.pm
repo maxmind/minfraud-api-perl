@@ -5,12 +5,15 @@ use Moo 1.004005;
 
 our $VERSION = '0.001003';
 
+use HTTP::Headers ();
+use HTTP::Request ();
 use JSON::MaybeXS;
 use LWP::UserAgent;
 use Scalar::Util qw( blessed );
 use Sub::Quote qw( quote_sub );
 use Try::Tiny;
 use Types::Standard qw( InstanceOf );
+use URI ();
 use WebService::MinFraud::Error::Generic;
 use WebService::MinFraud::Error::HTTP;
 use WebService::MinFraud::Error::IPAddressNotFound;
@@ -41,7 +44,7 @@ has _json => (
     is       => 'ro',
     isa      => JSONObject,
     init_arg => undef,
-    default  => quote_sub(q{ JSON->new->utf8 }),
+    default  => quote_sub(q{ JSON()->new->utf8 }),
 );
 has license_key => (
     is       => 'ro',
@@ -164,8 +167,8 @@ sub _response_for {
 
             $content->{$object}{$key}
                 = $content->{$object}{$key}
-                ? JSON->true
-                : JSON->false;
+                ? JSON()->true
+                : JSON()->false;
         }
     }
 }
