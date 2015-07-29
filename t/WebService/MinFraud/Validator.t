@@ -1,6 +1,7 @@
 use strict;
 use warnings;
 
+use JSON::MaybeXS;
 use Test::Fatal;
 use Test::More 0.88;
 use WebService::MinFraud::Validator;
@@ -228,28 +229,28 @@ like(
     'bad shipping country throws an exception'
 );
 
-my $zero_boolean = {
+my $false_boolean = {
     device  => { ip_address => '24.24.24.24' },
     payment => {
         decline_code   => 'invalid number',
-        was_authorized => 0,
+        was_authorized => JSON->false,
         processor      => 'stripe'
     },
 };
 ok(
-    $validator->validate_request($zero_boolean),
+    $validator->validate_request($false_boolean),
     'zero as a boolean validates'
 );
-my $one_boolean = {
+my $true_boolean = {
     device  => { ip_address => '24.24.24.24' },
     payment => {
         decline_code   => 'invalid number',
-        was_authorized => 1,
+        was_authorized => JSON->true,
         processor      => 'stripe'
     },
 };
 ok(
-    $validator->validate_request($one_boolean),
+    $validator->validate_request($true_boolean),
     'one as a boolean validates'
 );
 my $undef_boolean = {
@@ -260,9 +261,11 @@ my $undef_boolean = {
         processor      => 'stripe'
     },
 };
-ok(
-    $validator->validate_request($undef_boolean),
-    'undef as a boolean validates'
+
+like(
+    exception { $validator->validate_request($undef_boolean) },
+    qr/found value was not a bool/,
+    'undef as a boolean does not validate'
 );
 
 done_testing;

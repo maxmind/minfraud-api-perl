@@ -158,10 +158,12 @@ sub _build_request_schema_definition {
                         type   => '//str',
                         length => { 'min' => 3, 'max' => 3 },
                     },
-                    discount_code   => '//str',
-                    affiliate_id    => '//str',
-                    subaffiliate_id => '//str',
-                    referrer_uri    => '/maxmind/weburi',
+                    discount_code    => '//str',
+                    affiliate_id     => '//str',
+                    subaffiliate_id  => '//str',
+                    referrer_uri     => '/maxmind/weburi',
+                    is_gift          => '//bool',
+                    has_gift_message => '//bool',
                 },
             },
             payment => {
@@ -242,11 +244,8 @@ sub _build_request_schema_definition {
 
                         },
                     },
-                    was_authorized => {
-                        type => '//any',
-                        of   => [ '//nil', '//bool', '//int' ]
-                    },
-                    decline_code => '//str',
+                    was_authorized => '//bool',
+                    decline_code   => '//str',
                 },
             },
             shipping => {
@@ -306,9 +305,12 @@ sub validate_request {
         $self->_schema->assert_valid($request);
     }
     catch {
-        my @error_strings
-            = map { 'VALUE: ' . $_->value . ' caused ERROR: ' . $_->stringify }
-            @{ $_->failures };
+        my @error_strings = map {
+                  'VALUE: '
+                . ( defined $_->value ? $_->value : 'undef' )
+                . ' caused ERROR: '
+                . $_->stringify
+        } @{ $_->failures };
         my $all_error_strings = join "\n", @error_strings;
         die $all_error_strings;
     };

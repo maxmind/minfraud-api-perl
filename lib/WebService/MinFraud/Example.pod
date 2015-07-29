@@ -65,12 +65,14 @@ score.
            time           => '2014-04-12T23:20:50.052+00:00'
        },
        order => {
-           affiliate_id    => 'af12',
-           referrer_uri    => 'http://www.amazon.com/',
-           subaffiliate_id => 'saf42',
-           discount_code   => 'FIRST',
-           currency        => 'USD',
-           amount          => 323.21
+           affiliate_id     => 'af12',
+           referrer_uri     => 'http://www.amazon.com/',
+           subaffiliate_id  => 'saf42',
+           discount_code    => 'FIRST',
+           currency         => 'USD',
+           amount           => 323.21
+           is_gift          => 1,
+           has_gift_message => 0,
        },
        payment => {
            decline_code   => 'invalid number',

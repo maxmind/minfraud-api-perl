@@ -4,7 +4,7 @@ WebService::MinFraud - BETA Perl API for MaxMind's minFraud Score and Insights w
 
 # VERSION
 
-version 0.001002
+version 0.001003
 
 # SYNOPSIS
 
@@ -78,9 +78,10 @@ client API please visit [http://www.maxmind.com/en/support](http://www.maxmind.c
 
 Mateu Hunter <mhunter@maxmind.com>
 
-# CONTRIBUTOR
+# CONTRIBUTORS
 
-Andy Jack <ajack@maxmind.com>
+- Andy Jack <ajack@maxmind.com>
+- Greg Oschwald <goschwald@maxmind.com>
 
 # COPYRIGHT AND LICENSE
 
