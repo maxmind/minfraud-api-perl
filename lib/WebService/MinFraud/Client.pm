@@ -5,12 +5,15 @@ use Moo 1.004005;
 
 our $VERSION = '0.001003';
 
+use HTTP::Headers ();
+use HTTP::Request ();
 use JSON::MaybeXS;
 use LWP::UserAgent;
 use Scalar::Util qw( blessed );
 use Sub::Quote qw( quote_sub );
 use Try::Tiny;
 use Types::Standard qw( InstanceOf );
+use URI ();
 use WebService::MinFraud::Error::Generic;
 use WebService::MinFraud::Error::HTTP;
 use WebService::MinFraud::Error::IPAddressNotFound;
@@ -41,7 +44,7 @@ has _json => (
     is       => 'ro',
     isa      => JSONObject,
     init_arg => undef,
-    default  => quote_sub(q{ JSON->new->utf8 }),
+    default  => quote_sub(q{ JSON()->new->utf8 }),
 );
 has license_key => (
     is       => 'ro',
@@ -118,6 +121,7 @@ sub score {
 sub _response_for {
     my ( $self, $path, $model_class, $content ) = @_;
 
+    $self->_fix_booleans($content);
     $self->_validator->validate_request($content);
     my $uri = $self->_base_uri->clone;
     $uri->path_segments( $uri->path_segments, $path );
@@ -141,6 +145,31 @@ sub _response_for {
             $response, $uri,
             $content->{device}{ip_address}
         );
+    }
+}
+
+{
+    my @Booleans = (
+        [ 'order',   'is_gift' ],
+        [ 'order',   'has_gift_message' ],
+        [ 'payment', 'was_authorized' ],
+    );
+
+    sub _fix_booleans {
+        my $self    = shift;
+        my $content = shift;
+
+        return unless $content;
+
+        for my $boolean (@Booleans) {
+            my ( $object, $key ) = @{$boolean};
+            next unless exists $content->{$object}{$key};
+
+            $content->{$object}{$key}
+                = $content->{$object}{$key}
+                ? JSON()->true
+                : JSON()->false;
+        }
     }
 }
 
@@ -450,17 +479,6 @@ The request methods are passed a HashRef as the only argument. See the L</SYNOPS
 
 This must be a valid IPv4 or IPv6 address in presentation format, i.e.,
 dotted-quad notation or the IPv6 hexadecimal-colon notation.
-
-=head2 payment => was_authorized
-
-The optional
-L<Payment|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/#Payment_payment>
-top-level field has a C<< was_authorized >> key. The minFraud web service
-expects a JSON boolean type which is distinct from values that Perl treats as
-true or false.  We recommend using C<< 0 >> for false, C<< 1 >> for true, and
-C<< undef >> for unknown, when setting the value for C<< was_authorized >> in
-the request.  Other values may fail local validation or be rejected as invalid
-by the minFraud web service.
 
 =head1 REQUEST METHODS
 
