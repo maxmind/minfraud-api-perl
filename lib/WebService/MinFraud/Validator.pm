@@ -19,7 +19,7 @@ has _deleter => (
     is      => 'lazy',
     isa     => InstanceOf ['Data::Delete'],
     builder => sub { Data::Delete->new },
-    handles => { remove_trivial_hash_values => 'delete' },
+    handles => { _delete => 'delete' },
 );
 
 has _request_schema_definition => (
@@ -353,9 +353,4 @@ passed to the C<score> or C<insights> methods.
 This method takes a minFraud request as a HashRef and validates it against the
 minFraud request schema.  If the request HashRef fails validation, an exception
 is thrown, which is a string containing all of the validation errors.
-
-=head2 remove_trivial_hash_values
-
-This methods deletes keys from hash that have an undefined or empty string value
-It is applied to the request before validation.
 

@@ -240,9 +240,7 @@ like(
     'empty string as a billing country throws an exception'
 );
 ok(
-    $validator->validate_request(
-        $validator->remove_trivial_hash_values($bad_billing_country)
-    ),
+    $validator->validate_request( $validator->_delete($bad_billing_country) ),
     'delete removes an undefined value'
 );
 
