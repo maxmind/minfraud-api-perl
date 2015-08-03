@@ -4,6 +4,7 @@ use Moo;
 
 our $VERSION = '0.001003';
 
+use Data::Delete 0.05;
 use Data::Rx;
 use Try::Tiny;
 use Types::Standard qw( HashRef InstanceOf Object );
@@ -13,6 +14,13 @@ use WebService::MinFraud::Data::Rx::Type::Hex32;
 use WebService::MinFraud::Data::Rx::Type::Hostname;
 use WebService::MinFraud::Data::Rx::Type::IPAddress;
 use WebService::MinFraud::Data::Rx::Type::WebURI;
+
+has _deleter => (
+    is      => 'lazy',
+    isa     => InstanceOf ['Data::Delete'],
+    builder => sub { Data::Delete->new },
+    handles => { remove_trivial_hash_values => 'delete' },
+);
 
 has _request_schema_definition => (
     is      => 'lazy',

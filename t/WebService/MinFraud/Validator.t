@@ -7,6 +7,7 @@ use Test::More 0.88;
 use WebService::MinFraud::Validator;
 
 my $validator = WebService::MinFraud::Validator->new;
+
 my $good_request = { device => { ip_address => '24.24.24.24' } };
 ok( $validator->validate_request($good_request), 'good request validates' );
 my $empty_request = {};
@@ -227,6 +228,22 @@ like(
     exception { $validator->validate_request($bad_shipping_country); },
     qr/length of value is outside allowed range/,
     'bad shipping country throws an exception'
+);
+
+my $bad_billing_country = {
+    device  => { ip_address => '24.24.24.24' },
+    billing => { country    => q{} },
+};
+like(
+    exception { $validator->validate_request($bad_billing_country); },
+    qr/length of value is outside allowed range/,
+    'empty string as a billing country throws an exception'
+);
+ok(
+    $validator->validate_request(
+        $validator->remove_trivial_hash_values($bad_billing_country)
+    ),
+    'delete removes an undefined value'
 );
 
 my $false_boolean = {

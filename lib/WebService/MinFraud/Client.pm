@@ -121,6 +121,7 @@ sub score {
 sub _response_for {
     my ( $self, $path, $model_class, $content ) = @_;
 
+    $content = $self->_validator->remove_trivial_hash_values($content);
     $self->_fix_booleans($content);
     $self->_validator->validate_request($content);
     my $uri = $self->_base_uri->clone;
