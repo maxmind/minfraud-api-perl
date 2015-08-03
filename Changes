@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+  - Remove trivial hash values from the request for stricter validation
+
 0.001002 2015-06-30
 
   - Improve POD
