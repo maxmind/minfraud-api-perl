@@ -1,4 +1,5 @@
 requires "Carp" => "0";
+requires "Data::Delete" => "0.05";
 requires "Data::Rx" => "0";
 requires "Data::Rx::CommonType::EasyNew" => "0";
 requires "Data::Validate::Domain" => "0";

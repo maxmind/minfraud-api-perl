@@ -80,6 +80,7 @@ has _validator => (
     is      => 'lazy',
     isa     => InstanceOf ['WebService::MinFraud::Validator'],
     builder => sub { WebService::MinFraud::Validator->new },
+    handles => { _remove_trivial_hash_values => '_delete' },
 );
 
 sub BUILD {
@@ -121,6 +122,7 @@ sub score {
 sub _response_for {
     my ( $self, $path, $model_class, $content ) = @_;
 
+    $content = $self->_remove_trivial_hash_values($content);
     $self->_fix_booleans($content);
     $self->_validator->validate_request($content);
     my $uri = $self->_base_uri->clone;
@@ -484,8 +486,9 @@ dotted-quad notation or the IPv6 hexadecimal-colon notation.
 
 All of the request methods require a device ip_address. See the
 L<API documentation|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>
-for details on all the values that can be part of the request.
-
+for details on all the values that can be part of the request.  Portions of the
+request hash with undefined and empty string values are automatically removed
+from the request.
 
 =head2 score
 

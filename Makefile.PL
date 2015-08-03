@@ -19,6 +19,7 @@ my %WriteMakefileArgs = (
   "NAME" => "WebService::MinFraud",
   "PREREQ_PM" => {
     "Carp" => 0,
+    "Data::Delete" => "0.05",
     "Data::Rx" => 0,
     "Data::Rx::CommonType::EasyNew" => 0,
     "Data::Validate::Domain" => 0,
@@ -65,6 +66,7 @@ my %WriteMakefileArgs = (
 
 my %FallbackPrereqs = (
   "Carp" => 0,
+  "Data::Delete" => "0.05",
   "Data::Rx" => 0,
   "Data::Rx::CommonType::EasyNew" => 0,
   "Data::Validate::Domain" => 0,
