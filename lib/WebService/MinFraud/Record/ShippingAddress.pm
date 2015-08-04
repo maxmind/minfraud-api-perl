@@ -2,7 +2,7 @@ package WebService::MinFraud::Record::ShippingAddress;
 
 use Moo;
 
-our $VERSION = '0.001003';
+our $VERSION = '0.001004';
 
 use WebService::MinFraud::Types qw( Bool BoolCoercion Num);
 

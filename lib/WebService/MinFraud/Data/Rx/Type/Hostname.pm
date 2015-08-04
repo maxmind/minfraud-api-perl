@@ -5,7 +5,7 @@ use 5.010;
 use strict;
 use warnings;
 
-our $VERSION = '0.001003';
+our $VERSION = '0.001004';
 
 use Data::Validate::Domain qw( is_domain );
 
