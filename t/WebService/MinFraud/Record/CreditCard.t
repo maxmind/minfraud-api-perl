@@ -6,7 +6,7 @@ use Test::More 0.88;
 use WebService::MinFraud::Record::CreditCard;
 
 my $cc = WebService::MinFraud::Record::CreditCard->new(
-    issuer                               => { name => 'Bank' },
+    issuer => { name => 'Bank' },
     country                              => 'US',
     is_issued_in_billing_address_country => 1,
     is_prepaid                           => 1

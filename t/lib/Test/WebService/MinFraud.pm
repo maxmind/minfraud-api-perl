@@ -139,7 +139,7 @@ sub test_model_class_with_empty_record {
 
     my %raw = (
         billing_address => {},
-        ip_address      => { traits => { ip_address => '5.6.7.8' } }
+        ip_address => { traits => { ip_address => '5.6.7.8' } }
     );
 
     my $model = $class->new(%raw);
@@ -162,7 +162,7 @@ sub test_model_class_with_unknown_keys {
 
     my %raw = (
         new_top_level => { foo => 42 },
-        ip_address    => {
+        ip_address => {
             city => {
                 confidence => 76,
                 geoname_id => 9876,
