@@ -54,7 +54,7 @@ sub guts_from_arg {
     my $schema = $rx->make_schema(
         {
             type => '//any',
-            of   => [ map { { type => $type, value => $_ } } @values, ]
+            of => [ map { { type => $type, value => $_ } } @values, ]
         }
     );
 

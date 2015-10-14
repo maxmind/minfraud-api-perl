@@ -73,14 +73,18 @@ Returns the L<WebService::MinFraud::Record::Issuer> object for the credit card.
 
 =head2 country
 
-Returns the L<ISO 3166-1 alpha 2 country
-code|http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2> representing the country
-that the card was issued in.
+Returns the two letter L<ISO 3166-1 alpha 2 country
+code|http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2> associated with the
+location of the majority of customers using this credit card as determined by
+their billing address. In cases where the location of customers is highly
+mixed, this defaults to the country of the bank issuing the card.
 
 =head2 is_issued_in_billing_address_country
 
-Returns a boolean indicating whether the issuer of the credit card is in the
-same country as the billing address.
+Returns a boolean indicating whether the country of the billing address
+matches the country of the majority of customers using this credit card. In
+cases where the location of customers is highly mixed, the match is to the
+country of the bank issuing the card.
 
 =head2 is_prepaid
 
