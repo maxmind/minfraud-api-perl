@@ -33,4 +33,7 @@ notifications:
     on_failure: always
     on_success: change
     recipients:
-      - dev@maxmind.com
+      - dev-ci@maxmind.com
+  slack:
+    rooms:
+      secure: "LV88x7IKRIV9iyEWAFOxugHA4NwvNA0waBB1k+VtPUGaCcwLP2HAdxo7c/xvu0N1w7aPRZ6o2SuHEH/HeLaKEV61a/goREguRLT2mwLpZdoRSnCJMqZ5Uztuxs7S7ymhC/m+jLJ9spWVoTsZ4C2u6NTp5VosetPNiG+sH0bwsUhycF+ldYaMBOdwOBSUUX0OkCwyLM6k8IV+IN1IEY/2wW6h4elWKpHPQCXBqYOI+NCj80h6TxCUAgiucqsBZZJyy8VRE2Gnoh9/M+q8Rz8xSwu9P+XVPr/oHnVkkMmCGqJ9C4bWworGVhRa6v/xEsJ1iNoVCWAN6o7tKOGsABtJml0DjJTyq+l285n/VfjbSEuEeRnlsOZSxGu6W9PM4zSqntWpkATTQbEcardWHQ+JdO8157vUMNe/dnOhM9mE+0opELIsGO+apEfave5RsL714PIgN/W+8hbFHBLhTJbSfi4RR122nEKqoDvbr4j/esms9tm6+YCtN0CwjYRjpQjoC1Ph/wZZXCJUJkygZPp7xfbDxNYgKQ0on3f+1OeqAYkxL837QhfZCK9rcytNVGVzm76scXmd3IGAHsyy81ZrqGLVYilT7Bep8gPUrlSZ69YecdeiXPd6fyS/5mEqL8z83BgvlnE8lQD6LBbrwG0Fo6EpfYJCrGwcI/ijghftZRQ=\n"
