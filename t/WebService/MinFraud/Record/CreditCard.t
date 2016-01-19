@@ -24,4 +24,10 @@ is(
 is( $cc->brand, 'Visa',   'credit card brand' );
 is( $cc->type,  'credit', 'credit card type' );
 
+my $cc2 = WebService::MinFraud::Record::CreditCard->new(
+    brand => 'Visa',
+    type  => q{}
+);
+is( $cc2->type, q{}, 'credit card type empty' );
+
 done_testing;

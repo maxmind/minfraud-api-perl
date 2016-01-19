@@ -4,7 +4,6 @@ use Moo;
 
 our $VERSION = '0.001004';
 
-use Types::Standard qw( Enum Maybe );
 use WebService::MinFraud::Record::Issuer;
 use WebService::MinFraud::Types
     qw( Bool BoolCoercion IssuerObject IssuerObjectCoercion Str );
@@ -44,7 +43,7 @@ has is_prepaid => (
 
 has type => (
     is        => 'ro',
-    isa       => Maybe [ Enum [qw( charge credit debit )] ],
+    isa       => Str,
     predicate => 1,
 );
 
