@@ -35,7 +35,7 @@ has credits_remaining => (
 );
 
 has warnings => (
-    is => 'lazy',
+    is  => 'lazy',
     isa => ArrayRef [ InstanceOf ['WebService::MinFraud::Record::Warning'] ],
     init_arg => undef,
     builder  => sub {

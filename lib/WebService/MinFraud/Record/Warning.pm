@@ -63,7 +63,7 @@ for the current list.
 
 =head2 input_pointer
 
-Returns a strings representing the path to the input that the warning is associated with. 
+Returns a strings representing the path to the input that the warning is associated with.
 For instance, if the warning was about the billing city, the returned reference would be
 C<< "/billing/city" >>.
 

@@ -28,7 +28,7 @@ with 'WebService::MinFraud::Role::Model',
 
     foreach my $attribute ( keys %attribute_to_class ) {
         has $attribute => (
-            is => 'ro',
+            is  => 'ro',
             isa => InstanceOf [ $attribute_to_class{$attribute} ],
         );
     }
