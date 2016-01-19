@@ -9,6 +9,7 @@ use WebService::MinFraud::Record::BillingAddress;
 use WebService::MinFraud::Record::Country;
 use WebService::MinFraud::Record::CreditCard;
 use WebService::MinFraud::Record::Device;
+use WebService::MinFraud::Record::Email;
 use WebService::MinFraud::Record::IPAddress;
 use WebService::MinFraud::Record::Issuer;
 use WebService::MinFraud::Record::Location;
@@ -24,6 +25,7 @@ with 'WebService::MinFraud::Role::Model',
         billing_address  => 'WebService::MinFraud::Record::BillingAddress',
         credit_card      => 'WebService::MinFraud::Record::CreditCard',
         device           => 'WebService::MinFraud::Record::Device',
+        email            => 'WebService::MinFraud::Record::Email',
         ip_address       => 'WebService::MinFraud::Record::IPAddress',
         shipping_address => 'WebService::MinFraud::Record::ShippingAddress',
     );

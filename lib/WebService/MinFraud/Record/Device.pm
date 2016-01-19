@@ -43,7 +43,7 @@ This class provides the following methods:
 
 =head2 id
 
-Returns the id f the device
+Returns the id of the device
 
 =head1 PREDICATE METHODS
 

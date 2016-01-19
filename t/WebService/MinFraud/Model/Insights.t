@@ -51,6 +51,7 @@ my $response_structure = {
         'type',
     ],
     device     => ['id'],
+    email      => [ 'is_free', 'is_high_risk' ],
     ip_address => \@ip_address_hashes,
 };
 
