@@ -4,7 +4,7 @@ WebService::MinFraud - BETA Perl API for MaxMind's minFraud Score and Insights w
 
 # VERSION
 
-version 0.001004
+version 0.002000
 
 # SYNOPSIS
 
