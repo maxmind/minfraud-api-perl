@@ -84,6 +84,10 @@ This class provides the following methods:
 
 Returns the L<WebService::MinFraud::Record::Issuer> object for the credit card.
 
+=head2 brand
+
+Returns the brand of the credit card, e.g. Visa, Mastercard, American Express etc.
+
 =head2 country
 
 Returns the two letter L<ISO 3166-1 alpha 2 country
@@ -102,6 +106,11 @@ country of the bank issuing the card.
 =head2 is_prepaid
 
 Returns a boolean indicating whether the credit card is prepaid.
+
+=head2 type
+
+Returns the type of the card if known: charge, credit or debit
+
 
 =head1 PREDICATE METHODS
 
