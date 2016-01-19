@@ -45,8 +45,8 @@ sub test_common_attributes {
             'warning message'
         );
         is_deeply(
-            $warnings[$i]->input,
-            $raw->{warnings}->[$i]->{input},
+            $warnings[$i]->input_pointer,
+            $raw->{warnings}->[$i]->{input_pointer},
             'warning input'
         );
     }

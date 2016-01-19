@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+  - The warning "input" has been restructured to be "input_pointer"
+
 0.001003 2015-08-03
 
   - Remove trivial hash values from the request for stricter validation
