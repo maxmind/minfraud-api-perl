@@ -17,9 +17,9 @@ has warning => (
     predicate => 1,
 );
 
-has input => (
+has input_pointer => (
     is        => 'ro',
-    isa       => ArrayRef [Str],
+    isa       => Str,
     predicate => 1,
 );
 
@@ -61,12 +61,11 @@ Returns a machine-readable code identifying the warning. See the L<API
 documentation|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/#Warning_Object>
 for the current list.
 
-=head2 input
+=head2 input_pointer
 
-Returns a reference to an array of keys and array indexes representing the path
-to the input that the warning is associated with. For instance, if the warning
-was about the billing city, the returned reference would be C<< ["billing",
-"city"] >>.
+Returns a strings representing the path to the input that the warning is associated with. 
+For instance, if the warning was about the billing city, the returned reference would be
+C<< "/billing/city" >>.
 
 =head2 warning
 
@@ -78,6 +77,6 @@ change at any time and should not be matched against.
 The following predicate methods are available, which return true if the related
 data was present in the response body, false if otherwise:
 
-=head2 has_input
+=head2 has_input_pointer
 
 =head2 has_warning
