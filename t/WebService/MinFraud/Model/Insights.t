@@ -50,6 +50,7 @@ my $response_structure = {
         },
         'type',
     ],
+    device     => ['id'],
     ip_address => \@ip_address_hashes,
 };
 

@@ -5,6 +5,7 @@ use Moo::Role;
 our $VERSION = '0.001004';
 
 use Types::Standard qw( ArrayRef InstanceOf Num Str );
+use Types::UUID;
 use WebService::MinFraud::Record::Warning;
 use WebService::MinFraud::Types qw( NonNegativeInt );
 
@@ -12,7 +13,7 @@ requires 'raw';
 
 has id => (
     is        => 'lazy',
-    isa       => Str,
+    isa       => Uuid,
     init_arg  => undef,
     builder   => sub { $_[0]->raw->{id} },
     predicate => 1,

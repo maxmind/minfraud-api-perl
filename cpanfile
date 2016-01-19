@@ -25,6 +25,7 @@ requires "Sub::Quote" => "0";
 requires "Throwable::Error" => "0";
 requires "Try::Tiny" => "0";
 requires "Types::Standard" => "0";
+requires "Types::UUID" => "0";
 requires "URI" => "0";
 requires "parent" => "0";
 requires "perl" => "5.010";
@@ -50,7 +51,7 @@ on 'configure' => sub {
 };
 
 on 'develop' => sub {
-  requires "Code::TidyAll" => "0.38";
+  requires "Code::TidyAll" => "0.24";
   requires "File::Spec" => "0";
   requires "IO::Handle" => "0";
   requires "IPC::Open3" => "0";
@@ -59,7 +60,7 @@ on 'develop' => sub {
   requires "Pod::Coverage::Moose" => "0";
   requires "Pod::Coverage::TrustPod" => "0";
   requires "Test::CPAN::Changes" => "0.19";
-  requires "Test::Code::TidyAll" => "0.38";
+  requires "Test::Code::TidyAll" => "0.24";
   requires "Test::EOL" => "0";
   requires "Test::More" => "0.88";
   requires "Test::NoTabs" => "0";

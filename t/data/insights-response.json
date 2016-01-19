@@ -118,6 +118,9 @@
     "is_prepaid": true,
     "type": "credit"
   },
+  "device": {
+    "id": "ECE205B0-BE16-11E5-B83F-FE035C37265F"
+  },
   "shipping_address": {
     "distance_to_billing_address": 2227,
     "distance_to_ip_location": 7456,

@@ -86,7 +86,7 @@ Returns the L<WebService::MinFraud::Record::Issuer> object for the credit card.
 
 =head2 brand
 
-Returns the brand of the credit card, e.g. Visa, Mastercard, American Express etc.
+Returns the brand of the credit card, e.g. Visa, MasterCard, American Express etc.
 
 =head2 country
 
