@@ -43,7 +43,11 @@ This class provides the following methods:
 
 =head2 id
 
-Returns the id of the device
+A UUID that MaxMind uses for the device associated
+with this IP address. Note that many devices cannot be uniquely identified
+because they are too common (for example, all iPhones of a given model and
+OS release). In these cases, the minFraud service will simply not return a
+UUID for that device.
 
 =head1 PREDICATE METHODS
 

@@ -113,7 +113,8 @@ The service credit counts are near realtime so they may not be exact.
 =head2 device
 
 Returns a L<WebService::MinFraud::Record::Device> object representing the
-device associated with the transaction.
+device that MaxMind believes is associated with the IP address passed in the
+request.
 
 =head2 id
 

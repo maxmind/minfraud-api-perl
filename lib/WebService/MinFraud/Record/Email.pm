@@ -49,8 +49,11 @@ This class provides the following methods:
 
 =head2 is_free
 
-Indicates whether the email is considered free or not
+This property is true if MaxMind believes that this email is hosted by a free
+email provider such as Gmail or Yahoo! Mail.
 
 =head2 is_high_risk
 
-Indicates whether the email is considered high risk or not
+This field is true if MaxMind believes that this email is likely to be used
+for fraud. Note that this is also factored into the overall risk_score in the
+response as well.
