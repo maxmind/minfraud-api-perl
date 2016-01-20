@@ -25,6 +25,7 @@ requires "Sub::Quote" => "0";
 requires "Throwable::Error" => "0";
 requires "Try::Tiny" => "0";
 requires "Types::Standard" => "0";
+requires "Types::UUID" => "0";
 requires "URI" => "0";
 requires "parent" => "0";
 requires "perl" => "5.010";

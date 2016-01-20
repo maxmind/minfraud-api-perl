@@ -41,13 +41,17 @@ my $response_structure = {
     billing_address  => [ keys %{ $response->{billing_address} } ],
     shipping_address => [ keys %{ $response->{shipping_address} } ],
     credit_card      => [
+        'brand',
         'country',
         'is_issued_in_billing_address_country',
         'is_prepaid',
         {
             issuer => [ keys %{ $response->{credit_card}{issuer} } ],
         },
+        'type',
     ],
+    device     => ['id'],
+    email      => [ 'is_free', 'is_high_risk' ],
     ip_address => \@ip_address_hashes,
 };
 

@@ -8,6 +8,8 @@ use Types::Standard qw( HashRef InstanceOf );
 use WebService::MinFraud::Record::BillingAddress;
 use WebService::MinFraud::Record::Country;
 use WebService::MinFraud::Record::CreditCard;
+use WebService::MinFraud::Record::Device;
+use WebService::MinFraud::Record::Email;
 use WebService::MinFraud::Record::IPAddress;
 use WebService::MinFraud::Record::Issuer;
 use WebService::MinFraud::Record::Location;
@@ -22,6 +24,8 @@ with 'WebService::MinFraud::Role::Model',
     my %attribute_to_class = (
         billing_address  => 'WebService::MinFraud::Record::BillingAddress',
         credit_card      => 'WebService::MinFraud::Record::CreditCard',
+        device           => 'WebService::MinFraud::Record::Device',
+        email            => 'WebService::MinFraud::Record::Email',
         ip_address       => 'WebService::MinFraud::Record::IPAddress',
         shipping_address => 'WebService::MinFraud::Record::ShippingAddress',
     );
@@ -75,6 +79,8 @@ __END__
   my $postal     = $ip_address->postal;
   say $postal->code;
 
+  say $insights->device->id;
+
 =head1 DESCRIPTION
 
 This class provides a model for the data returned by the minFraud Insights web
@@ -103,6 +109,12 @@ credit card data for the transaction.
 
 Returns the I<approximate> number of service credits remaining on your account.
 The service credit counts are near realtime so they may not be exact.
+
+=head2 device
+
+Returns a L<WebService::MinFraud::Record::Device> object representing the
+device that MaxMind believes is associated with the IP address passed in the
+request.
 
 =head2 id
 

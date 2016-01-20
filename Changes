@@ -1,5 +1,10 @@
 {{$NEXT}}
 
+  - The warning "input" has been restructured to be "input_pointer"
+  - brand and type added to credit_card
+  - device id added
+  - email is_free and is_high_risk added
+
 0.001003 2015-08-03
 
   - Remove trivial hash values from the request for stricter validation

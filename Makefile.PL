@@ -45,6 +45,7 @@ my %WriteMakefileArgs = (
     "Throwable::Error" => 0,
     "Try::Tiny" => 0,
     "Types::Standard" => 0,
+    "Types::UUID" => 0,
     "URI" => 0,
     "parent" => 0,
     "strict" => 0,
@@ -57,7 +58,7 @@ my %WriteMakefileArgs = (
     "Test::More" => "0.96",
     "lib" => 0
   },
-  "VERSION" => "0.001004",
+  "VERSION" => "0.002000",
   "test" => {
     "TESTS" => "t/*.t t/WebService/MinFraud/*.t t/WebService/MinFraud/Model/*.t t/WebService/MinFraud/Record/*.t"
   }
@@ -96,6 +97,7 @@ my %FallbackPrereqs = (
   "Throwable::Error" => 0,
   "Try::Tiny" => 0,
   "Types::Standard" => 0,
+  "Types::UUID" => 0,
   "URI" => 0,
   "lib" => 0,
   "parent" => 0,
