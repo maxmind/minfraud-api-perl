@@ -7,7 +7,7 @@ use warnings;
 
 our $VERSION = '0.002001';
 
-use Data::Validate::Domain qw( is_domain );
+use Data::Validate::Domain qw( is_hostname );
 
 use parent 'Data::Rx::CommonType::EasyNew';
 
@@ -18,8 +18,9 @@ with 'WebService::MinFraud::Role::Data::Rx::Type';
 sub assert_valid {
     my ( $self, $value ) = @_;
 
-    return 1
-        if is_domain($value);
+    # We use is_hostname rather than is_domain as Net::Domain::TLD cannot keep
+    # up with all of the new gTLDs
+    return 1 if is_hostname($value);
 
     $self->fail(
         {
@@ -31,7 +32,6 @@ sub assert_valid {
 }
 
 sub type_uri {
-    ## no critic(ValuesAndExpressions::ProhibitCommaSeparatedStatements)
     'tag:maxmind.com,MAXMIND:rx/hostname';
 }
 

@@ -1,20 +1,27 @@
 {{$NEXT}}
 
+- When validating a request body, this module no longer validates the TLD on
+  domains to prevent false errors due to new gTLDs.
+
+
 0.002000 2016-01-21
 
-  - The warning "input" has been restructured to be "input_pointer"
-  - brand and type added to credit_card
-  - device id added
-  - email is_free and is_high_risk added
+- The warning "input" has been restructured to be "input_pointer"
+- brand and type added to credit_card
+- device id added
+- email is_free and is_high_risk added
+
 
 0.001003 2015-08-03
 
-  - Remove trivial hash values from the request for stricter validation
+- Remove trivial hash values from the request for stricter validation
+
 
 0.001002 2015-06-30
 
-  - Improve POD
+- Improve POD
+
 
 0.001001 2015-06-29
 
-  - First release
+- First release
