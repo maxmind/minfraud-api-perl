@@ -87,10 +87,10 @@ like(
 );
 
 subtest 'Domain validation' => sub {
-    my %base = (device => { ip_address => '24.24.24.24' });
+    my %base = ( device => { ip_address => '24.24.24.24' } );
     my $good_email_domain = {
         %base,
-        email  => { domain     => 'zed.com' },
+        email => { domain => 'zed.com' },
     };
 
     ok(
@@ -100,7 +100,7 @@ subtest 'Domain validation' => sub {
 
     my $fake_tld_email_domain = {
         %base,
-        email  => { domain     => 'zed.faketld' },
+        email => { domain => 'zed.faketld' },
     };
 
     ok(
@@ -108,10 +108,9 @@ subtest 'Domain validation' => sub {
         'TLD is not validated'
     );
 
-
     my $bad_email_domain = {
         %base,
-        email  => { domain     => '-X-.com' },
+        email => { domain => '-X-.com' },
     };
     like(
         exception { $validator->validate_request($bad_email_domain); },
