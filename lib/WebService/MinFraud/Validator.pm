@@ -96,11 +96,11 @@ sub _build_request_schema_definition {
                     address_2  => '//str',
                     city       => '//str',
                     region     => {
-                        type => '//str',
+                        type   => '//str',
                         length => { 'min' => 1, 'max' => 4 },
                     },
                     country => {
-                        type => '//str',
+                        type   => '//str',
                         length => { 'min' => 2, 'max' => 2 },
                     },
                     postal             => '//str',
@@ -112,22 +112,22 @@ sub _build_request_schema_definition {
                 type     => '//rec',
                 optional => {
                     issuer_id_number => {
-                        type => '//str',
+                        type   => '//str',
                         length => { 'min' => 6, 'max' => 6 },
                     },
                     last_4_digits => => {
-                        type => '//str',
+                        type   => '//str',
                         length => { 'min' => 4, 'max' => 4 },
                     },
                     bank_name               => '//str',
                     bank_phone_country_code => '//int',
                     bank_phone_number       => '//str',
                     avs_result              => {
-                        type => '//str',
+                        type   => '//str',
                         length => { 'min' => 1, 'max' => 1 },
                     },
                     cvv_result => {
-                        type => '//str',
+                        type   => '//str',
                         length => { 'min' => 1, 'max' => 1 },
                     },
                 },
@@ -163,7 +163,7 @@ sub _build_request_schema_definition {
                 optional => {
                     amount   => '//num',
                     currency => {
-                        type => '//str',
+                        type   => '//str',
                         length => { 'min' => 3, 'max' => 3 },
                     },
                     discount_code    => '//str',
@@ -276,17 +276,17 @@ sub _build_request_schema_definition {
                         },
                     },
                     region => {
-                        type => '//str',
+                        type   => '//str',
                         length => { 'min' => 1, 'max' => 4 },
                     },
                     country => {
-                        type => '//str',
+                        type   => '//str',
                         length => { 'min' => 2, 'max' => 2 },
                     },
                     postal             => '//str',
                     phone_number       => '//str',
                     phone_country_code => {
-                        type => '//str',
+                        type   => '//str',
                         length => { 'min' => 1, 'max' => 4 },
                     },
                 },

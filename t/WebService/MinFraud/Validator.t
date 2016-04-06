@@ -69,7 +69,7 @@ like(
 );
 
 my $good_cvv_result = {
-    device => { ip_address => '24.24.24.24' },
+    device      => { ip_address => '24.24.24.24' },
     credit_card => { cvv_result => 'N', avs_result => 'Y' },
 };
 ok(
@@ -86,23 +86,38 @@ like(
     'bad cvv_result throws an exception'
 );
 
-my $good_email_domain = {
-    device => { ip_address => '24.24.24.24' },
-    email  => { domain     => 'zed.com' },
+subtest 'Domain validation' => sub {
+    my %base = ( device => { ip_address => '24.24.24.24' } );
+    my $good_email_domain = {
+        %base,
+        email => { domain => 'zed.com' },
+    };
+
+    ok(
+        $validator->validate_request($good_email_domain),
+        'good email domain validates'
+    );
+
+    my $fake_tld_email_domain = {
+        %base,
+        email => { domain => 'zed.faketld' },
+    };
+
+    ok(
+        $validator->validate_request($fake_tld_email_domain),
+        'TLD is not validated'
+    );
+
+    my $bad_email_domain = {
+        %base,
+        email => { domain => '-X-.com' },
+    };
+    like(
+        exception { $validator->validate_request($bad_email_domain); },
+        qr/not a valid host name/,
+        'bad email domain throws an exception'
+    );
 };
-ok(
-    $validator->validate_request($good_email_domain),
-    'good email domain validates'
-);
-my $bad_email_domain = {
-    device => { ip_address => '24.24.24.24' },
-    email  => { domain     => '-X-.com' },
-};
-like(
-    exception { $validator->validate_request($bad_email_domain); },
-    qr/not a valid host name/,
-    'bad email domain throws an exception'
-);
 
 my $good_event_time = {
     device => { ip_address => '24.24.24.24' },
@@ -245,7 +260,7 @@ ok(
 );
 
 my $false_boolean = {
-    device => { ip_address => '24.24.24.24' },
+    device  => { ip_address => '24.24.24.24' },
     payment => {
         decline_code   => 'invalid number',
         was_authorized => JSON()->false,
@@ -257,7 +272,7 @@ ok(
     'zero as a boolean validates'
 );
 my $true_boolean = {
-    device => { ip_address => '24.24.24.24' },
+    device  => { ip_address => '24.24.24.24' },
     payment => {
         decline_code   => 'invalid number',
         was_authorized => JSON()->true,
@@ -269,7 +284,7 @@ ok(
     'one as a boolean validates'
 );
 my $undef_boolean = {
-    device => { ip_address => '24.24.24.24' },
+    device  => { ip_address => '24.24.24.24' },
     payment => {
         decline_code   => 'invalid number',
         was_authorized => undef,
