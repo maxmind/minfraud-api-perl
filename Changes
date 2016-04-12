@@ -2,6 +2,9 @@
 
 - When validating a request body, this module no longer validates the TLD on
   domains to prevent false errors due to new gTLDs.
+- Added the following new values to the `/payment/processor` validation:
+  ccnow, dalpay, epay (repaces epayeu), payplus, pinpayments, quickpay, and
+  verepay.
 
 
 0.002000 2016-01-21
