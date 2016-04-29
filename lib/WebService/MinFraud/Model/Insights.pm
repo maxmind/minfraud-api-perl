@@ -44,8 +44,10 @@ with 'WebService::MinFraud::Role::Model',
 
         foreach my $attribute ( keys %attribute_to_class ) {
             $args->{$attribute} //= {};
-            $args->{$attribute}
-                = $attribute_to_class{$attribute}->new( $args->{$attribute} );
+            $args->{$attribute} = $attribute_to_class{$attribute}->new(
+                %{ $args->{$attribute} },
+                exists $args->{locales} ? ( locales => $args->{locales} ) : ()
+            );
         }
 
         return $args;

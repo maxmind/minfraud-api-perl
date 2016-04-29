@@ -4,50 +4,58 @@ use Moo;
 
 our $VERSION = '0.002001';
 
+use B;
 use GeoIP2::Role::Model::Location;
 use GeoIP2::Role::Model::HasSubdivisions;
 use Types::Standard qw( ArrayRef InstanceOf Num);
+use Sub::Quote qw( quote_sub );
 use WebService::MinFraud::Record::Location;
 use WebService::MinFraud::Record::Country;
-use WebService::MinFraud::Types qw(
-    MinFraudCountryCoercion
-    MinFraudLocationCoercion
-);
+
 with 'GeoIP2::Role::Model::Location', 'GeoIP2::Role::Model::HasSubdivisions';
 
-__PACKAGE__->_define_attributes_for_keys(
-    __PACKAGE__->_record_names_from_geo );
+__PACKAGE__->_define_attributes_for_keys( __PACKAGE__->_all_record_names() );
 
-sub _record_names_from_geo {
-    qw(
-        city
-        continent
-        postal
-        registered_country
-        represented_country
-        traits
+# sub _raw_country  { $_[0]->raw->{country} }
+# sub _raw_location { $_[0]->raw->{location} }
+
+for my $name ( 'Country', 'Location' ) {
+    my $attr = lc $name;
+
+    my $raw_attr = '_raw_' . $attr;
+    my $class    = "WebService::MinFraud::Record::$name";
+
+    has "+$attr" => (
+        is       => 'ro',
+        isa      => InstanceOf [$class],
+        init_arg => undef,
+        lazy     => 1,
+        default  => quote_sub(
+            ## no critic (ProhibitCallsToUnexportedSubs)
+            sprintf(
+                q{ $_[0]->_build_mf_record( %s, %s ) },
+                map { B::perlstring($_) } $class, $raw_attr
+            )
+        ),
+        predicate => 1,
     );
 }
-
-has country => (
-    is        => 'ro',
-    isa       => InstanceOf ['WebService::MinFraud::Record::Country'],
-    coerce    => MinFraudCountryCoercion,
-    predicate => 1,
-);
-
-has location => (
-    is        => 'ro',
-    isa       => InstanceOf ['WebService::MinFraud::Record::Location'],
-    coerce    => MinFraudLocationCoercion,
-    predicate => 1,
-);
 
 has risk => (
     is        => 'ro',
     isa       => Num,
     predicate => 1,
 );
+
+sub _build_mf_record {
+    my $self   = shift;
+    my $class  = shift;
+    my $method = shift;
+
+    my $raw = $self->$method;
+
+    return $class->new( %{$raw}, locales => $self->locales() );
+}
 
 1;
 

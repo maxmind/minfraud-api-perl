@@ -16,7 +16,6 @@ use Types::Standard qw( InstanceOf );
 use URI ();
 use WebService::MinFraud::Error::Generic;
 use WebService::MinFraud::Error::HTTP;
-use WebService::MinFraud::Error::IPAddressNotFound;
 use WebService::MinFraud::Error::WebService;
 use WebService::MinFraud::Model::Insights;
 use WebService::MinFraud::Model::Score;
@@ -220,62 +219,39 @@ sub _handle_4xx_status {
     my $uri      = shift;
     my $ip       = shift;
 
-    if ( $status == 404 ) {
-        WebService::MinFraud::Error::IPAddressNotFound->throw(
-            message    => "No record found for IP address $ip",
-            ip_address => $ip,
-        );
-    }
-
     my $content = $response->decoded_content;
 
-    my $body = {};
+    my $has_body = defined $content && length $content;
+    my $body = try {
+        $has_body
+            && $response->content_type =~ /json/
+            && $self->_json->decode($content)
+    };
 
-    if ( defined $content && length $content ) {
-        if ( $response->content_type =~ /json/ ) {
-            try {
-                $body = $self->_json->decode($content);
-                if ( !$body->{code} && !$body->{error} ) {
-                    WebService::MinFraud::Error::Generic->throw( message =>
-                            'Response contains JSON but it does not specify code or error keys'
-                    );
-                }
-                else {
-                    WebService::MinFraud::Error::WebService->throw(
-                        message => delete $body->{error},
-                        %{$body},
-                        http_status => $status,
-                        uri         => $uri,
-                    );
-                }
-            }
-            catch {
-                WebService::MinFraud::Error::HTTP->throw(
-                    message =>
-                        "Received a $status error for $uri with the following message: "
-                        . $_->message,
-                    http_status => $status,
-                    uri         => $uri,
-                );
-            };
-        }
-        else {
-            WebService::MinFraud::Error::HTTP->throw(
-                message =>
-                    "Received a $status error for $uri with the following body: $content",
+    if ($body) {
+        if ( $body->{code} || $body->{error} ) {
+            WebService::MinFraud::Error::WebService->throw(
+                message => delete $body->{error},
+                %{$body},
                 http_status => $status,
                 uri         => $uri,
+            );
+        }
+        else {
+            WebService::MinFraud::Error::Generic->throw( message =>
+                    'Response contains JSON but it does not specify code or error keys'
             );
         }
     }
     else {
         WebService::MinFraud::Error::HTTP->throw(
-            message     => "Received a $status error for $uri with no body",
+            message => $has_body
+            ? "Received a $status error for $uri with the following body: $content"
+            : "Received a $status error for $uri with no body",
             http_status => $status,
             uri         => $uri,
         );
     }
-
 }
 
 sub _handle_5xx_status {
@@ -299,7 +275,7 @@ sub _handle_non_200_status {
 
     WebService::MinFraud::Error::HTTP->throw(
         message =>
-            "Received an uncommon HTTP status ($status) for $uri that is neither 2xx, 4xx nor 5xx",
+            "Received an unexpected HTTP status ($status) for $uri that is neither 2xx, 4xx nor 5xx",
         http_status => $status,
         uri         => $uri,
     );
