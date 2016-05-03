@@ -49,16 +49,16 @@ __END__
   );
 
   my $request = { device => { ip_address => '24.24.24.24' } };
-  my $insights = $client->insights($request);
+  my $factors = $client->factors($request);
 
-  my $shipping_address = $insights->shipping_address;
+  my $shipping_address = $factors->shipping_address;
   say $shipping_address->is_high_risk;
 
-  my $ip_address = $insights->ip_address;
+  my $ip_address = $factors->ip_address;
   my $postal     = $ip_address->postal;
   say $postal->code;
 
-  say $insights->device->id;
+  say $factors->device->id;
 
 =head1 DESCRIPTION
 

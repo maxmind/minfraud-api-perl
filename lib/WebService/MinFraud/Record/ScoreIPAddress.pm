@@ -23,8 +23,8 @@ __END__
       license_key => 'abcdef123456',
   );
   my $request    = { device => { ip_address => '24.24.24.24' } };
-  my $insights   = $client->insights($request);
-  my $ip_address = $insights->ip_address;
+  my $score      = $client->score($request);
+  my $ip_address = $score->ip_address;
   say $ip_address->risk;
 
 =head1 DESCRIPTION

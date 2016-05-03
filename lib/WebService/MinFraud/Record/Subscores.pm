@@ -48,8 +48,8 @@ __END__
       license_key => 'abcdef123456',
   );
   my $request   = { device => { ip_address => '24.24.24.24' } };
-  my $insights  = $client->insights($request);
-  my $subscores = $insights->subscores;
+  my $factors   = $client->factors($request);
+  my $subscores = $factors->subscores;
   say $subscores->ip_tenure;
 
 =head1 DESCRIPTION
