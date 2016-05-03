@@ -3,6 +3,7 @@
   "risk_score": 0.01,
   "credits_remaining": 1000,
   "ip_address": {
+    "risk": 0.01,
     "city": {
       "confidence": 42,
       "geoname_id": 2643743,
@@ -54,9 +55,9 @@
       "time_zone": "Europe\/London"
     },
     "postal": {
-        "code": "12345",
-        "confidence": 57
-     },
+      "code": "12345",
+      "confidence": 57
+    },
     "registered_country": {
       "geoname_id": 6252001,
       "iso_code": "US",
@@ -72,11 +73,12 @@
       }
     },
     "represented_country": {
-                "geoname_id": 3,
-                "iso_code": "GB",
-                "names": { "en": "United Kingdom" }
+      "geoname_id": 3,
+      "iso_code": "GB",
+      "names": {
+        "en": "United Kingdom"
+      }
     },
-    "risk": 0.01,
     "subdivisions": [
       {
         "confidence": 42,
@@ -120,6 +122,10 @@
   },
   "device": {
     "id": "ECE205B0-BE16-11E5-B83F-FE035C37265F"
+  },
+  "email": {
+    "is_free": true,
+    "is_high_risk": true
   },
   "shipping_address": {
     "distance_to_billing_address": 2227,

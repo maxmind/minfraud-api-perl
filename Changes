@@ -1,10 +1,24 @@
 {{$NEXT}}
 
-- When validating a request body, this module no longer validates the TLD on
-  domains to prevent false errors due to new gTLDs.
-- Added the following new values to the `/payment/processor` validation:
+[ENHANCEMENTS]
+
+- Added the following new values to the /payment/processor validation:
   ccnow, dalpay, epay (repaces epayeu), payplus, pinpayments, quickpay, and
   verepay.
+
+[ BUGFIXES ]
+
+- Setting the locales on the client now sets the locales in the model objects
+  as documented
+- An WebService::MinFraud::Error::IPAddressNotFound is no longer erroneously
+  thrown if a 404 is received.
+- Some bugs in the HTTP error status handling were fixed.
+- When validating a request body, this module no longer validates the TLD on
+  domains to prevent false errors due to new gTLDs.
+
+[ OTHER ]
+
+- Added tests for WebService::MinFraud::Client that uses mocked user agent.
 
 
 0.002000 2016-01-21

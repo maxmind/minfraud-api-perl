@@ -40,8 +40,6 @@ our @EXPORT_OK = qw(
     LocalesArrayRef
     MaxMindID
     MaxMindLicenseKey
-    MinFraudCountryCoercion
-    MinFraudLocationCoercion
     NonNegativeInt
     Num
     Str
@@ -67,30 +65,6 @@ sub IssuerObjectCoercion () {
             && $_[0]->isa('WebService::MinFraud::Record::Issuer')
             ? $_[0]
             : WebService::MinFraud::Record::Issuer->new($_[0]);
-        }
-    );
-}
-
-sub MinFraudCountryCoercion () {
-    return quote_sub(
-        q{
-            defined $_[0]
-            && Scalar::Util::blessed($_[0])
-            && $_[0]->isa('WebService::MinFraud::Record::Country')
-            ? $_[0]
-            : WebService::MinFraud::Record::Country->new($_[0]);
-        }
-    );
-}
-
-sub MinFraudLocationCoercion () {
-    return quote_sub(
-        q{
-            defined $_[0]
-            && Scalar::Util::blessed($_[0])
-            && $_[0]->isa('WebService::MinFraud::Record::Location')
-            ? $_[0]
-            : WebService::MinFraud::Record::Location->new($_[0]);
         }
     );
 }
