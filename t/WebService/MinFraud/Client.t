@@ -1,20 +1,20 @@
 use strict;
 use warnings;
 
-use File::Slurper qw( read_binary );
+use lib 't/lib';
+
 use HTTP::Response ();
-use JSON::MaybeXS qw( decode_json );
 use Test::Fatal qw( exception );
 use Test::LWP::UserAgent ();
 use Test::More 0.88;
 use Test::Warnings qw( :all );
-use WebService::MinFraud::Client ();
-
-# use WebService::MinFraud::Model::Factors  ();
+use Test::WebService::MinFraud qw( read_data_file );
+use WebService::MinFraud::Client          ();
+use WebService::MinFraud::Model::Factors  ();
 use WebService::MinFraud::Model::Insights ();
 use WebService::MinFraud::Model::Score    ();
 
-for my $service ( 'insights', 'score' ) {
+for my $service ( 'factors', 'insights', 'score' ) {
     subtest $service => sub {
         subtest 'test simple success' => sub {
             my $model = _run_request($service);
@@ -212,7 +212,7 @@ sub _run_request {
                     "application/vnd.maxmind.com-minfraud-${service}+json; charset=UTF-8; version=2.0"
             ],
             $args->{response_content}
-                || _read_data_file("${service}-response.json"),
+                || read_data_file("${service}-response.json"),
         )
     );
 
@@ -226,10 +226,4 @@ sub _run_request {
 
 sub _uri_for {
     'https://minfraud.maxmind.com/minfraud/v2.0/' . $_[0];
-}
-
-sub _read_data_file {
-    my $file_name = shift;
-
-    return read_binary("t/data/$file_name");
 }

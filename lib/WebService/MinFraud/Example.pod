@@ -5,8 +5,8 @@ WebService::MinFraud::Example - MaxMind minFraud client example
 =head1 EXAMPLE
 
 Here is an example using the client to submit a request of transaction
-data to the minFraud service.  You can provide any subset of the C<< $request >>
-so long as you provide a C<< $request->{device}{ip_address} >>.  Typically,
+data to the minFraud service. You can provide any subset of the C<< $request >>
+so long as you provide a C<< $request->{device}{ip_address} >>. Typically,
 the more information that you provide, the more confident you can be in the risk
 score.
 

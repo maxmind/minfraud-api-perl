@@ -3,7 +3,7 @@ package WebService::MinFraud::Client;
 use 5.010;
 use Moo 1.004005;
 
-our $VERSION = '0.002001';
+our $VERSION = '0.003000';
 
 use HTTP::Headers ();
 use HTTP::Request ();
@@ -17,6 +17,7 @@ use URI ();
 use WebService::MinFraud::Error::Generic;
 use WebService::MinFraud::Error::HTTP;
 use WebService::MinFraud::Error::WebService;
+use WebService::MinFraud::Model::Factors;
 use WebService::MinFraud::Model::Insights;
 use WebService::MinFraud::Model::Score;
 use WebService::MinFraud::Types
@@ -98,6 +99,15 @@ sub BUILD {
         . "Perl $^V)";
 
     $ua->agent($agent);
+}
+
+sub factors {
+    my $self = shift;
+
+    return $self->_response_for(
+        'factors',
+        'WebService::MinFraud::Model::Factors', @_,
+    );
 }
 
 sub insights {
@@ -308,8 +318,8 @@ __END__
 
   my $request = { device => { ip_address => '24.24.24.24' } };
 
-  # Use the 'score' or 'insights' client methods, depending on the minFraud
-  # web service you are using.
+  # Use the 'score', 'insights', or 'factors' client methods, depending on
+  # the minFraud web service you are using.
 
   my $score = $client->score( $request );
   say $score->risk_score;
@@ -317,11 +327,14 @@ __END__
   my $insights = $client->insights( $request );
   say $insights->shipping_address->is_high_risk;
 
+  my $factors = $client->factors( $request );
+  say $factors->subscores->ip_tenure;
+
 =head1 DESCRIPTION
 
-This class provides a client API for the MaxMind minFraud Score and Insights
-web services. The B<Insights> service returns more data about a transaction
-than the B<Score> service. See the
+This class provides a client API for the MaxMind minFraud Score, Insights, and
+Factors web services. The B<Insights> service returns more data about a
+transaction than the B<Score> service. See the
 L<API documentation|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>
 for more details.
 
@@ -451,7 +464,7 @@ described below.
 
 =head1 REQUEST
 
-The request methods are passed a HashRef as the only argument. See the L</SYNOPSIS> and L<WebService::MinFraud::Example> for detailed usage examples.  Some important notes regarding values passed to the minFraud web service via the Perl API are described below.
+The request methods are passed a HashRef as the only argument. See the L</SYNOPSIS> and L<WebService::MinFraud::Example> for detailed usage examples. Some important notes regarding values passed to the minFraud web service via the Perl API are described below.
 
 =head2 device => ip_address
 
@@ -462,7 +475,7 @@ dotted-quad notation or the IPv6 hexadecimal-colon notation.
 
 All of the request methods require a device ip_address. See the
 L<API documentation|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>
-for details on all the values that can be part of the request.  Portions of the
+for details on all the values that can be part of the request. Portions of the
 request hash with undefined and empty string values are automatically removed
 from the request.
 
@@ -475,6 +488,11 @@ L<WebService::MinFraud::Model::Score> object.
 
 This method calls the minFraud Insights web service. It returns a
 L<WebService::MinFraud::Model::Insights> object.
+
+=head2 factors
+
+This method calls the minFraud Factors web service. It returns a
+L<WebService::MinFraud::Model::Factors> object.
 
 =head1 User-Agent HEADER
 
@@ -492,7 +510,7 @@ refer to the
 L<API documentation|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>.
 
 Prior to making the request to the web service, the request HashRef is passed
-to L<WebService::MinFraud::Validator> for checks.  If the request fails
+to L<WebService::MinFraud::Validator> for checks. If the request fails
 validation an exception is thrown, containing a string describing all of the
 validation errors.
 

@@ -2,22 +2,20 @@ package WebService::MinFraud::Record::IPAddress;
 
 use Moo;
 
-our $VERSION = '0.002001';
+our $VERSION = '0.003000';
 
 use B;
 use GeoIP2::Role::Model::Location;
 use GeoIP2::Role::Model::HasSubdivisions;
-use Types::Standard qw( ArrayRef InstanceOf Num);
+use Types::Standard qw( ArrayRef InstanceOf );
 use Sub::Quote qw( quote_sub );
 use WebService::MinFraud::Record::Location;
 use WebService::MinFraud::Record::Country;
 
-with 'GeoIP2::Role::Model::Location', 'GeoIP2::Role::Model::HasSubdivisions';
+with 'GeoIP2::Role::Model::Location', 'GeoIP2::Role::Model::HasSubdivisions',
+    'WebService::MinFraud::Role::Record::HasRisk';
 
 __PACKAGE__->_define_attributes_for_keys( __PACKAGE__->_all_record_names() );
-
-# sub _raw_country  { $_[0]->raw->{country} }
-# sub _raw_location { $_[0]->raw->{location} }
 
 for my $name ( 'Country', 'Location' ) {
     my $attr = lc $name;
@@ -40,12 +38,6 @@ for my $name ( 'Country', 'Location' ) {
         predicate => 1,
     );
 }
-
-has risk => (
-    is        => 'ro',
-    isa       => Num,
-    predicate => 1,
-);
 
 sub _build_mf_record {
     my $self   = shift;
@@ -135,7 +127,7 @@ bases.
 =head2 risk
 
 Returns the risk associated with the IP address. The value ranges from 0.01 to
-99. A higher value indicates a higher risk.  The IP address risk is distinct
+99. A higher value indicates a higher risk. The IP address risk is distinct
 from the value returned by C<< risk_score >> methods of
 L<WebService::MinFraud::Model::Insights> and
 L<WebService::MinFraud::Model::Score> modules.
@@ -143,7 +135,7 @@ L<WebService::MinFraud::Model::Score> modules.
 =head2 subdivisions
 
 Returns an array of L<GeoIP2::Record::Subdivision> objects representing the
-country divisions for the IP address.  The number and type of subdivisions
+country divisions for the IP address. The number and type of subdivisions
 varies by country, but a subdivision is typically a state, province, county, or
 administrative region.
 

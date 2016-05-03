@@ -3,13 +3,18 @@ package Test::WebService::MinFraud;
 use strict;
 use warnings;
 
-use Test::Fatal;
+use File::Slurper qw( read_binary );
+use JSON::MaybeXS;
+use Test::Fatal qw( exception );
 use Test::More 0.88;
 
 use Exporter qw( import );
 
 our @EXPORT_OK = qw(
+    decode_json_file
+    read_data_file
     test_common_attributes
+    test_insights
     test_model_class
     test_model_class_with_empty_record
     test_model_class_with_unknown_keys
@@ -25,6 +30,12 @@ sub test_common_attributes {
     foreach my $attribute (@attributes) {
         is( $model->$attribute, $raw->{$attribute}, "${attribute}" );
     }
+
+    is(
+        $model->ip_address->risk, $raw->{ip_address}{risk},
+        'ip_address risk'
+    );
+
     is(
         ref( $model->warnings ), 'ARRAY',
         'warnings are an array referernce'
@@ -49,6 +60,74 @@ sub test_common_attributes {
             $raw->{warnings}->[$i]->{input_pointer},
             'warning input'
         );
+    }
+    is_deeply( $model->raw, $raw, 'response gets stored as raw' );
+}
+
+sub test_insights {
+    my $model    = shift;
+    my $class    = shift;
+    my $response = shift;
+
+    test_model_class( $class, $response );
+    test_common_attributes( $model, $class, $response );
+    test_model_class_with_empty_record($class);
+    test_model_class_with_unknown_keys($class);
+
+    # We create a response structure to help us test the various attributes
+    # that we create from the response.
+    my @top_level         = keys %{ $response->{ip_address} };
+    my @ip_address_hashes = map {
+        { $_ => [ keys %{ $response->{ip_address}{$_} } ] }
+        }
+        grep {
+               ref( $response->{ip_address}{$_} )
+            && ref( $response->{ip_address}{$_} ) eq 'HASH'
+        } @top_level;
+    my $response_structure = {
+        billing_address  => [ keys %{ $response->{billing_address} } ],
+        shipping_address => [ keys %{ $response->{shipping_address} } ],
+        credit_card      => [
+            'brand',
+            'country',
+            'is_issued_in_billing_address_country',
+            'is_prepaid',
+            {
+                issuer => [ keys %{ $response->{credit_card}{issuer} } ],
+            },
+            'type',
+        ],
+        device     => ['id'],
+        email      => [ 'is_free', 'is_high_risk' ],
+        ip_address => \@ip_address_hashes,
+    };
+
+    foreach my $attribute ( keys %{$response_structure} ) {
+        my @subattributes = @{ $response_structure->{$attribute} };
+        foreach my $subattribute (@subattributes) {
+            if ( ref($subattribute) and ref($subattribute) eq 'HASH' ) {
+
+                # get the key its value(s)
+                foreach my $subsubattribute ( keys %{$subattribute} ) {
+                    foreach
+                        my $value ( @{ $subattribute->{$subsubattribute} } ) {
+                        is(
+                            $model->$attribute->$subsubattribute->$value,
+                            $response->{$attribute}->{$subsubattribute}
+                                ->{$value},
+                            "${attribute} > ${subsubattribute} > ${value}"
+                        );
+                    }
+                }
+            }
+            else {
+                is(
+                    $model->$attribute->$subattribute,
+                    $response->{$attribute}->{$subattribute},
+                    "${attribute} > ${subattribute}"
+                );
+            }
+        }
     }
 }
 
@@ -211,5 +290,13 @@ sub test_top_level {
 
     is_deeply( $model->raw, $raw, 'raw method returns raw input' );
 }
+
+sub read_data_file {
+    my $file_name = shift;
+
+    return read_binary("t/data/$file_name");
+}
+
+sub decode_json_file { decode_json( read_data_file(@_) ) }
 
 1;

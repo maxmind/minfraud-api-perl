@@ -4,11 +4,11 @@ use 5.010;
 use strict;
 use warnings;
 
-our $VERSION = '0.002001';
+our $VERSION = '0.003000';
 
 1;
 
-# ABSTRACT: BETA Perl API for MaxMind's minFraud Score and Insights web services
+# ABSTRACT: BETA API for MaxMind's minFraud Score, Insights, and Factors services
 
 __END__
 
@@ -36,8 +36,8 @@ __END__
 
   my $request = { device => { ip_address => '24.24.24.24' } };
 
-  # Use the 'score' or 'insights' client methods, depending on the minFraud
-  # web service you are using.
+  # Use the 'score', 'insights', or 'factors' client methods, depending on
+  # the minFraud web service you are using.
 
   my $score = $client->score( $request );
   say $score->risk_score;
@@ -45,10 +45,13 @@ __END__
   my $insights = $client->insights( $request );
   say $insights->shipping_address->is_high_risk;
 
+  my $factors = $client->factors( $request );
+  say $factors->subscores->ip_tenure;
+
 =head1 DESCRIPTION
 
 This distribution provides a BETA API for the
-L<MaxMind minFraud Score and Insights web services|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>.
+L<MaxMind minFraud Score, Insights, and Factors web services|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>.
 
 See L<WebService::MinFraud::Client> for details on using the web service client
 API.
@@ -56,7 +59,7 @@ API.
 =head1 INSTALLATION
 
 The minFraud Perl API and its dependencies can be installed with
-L<cpanm|https://metacpan.org/pod/App::cpanminus>.  C<< cpanm >> itself has no
+L<cpanm|https://metacpan.org/pod/App::cpanminus>. C<< cpanm >> itself has no
 dependencies.
 
   cpanm WebService::MinFraud
@@ -70,7 +73,7 @@ The minFraud Perl API uses L<Semantic Versioning|http://semver.org/>.
 The minimum required Perl version for the minFraud Perl API is 5.10.0.
 
 The data returned from the minFraud web services includes Unicode characters
-in several locales. This may expose bugs in earlier versions of Perl.  If
+in several locales. This may expose bugs in earlier versions of Perl. If
 Unicode is important to your work, we recommend that you use the most recent
 version of Perl available.
 

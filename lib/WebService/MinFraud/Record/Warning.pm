@@ -2,7 +2,7 @@ package WebService::MinFraud::Record::Warning;
 
 use Moo;
 
-our $VERSION = '0.002001';
+our $VERSION = '0.003000';
 
 use Types::Standard qw( ArrayRef Str );
 
@@ -69,7 +69,7 @@ C<< "/billing/city" >>.
 
 =head2 warning
 
-Returns a human-readable explanation of the warning.  This description may
+Returns a human-readable explanation of the warning. This description may
 change at any time and should not be matched against.
 
 =head1 PREDICATE METHODS

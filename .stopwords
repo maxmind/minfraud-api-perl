@@ -1,8 +1,11 @@
+AVS
 ASN
 API
 APIs
 AdWords
+chargeback
 CN
+CVV
 GEONAMES
 GeoIP
 GeoLite
@@ -10,6 +13,7 @@ GeoNames
 GitHub
 Gmail
 IANA
+IIN
 IP
 IP's
 IPv
@@ -48,6 +52,7 @@ params
 routable
 ru
 searchEngineSpider
+subscores
 ua
 unpopulated
 versioning

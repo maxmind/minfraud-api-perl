@@ -1,9 +1,11 @@
 use strict;
 use warnings;
 
-use JSON::MaybeXS;
-use Test::Fatal;
+use lib 't/lib';
+
+use Test::Fatal qw( exception );
 use Test::More 0.88;
+use Test::WebService::MinFraud qw( decode_json_file );
 use WebService::MinFraud::Client;
 
 BEGIN {
@@ -15,79 +17,64 @@ BEGIN {
     }
 }
 
-my $client;
-if ( $ENV{MM_LICENSE_KEY} ) {
-    $client = WebService::MinFraud::Client->new(
-        host    => $ENV{MM_MINFRAUD_HOST} || 'ct100-test.maxmind.com',
-        user_id => $ENV{MM_USER_ID}       || 10,
-        license_key => $ENV{MM_LICENSE_KEY},
-    );
-}
-else {
+unless ( $ENV{MM_LICENSE_KEY} ) {
     BAIL_OUT 'License key not found';
 }
-my $request_file = 't/data/full-request.json';
-my $request_json = do {
-    local $/ = undef;
-    open my $fh, '<', $request_file
-        or die "Could not open $request_file: $!";
-    <$fh>;
-};
-my $request        = decode_json($request_json);
-my $response_score = $client->score($request);
-ok( $response_score, 'score response' );
-ok(
-    exists $response_score->raw->{risk_score},
-    'raw risk_score exists (score)'
-);
-ok(
-    defined $response_score->risk_score,
-    'sugary risk_score is defined (score)'
+
+my $client = WebService::MinFraud::Client->new(
+    host    => $ENV{MM_MINFRAUD_HOST} || 'ct100-test.maxmind.com',
+    user_id => $ENV{MM_USER_ID}       || 10,
+    license_key => $ENV{MM_LICENSE_KEY},
 );
 
-my $response_insights = $client->insights($request);
-ok( $response_insights, 'insights response' );
-ok(
-    exists $response_insights->raw->{risk_score},
-    'raw risk_score exists (insights)'
-);
-ok(
-    defined $response_insights->risk_score,
-    'sugary risk_score is defined (insights)'
-);
-ok(
-    defined $response_insights->credits_remaining,
-    'credits_remaining is defined'
-);
-ok( $response_insights->billing_address, 'billing address record exists' );
-ok(
-    $response_insights->billing_address->latitude,
-    'billing latitude exists'
-);
-ok( $response_insights->credit_card, 'credit card record exists' );
-ok(
-    $response_insights->credit_card->issuer,
-    'credit card issuer record exists'
-);
-ok(
-    $response_insights->credit_card->issuer->name,
-    'credit card issuer name exists'
-);
-ok( $response_insights->shipping_address, 'shipping address record exists' );
-ok(
-    $response_insights->shipping_address->latitude,
-    'shipping latitude exists'
-);
-ok( $response_insights->ip_address,       'ip_address record exists' );
-ok( $response_insights->ip_address->city, 'city exists' );
-ok(
-    $response_insights->ip_address->city->geoname_id,
-    'city geoname id exists'
-);
-ok(
-    defined $response_insights->ip_address->risk,
-    'ip_address risk is defined'
-);
+my $request = decode_json_file('full-request.json');
+
+subtest 'score' => sub {
+    my $response_score = $client->score($request);
+    ok( $response_score, 'score response' );
+    ok(
+        exists $response_score->raw->{risk_score},
+        'raw risk_score exists (score)'
+    );
+    ok(
+        defined $response_score->risk_score,
+        'sugary risk_score is defined (score)'
+    );
+};
+
+subtest 'insights' => sub {
+    my $response = $client->insights($request);
+    _insights_tests($response);
+};
+
+subtest 'factors' => sub {
+    my $response = $client->factors($request);
+    _insights_tests($response);
+
+    # These are the subscores that should return a value on a CT for the
+    # request.
+    for my $subscore (
+        qw(
+        billing_address
+        billing_address_distance_to_ip_location
+        browser
+        country
+        country_mismatch
+        email_address
+        email_domain
+        email_tenure
+        ip_tenure
+        issuer_id_number
+        time_of_day
+        )
+        ) {
+        ok(
+            defined $response->subscores->$subscore,
+            "$subscore subscore"
+        );
+    }
+};
+
 like(
     exception {
 
@@ -101,8 +88,61 @@ like(
         );
         $test_client->score($request);
     },
-    qr/Invalid user_id or license_key/,
+    qr/Your user ID or license key could not be authenticated/,
     'bad user_id throws an exception'
 );
+
+sub _insights_tests {
+    my $response = shift;
+
+    ok( $response, 'response' );
+    ok(
+        exists $response->raw->{risk_score},
+        'raw risk_score exists (insights)'
+    );
+    ok(
+        defined $response->risk_score,
+        'sugary risk_score is defined (insights)'
+    );
+    ok(
+        defined $response->credits_remaining,
+        'credits_remaining is defined'
+    );
+    ok(
+        $response->billing_address,
+        'billing address record exists'
+    );
+    ok(
+        $response->billing_address->latitude,
+        'billing latitude exists'
+    );
+    ok( $response->credit_card, 'credit card record exists' );
+    ok(
+        $response->credit_card->issuer,
+        'credit card issuer record exists'
+    );
+    ok(
+        $response->credit_card->issuer->name,
+        'credit card issuer name exists'
+    );
+    ok(
+        $response->shipping_address,
+        'shipping address record exists'
+    );
+    ok(
+        $response->shipping_address->latitude,
+        'shipping latitude exists'
+    );
+    ok( $response->ip_address,       'ip_address record exists' );
+    ok( $response->ip_address->city, 'city exists' );
+    ok(
+        $response->ip_address->city->geoname_id,
+        'city geoname id exists'
+    );
+    ok(
+        defined $response->ip_address->risk,
+        'ip_address risk is defined'
+    );
+}
 
 done_testing;

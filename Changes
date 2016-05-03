@@ -2,6 +2,8 @@
 
 [ENHANCEMENTS]
 
+- Added support for the minFraud Factors.
+- Added IP address risk to the minFraud Score model.
 - Added the following new values to the /payment/processor validation:
   ccnow, dalpay, epay (repaces epayeu), payplus, pinpayments, quickpay, and
   verepay.
