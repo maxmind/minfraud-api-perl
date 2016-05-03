@@ -1,4 +1,4 @@
-package WebService::MinFraud::Model::Insights;
+package WebService::MinFraud::Model::Factors;
 
 use Moo;
 
@@ -14,6 +14,7 @@ use WebService::MinFraud::Record::IPAddress;
 use WebService::MinFraud::Record::Issuer;
 use WebService::MinFraud::Record::Location;
 use WebService::MinFraud::Record::ShippingAddress;
+use WebService::MinFraud::Record::Subscores;
 use WebService::MinFraud::Record::Warning;
 
 with 'WebService::MinFraud::Role::Model',
@@ -27,11 +28,12 @@ __PACKAGE__->_define_model_attributes(
     email            => 'Email',
     ip_address       => 'IPAddress',
     shipping_address => 'ShippingAddress',
+    subscores        => 'Subscores',
 );
 
 1;
 
-# ABSTRACT: Model class for minFraud Insights
+# ABSTRACT: Model class for minFraud Factors
 
 __END__
 
@@ -47,23 +49,23 @@ __END__
   );
 
   my $request = { device => { ip_address => '24.24.24.24' } };
-  my $insights = $client->insights($request);
+  my $factors = $client->factors($request);
 
-  my $shipping_address = $insights->shipping_address;
+  my $shipping_address = $factors->shipping_address;
   say $shipping_address->is_high_risk;
 
-  my $ip_address = $insights->ip_address;
+  my $ip_address = $factors->ip_address;
   my $postal     = $ip_address->postal;
   say $postal->code;
 
-  say $insights->device->id;
+  say $factors->device->id;
 
 =head1 DESCRIPTION
 
-This class provides a model for the data returned by the minFraud Insights web
+This class provides a model for the data returned by the minFraud Factors web
 service.
 
-The Insights model class includes more data than the Score model class. See
+The Factors model class includes more data than the Score model class. See
 the L<API
 documentation|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>
 for more details.
@@ -139,6 +141,11 @@ indicates a higher risk of fraud.
 
 Returns a L<WebService::MinFraud::Record::ShippingAddress> object representing
 shipping data for the transaction.
+
+=head2 subscores
+
+Returns a L<WebService::MinFraud::Record::Subscores> object containing
+subscores used in calculating the overall risk score.
 
 =head2 warnings
 

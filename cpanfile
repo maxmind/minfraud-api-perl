@@ -1,3 +1,4 @@
+requires "B" => "0";
 requires "Carp" => "0";
 requires "Data::Delete" => "0.05";
 requires "Data::Rx" => "0";
@@ -34,9 +35,13 @@ requires "warnings" => "0";
 
 on 'test' => sub {
   requires "ExtUtils::MakeMaker" => "0";
+  requires "File::Slurper" => "0";
   requires "File::Spec" => "0";
+  requires "HTTP::Response" => "0";
   requires "Test::Fatal" => "0";
+  requires "Test::LWP::UserAgent" => "0";
   requires "Test::More" => "0.96";
+  requires "Test::Warnings" => "0";
   requires "lib" => "0";
   requires "perl" => "5.010";
 };
@@ -51,7 +56,6 @@ on 'configure' => sub {
 };
 
 on 'develop' => sub {
-  requires "Code::TidyAll" => "0.24";
   requires "File::Spec" => "0";
   requires "IO::Handle" => "0";
   requires "IPC::Open3" => "0";
@@ -70,4 +74,5 @@ on 'develop' => sub {
   requires "Test::Spelling" => "0.12";
   requires "Test::Synopsis" => "0";
   requires "Test::Version" => "1";
+  requires "lib" => "0";
 };

@@ -2,7 +2,7 @@ package WebService::MinFraud::Validator;
 
 use Moo;
 
-our $VERSION = '0.002001';
+our $VERSION = '0.003000';
 
 use Data::Delete 0.05;
 use Data::Rx;
@@ -348,7 +348,7 @@ __END__
 
 =head1 DESCRIPTION
 
-This module defines the request schema for the minFraud API.  In addition, it
+This module defines the request schema for the minFraud API. In addition, it
 provides a C<validate_request> method that is used to validate any request
 passed to the C<score> or C<insights> methods.
 
@@ -357,6 +357,6 @@ passed to the C<score> or C<insights> methods.
 =head2 validate_request
 
 This method takes a minFraud request as a HashRef and validates it against the
-minFraud request schema.  If the request HashRef fails validation, an exception
+minFraud request schema. If the request HashRef fails validation, an exception
 is thrown, which is a string containing all of the validation errors.
 

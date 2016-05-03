@@ -5,7 +5,7 @@ use 5.010;
 use strict;
 use warnings;
 
-our $VERSION = '0.002001';
+our $VERSION = '0.003000';
 
 use parent 'Data::Rx::CommonType::EasyNew';
 
@@ -25,9 +25,8 @@ sub guts_from_arg {
                 contents => {
                     type     => '//rec',
                     required => {
-                        type =>
-                            '//str', # e.g. //int or //str.  Really we only
-                                     # want schemas that have a 'value' option
+                        type => '//str', # e.g. //int or //str. Really we only
+                             # want schemas that have a 'value' option
                         values => {
                             type     => '//arr',
                             contents => '//def',
