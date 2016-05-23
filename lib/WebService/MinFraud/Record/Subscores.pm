@@ -73,20 +73,19 @@ the range 0.01 to 99.
 
 =head2 billing_address_distance_to_ip_location
 
-The risk associated with the distance between the billing address and the IP
-location for the given IP address.If present, this is a value in the range
+The risk associated with the distance between the billing address and the
+location for the given IP address. If present, this is a value in the range
 0.01 to 99.
 
 =head2 browser
 
 The risk associated with the browser attributes such as the User-Agent and
-Accept-Language AVS result.If present, this is a value in the range 0.01 to
-99.
+Accept-Language. If present, this is a value in the range 0.01 to 99.
 
 =head2 chargeback
 
 Individualized risk of chargeback for the given IP address on your account and
-shop ID.This is only available to users sending chargeback data to MaxMind.If
+shop ID.This is only available to users sending chargeback data to MaxMind. If
 present, this is a value in the range 0.01 to 99.
 
 =head2 country
@@ -97,7 +96,7 @@ present, this is a value in the range 0.01 to 99.
 =head2 country_mismatch
 
 The risk associated with the combination of IP country, card issuer country,
-billing country, and shipping country.If present, this is a value in the range
+billing country, and shipping country. If present, this is a value in the range
 0.01 to 99.
 
 =head2 cvv_result
@@ -144,7 +143,7 @@ value in the range 0.01 to 99.
 
 =head2 shipping_address_distance_to_ip_location
 
-The risk associated with the distance between the billing address and the IP
+The risk associated with the distance between the shipping address and the
 location for the given IP address. If present, this is a value in the range
 0.01 to 99.
 
