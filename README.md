@@ -79,13 +79,13 @@ client API please visit [http://www.maxmind.com/en/support](http://www.maxmind.c
 
 # AUTHOR
 
-Mateu Hunter &lt;mhunter@maxmind.com>
+Mateu Hunter <mhunter@maxmind.com>
 
 # CONTRIBUTORS
 
-- Andy Jack &lt;ajack@maxmind.com>
-- Dave Rolsky &lt;drolsky@maxmind.com>
-- Greg Oschwald &lt;goschwald@maxmind.com>
+- Andy Jack <ajack@maxmind.com>
+- Dave Rolsky <drolsky@maxmind.com>
+- Greg Oschwald <goschwald@maxmind.com>
 
 # COPYRIGHT AND LICENSE
 
