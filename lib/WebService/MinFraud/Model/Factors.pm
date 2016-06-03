@@ -84,16 +84,16 @@ billing data for the transaction.
 Returns a L<WebService::MinFraud::Record::CreditCard> object representing
 credit card data for the transaction.
 
-=head2 credits_remaining
-
-Returns the I<approximate> number of service credits remaining on your account.
-The service credit counts are near realtime so they may not be exact.
-
 =head2 device
 
 Returns a L<WebService::MinFraud::Record::Device> object representing the
 device that MaxMind believes is associated with the IP address passed in the
 request.
+
+=head2 funds_remaining
+
+Returns the  I<approximate> US dollar value of the funds remaining on your
+account. The fund calculation is near realtime so it may not be exact.
 
 =head2 id
 
@@ -137,6 +137,12 @@ For details, please refer to L<WebService::MinFraud::Record::IPAddress/METHODS>.
 Returns the risk score which is a number between 0.01 and 99. A higher score
 indicates a higher risk of fraud.
 
+=head2 queries_remaining
+
+Returns he I<approximate> number of queries remaining for this service before
+your account runs out of funds. The query counts are near realtime so they may
+not be exact.
+
 =head2 shipping_address
 
 Returns a L<WebService::MinFraud::Record::ShippingAddress> object representing
@@ -158,9 +164,11 @@ web service.
 The following predicate methods are available, which return true if the related
 data was present in the response body, false if otherwise:
 
-=head2 has_credits_remaining
+=head2 has_funds_remaining
 
 =head2 has_id
+
+=head2 has_queries_remaining
 
 =head2 has_risk_score
 

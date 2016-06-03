@@ -41,6 +41,7 @@ our @EXPORT_OK = qw(
     MaxMindID
     MaxMindLicenseKey
     NonNegativeInt
+    NonNegativeNum
     Num
     Str
     URIObject
@@ -66,6 +67,16 @@ sub IssuerObjectCoercion () {
             ? $_[0]
             : WebService::MinFraud::Record::Issuer->new($_[0]);
         }
+    );
+}
+
+sub NonNegativeNum () {
+    return quote_sub(
+        q{ GeoIP2::Types::_tc_fail( $_[0], 'NonNegativeNum' )
+               unless defined $_[0]
+               && ! ref $_[0]
+               && $_[0] =~ /^-?\d+(\.\d+)?$/
+               && $_[0] >= 0; }
     );
 }
 

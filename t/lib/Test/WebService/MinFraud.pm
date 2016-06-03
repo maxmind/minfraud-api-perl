@@ -26,7 +26,7 @@ sub test_common_attributes {
     my $raw   = shift;
 
     isa_ok( $model, $class, 'Have an appropriate model' );
-    my @attributes = qw( credits_remaining id risk_score );
+    my @attributes = qw( funds_remaining id risk_score queries_remaining );
     foreach my $attribute (@attributes) {
         is( $model->$attribute, $raw->{$attribute}, "${attribute}" );
     }
