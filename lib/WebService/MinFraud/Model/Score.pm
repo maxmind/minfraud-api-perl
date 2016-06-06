@@ -65,7 +65,7 @@ IP address data for the transaction.
 
 =head2 queries_remaining
 
-Returns he I<approximate> number of queries remaining for this service before
+Returns the I<approximate> number of queries remaining for this service before
 your account runs out of funds. The query counts are near realtime so they may
 not be exact.
 
