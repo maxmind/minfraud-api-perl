@@ -105,8 +105,8 @@ sub _insights_tests {
         'sugary risk_score is defined (insights)'
     );
     ok(
-        defined $response->credits_remaining,
-        'credits_remaining is defined'
+        defined $response->queries_remaining,
+        'queries_remaining is defined'
     );
     ok(
         $response->billing_address,

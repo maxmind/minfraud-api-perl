@@ -7,9 +7,17 @@ our $VERSION = '0.003001';
 use Types::Standard qw( ArrayRef InstanceOf Num Str );
 use Types::UUID;
 use WebService::MinFraud::Record::Warning;
-use WebService::MinFraud::Types qw( NonNegativeInt );
+use WebService::MinFraud::Types qw( NonNegativeInt NonNegativeNum );
 
 requires 'raw';
+
+has funds_remaining => (
+    is        => 'lazy',
+    isa       => NonNegativeNum,
+    init_arg  => undef,
+    builder   => sub { $_[0]->raw->{funds_remaining} },
+    predicate => 1,
+);
 
 has id => (
     is        => 'lazy',
@@ -19,19 +27,19 @@ has id => (
     predicate => 1,
 );
 
+has queries_remaining => (
+    is        => 'lazy',
+    isa       => NonNegativeInt,
+    init_arg  => undef,
+    builder   => sub { $_[0]->raw->{queries_remaining} },
+    predicate => 1,
+);
+
 has risk_score => (
     is        => 'lazy',
     isa       => Num,
     init_arg  => undef,
     builder   => sub { $_[0]->raw->{risk_score} },
-    predicate => 1,
-);
-
-has credits_remaining => (
-    is        => 'lazy',
-    isa       => NonNegativeInt,
-    init_arg  => undef,
-    builder   => sub { $_[0]->raw->{credits_remaining} },
     predicate => 1,
 );
 

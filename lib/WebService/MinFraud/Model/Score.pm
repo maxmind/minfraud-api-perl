@@ -47,10 +47,10 @@ documentation|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-d
 
 This class provides the following methods:
 
-=head2 credits_remaining
+=head2 funds_remaining
 
-Returns the I<approximate> number of service credits remaining on your account.
-The service credit counts are near realtime so they may not be exact.
+Returns the  I<approximate> US dollar value of the funds remaining on your
+account. The fund calculation is near realtime so it may not be exact.
 
 =head2 id
 
@@ -62,6 +62,12 @@ particular request.
 
 Returns a L<WebService::MinFraud::Record::ScoreIPAddress> object representing
 IP address data for the transaction.
+
+=head2 queries_remaining
+
+Returns the I<approximate> number of queries remaining for this service before
+your account runs out of funds. The query counts are near realtime so they may
+not be exact.
 
 =head2 risk_score
 
@@ -79,9 +85,11 @@ web service.
 The following predicate methods are available, which return true if the related
 data was present in the response body, false if otherwise:
 
-=head2 has_credits_remaining
+=head2 has_funds_remaining
 
 =head2 has_id
+
+=head2 has_queries_remaining
 
 =head2 has_risk_score
 

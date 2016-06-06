@@ -114,11 +114,11 @@ score.
 
     say "Transaction risk score: ", $score_response->risk_score;
     say "Request id: ",$score_response->id;
-    say "Credits Remaining: ",$score_response->credits_remaining;
+    say "Queries Remaining: ",$score_response->queries_remaining;
     # output:
     # Transaction risk score: 5.84
     # Request id: 96A5C322-1B86-11E5-A3D3-72F613C364DD
-    # Credits Remaining: 299923
+    # Queries Remaining: 299923
 
 
     my $insights_response = $client->insights($request);
