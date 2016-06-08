@@ -56,7 +56,7 @@ This class provides the following methods:
 
 =head2 confidence
 
-This number represents our confidence that the device_id refers to a unique 
+This number represents our confidence that the device_id refers to a unique
 device as opposed to a cluster of similar devices.
 
 =head2 id
@@ -70,7 +70,7 @@ UUID for that device.
 =head2 last_seen
 
 This is the date and time of the last sighting of the device on the specified
-IP address for your user account. The string is formatted in the ISO 8601 
+IP address for your user account. The string is formatted in the ISO 8601
 combined date and time in UTC.
 
 =head1 PREDICATE METHODS
