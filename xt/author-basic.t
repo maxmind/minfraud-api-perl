@@ -88,7 +88,7 @@ like(
         );
         $test_client->score($request);
     },
-    qr/Your user ID or license key could not be authenticated/,
+    qr/Invalid user_id or license_key provided/,
     'bad user_id throws an exception'
 );
 
