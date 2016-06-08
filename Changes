@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+0.004000 2016-06-08
+
 [BREAKING CHANGE]
 
 - credits_remaining has been removed from the web service models and has been
