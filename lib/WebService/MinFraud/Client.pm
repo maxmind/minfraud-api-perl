@@ -3,7 +3,7 @@ package WebService::MinFraud::Client;
 use 5.010;
 use Moo 1.004005;
 
-our $VERSION = '0.004000';
+our $VERSION = '0.004001';
 
 use HTTP::Headers ();
 use HTTP::Request ();
