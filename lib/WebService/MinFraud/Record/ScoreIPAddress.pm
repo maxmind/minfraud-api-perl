@@ -2,7 +2,7 @@ package WebService::MinFraud::Record::ScoreIPAddress;
 
 use Moo;
 
-our $VERSION = '0.003001';
+our $VERSION = '0.004000';
 
 with 'WebService::MinFraud::Role::Record::HasRisk';
 

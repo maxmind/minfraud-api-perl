@@ -2,7 +2,7 @@ package WebService::MinFraud::Role::Record::HasRisk;
 
 use Moo::Role;
 
-our $VERSION = '0.003001';
+our $VERSION = '0.004000';
 
 use Types::Standard qw( Num );
 

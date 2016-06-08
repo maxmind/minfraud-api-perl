@@ -2,7 +2,7 @@ package WebService::MinFraud::Validator;
 
 use Moo;
 
-our $VERSION = '0.003001';
+our $VERSION = '0.004000';
 
 use Data::Delete 0.05;
 use Data::Rx;

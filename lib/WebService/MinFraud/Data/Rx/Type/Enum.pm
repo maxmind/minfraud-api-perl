@@ -5,7 +5,7 @@ use 5.010;
 use strict;
 use warnings;
 
-our $VERSION = '0.003001';
+our $VERSION = '0.004000';
 
 use parent 'Data::Rx::CommonType::EasyNew';
 
