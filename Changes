@@ -1,5 +1,11 @@
 {{$NEXT}}
 
+[ENHANCEMENTS]
+
+- Added the following new values to the /payment/processor validation:
+  concept_payments, ecomm365, orangepay, and pacnet_services.
+
+
 0.004000 2016-06-08
 
 [BREAKING CHANGE]
