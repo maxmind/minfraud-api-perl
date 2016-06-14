@@ -1,5 +1,11 @@
 {{$NEXT}}
 
+[ENHANCEMENTS]
+
+- Added the following new values to the /payment/processor validation:
+  concept_payments, ecomm365, orangepay, and pacnet_services.
+
+
 0.004000 2016-06-08
 
 [BREAKING CHANGE]
@@ -9,10 +15,10 @@
 
 [ENHANCEMENTS]
 
-- Added `queries_remaining` and `funds_remaining`. Note that funds_remaining
+- Added queries_remaining and funds_remaining. Note that funds_remaining
   will not be returned by the web service until our new  credit system is in
   place.
-- Added device `confidence` and `last_seen` to minFraud Insights
+- Added device confidence and last_seen to minFraud Insights
 
 
 0.003000 2016-05-23
