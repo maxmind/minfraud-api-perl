@@ -8,7 +8,7 @@ our $VERSION = '1.000001';
 
 1;
 
-# ABSTRACT: BETA API for MaxMind's minFraud Score, Insights, and Factors services
+# ABSTRACT: API for MaxMind's minFraud Score, Insights, and Factors services
 
 __END__
 
@@ -16,7 +16,6 @@ __END__
 
 =head1 SYNOPSIS
 
-  # This is a BETA release
   use 5.010;
 
   use WebService::MinFraud::Client;
@@ -50,7 +49,7 @@ __END__
 
 =head1 DESCRIPTION
 
-This distribution provides a BETA API for the
+This distribution provides an API for the
 L<MaxMind minFraud Score, Insights, and Factors web services|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/>.
 
 See L<WebService::MinFraud::Client> for details on using the web service client
