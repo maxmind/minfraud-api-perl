@@ -86,10 +86,12 @@ has _validator => (
 sub BUILD {
     my $self = shift;
 
+    ## no critic (RequireBlockTermination)
     my $self_version = try { 'v' . $self->VERSION() } || 'v?';
 
     my $ua = $self->ua();
     my $ua_version = try { 'v' . $ua->VERSION() } || 'v?';
+    ## use critic
 
     my $agent
         = blessed($self)

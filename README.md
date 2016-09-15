@@ -4,7 +4,7 @@ WebService::MinFraud - BETA API for MaxMind's minFraud Score, Insights, and Fact
 
 # VERSION
 
-version 0.004000
+version 1.000000
 
 # SYNOPSIS
 
