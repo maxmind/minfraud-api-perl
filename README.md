@@ -1,14 +1,13 @@
 # NAME
 
-WebService::MinFraud - BETA API for MaxMind's minFraud Score, Insights, and Factors services
+WebService::MinFraud - API for MaxMind's minFraud Score, Insights, and Factors services
 
 # VERSION
 
-version 1.000000
+version 1.000001
 
 # SYNOPSIS
 
-    # This is a BETA release
     use 5.010;
 
     use WebService::MinFraud::Client;
@@ -42,7 +41,7 @@ version 1.000000
 
 # DESCRIPTION
 
-This distribution provides a BETA API for the
+This distribution provides an API for the
 [MaxMind minFraud Score, Insights, and Factors web services](https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/).
 
 See [WebService::MinFraud::Client](https://metacpan.org/pod/WebService::MinFraud::Client) for details on using the web service client
