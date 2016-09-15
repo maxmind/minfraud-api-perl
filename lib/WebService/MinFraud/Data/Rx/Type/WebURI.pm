@@ -5,7 +5,7 @@ use 5.010;
 use strict;
 use warnings;
 
-our $VERSION = '0.004001';
+our $VERSION = '1.000000';
 
 use Data::Validate::URI qw(is_web_uri);
 
