@@ -75,7 +75,7 @@ country as that of the IP address.
 =head2 is_postal_in_city
 
 Returns a boolean indicating whether the shipping postal code is in the
-shipping city.
+shipping city, or an undef if the address is not in USA.
 
 =head2 latitude
 

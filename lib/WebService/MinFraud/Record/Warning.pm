@@ -58,7 +58,7 @@ This class provides the following methods:
 =head2 code
 
 Returns a machine-readable code identifying the warning. See the L<API
-documentation|https://dev.maxmind.com/minfraud/minfraud-score-and-insights-api-documentation/#Warning_Object>
+documentation|https://dev.maxmind.com/minfraud/#Warning>
 for the current list.
 
 =head2 input_pointer
