@@ -49,7 +49,7 @@ country as that of the IP address.
 =head2 is_postal_in_city
 
 Returns a boolean indicating whether the billing postal code is in the
-billing city, or an undef if the address is not in USA.
+billing city. The attribute will not be set if the address is not in USA.
 
 =head2 latitude
 
