@@ -149,6 +149,22 @@ my $bad_event_type = {
     device => { ip_address => '24.24.24.24' },
     event  => { type       => 'estudi' },
 };
+$good_event_type = {
+    device => { ip_address => '24.24.24.24' },
+    event  => { type       => 'password_reset' },
+};
+ok(
+    $validator->validate_request($good_event_type),
+    'good event type validates'
+);
+$good_event_type = {
+    device => { ip_address => '24.24.24.24' },
+    event  => { type       => 'email_change' },
+};
+ok(
+    $validator->validate_request($good_event_type),
+    'good event type validates'
+);
 like(
     exception { $validator->validate_request($bad_event_type); },
     qr/matched none of the available alternative/,
