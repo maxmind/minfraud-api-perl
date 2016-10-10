@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+1.001000 2016-10-10
+
 [ENHANCEMENTS]
 
 - Added the following new values to the /event/type validation:
