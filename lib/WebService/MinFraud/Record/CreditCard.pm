@@ -8,13 +8,6 @@ use WebService::MinFraud::Record::Issuer;
 use WebService::MinFraud::Types
     qw( Bool BoolCoercion IssuerObject IssuerObjectCoercion Str );
 
-has issuer => (
-    is        => 'ro',
-    isa       => IssuerObject,
-    coerce    => IssuerObjectCoercion,
-    predicate => 1,
-);
-
 has brand => (
     is        => 'ro',
     isa       => Str,
@@ -41,9 +34,10 @@ has is_prepaid => (
     coerce  => BoolCoercion,
 );
 
-has token => (
+has issuer => (
     is        => 'ro',
-    isa       => Str,
+    isa       => IssuerObject,
+    coerce    => IssuerObjectCoercion,
     predicate => 1,
 );
 

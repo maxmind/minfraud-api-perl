@@ -111,24 +111,28 @@ sub _build_request_schema_definition {
             credit_card => {
                 type     => '//rec',
                 optional => {
-                    issuer_id_number => {
+                    avs_result => {
                         type   => '//str',
-                        length => { 'min' => 6, 'max' => 6 },
-                    },
-                    last_4_digits => => {
-                        type   => '//str',
-                        length => { 'min' => 4, 'max' => 4 },
+                        length => { 'min' => 1, 'max' => 1 },
                     },
                     bank_name               => '//str',
                     bank_phone_country_code => '//int',
                     bank_phone_number       => '//str',
-                    avs_result              => {
+                    cvv_result              => {
                         type   => '//str',
                         length => { 'min' => 1, 'max' => 1 },
                     },
-                    cvv_result => {
+                    issuer_id_number => {
                         type   => '//str',
-                        length => { 'min' => 1, 'max' => 1 },
+                        length => { 'min' => 6, 'max' => 6 },
+                    },
+                    last_4_digits => {
+                        type   => '//str',
+                        length => { 'min' => 4, 'max' => 4 },
+                    },
+                    token => {
+                        type   => '//str',
+                        length => { 'min' => 1, 'max' => 255 },
                     },
                 },
             },
