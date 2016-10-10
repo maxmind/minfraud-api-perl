@@ -2,7 +2,7 @@ package WebService::MinFraud::Record::Country;
 
 use Moo;
 
-our $VERSION = '1.001000';
+our $VERSION = '1.001001';
 
 use WebService::MinFraud::Types qw( Bool BoolCoercion );
 
