@@ -2,7 +2,7 @@ package WebService::MinFraud::Role::HasCommonAttributes;
 
 use Moo::Role;
 
-our $VERSION = '1.000002';
+our $VERSION = '1.001000';
 
 use Types::Standard qw( ArrayRef InstanceOf Num Str );
 use Types::UUID;

@@ -2,7 +2,7 @@ package WebService::MinFraud::Record::CreditCard;
 
 use Moo;
 
-our $VERSION = '1.000002';
+our $VERSION = '1.001000';
 
 use WebService::MinFraud::Record::Issuer;
 use WebService::MinFraud::Types

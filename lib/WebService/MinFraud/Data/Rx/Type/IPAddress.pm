@@ -5,7 +5,7 @@ use 5.010;
 use strict;
 use warnings;
 
-our $VERSION = '1.000002';
+our $VERSION = '1.001000';
 
 use Data::Validate::IP;
 

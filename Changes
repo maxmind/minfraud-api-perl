@@ -5,6 +5,7 @@
 - Added the following new values to the /event/type validation:
   password_reset and email_change
 
+
 1.000001 2016-09-15
 
 [ OTHER ]
