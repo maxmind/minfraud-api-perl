@@ -41,6 +41,12 @@ has is_prepaid => (
     coerce  => BoolCoercion,
 );
 
+has token => (
+    is        => 'ro',
+    isa       => Str,
+    predicate => 1,
+);
+
 has type => (
     is        => 'ro',
     isa       => Str,
