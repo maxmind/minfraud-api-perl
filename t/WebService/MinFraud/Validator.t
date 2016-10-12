@@ -100,8 +100,35 @@ my $bad_cc_token = {
 };
 like(
     exception { $validator->validate_request($bad_cc_token); },
-    qr/length of value is outside allowed range/,
-    'bad cc token throws an exception'
+    qr{Failed /maxmind/cctoken},
+    'a cc token greater 255 characters throws an exception'
+);
+$bad_cc_token = {
+    device      => { ip_address => '24.24.24.24' },
+    credit_card => { token      => 1 x 19 },
+};
+like(
+    exception { $validator->validate_request($bad_cc_token); },
+    qr{Failed /maxmind/cctoken},
+    'a cc token of all numbers less than 20 digits in length throws an exception'
+);
+$bad_cc_token = {
+    device      => { ip_address => '24.24.24.24' },
+    credit_card => { token      => q( ) },
+};
+like(
+    exception { $validator->validate_request($bad_cc_token); },
+    qr{Failed /maxmind/cctoken},
+    'a space in the cc token throws an exception'
+);
+$bad_cc_token = {
+    device      => { ip_address => '24.24.24.24' },
+    credit_card => { token      => "\x7F" },
+};
+like(
+    exception { $validator->validate_request($bad_cc_token); },
+    qr{Failed /maxmind/cctoken},
+    'a delete in the cc token throws an exception'
 );
 
 subtest 'Domain validation' => sub {

@@ -8,6 +8,7 @@ use Data::Delete 0.05;
 use Data::Rx;
 use Try::Tiny;
 use Types::Standard qw( HashRef InstanceOf Object );
+use WebService::MinFraud::Data::Rx::Type::CCToken;
 use WebService::MinFraud::Data::Rx::Type::DateTime::RFC3339;
 use WebService::MinFraud::Data::Rx::Type::Enum;
 use WebService::MinFraud::Data::Rx::Type::Hex32;
@@ -39,6 +40,7 @@ has _rx => (
                 },
                 type_plugins => [
                     qw(
+                        WebService::MinFraud::Data::Rx::Type::CCToken
                         WebService::MinFraud::Data::Rx::Type::DateTime::RFC3339
                         WebService::MinFraud::Data::Rx::Type::Enum
                         WebService::MinFraud::Data::Rx::Type::Hex32
@@ -130,10 +132,7 @@ sub _build_request_schema_definition {
                         type   => '//str',
                         length => { 'min' => 4, 'max' => 4 },
                     },
-                    token => {
-                        type   => '//str',
-                        length => { 'min' => 1, 'max' => 255 },
-                    },
+                    token => '/maxmind/cctoken',
                 },
             },
             email => {
