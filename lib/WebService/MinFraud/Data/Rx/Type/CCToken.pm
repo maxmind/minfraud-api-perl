@@ -21,7 +21,7 @@ sub assert_valid {
         if $value
         && ( length($value) < 256 )
         && ( $value !~ m/^[0-9]{1,19}$/ )
-        && ( $value =~ m/^[[:graph:]]$/ );
+        && ( $value =~ m/^[\x21-\x7E]+$/ );
 
     $self->fail(
         {
