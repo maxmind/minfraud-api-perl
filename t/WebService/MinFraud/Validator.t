@@ -86,6 +86,51 @@ like(
     'bad cvv_result throws an exception'
 );
 
+my $good_cc_token = {
+    device      => { ip_address => '24.24.24.24' },
+    credit_card => { token      => 'a' x 20 },
+};
+ok(
+    $validator->validate_request($good_cvv_result),
+    'good cvv result validates'
+);
+my $bad_cc_token = {
+    device      => { ip_address => '24.24.24.24' },
+    credit_card => { token      => 'a' x 256 },
+};
+like(
+    exception { $validator->validate_request($bad_cc_token); },
+    qr{Failed /maxmind/cctoken},
+    'a cc token greater 255 characters throws an exception'
+);
+$bad_cc_token = {
+    device      => { ip_address => '24.24.24.24' },
+    credit_card => { token      => 1 x 19 },
+};
+like(
+    exception { $validator->validate_request($bad_cc_token); },
+    qr{Failed /maxmind/cctoken},
+    'a cc token of all numbers less than 20 digits in length throws an exception'
+);
+$bad_cc_token = {
+    device      => { ip_address => '24.24.24.24' },
+    credit_card => { token      => q( ) },
+};
+like(
+    exception { $validator->validate_request($bad_cc_token); },
+    qr{Failed /maxmind/cctoken},
+    'a space in the cc token throws an exception'
+);
+$bad_cc_token = {
+    device      => { ip_address => '24.24.24.24' },
+    credit_card => { token      => "\x7F" },
+};
+like(
+    exception { $validator->validate_request($bad_cc_token); },
+    qr{Failed /maxmind/cctoken},
+    'a delete in the cc token throws an exception'
+);
+
 subtest 'Domain validation' => sub {
     my %base = ( device => { ip_address => '24.24.24.24' } );
     my $good_email_domain = {
