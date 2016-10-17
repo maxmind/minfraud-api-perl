@@ -9,6 +9,7 @@ use WebService::MinFraud::Record::BillingAddress;
 use WebService::MinFraud::Record::Country;
 use WebService::MinFraud::Record::CreditCard;
 use WebService::MinFraud::Record::Device;
+use WebService::MinFraud::Record::Disposition;
 use WebService::MinFraud::Record::Email;
 use WebService::MinFraud::Record::IPAddress;
 use WebService::MinFraud::Record::Issuer;
@@ -25,6 +26,7 @@ __PACKAGE__->_define_model_attributes(
     billing_address  => 'BillingAddress',
     credit_card      => 'CreditCard',
     device           => 'Device',
+    disposition      => 'Disposition',
     email            => 'Email',
     ip_address       => 'IPAddress',
     shipping_address => 'ShippingAddress',
@@ -89,6 +91,11 @@ credit card data for the transaction.
 Returns a L<WebService::MinFraud::Record::Device> object representing the
 device that MaxMind believes is associated with the IP address passed in the
 request.
+
+=head2 disposition
+
+Returns a L<WebService::MinFraud::Record::Disposition> object representing the
+disposition set for the transaction using custom rules.
 
 =head2 funds_remaining
 
