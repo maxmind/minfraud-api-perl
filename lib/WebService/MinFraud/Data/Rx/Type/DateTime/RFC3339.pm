@@ -5,7 +5,7 @@ use 5.010;
 use strict;
 use warnings;
 
-our $VERSION = '1.002001';
+our $VERSION = '1.003000';
 
 use Carp ();
 use DateTime::Format::RFC3339;
