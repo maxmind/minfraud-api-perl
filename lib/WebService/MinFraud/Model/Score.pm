@@ -4,6 +4,7 @@ use Moo;
 
 our $VERSION = '1.001001';
 
+use WebService::MinFraud::Record::Disposition;
 use WebService::MinFraud::Record::ScoreIPAddress;
 
 with 'WebService::MinFraud::Role::HasCommonAttributes',
@@ -11,7 +12,8 @@ with 'WebService::MinFraud::Role::HasCommonAttributes',
     'WebService::MinFraud::Role::Model';
 
 __PACKAGE__->_define_model_attributes(
-    ip_address => 'ScoreIPAddress',
+    disposition => 'Disposition',
+    ip_address  => 'ScoreIPAddress',
 );
 
 1;
@@ -46,6 +48,11 @@ documentation|https://dev.maxmind.com/minfraud/>.
 =head1 METHODS
 
 This class provides the following methods:
+
+=head2 disposition
+
+Returns a L<WebService::MinFraud::Record::Disposition> object representing the
+disposition set for the transaction using custom rules.
 
 =head2 funds_remaining
 
