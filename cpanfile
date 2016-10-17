@@ -17,6 +17,7 @@ requires "HTTP::Headers" => "0";
 requires "HTTP::Request" => "0";
 requires "JSON::MaybeXS" => "0";
 requires "LWP::UserAgent" => "0";
+requires "List::Util" => "0";
 requires "Moo" => "1.004005";
 requires "Moo::Role" => "0";
 requires "Role::Tiny" => "0";
