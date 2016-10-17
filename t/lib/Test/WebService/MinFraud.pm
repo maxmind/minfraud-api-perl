@@ -26,10 +26,22 @@ sub test_common_attributes {
     my $raw   = shift;
 
     isa_ok( $model, $class, 'Have an appropriate model' );
-    my @attributes = qw( funds_remaining id risk_score queries_remaining );
-    foreach my $attribute (@attributes) {
+    my @attributes = qw(
+        funds_remaining
+        id
+        risk_score
+        queries_remaining
+    );
+
+    for my $attribute (@attributes) {
         is( $model->$attribute, $raw->{$attribute}, "${attribute}" );
     }
+
+    is(
+        $model->disposition->action,
+        'reject',
+        'disposition action'
+    );
 
     is(
         $model->ip_address->risk, $raw->{ip_address}{risk},
@@ -41,7 +53,7 @@ sub test_common_attributes {
         'warnings are an array referernce'
     );
     my @warnings = @{ $model->warnings };
-    foreach my $i ( 0 .. $#warnings ) {
+    for my $i ( 0 .. $#warnings ) {
         isa_ok(
             $warnings[$i], 'WebService::MinFraud::Record::Warning',
             '$model->warnings'
@@ -102,15 +114,14 @@ sub test_insights {
         ip_address => \@ip_address_hashes,
     };
 
-    foreach my $attribute ( keys %{$response_structure} ) {
+    for my $attribute ( keys %{$response_structure} ) {
         my @subattributes = @{ $response_structure->{$attribute} };
-        foreach my $subattribute (@subattributes) {
+        for my $subattribute (@subattributes) {
             if ( ref($subattribute) and ref($subattribute) eq 'HASH' ) {
 
                 # get the key its value(s)
-                foreach my $subsubattribute ( keys %{$subattribute} ) {
-                    foreach
-                        my $value ( @{ $subattribute->{$subsubattribute} } ) {
+                for my $subsubattribute ( keys %{$subattribute} ) {
+                    for my $value ( @{ $subattribute->{$subsubattribute} } ) {
                         is(
                             $model->$attribute->$subsubattribute->$value,
                             $response->{$attribute}->{$subsubattribute}
@@ -202,7 +213,7 @@ sub test_model_class {
             "\$model->ip_address->subdivisions[$i]"
         );
     }
-    foreach my $warning ( @{ $model->warnings } ) {
+    for my $warning ( @{ $model->warnings } ) {
         isa_ok(
             $warning, 'WebService::MinFraud::Record::Warning',
             '$model->warnings'
