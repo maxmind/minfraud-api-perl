@@ -2,14 +2,15 @@
 
 [ENHANCEMENTS]
 
-- Added the new input /credit_card/token
+- Added the new input /credit_card/token.
+
 
 1.001000 2016-10-10
 
 [ENHANCEMENTS]
 
 - Added the following new values to the /event/type validation:
-  password_reset and email_change
+  password_reset and email_change.
 
 
 1.000001 2016-09-15
