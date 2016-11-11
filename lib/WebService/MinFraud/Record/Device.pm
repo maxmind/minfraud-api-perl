@@ -2,7 +2,7 @@ package WebService::MinFraud::Record::Device;
 
 use Moo;
 
-our $VERSION = '1.002000';
+our $VERSION = '1.002001';
 
 use Types::UUID;
 use WebService::MinFraud::Types qw( Num Str );

@@ -2,7 +2,7 @@ package WebService::MinFraud::Error::WebService;
 
 use Moo;
 
-our $VERSION = '1.002000';
+our $VERSION = '1.002001';
 
 use WebService::MinFraud::Types qw( Str );
 

@@ -2,7 +2,7 @@ package WebService::MinFraud::Error::Generic;
 
 use Moo;
 
-our $VERSION = '1.002000';
+our $VERSION = '1.002001';
 
 extends 'Throwable::Error';
 

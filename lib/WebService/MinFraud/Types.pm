@@ -3,7 +3,7 @@ package WebService::MinFraud::Types;
 use strict;
 use warnings;
 
-our $VERSION = '1.002000';
+our $VERSION = '1.002001';
 
 use GeoIP2::Types qw(
     ArrayRef
