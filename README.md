@@ -4,7 +4,7 @@ WebService::MinFraud - API for MaxMind's minFraud Score, Insights, and Factors s
 
 # VERSION
 
-version 1.001000
+version 1.002000
 
 # SYNOPSIS
 
@@ -84,8 +84,12 @@ Mateu Hunter <mhunter@maxmind.com>
 
 - Andy Jack <ajack@maxmind.com>
 - Dave Rolsky <drolsky@maxmind.com>
-- Greg Oschwald <goschwald@maxmind.com>
+- Florian Ragwitz <rafl@debian.org>
+- Greg <goschwald@maxmind.com>
+- Mark Fowler <mark@twoshortplanks.com>
+- Olaf Alders <oalders@maxmind.com>
 - Patrick Cronin <PatrickCronin@users.noreply.github.com>
+- Ruben Navarro <rbnx@users.noreply.github.com>
 
 # COPYRIGHT AND LICENSE
 
