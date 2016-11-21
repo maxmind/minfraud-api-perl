@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Role::Tiny;
 
-our $VERSION = '1.003000';
+our $VERSION = '1.003001';
 
 use Carp ();
 
