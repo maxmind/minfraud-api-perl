@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+1.003000 2016-11-21
+
 [ENHANCEMENTS]
 
 - The disposition was added to the minFraud response models. This is used to

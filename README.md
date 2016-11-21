@@ -4,7 +4,7 @@ WebService::MinFraud - API for MaxMind's minFraud Score, Insights, and Factors s
 
 # VERSION
 
-version 1.002000
+version 1.003000
 
 # SYNOPSIS
 
