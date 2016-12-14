@@ -27,7 +27,7 @@ sub assert_valid {
 }
 
 sub guts_from_arg {
-    my ( $class, $arg, $rx ) = @_;
+    my ( $class, $arg, undef ) = @_;
     $arg ||= {};
 
     if ( my @unexpected = keys %$arg ) {

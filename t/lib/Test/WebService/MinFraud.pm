@@ -144,8 +144,6 @@ sub test_insights {
 
 sub test_ip_address {
     my $model = shift;
-    my $class = shift;
-    my $raw   = shift;
 
     isa_ok(
         $model->ip_address->city,
@@ -220,8 +218,8 @@ sub test_model_class {
         );
     }
 
-    test_top_level( $model, $class, $raw );
-    test_ip_address( $model, $class, $raw );
+    test_top_level( $model, $raw );
+    test_ip_address($model);
 }
 
 sub test_model_class_with_empty_record {
@@ -239,7 +237,7 @@ sub test_model_class_with_empty_record {
         "$class object with no data except ip_adress.traits.ip_address"
     );
 
-    test_top_level( $model, $class, \%raw );
+    test_top_level( $model, \%raw );
     my @subdivisions = $model->ip_address->subdivisions;
     is(
         scalar @subdivisions,
@@ -274,7 +272,6 @@ sub test_model_class_with_unknown_keys {
 
 sub test_top_level {
     my $model = shift;
-    my $class = shift;
     my $raw   = shift;
 
     isa_ok(

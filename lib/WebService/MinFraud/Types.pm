@@ -1,3 +1,4 @@
+## no critic (Subroutines::ProhibitExportingUndeclaredSubs)
 package WebService::MinFraud::Types;
 
 use strict;
