@@ -1,5 +1,12 @@
 {{$NEXT}}
 
+[OTHER]
+
+- Updated the docs for the WebService::MinFraud::Record::BillingAddress and
+  WebService::MinFraud::Record::ShippingAddress classes' is_postal_in_city
+  method to no longer say that it is US-only
+
+
 1.003000 2016-11-21
 
 [ENHANCEMENTS]
