@@ -4,7 +4,7 @@ WebService::MinFraud - API for MaxMind's minFraud Score, Insights, and Factors s
 
 # VERSION
 
-version 1.003000
+version 1.003001
 
 # SYNOPSIS
 
@@ -75,6 +75,8 @@ at [https://github.com/maxmind/minfraud-api-perl/issues](https://github.com/maxm
 
 If you are having an issue with a MaxMind service that is not specific to the
 client API please visit [http://www.maxmind.com/en/support](http://www.maxmind.com/en/support) for details.
+
+Bugs may be submitted through [https://github.com/maxmind/minfraud-api-perl/issues](https://github.com/maxmind/minfraud-api-perl/issues).
 
 # AUTHOR
 
