@@ -18,7 +18,6 @@ with 'WebService::MinFraud::Role::Data::Rx::Type';
 sub assert_valid {
     my ( $self, $value ) = @_;
 
-    my @labels = split /\./, $value;
     return 1
         if $value
         && is_web_uri($value);

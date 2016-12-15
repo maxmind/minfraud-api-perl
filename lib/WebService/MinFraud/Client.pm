@@ -154,10 +154,7 @@ sub _response_for {
     }
     else {
         # all other error codes throw an exception
-        $self->_handle_error_status(
-            $response, $uri,
-            $content->{device}{ip_address}
-        );
+        $self->_handle_error_status( $response, $uri );
     }
 }
 
@@ -209,18 +206,17 @@ sub _handle_error_status {
     my $self     = shift;
     my $response = shift;
     my $uri      = shift;
-    my $ip       = shift;
 
     my $status = $response->code;
 
     if ( $status =~ /^4/ ) {
-        $self->_handle_4xx_status( $response, $status, $uri, $ip );
+        $self->_handle_4xx_status( $response, $status, $uri );
     }
     elsif ( $status =~ /^5/ ) {
-        $self->_handle_5xx_status( $response, $status, $uri );
+        $self->_handle_5xx_status( $status, $uri );
     }
     else {
-        $self->_handle_non_200_status( $response, $status, $uri );
+        $self->_handle_non_200_status( $status, $uri );
     }
 }
 
@@ -229,7 +225,6 @@ sub _handle_4xx_status {
     my $response = shift;
     my $status   = shift;
     my $uri      = shift;
-    my $ip       = shift;
 
     my $content = $response->decoded_content;
 
@@ -267,10 +262,9 @@ sub _handle_4xx_status {
 }
 
 sub _handle_5xx_status {
-    my $self     = shift;
-    my $response = shift;
-    my $status   = shift;
-    my $uri      = shift;
+    my $self   = shift;
+    my $status = shift;
+    my $uri    = shift;
 
     WebService::MinFraud::Error::HTTP->throw(
         message     => "Received a server error ($status) for $uri",
@@ -280,10 +274,9 @@ sub _handle_5xx_status {
 }
 
 sub _handle_non_200_status {
-    my $self     = shift;
-    my $response = shift;
-    my $status   = shift;
-    my $uri      = shift;
+    my $self   = shift;
+    my $status = shift;
+    my $uri    = shift;
 
     WebService::MinFraud::Error::HTTP->throw(
         message =>

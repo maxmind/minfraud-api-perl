@@ -16,7 +16,7 @@ sub assert_valid {
 }
 
 sub guts_from_arg {
-    my ( $class, $arg, $rx ) = @_;
+    my ( undef, $arg, $rx ) = @_;
 
     my $meta = $rx->make_schema(
         {

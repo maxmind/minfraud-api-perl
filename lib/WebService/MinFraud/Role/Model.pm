@@ -26,6 +26,7 @@ around BUILDARGS => sub {
     return $p;
 };
 
+## no critic (Subroutines::ProhibitUnusedPrivateSubroutines)
 sub _define_model_attributes {
     my $class  = shift;
     my %models = @_;
@@ -69,6 +70,7 @@ sub _define_model_attributes {
         ## use critic
     }
 }
+## use critic
 
 sub _build_record {
     my $self         = shift;
