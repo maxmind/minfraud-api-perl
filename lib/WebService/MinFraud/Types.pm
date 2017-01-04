@@ -6,6 +6,10 @@ use warnings;
 
 our $VERSION = '1.003001';
 
+use Sub::Quote qw( quote_sub );
+
+use namespace::clean;
+
 use GeoIP2::Types qw(
     ArrayRef
     Bool
@@ -24,7 +28,6 @@ use GeoIP2::Types qw(
     UserAgentObject
     object_isa_type
 );
-use Sub::Quote qw( quote_sub );
 
 use Exporter qw( import );
 

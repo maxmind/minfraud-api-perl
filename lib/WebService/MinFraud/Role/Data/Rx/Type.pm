@@ -3,6 +3,7 @@ package WebService::MinFraud::Role::Data::Rx::Type;
 use strict;
 use warnings;
 use Role::Tiny;
+use namespace::autoclean;
 
 our $VERSION = '1.003001';
 

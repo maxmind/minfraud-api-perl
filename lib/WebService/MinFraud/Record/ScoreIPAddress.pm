@@ -1,6 +1,7 @@
 package WebService::MinFraud::Record::ScoreIPAddress;
 
 use Moo;
+use namespace::autoclean;
 
 our $VERSION = '1.003001';
 

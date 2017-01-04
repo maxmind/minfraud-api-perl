@@ -1,6 +1,7 @@
 package WebService::MinFraud::Record::Issuer;
 
 use Moo;
+use namespace::autoclean;
 
 our $VERSION = '1.003001';
 

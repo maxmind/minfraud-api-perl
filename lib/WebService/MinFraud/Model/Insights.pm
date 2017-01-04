@@ -1,6 +1,7 @@
 package WebService::MinFraud::Model::Insights;
 
 use Moo;
+use namespace::autoclean;
 
 our $VERSION = '1.003001';
 
@@ -20,6 +21,8 @@ use WebService::MinFraud::Record::Warning;
 with 'WebService::MinFraud::Role::Model',
     'WebService::MinFraud::Role::HasLocales',
     'WebService::MinFraud::Role::HasCommonAttributes';
+
+sub _has { has(@_) }
 
 __PACKAGE__->_define_model_attributes(
     billing_address  => 'BillingAddress',

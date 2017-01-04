@@ -1,6 +1,7 @@
 package WebService::MinFraud::Role::Error::HTTP;
 
 use Moo::Role;
+use namespace::autoclean;
 
 our $VERSION = '1.003001';
 

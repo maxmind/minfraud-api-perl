@@ -1,6 +1,7 @@
 package WebService::MinFraud::Role::HasLocales;
 
 use Moo::Role;
+use namespace::autoclean;
 
 our $VERSION = '1.003001';
 

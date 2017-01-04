@@ -1,11 +1,12 @@
 package WebService::MinFraud::Record::IPAddress;
 
 use Moo;
+use namespace::autoclean;
 
 our $VERSION = '1.003001';
 
 use B;
-use GeoIP2::Role::Model::Location;
+use GeoIP2::Role::Model::Location 2.003003;
 use GeoIP2::Role::Model::HasSubdivisions;
 use Types::Standard qw( ArrayRef InstanceOf );
 use Sub::Quote qw( quote_sub );
@@ -14,6 +15,8 @@ use WebService::MinFraud::Record::Country;
 
 with 'GeoIP2::Role::Model::Location', 'GeoIP2::Role::Model::HasSubdivisions',
     'WebService::MinFraud::Role::Record::HasRisk';
+
+sub _has { has(@_) }
 
 __PACKAGE__->_define_attributes_for_keys( __PACKAGE__->_all_record_names() );
 

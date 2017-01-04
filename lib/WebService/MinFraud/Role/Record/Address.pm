@@ -1,6 +1,7 @@
 package WebService::MinFraud::Role::Record::Address;
 
 use Moo::Role;
+use namespace::autoclean;
 
 our $VERSION = '1.003001';
 

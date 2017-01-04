@@ -1,6 +1,7 @@
 package WebService::MinFraud::Error::WebService;
 
 use Moo;
+use namespace::autoclean;
 
 our $VERSION = '1.003001';
 

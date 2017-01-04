@@ -1,6 +1,7 @@
 package WebService::MinFraud::Error::Generic;
 
 use Moo;
+use namespace::autoclean;
 
 our $VERSION = '1.003001';
 
@@ -50,4 +51,3 @@ L<Throwable::Error>.
 =head2 message
 
 =head2 stack_trace
-
