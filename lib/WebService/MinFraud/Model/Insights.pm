@@ -22,7 +22,9 @@ with 'WebService::MinFraud::Role::Model',
     'WebService::MinFraud::Role::HasLocales',
     'WebService::MinFraud::Role::HasCommonAttributes';
 
+## no critic (ProhibitUnusedPrivateSubroutines)
 sub _has { has(@_) }
+## use critic
 
 __PACKAGE__->_define_model_attributes(
     billing_address  => 'BillingAddress',

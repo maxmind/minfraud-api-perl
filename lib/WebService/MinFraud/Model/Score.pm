@@ -12,7 +12,9 @@ with 'WebService::MinFraud::Role::HasCommonAttributes',
     'WebService::MinFraud::Role::HasLocales',
     'WebService::MinFraud::Role::Model';
 
+## no critic (ProhibitUnusedPrivateSubroutines)
 sub _has { has(@_) }
+## use critic
 
 __PACKAGE__->_define_model_attributes(
     disposition => 'Disposition',

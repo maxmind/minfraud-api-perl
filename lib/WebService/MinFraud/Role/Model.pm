@@ -70,7 +70,6 @@ sub _define_model_attributes {
                 ),
             ),
         );
-        ## use critic
     }
 }
 ## use critic

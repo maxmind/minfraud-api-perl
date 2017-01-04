@@ -16,7 +16,9 @@ use WebService::MinFraud::Record::Country;
 with 'GeoIP2::Role::Model::Location', 'GeoIP2::Role::Model::HasSubdivisions',
     'WebService::MinFraud::Role::Record::HasRisk';
 
+## no critic (ProhibitUnusedPrivateSubroutines)
 sub _has { has(@_) }
+## use critic
 
 __PACKAGE__->_define_attributes_for_keys( __PACKAGE__->_all_record_names() );
 
