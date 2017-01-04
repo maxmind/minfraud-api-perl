@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+1.004000 2017-01-04
+
 [ENHANCEMENTS]
 
 - This module now uses namespace::autoclean to remove imported functions from
