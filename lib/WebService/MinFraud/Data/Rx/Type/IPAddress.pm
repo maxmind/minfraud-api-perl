@@ -4,8 +4,9 @@ use 5.010;
 
 use strict;
 use warnings;
+use namespace::autoclean;
 
-our $VERSION = '1.003001';
+our $VERSION = '1.004000';
 
 use Data::Validate::IP;
 

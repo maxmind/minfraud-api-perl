@@ -1,11 +1,14 @@
 package WebService::MinFraud::Role::Model;
 
 use Moo::Role;
+use namespace::autoclean;
 
-our $VERSION = '1.003001';
+our $VERSION = '1.004000';
 
 use Sub::Quote qw( quote_sub );
 use Types::Standard qw( HashRef );
+
+requires '_has';
 
 has raw => (
     is       => 'ro',
@@ -31,7 +34,7 @@ sub _define_model_attributes {
     my $class  = shift;
     my %models = @_;
 
-    my $has = $class->can('has');
+    my $has = $class->can('_has');
 
     for my $key ( keys %models ) {
         my $record_class = "WebService::MinFraud::Record::$models{$key}";
@@ -67,7 +70,6 @@ sub _define_model_attributes {
                 ),
             ),
         );
-        ## use critic
     }
 }
 ## use critic

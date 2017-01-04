@@ -1,8 +1,9 @@
 package WebService::MinFraud::Validator;
 
 use Moo;
+use namespace::autoclean;
 
-our $VERSION = '1.003001';
+our $VERSION = '1.004000';
 
 use Data::Delete 0.05;
 use Data::Rx;
@@ -367,4 +368,3 @@ passed to the C<score> or C<insights> methods.
 This method takes a minFraud request as a HashRef and validates it against the
 minFraud request schema. If the request HashRef fails validation, an exception
 is thrown, which is a string containing all of the validation errors.
-

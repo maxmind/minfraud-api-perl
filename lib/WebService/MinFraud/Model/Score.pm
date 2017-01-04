@@ -1,8 +1,9 @@
 package WebService::MinFraud::Model::Score;
 
 use Moo;
+use namespace::autoclean;
 
-our $VERSION = '1.003001';
+our $VERSION = '1.004000';
 
 use WebService::MinFraud::Record::Disposition;
 use WebService::MinFraud::Record::ScoreIPAddress;
@@ -10,6 +11,10 @@ use WebService::MinFraud::Record::ScoreIPAddress;
 with 'WebService::MinFraud::Role::HasCommonAttributes',
     'WebService::MinFraud::Role::HasLocales',
     'WebService::MinFraud::Role::Model';
+
+## no critic (ProhibitUnusedPrivateSubroutines)
+sub _has { has(@_) }
+## use critic
 
 __PACKAGE__->_define_model_attributes(
     disposition => 'Disposition',

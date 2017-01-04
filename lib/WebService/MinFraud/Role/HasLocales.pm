@@ -1,8 +1,9 @@
 package WebService::MinFraud::Role::HasLocales;
 
 use Moo::Role;
+use namespace::autoclean;
 
-our $VERSION = '1.003001';
+our $VERSION = '1.004000';
 
 use Sub::Quote qw( quote_sub );
 use WebService::MinFraud::Types qw( LocalesArrayRef );

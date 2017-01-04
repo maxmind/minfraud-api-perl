@@ -1,8 +1,9 @@
 package WebService::MinFraud::Record::Warning;
 
 use Moo;
+use namespace::autoclean;
 
-our $VERSION = '1.003001';
+our $VERSION = '1.004000';
 
 use Types::Standard qw( ArrayRef Str );
 

@@ -4,8 +4,9 @@ use 5.010;
 
 use strict;
 use warnings;
+use namespace::autoclean;
 
-our $VERSION = '1.003001';
+our $VERSION = '1.004000';
 
 use Carp ();
 use DateTime::Format::RFC3339;
@@ -27,7 +28,7 @@ sub assert_valid {
 }
 
 sub guts_from_arg {
-    my ( $class, $arg, undef ) = @_;
+    my ( $class, $arg ) = @_;
     $arg ||= {};
 
     if ( my @unexpected = keys %$arg ) {

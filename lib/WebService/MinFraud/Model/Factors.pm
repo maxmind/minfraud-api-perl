@@ -1,8 +1,9 @@
 package WebService::MinFraud::Model::Factors;
 
 use Moo;
+use namespace::autoclean;
 
-our $VERSION = '1.003001';
+our $VERSION = '1.004000';
 
 use Types::Standard qw( HashRef InstanceOf );
 use WebService::MinFraud::Record::BillingAddress;
@@ -21,6 +22,10 @@ use WebService::MinFraud::Record::Warning;
 with 'WebService::MinFraud::Role::Model',
     'WebService::MinFraud::Role::HasLocales',
     'WebService::MinFraud::Role::HasCommonAttributes';
+
+## no critic (ProhibitUnusedPrivateSubroutines)
+sub _has { has(@_) }
+## use critic
 
 __PACKAGE__->_define_model_attributes(
     billing_address  => 'BillingAddress',

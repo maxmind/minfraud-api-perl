@@ -2,8 +2,9 @@ package WebService::MinFraud::Client;
 
 use 5.010;
 use Moo 1.004005;
+use namespace::autoclean;
 
-our $VERSION = '1.003001';
+our $VERSION = '1.004000';
 
 use HTTP::Headers ();
 use HTTP::Request ();
@@ -44,7 +45,7 @@ has _json => (
     is       => 'ro',
     isa      => JSONObject,
     init_arg => undef,
-    default  => quote_sub(q{ JSON()->new->utf8 }),
+    default  => quote_sub(q{ JSON::MaybeXS->new->utf8 }),
 );
 has license_key => (
     is       => 'ro',
