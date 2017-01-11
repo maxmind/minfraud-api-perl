@@ -2,6 +2,8 @@
 
 [ENHANCEMENTS]
 
+- Added support for custom inputs. You may set up custom inputs from your
+  account portal.
 - Added the following new values to the /payment/processor validation:
   - american_express_payment_gateway
   - bluesnap

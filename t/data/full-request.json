@@ -55,6 +55,12 @@
     "last_4_digits": "7643",
     "token": "7aF1Zx118523mw4cwl5x2"
   },
+  "custom_inputs": {
+    "float_input": 12.1,
+    "integer_input": 3123,
+    "string_input": "This is a string input.",
+    "boolean_input": true
+  },
   "order": {
     "amount": 323.21,
     "currency": "USD",
