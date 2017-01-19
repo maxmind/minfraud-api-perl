@@ -1,5 +1,11 @@
 {{$NEXT}}
 
+[ENHANCEMENTS]
+
+- Added the following new values to the /payment/processor validation:
+  ebs, hipay, and lemon_way.
+
+
 1.004000 2017-01-04
 
 [ENHANCEMENTS]
