@@ -47,6 +47,7 @@ our @EXPORT_OK = qw(
     NonNegativeInt
     NonNegativeNum
     Num
+    SessionID
     Str
     URIObject
     UserAgentObject
@@ -81,6 +82,15 @@ sub NonNegativeNum () {
                && ! ref $_[0]
                && $_[0] =~ /^-?\d+(\.\d+)?$/
                && $_[0] >= 0; }
+    );
+}
+
+sub SessionID () {
+    return quote_sub(
+        q{ GeoIP2::Types::_tc_fail( $_[0], 'SessionID' )
+               unless defined $_[0]
+               && ! ref $_[0]
+               && length( $_[0] ) <= 255; }
     );
 }
 
