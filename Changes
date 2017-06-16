@@ -4,7 +4,8 @@
 
 - Added the following new values to the /payment/processor validation:
   ebs, hipay, and lemon_way.
-
+- Added /device/session_id, /device/session_age inputs and email/first_seen
+  output
 
 1.004000 2017-01-04
 

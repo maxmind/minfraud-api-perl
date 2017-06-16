@@ -26,6 +26,18 @@ has last_seen => (
     predicate => 1,
 );
 
+has session_age => (
+    is        => 'ro',
+    isa       => Num,
+    predicate => 1,
+);
+
+has session_id => (
+    is        => 'ro',
+    isa       => Str,
+    predicate => 1,
+);
+
 1;
 
 # ABSTRACT: Contains data for the device associated with a transaction
@@ -74,6 +86,14 @@ This is the date and time of the last sighting of the device on the specified
 IP address for your user account. The string is formatted in the ISO 8601
 combined date and time in UTC.
 
+=head2 session_age
+
+A session length (in seconds) consisting of a floating point number.
+
+=head2 session_id
+
+A session id consisting of a string up to 255 characters in length.
+
 =head1 PREDICATE METHODS
 
 The following predicate methods are available, which return true if the related
@@ -84,3 +104,7 @@ data was present in the response body, false if otherwise:
 =head2 has_id
 
 =head2 has_last_seen
+
+=head2 has_session_age
+
+=head2 has_session_id
