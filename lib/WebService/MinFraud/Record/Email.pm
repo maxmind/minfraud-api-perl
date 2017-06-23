@@ -56,7 +56,7 @@ This class provides the following methods:
 =head2 first_seen
 
 A date string (e.g. 2017-04-24) to identify the date an email address was first
-seen.  This is expressed using the ISO 8601 date format.
+seen by MaxMind. This is expressed using the ISO 8601 date format.
 
 =head2 is_free
 
