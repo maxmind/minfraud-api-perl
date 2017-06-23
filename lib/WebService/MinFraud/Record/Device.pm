@@ -96,7 +96,7 @@ visit.
 =head2 session_id
 
 A string up to 255 characters in length. This is an ID which uniquely
-identifies a visitors session on the site.
+identifies a visitor's session on the site.
 
 =head1 PREDICATE METHODS
 
