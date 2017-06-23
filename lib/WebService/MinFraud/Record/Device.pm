@@ -6,7 +6,7 @@ use namespace::autoclean;
 our $VERSION = '1.004001';
 
 use Types::UUID;
-use WebService::MinFraud::Types qw( Num SessionID Str );
+use WebService::MinFraud::Types qw( NonNegativeNum Num SessionID Str );
 
 has confidence => (
     is        => 'ro',
@@ -28,7 +28,7 @@ has last_seen => (
 
 has session_age => (
     is        => 'ro',
-    isa       => Num,
+    isa       => NonNegativeNum,
     predicate => 1,
 );
 
@@ -88,7 +88,10 @@ combined date and time in UTC.
 
 =head2 session_age
 
-A session length (in seconds) consisting of a floating point number.
+A floating point number. The number of seconds between the creation of the
+user's session and the time of the transaction. Note that C<session_age> is not
+the duration of the current visit, but the time since the start of the first
+visit.
 
 =head2 session_id
 
