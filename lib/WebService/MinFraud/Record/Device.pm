@@ -6,7 +6,7 @@ use namespace::autoclean;
 our $VERSION = '1.004001';
 
 use Types::UUID;
-use WebService::MinFraud::Types qw( Num Str );
+use WebService::MinFraud::Types qw( NonNegativeNum Num SessionID Str );
 
 has confidence => (
     is        => 'ro',
@@ -23,6 +23,18 @@ has id => (
 has last_seen => (
     is        => 'ro',
     isa       => Str,
+    predicate => 1,
+);
+
+has session_age => (
+    is        => 'ro',
+    isa       => NonNegativeNum,
+    predicate => 1,
+);
+
+has session_id => (
+    is        => 'ro',
+    isa       => SessionID,
     predicate => 1,
 );
 
@@ -74,6 +86,18 @@ This is the date and time of the last sighting of the device on the specified
 IP address for your user account. The string is formatted in the ISO 8601
 combined date and time in UTC.
 
+=head2 session_age
+
+A floating point number. The number of seconds between the creation of the
+user's session and the time of the transaction. Note that C<session_age> is not
+the duration of the current visit, but the time since the start of the first
+visit.
+
+=head2 session_id
+
+A string up to 255 characters in length. This is an ID which uniquely
+identifies a visitor's session on the site.
+
 =head1 PREDICATE METHODS
 
 The following predicate methods are available, which return true if the related
@@ -84,3 +108,7 @@ data was present in the response body, false if otherwise:
 =head2 has_id
 
 =head2 has_last_seen
+
+=head2 has_session_age
+
+=head2 has_session_id
