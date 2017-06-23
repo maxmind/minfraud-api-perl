@@ -90,7 +90,8 @@ sub SessionID () {
         q{ GeoIP2::Types::_tc_fail( $_[0], 'SessionID' )
                unless defined $_[0]
                && ! ref $_[0]
-               && length( $_[0] ) <= 255; }
+               && length $_[0] <= 255
+               && $_[0] !~ m/\n|\0/; }
     );
 }
 

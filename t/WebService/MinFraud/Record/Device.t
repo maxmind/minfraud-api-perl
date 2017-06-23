@@ -40,4 +40,24 @@ like(
     'no negative session age'
 );
 
+like(
+    exception(
+        sub {
+            WebService::MinFraud::Record::Device->new( session_id => "99\n" );
+        }
+    ),
+    qr{not a valid SessionID},
+    'no newlines in session id'
+);
+
+like(
+    exception(
+        sub {
+            WebService::MinFraud::Record::Device->new( session_id => "99\0" );
+        }
+    ),
+    qr{not a valid SessionID},
+    'no null bytes in session id'
+);
+
 done_testing;
