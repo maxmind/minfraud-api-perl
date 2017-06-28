@@ -26,18 +26,6 @@ has last_seen => (
     predicate => 1,
 );
 
-has session_age => (
-    is        => 'ro',
-    isa       => NonNegativeNum,
-    predicate => 1,
-);
-
-has session_id => (
-    is        => 'ro',
-    isa       => SessionID,
-    predicate => 1,
-);
-
 1;
 
 # ABSTRACT: Contains data for the device associated with a transaction
