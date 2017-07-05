@@ -78,6 +78,11 @@ sub _build_request_schema_definition {
                 optional => {
                     user_agent      => '//str',
                     accept_language => '//str',
+                    session_age     => '//num',
+                    session_id      => {
+                        type   => '//str',
+                        length => { min => 1, max => 255, },
+                    },
                 },
             }
         },

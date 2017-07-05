@@ -8,7 +8,13 @@ use WebService::MinFraud::Validator;
 
 my $validator = WebService::MinFraud::Validator->new;
 
-my $good_request = { device => { ip_address => '24.24.24.24' } };
+my $good_request = {
+    device => {
+        ip_address  => '24.24.24.24',
+        session_age => 3600.8,
+        session_id  => 'foobar',
+    }
+};
 ok( $validator->validate_request($good_request), 'good request validates' );
 my $empty_request = {};
 like(
@@ -358,5 +364,33 @@ like(
     qr/found value was not a bool/,
     'undef as a boolean does not validate'
 );
+
+my $bad_session_age = {
+    device => { ip_address => '24.24.24.24', session_age => 'foo', },
+};
+like(
+    exception { $validator->validate_request($bad_session_age); },
+    qr/not a number/,
+    'bad session_age throws an exception'
+);
+
+my %id_exceptions = (
+    'undef'        => { id => undef, expect => qr{found value is undef}, },
+    'empty string' => { id => q{},   expect => qr{outside allowed range}, },
+    'long id' => { id => 'x' x 266, expect => qr{outside allowed range}, },
+);
+
+for my $name ( keys %id_exceptions ) {
+    my $test = $id_exceptions{$name};
+
+    my $request = {
+        device => { ip_address => '24.24.24.24', session_id => $test->{id}, },
+    };
+    like(
+        exception { $validator->validate_request($request); },
+        $test->{expect},
+        $name . ' throws an exception'
+    );
+}
 
 done_testing;

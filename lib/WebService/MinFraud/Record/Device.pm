@@ -6,7 +6,7 @@ use namespace::autoclean;
 our $VERSION = '1.004001';
 
 use Types::UUID;
-use WebService::MinFraud::Types qw( NonNegativeNum Num SessionID Str );
+use WebService::MinFraud::Types qw( NonNegativeNum Num Str );
 
 has confidence => (
     is        => 'ro',
@@ -23,18 +23,6 @@ has id => (
 has last_seen => (
     is        => 'ro',
     isa       => Str,
-    predicate => 1,
-);
-
-has session_age => (
-    is        => 'ro',
-    isa       => NonNegativeNum,
-    predicate => 1,
-);
-
-has session_id => (
-    is        => 'ro',
-    isa       => SessionID,
     predicate => 1,
 );
 
