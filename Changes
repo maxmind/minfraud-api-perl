@@ -3,7 +3,22 @@
 [ENHANCEMENTS]
 
 - Added the following new values to the /payment/processor validation:
-  ebs, hipay, and lemon_way.
+  - american_express_payment_gateway
+  - bluesnap
+  - commdoo
+  - curopayments
+  - ebs
+  - exact
+  - hipay
+  - lemon_way
+  - oceanpayment
+  - paymentwall
+  - payza
+  - securetrading
+  - solidtrust_pay
+  - vantiv
+  - vericheck
+  - vpos
 - Added /device/session_id, /device/session_age inputs and /email/first_seen
   output.
 
