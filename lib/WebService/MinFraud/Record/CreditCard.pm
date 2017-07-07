@@ -3,7 +3,7 @@ package WebService::MinFraud::Record::CreditCard;
 use Moo;
 use namespace::autoclean;
 
-our $VERSION = '1.005000';
+our $VERSION = '1.005001';
 
 use WebService::MinFraud::Record::Issuer;
 use WebService::MinFraud::Types

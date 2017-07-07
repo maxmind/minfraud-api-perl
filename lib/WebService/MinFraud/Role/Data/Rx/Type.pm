@@ -5,7 +5,7 @@ use warnings;
 use Role::Tiny;
 use namespace::autoclean;
 
-our $VERSION = '1.005000';
+our $VERSION = '1.005001';
 
 use Carp ();
 
