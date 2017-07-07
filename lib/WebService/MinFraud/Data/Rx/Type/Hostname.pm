@@ -6,7 +6,7 @@ use strict;
 use warnings;
 use namespace::autoclean;
 
-our $VERSION = '1.004001';
+our $VERSION = '1.005000';
 
 use Data::Validate::Domain qw( is_hostname );
 

@@ -3,7 +3,7 @@ package WebService::MinFraud::Record::IPAddress;
 use Moo;
 use namespace::autoclean;
 
-our $VERSION = '1.004001';
+our $VERSION = '1.005000';
 
 use B;
 use GeoIP2::Role::Model::Location 2.003003;

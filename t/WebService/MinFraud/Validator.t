@@ -423,7 +423,7 @@ subtest 'custom inputs' => sub {
                     float_input   => 12.1,
                     integer_input => 3123,
                     string_input  => 'This is a string input.',
-                    boolean_input => JSON->true,
+                    boolean_input => JSON()->true,
                 },
             },
         ),

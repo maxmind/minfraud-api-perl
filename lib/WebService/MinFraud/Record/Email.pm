@@ -3,7 +3,7 @@ package WebService::MinFraud::Record::Email;
 use Moo;
 use namespace::autoclean;
 
-our $VERSION = '1.004001';
+our $VERSION = '1.005000';
 
 use WebService::MinFraud::Types qw( Bool BoolCoercion Str );
 
