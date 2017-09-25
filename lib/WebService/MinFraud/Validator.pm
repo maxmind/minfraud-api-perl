@@ -52,7 +52,7 @@ has _rx => (
                         WebService::MinFraud::Data::Rx::Type::WebURI
                         )
                 ],
-            }
+            },
         );
     },
 );
@@ -86,7 +86,7 @@ sub _build_request_schema_definition {
                         length => { min => 1, max => 255, },
                     },
                 },
-            }
+            },
         },
         optional => {
             account => {
@@ -170,7 +170,7 @@ sub _build_request_schema_definition {
                                 'referral',         'survey',
                             ],
                         },
-                    }
+                    },
                 },
             },
             order => {
@@ -288,7 +288,7 @@ sub _build_request_schema_definition {
                                 'virtual_card_services',
                                 'vme',
                                 'vpos',
-                                'worldpay'
+                                'worldpay',
                             ],
 
                         },
@@ -312,7 +312,7 @@ sub _build_request_schema_definition {
                             type   => '//str',
                             values => [
                                 'same_day',  'overnight',
-                                'expedited', 'standard'
+                                'expedited', 'standard',
                             ],
                         },
                     },
@@ -341,8 +341,8 @@ sub _build_request_schema_definition {
                         item_id  => '//str',
                         quantity => '//int',
                         price    => '//num',
-                    }
-                }
+                    },
+                },
             },
         },
     };
