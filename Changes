@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+- Updated GeoIP2 dependency to add support for GeoIP2 Precision Insights
+  anonymizer fields.
 - Added the following new values to the /payment/processor validation:
   - bpoint
   - checkout_com
