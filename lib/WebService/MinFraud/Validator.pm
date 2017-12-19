@@ -219,6 +219,7 @@ sub _build_request_schema_definition {
                                 'conekta',
                                 'cuentadigital',
                                 'curopayments',
+                                'cybersource',
                                 'dalpay',
                                 'dibs',
                                 'digital_river',
@@ -285,6 +286,7 @@ sub _build_request_schema_definition {
                                 'stripe',
                                 'telerecargas',
                                 'towah',
+                                'transact_pro',
                                 'usa_epay',
                                 'vantiv',
                                 'verepay',
@@ -293,6 +295,7 @@ sub _build_request_schema_definition {
                                 'virtual_card_services',
                                 'vme',
                                 'vpos',
+                                'wirecard',
                                 'worldpay',
                             ],
 
