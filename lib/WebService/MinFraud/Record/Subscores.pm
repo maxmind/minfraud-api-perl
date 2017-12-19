@@ -27,10 +27,10 @@ has [
         shipping_address_distance_to_ip_location
         time_of_day
         )
-    ] => (
+] => (
     is  => 'ro',
     isa => Num,
-    );
+);
 
 1;
 
