@@ -5,7 +5,7 @@ use namespace::autoclean;
 
 our $VERSION = '1.005002';
 
-use GeoIP2::Record::Country 2.004000;
+use GeoIP2::Record::Country 2.005000;
 use WebService::MinFraud::Types qw( Bool BoolCoercion );
 
 extends 'GeoIP2::Record::Country';
