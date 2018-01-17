@@ -3,7 +3,7 @@ package WebService::MinFraud::Error::HTTP;
 use Moo;
 use namespace::autoclean;
 
-our $VERSION = '1.005002';
+our $VERSION = '1.006000';
 
 with 'WebService::MinFraud::Role::Error::HTTP';
 
