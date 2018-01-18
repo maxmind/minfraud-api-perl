@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+1.006000 2018-01-18
+
 - Updated GeoIP2 dependency to GeoIP2 2.005000. This adds the
   is_in_european_union() attribute to GeoIP2::Record::Country and
   GeoIP2::Record::RepresentedCountry. This attribute is true if the
