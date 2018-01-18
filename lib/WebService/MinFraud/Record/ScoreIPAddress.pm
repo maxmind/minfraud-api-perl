@@ -3,7 +3,7 @@ package WebService::MinFraud::Record::ScoreIPAddress;
 use Moo;
 use namespace::autoclean;
 
-our $VERSION = '1.006000';
+our $VERSION = '1.006001';
 
 with 'WebService::MinFraud::Role::Record::HasRisk';
 

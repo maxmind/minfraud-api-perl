@@ -3,7 +3,7 @@ package WebService::MinFraud::Record::Country;
 use Moo;
 use namespace::autoclean;
 
-our $VERSION = '1.006000';
+our $VERSION = '1.006001';
 
 use GeoIP2::Record::Country 2.005000;
 use WebService::MinFraud::Types qw( Bool BoolCoercion );

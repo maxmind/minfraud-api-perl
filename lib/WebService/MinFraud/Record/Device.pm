@@ -3,7 +3,7 @@ package WebService::MinFraud::Record::Device;
 use Moo;
 use namespace::autoclean;
 
-our $VERSION = '1.006000';
+our $VERSION = '1.006001';
 
 use Types::UUID;
 use WebService::MinFraud::Types qw( NonNegativeNum Num Str );

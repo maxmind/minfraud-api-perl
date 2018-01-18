@@ -4,7 +4,7 @@ use 5.010;
 use Moo 1.004005;
 use namespace::autoclean;
 
-our $VERSION = '1.006000';
+our $VERSION = '1.006001';
 
 use HTTP::Headers ();
 use HTTP::Request ();
