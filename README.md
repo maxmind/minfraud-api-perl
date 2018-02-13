@@ -13,10 +13,10 @@ version 1.006000
     use WebService::MinFraud::Client;
 
     # The Client object can be re-used across several requests.
-    # Your MaxMind user_id and license_key are available at
+    # Your MaxMind account_id and license_key are available at
     # https://www.maxmind.com/en/my_license_key
     my $client = WebService::MinFraud::Client->new(
-        user_id     => 42,
+        account_id   => 42,
         license_key => 'abcdef123456',
     );
 

@@ -61,7 +61,7 @@ __END__
   use WebService::MinFraud::Client;
 
   my $client = WebService::MinFraud::Client->new(
-      user_id     => 42,
+      account_id  => 42,
       license_key => 'abcdef123456',
   );
   my $request     = { device => { ip_address => '24.24.24.24' } };

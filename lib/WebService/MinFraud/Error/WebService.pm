@@ -33,7 +33,7 @@ __END__
   use Try::Tiny;
 
   my $client = WebService::MinFraud::Client->new(
-      user_id     => 42,
+      account_id  => 42,
       license_key => 'abcdef123456',
   );
 

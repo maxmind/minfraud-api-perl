@@ -1,5 +1,8 @@
 {{$NEXT}}
 
+- Renamed the WebService::MinFraud::Client constructor argument user_id
+  to account_id. user_id still works but should be considered deprecated.
+
 1.006000 2018-01-18
 
 - Updated GeoIP2 dependency to GeoIP2 2.005000. This adds the
