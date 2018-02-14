@@ -3,7 +3,7 @@ package WebService::MinFraud::Record::Subscores;
 use Moo;
 use namespace::autoclean;
 
-our $VERSION = '1.006001';
+our $VERSION = '1.007000';
 
 use WebService::MinFraud::Types qw( Num );
 
@@ -45,7 +45,7 @@ __END__
   use WebService::MinFraud::Client;
 
   my $client = WebService::MinFraud::Client->new(
-      user_id     => 42,
+      account_id  => 42,
       license_key => 'abcdef123456',
   );
   my $request   = { device => { ip_address => '24.24.24.24' } };

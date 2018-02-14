@@ -3,7 +3,7 @@ package WebService::MinFraud::Error::Generic;
 use Moo;
 use namespace::autoclean;
 
-our $VERSION = '1.006001';
+our $VERSION = '1.007000';
 
 extends 'Throwable::Error';
 
@@ -23,7 +23,7 @@ __END__
   use Try::Tiny;
 
   my $client = WebService::MinFraud::Client->new(
-      user_id     => 42,
+      account_id  => 42,
       license_key => 'abcdef123456',
   );
 

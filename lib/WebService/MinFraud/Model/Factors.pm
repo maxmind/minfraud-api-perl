@@ -3,7 +3,7 @@ package WebService::MinFraud::Model::Factors;
 use Moo;
 use namespace::autoclean;
 
-our $VERSION = '1.006001';
+our $VERSION = '1.007000';
 
 use Types::Standard qw( HashRef InstanceOf );
 use WebService::MinFraud::Record::BillingAddress;
@@ -51,7 +51,7 @@ __END__
   use WebService::MinFraud::Client;
 
   my $client = WebService::MinFraud::Client->new(
-      user_id     => 42,
+      account_id  => 42,
       license_key => 'abcdef123456',
   );
 
