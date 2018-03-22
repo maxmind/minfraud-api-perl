@@ -82,7 +82,7 @@ like(
         # unless we hit the jackpot of accounts :)
         my $big_account_id = 900_000_000;
         my $test_client    = WebService::MinFraud::Client->new(
-            host => $ENV{MM_MINFRAUD_HOST} || 'ct100-test.maxmind.com',
+            host        => $ENV{MM_MINFRAUD_HOST} || 'ct100-test.maxmind.com',
             account_id  => $big_account_id,
             license_key => $ENV{MM_LICENSE_KEY},
         );
