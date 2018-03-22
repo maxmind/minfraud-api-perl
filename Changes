@@ -2,6 +2,12 @@
 
 - Renamed the WebService::MinFraud::Client constructor argument user_id
   to account_id. user_id still works but should be considered deprecated.
+- Added the following new values to the /payment/processor validation:
+  - ccavenue
+  - ct_payments
+  - dalenys
+  - oney
+  - posconnect
 
 1.006000 2018-01-18
 
