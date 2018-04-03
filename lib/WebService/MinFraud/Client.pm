@@ -12,7 +12,7 @@ use JSON::MaybeXS;
 use LWP::UserAgent;
 use Scalar::Util qw( blessed );
 use Sub::Quote qw( quote_sub );
-use Try::Tiny;
+use Try::Tiny qw( catch try );
 use Types::Standard qw( InstanceOf );
 use URI ();
 use WebService::MinFraud::Error::Generic;
