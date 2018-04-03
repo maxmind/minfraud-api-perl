@@ -398,7 +398,7 @@ __END__
 
 This module defines the request schema for the minFraud API. In addition, it
 provides a C<validate_request> method that is used to validate any request
-passed to the C<score> or C<insights> methods.
+passed to the C<score>, C<insights>, or C<factors> methods.
 
 =head1 METHODS
 
