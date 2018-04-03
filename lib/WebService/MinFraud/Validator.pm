@@ -164,10 +164,14 @@ sub _build_request_schema_definition {
                         contents => {
                             type   => '//str',
                             values => [
-                                'account_creation', 'account_login',
-                                'email_change',     'password_reset',
-                                'purchase',         'recurring_purchase',
-                                'referral',         'survey',
+                                'account_creation',
+                                'account_login',
+                                'email_change',
+                                'password_reset',
+                                'purchase',
+                                'recurring_purchase',
+                                'referral',
+                                'survey',
                             ],
                         },
                     },
