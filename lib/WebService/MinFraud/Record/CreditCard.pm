@@ -91,7 +91,7 @@ Returns the brand of the credit card, e.g. Visa, MasterCard, American Express et
 =head2 country
 
 Returns the two letter L<ISO 3166-1 alpha 2 country
-code|http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2> associated with the
+code|https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2> associated with the
 location of the majority of customers using this credit card as determined by
 their billing address. In cases where the location of customers is highly
 mixed, this defaults to the country of the bank issuing the card.
