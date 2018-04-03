@@ -1,10 +1,10 @@
 use strict;
 use warnings;
 
-use JSON::MaybeXS;
+use JSON::MaybeXS qw( JSON );
 use Test::Fatal qw( exception );
 use Test::More 0.88;
-use WebService::MinFraud::Validator;
+use WebService::MinFraud::Validator ();
 
 my $validator = WebService::MinFraud::Validator->new;
 
