@@ -168,6 +168,7 @@ sub _build_request_schema_definition {
                                 'account_login',
                                 'email_change',
                                 'password_reset',
+                                'payout_change',
                                 'purchase',
                                 'recurring_purchase',
                                 'referral',

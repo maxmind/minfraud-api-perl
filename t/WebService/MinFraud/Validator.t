@@ -234,6 +234,10 @@ subtest 'event type' => sub {
             device => { ip_address => '24.24.24.24' },
             event  => { type       => 'email_change' },
         },
+        {
+            device => { ip_address => '24.24.24.24' },
+            event  => { type       => 'payout_change' },
+        },
     );
     for my $good_event_type (@good) {
         ok(

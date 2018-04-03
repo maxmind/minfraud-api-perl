@@ -8,6 +8,8 @@
   - dalenys
   - oney
   - posconnect
+- Added the following new value to the /event/type validation:
+  payout_change
 
 1.006000 2018-01-18
 
