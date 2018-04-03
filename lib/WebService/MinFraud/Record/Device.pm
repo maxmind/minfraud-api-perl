@@ -6,7 +6,7 @@ use namespace::autoclean;
 our $VERSION = '1.007000';
 
 use Types::UUID;
-use WebService::MinFraud::Types qw( NonNegativeNum Num Str );
+use WebService::MinFraud::Types qw( Num Str );
 
 has confidence => (
     is        => 'ro',
