@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 use File::Slurper qw( read_binary );
-use JSON::MaybeXS;
+use JSON::MaybeXS qw( decode_json JSON );
 use Test::Fatal qw( exception );
 use Test::More 0.88;
 
