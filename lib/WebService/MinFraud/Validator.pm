@@ -164,10 +164,15 @@ sub _build_request_schema_definition {
                         contents => {
                             type   => '//str',
                             values => [
-                                'account_creation', 'account_login',
-                                'email_change',     'password_reset',
-                                'purchase',         'recurring_purchase',
-                                'referral',         'survey',
+                                'account_creation',
+                                'account_login',
+                                'email_change',
+                                'password_reset',
+                                'payout_change',
+                                'purchase',
+                                'recurring_purchase',
+                                'referral',
+                                'survey',
                             ],
                         },
                     },
@@ -398,7 +403,7 @@ __END__
 
 This module defines the request schema for the minFraud API. In addition, it
 provides a C<validate_request> method that is used to validate any request
-passed to the C<score> or C<insights> methods.
+passed to the C<score>, C<insights>, or C<factors> methods.
 
 =head1 METHODS
 

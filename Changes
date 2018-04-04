@@ -8,6 +8,10 @@
   - dalenys
   - oney
   - posconnect
+- Added the following new value to the /event/type validation:
+  payout_change
+- Added the /device/local_time output.
+- Added the /credit_card/is_virtual output.
 
 1.006000 2018-01-18
 

@@ -65,7 +65,7 @@ dependencies.
 
 =head1 VERSIONING POLICY
 
-The minFraud Perl API uses L<Semantic Versioning|http://semver.org/>.
+The minFraud Perl API uses L<Semantic Versioning|https://semver.org/>.
 
 =head1 PERL VERSION SUPPORT
 
@@ -82,6 +82,6 @@ Please report all issues with this distribution using the GitHub issue tracker
 at L<https://github.com/maxmind/minfraud-api-perl/issues>.
 
 If you are having an issue with a MaxMind service that is not specific to the
-client API please visit L<http://www.maxmind.com/en/support> for details.
+client API please visit L<https://www.maxmind.com/en/support> for details.
 
 =cut
