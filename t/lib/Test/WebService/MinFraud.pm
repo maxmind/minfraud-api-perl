@@ -104,6 +104,7 @@ sub test_insights {
             'country',
             'is_issued_in_billing_address_country',
             'is_prepaid',
+            'is_virtual',
             {
                 issuer => [ keys %{ $response->{credit_card}{issuer} } ],
             },

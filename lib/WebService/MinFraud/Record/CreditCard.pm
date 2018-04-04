@@ -35,6 +35,13 @@ has is_prepaid => (
     coerce  => BoolCoercion,
 );
 
+has is_virtual => (
+    is      => 'ro',
+    isa     => Bool,
+    default => 0,
+    coerce  => BoolCoercion,
+);
+
 has issuer => (
     is        => 'ro',
     isa       => IssuerObject,
@@ -106,6 +113,10 @@ country of the bank issuing the card.
 =head2 is_prepaid
 
 Returns a boolean indicating whether the credit card is prepaid.
+
+=head2 is_virtual
+
+Returns a boolean indicating whether the credit card is virtual.
 
 =head2 type
 
