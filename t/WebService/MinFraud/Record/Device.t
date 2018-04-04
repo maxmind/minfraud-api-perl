@@ -1,7 +1,6 @@
 use strict;
 use warnings;
 
-use Test::Fatal qw( exception );
 use Test::More 0.88;
 
 use WebService::MinFraud::Record::Device;
