@@ -109,7 +109,7 @@ sub test_insights {
             },
             'type',
         ],
-        device     => [ 'confidence', 'id',      'last_seen' ],
+        device     => [ 'confidence', 'id',      'last_seen', 'local_time' ],
         email      => [ 'first_seen', 'is_free', 'is_high_risk' ],
         ip_address => \@ip_address_hashes,
     };

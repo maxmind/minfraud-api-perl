@@ -26,6 +26,12 @@ has last_seen => (
     predicate => 1,
 );
 
+has local_time => (
+    is        => 'ro',
+    isa       => Str,
+    predicate => 1,
+);
+
 1;
 
 # ABSTRACT: Contains data for the device associated with a transaction
@@ -74,6 +80,11 @@ This is the date and time of the last sighting of the device on the specified
 IP address for your user account. The string is formatted in the ISO 8601
 combined date and time in UTC.
 
+=head2 local_time
+
+This is the date and time of the transaction at the UTC offset associated with
+the device. The string is in the ISO 8601 combined date and time format.
+
 =head2 session_age
 
 A floating point number. The number of seconds between the creation of the
@@ -96,6 +107,8 @@ data was present in the response body, false if otherwise:
 =head2 has_id
 
 =head2 has_last_seen
+
+=head2 has_local_time
 
 =head2 has_session_age
 
