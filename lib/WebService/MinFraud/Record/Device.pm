@@ -77,13 +77,12 @@ UUID for that device.
 =head2 last_seen
 
 This is the date and time of the last sighting of the device on the specified
-IP address for your user account. The string is formatted in the ISO 8601
-combined date and time in UTC.
+IP address for your user account. The string is in the RFC 3339 format.
 
 =head2 local_time
 
 This is the date and time of the transaction at the UTC offset associated with
-the device. The string is in the ISO 8601 combined date and time format.
+the device. The string is in the RFC 3339 format.
 
 =head1 PREDICATE METHODS
 
