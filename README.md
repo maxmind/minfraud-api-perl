@@ -4,7 +4,7 @@ WebService::MinFraud - API for MaxMind's minFraud Score, Insights, and Factors s
 
 # VERSION
 
-version 1.006000
+version 1.007000
 
 # SYNOPSIS
 
@@ -16,7 +16,7 @@ version 1.006000
     # Your MaxMind account_id and license_key are available at
     # https://www.maxmind.com/en/my_license_key
     my $client = WebService::MinFraud::Client->new(
-        account_id   => 42,
+        account_id  => 42,
         license_key => 'abcdef123456',
     );
 
@@ -87,12 +87,12 @@ Mateu Hunter <mhunter@maxmind.com>
 - Andy Jack <ajack@maxmind.com>
 - Dave Rolsky <drolsky@maxmind.com>
 - Florian Ragwitz <rafl@debian.org>
-- Greg <goschwald@maxmind.com>
+- Greg Oschwald <goschwald@maxmind.com>
 - Mark Fowler <mark@twoshortplanks.com>
 - Olaf Alders <oalders@maxmind.com>
-- Patrick Cronin <PatrickCronin@users.noreply.github.com>
-- Ruben Navarro <rbnx@users.noreply.github.com>
-- Will Storey <will@summercat.com>
+- Patrick Cronin <pcronin@maxmind.com>
+- Ruben Navarro <rnavarro@maxmind.com>
+- William Storey <wstorey@maxmind.com>
 
 # COPYRIGHT AND LICENSE
 
