@@ -6,7 +6,7 @@ use strict;
 use warnings;
 use namespace::autoclean;
 
-our $VERSION = '1.007000';
+our $VERSION = '1.007001';
 
 use Carp ();
 use DateTime::Format::RFC3339;
