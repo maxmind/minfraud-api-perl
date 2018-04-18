@@ -20,7 +20,7 @@ version 1.007000
         license_key => 'abcdef123456',
     );
 
-    # Request HashRef must contain a 'device' key, with a value that is a
+    # For the fraud services, the request HashRef must contain a 'device' key, with a value that is a
     # HashRef containing an 'ip_address' key with a valid IPv4 or IPv6 address.
     # All other keys/values are optional; see other modules in minFraud Perl API
     # distribution for details.
@@ -39,10 +39,23 @@ version 1.007000
     my $factors = $client->factors( $request );
     say $factors->subscores->ip_tenure;
 
+    # Use the 'chargeback' method. The chargeback api does not return
+    # any content from the server.
+    
+    use Try::Tiny;
+    try { 
+      $client->chargeback( $request );
+      say 'Successfully submitted chargeback';
+    } 
+    catch { 
+      say "Error: $_";
+    };
+
 # DESCRIPTION
 
 This distribution provides an API for the
-[MaxMind minFraud Score, Insights, and Factors web services](https://dev.maxmind.com/minfraud/).
+[MaxMind minFraud Score, Insights, and Factors web services](https://dev.maxmind.com/minfraud/)
+and the [axMind minFraud Chargeback web service](https://dev/maxmind.com/minfraud/chargeback/).
 
 See [WebService::MinFraud::Client](https://metacpan.org/pod/WebService::MinFraud::Client) for details on using the web service client
 API.
