@@ -39,8 +39,7 @@ has _base_uri => (
     isa     => URIObject,
     builder => sub {
         my $self = shift;
-        URI->new(
-            $self->uri_scheme . '://' . $self->host . '/minfraud/v2.0' );
+        URI->new( $self->uri_scheme . '://' . $self->host . '/minfraud' );
     },
 );
 has host => (
@@ -142,14 +141,30 @@ sub score {
     );
 }
 
+sub chargeback {
+    my $self = shift;
+
+    return $self->_response_for(
+        'chargeback',
+        'WebService::MinFraud::Model::Chargeback', @_,
+    );
+}
+
 sub _response_for {
     my ( $self, $path, $model_class, $content ) = @_;
 
     $content = $self->_remove_trivial_hash_values($content);
-    $self->_fix_booleans($content);
-    $self->_validator->validate_request($content);
+
     my $uri = $self->_base_uri->clone;
-    $uri->path_segments( $uri->path_segments, $path );
+    if ( $path ne 'chargeback' ) {
+        $self->_fix_booleans($content);
+        $uri->path_segments( $uri->path_segments, 'v2.0', $path );
+    }
+    else {
+        $uri->path_segments( $uri->path_segments, $path );
+    }
+
+    $self->_validator->validate_request( $content, $path );
     my $request = HTTP::Request->new(
         'POST', $uri,
         HTTP::Headers->new( Accept => 'application/json' ),
@@ -163,6 +178,9 @@ sub _response_for {
     if ( $response->code == 200 ) {
         my $body = $self->_handle_success( $response, $uri );
         return $model_class->new( %{$body}, locales => $self->locales, );
+    }
+    elsif ( $response->code == 204 ) {
+        return $model_class->new;
     }
     else {
         # all other error codes throw an exception

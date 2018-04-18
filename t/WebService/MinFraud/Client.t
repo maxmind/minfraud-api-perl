@@ -9,10 +9,82 @@ use Test::LWP::UserAgent ();
 use Test::More 0.88;
 use Test::Warnings qw( :all );
 use Test::WebService::MinFraud qw( read_data_file );
-use WebService::MinFraud::Client          ();
-use WebService::MinFraud::Model::Factors  ();
-use WebService::MinFraud::Model::Insights ();
-use WebService::MinFraud::Model::Score    ();
+use WebService::MinFraud::Client            ();
+use WebService::MinFraud::Model::Factors    ();
+use WebService::MinFraud::Model::Insights   ();
+use WebService::MinFraud::Model::Score      ();
+use WebService::MinFraud::Model::Chargeback ();
+
+subtest 'chargeback' => sub {
+    subtest 'test simple success' => sub {
+        my $model = _run_chargeback_request();
+
+        isa_ok(
+            $model, 'WebService::MinFraud::Model::Chargeback',
+            'expected class type'
+        );
+    };
+
+    my $service = 'chargeback';
+
+    for my $error (
+        'FRAUD_SCORE_INVALID', 'JSON_INVALID',
+        'MAXMIND_ID_INVALID',  'MINFRAUD_ID_INVALID',
+        'PARAMETER_UNKNOWN',   'IP_ADDRESS_INVALID',
+        'IP_ADDRESS_REQUIRED', 'IP_ADDRESS_RESERVED'
+    ) {
+        subtest $error => sub {
+            _test_ws_error(
+                $service,
+                {
+                    status_code => '400',
+                    response_content =>
+                        qq{{"code":"$error","error":"Bad Request"}},
+                },
+                qr/Bad Request/,
+            );
+        };
+    }
+
+    for my $error (
+        'AUTHORIZATION_INVALID', 'LICENSE_KEY_REQUIRED',
+        'USER_ID_REQUIRED'
+    ) {
+        subtest $error => sub {
+            _test_ws_error(
+                $service,
+                {
+                    status_code => '401',
+                    response_content =>
+                        qq{{"code":"$error","error":"Unauthorized"}},
+                },
+                qr/Unauthorized/,
+            );
+        };
+    }
+
+    subtest 'Unsupported Media Type' => sub {
+        _test_ws_error(
+            $service,
+            {
+                status_code     => '415',
+                exception_class => 'WebService::MinFraud::Error::HTTP'
+            },
+            qr/Received a 415 error for/
+        );
+    };
+
+    subtest 'Service Not Available' => sub {
+        _test_ws_error(
+            $service,
+            {
+                status_code     => '500',
+                exception_class => 'WebService::MinFraud::Error::HTTP',
+            },
+            qr/Received a server error/,
+        );
+    };
+};
 
 for my $service ( 'factors', 'insights', 'score' ) {
     subtest $service => sub {
@@ -190,9 +262,17 @@ sub _test_ws_error {
     my $args             = shift;
     my $expected_message = shift;
 
-    my $exception = exception {
-        _run_request( $service, $args )
-    };
+    my $exception;
+    if ( $service eq 'chargeback' ) {
+        $exception = exception {
+            _run_chargeback_request($args)
+        };
+    }
+    else {
+        $exception = exception {
+            _run_request( $service, $args )
+        };
+    }
 
     isa_ok(
         $exception,
@@ -234,6 +314,35 @@ sub _run_request {
         ua          => $ua,
         %{ $args->{client_args} || {} }
     )->$service($request);
+}
+
+sub _run_chargeback_request {
+    my $args = shift || {};
+
+    my $request = $args->{requests} || { ip_address => '1.1.1.1' };
+
+    my $ua = Test::LWP::UserAgent->new;
+    $ua->map_response(
+        sub {
+            $_[0]->uri eq 'https://minfraud.maxmind.com/minfraud/chargeback';
+        },
+        HTTP::Response->new(
+            $args->{status_code} || '204',
+            'No Content',
+            [
+                'Content-Type' => 'application/json; charset=UTF-8'
+                    || $args->{content_type}
+            ],
+            $args->{response_content} || undef
+        )
+    );
+
+    return WebService::MinFraud::Client->new(
+        account_id  => 42,
+        license_key => 'abcdef123456',
+        ua          => $ua,
+        %{ $args->{client_args} || {} }
+    )->chargeback($request);
 }
 
 sub _uri_for {
