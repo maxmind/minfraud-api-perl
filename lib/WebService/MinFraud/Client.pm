@@ -21,6 +21,7 @@ use WebService::MinFraud::Error::WebService;
 use WebService::MinFraud::Model::Factors;
 use WebService::MinFraud::Model::Insights;
 use WebService::MinFraud::Model::Score;
+use WebService::MinFraud::Model::Chargeback;
 use WebService::MinFraud::Types
     qw( JSONObject MaxMindID MaxMindLicenseKey Str URIObject UserAgentObject );
 use WebService::MinFraud::Validator;
@@ -170,7 +171,8 @@ sub _response_for {
     $self->_validator->validate_request( $content, $path );
     my $request = HTTP::Request->new(
         'POST', $uri,
-        HTTP::Headers->new( Accept => 'application/json' ),
+        HTTP::Headers->new( Accept => 'application/json',
+            'Content-Type' => 'application/json' ),
         $self->_json->encode($content)
     );
 
