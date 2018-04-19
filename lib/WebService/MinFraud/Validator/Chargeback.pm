@@ -62,3 +62,7 @@ sub _build_request_schema_definition {
 }
 
 1;
+
+# ABSTRACT: Validation for the minFraud Chargeback
+
+__END__

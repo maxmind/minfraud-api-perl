@@ -123,7 +123,7 @@ passed to the C<score>, C<insights>, C<factors>, or C<chargeback> methods.
     $validator->validate_request($request); # by default will use WebService::MinFraud::Validator::FraudService
 
 This method takes a minFraud request as a HashRef and validates it against the
-minFraud request schema for the specified api endpoint. A second optional argument can be used
-to specify the validator schema to use, C<socre>, C<insights>, C<factors>, C<chargeback>,
+minFraud request schema for the specified API endpoint. A second optional argument can be used
+to specify the schema to use, C<socre>, C<insights>, C<factors>, C<chargeback>,
 or C<fraud_service>. If the request HashRef fails validation, an exception
 is thrown, which is a string containing all of the validation errors.

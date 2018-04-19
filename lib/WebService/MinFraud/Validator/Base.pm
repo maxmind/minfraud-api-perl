@@ -46,6 +46,6 @@ sub _build_rx_plugins {
 
 1;
 
-# ABSTRACT: Validation for the minFraud requests
+# ABSTRACT: Abstract Base Validation for the minFraud requests
 
 __END__

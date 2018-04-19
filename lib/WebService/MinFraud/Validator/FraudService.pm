@@ -339,3 +339,7 @@ sub _build_request_schema_definition {
 }
 
 1;
+
+# ABSTRACT: Parent Validation for the minFraud FraudServices
+
+__END__

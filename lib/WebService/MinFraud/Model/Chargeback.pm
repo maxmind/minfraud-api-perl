@@ -31,6 +31,6 @@ __END__
 
 This class provides an interface consistent with the fraud services' model interfaces.
 
-The Chargeback api will not return any content. See L<API
+The Chargeback API will not return any content. See L<API
 documentation|https://dev.maxmind.com/minfraud/chargeback/>
 for more details.
