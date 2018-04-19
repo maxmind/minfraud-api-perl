@@ -118,6 +118,7 @@ sub factors {
     my $self = shift;
 
     return $self->_response_for(
+        'v2.0',
         'factors',
         'WebService::MinFraud::Model::Factors', @_,
     );
@@ -127,6 +128,7 @@ sub insights {
     my $self = shift;
 
     return $self->_response_for(
+        'v2.0',
         'insights',
         'WebService::MinFraud::Model::Insights', @_,
     );
@@ -136,6 +138,7 @@ sub score {
     my $self = shift;
 
     return $self->_response_for(
+        'v2.0',
         'score',
         'WebService::MinFraud::Model::Score', @_,
     );
@@ -145,24 +148,24 @@ sub chargeback {
     my $self = shift;
 
     return $self->_response_for(
+        undef,
         'chargeback',
         'WebService::MinFraud::Model::Chargeback', @_,
     );
 }
 
 sub _response_for {
-    my ( $self, $path, $model_class, $content ) = @_;
+    my ( $self, $version, $path, $model_class, $content ) = @_;
 
     $content = $self->_remove_trivial_hash_values($content);
 
-    my $uri = $self->_base_uri->clone;
-    if ( $path ne 'chargeback' ) {
-        $self->_fix_booleans($content);
-        $uri->path_segments( $uri->path_segments, 'v2.0', $path );
-    }
-    else {
-        $uri->path_segments( $uri->path_segments, $path );
-    }
+    $self->_fix_booleans($content);
+
+    my $uri           = $self->_base_uri->clone;
+    my @path_segments = ( $uri->path_segments, );
+    push @path_segments, $version if $version;
+    push @path_segments, $path;
+    $uri->path_segments(@path_segments);
 
     $self->_validator->validate_request( $content, $path );
     my $request = HTTP::Request->new(
@@ -203,7 +206,10 @@ sub _response_for {
 
         for my $boolean (@Booleans) {
             my ( $object, $key ) = @{$boolean};
-            next unless exists $content->{$object}{$key};
+            if (   !exists $content->{$object}
+                || !exists $content->{$object}{$key} ) {
+                next;
+            }
 
             $content->{$object}{$key}
                 = $content->{$object}{$key}

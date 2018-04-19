@@ -24,31 +24,31 @@ has _deleter => (
 
 has _validator_chargeback => (
     is      => 'lazy',
-    isa     => Object,
+    isa     => InstanceOf ['WebService::MinFraud::Validator::Chargeback'],
     builder => sub { WebService::MinFraud::Validator::Chargeback->new },
 );
 
 has _validator_score => (
     is      => 'lazy',
-    isa     => Object,
+    isa     => InstanceOf ['WebService::MinFraud::Validator::Score'],
     builder => sub { WebService::MinFraud::Validator::Score->new },
 );
 
 has _validator_insights => (
     is      => 'lazy',
-    isa     => Object,
+    isa     => InstanceOf ['WebService::MinFraud::Validator::Insights'],
     builder => sub { WebService::MinFraud::Validator::Insights->new },
 );
 
 has _validator_factors => (
     is      => 'lazy',
-    isa     => Object,
+    isa     => InstanceOf ['WebService::MinFraud::Validator::Factors'],
     builder => sub { WebService::MinFraud::Validator::Factors->new },
 );
 
 has _validator_fraud_service => (
     is      => 'lazy',
-    isa     => Object,
+    isa     => InstanceOf ['WebService::MinFraud::Validator::FraudService'],
     builder => sub { WebService::MinFraud::Validator::FraudService->new },
 );
 
@@ -103,7 +103,7 @@ __END__
 
     my $validator = WebService::MinFraud::Validator->new;
     my $request = { device => { ip_address => '24.24.24.24' } };
-    $validator->validate_request($request, 'chargeback');
+    $validator->validate_request($request, 'score'); # takes an optional 'path'
 
 =head1 DESCRIPTION
 
@@ -115,6 +115,15 @@ passed to the C<score>, C<insights>, C<factors>, or C<chargeback> methods.
 
 =head2 validate_request
 
+    my $validator = WebService::MinFraud::Validator->new;
+    my $request = { ip => '24.24.24.24' };
+    $validator->validate_request($request, 'chargeback');
+
+    $request = { device => { ip_address => '24.24.24.24'  } };
+    $validator->validate_request($request); # by default will use WebService::MinFraud::Validator::FraudService
+
 This method takes a minFraud request as a HashRef and validates it against the
-minFraud request schema. If the request HashRef fails validation, an exception
+minFraud request schema for the spcified api endpoint. A second optional argument can be used
+to specify the validator schema to use, C<socre>, C<insights>, C<factors>, C<chargeback>,
+or C<fraud_service>. If the request HashRef fails validation, an exception
 is thrown, which is a string containing all of the validation errors.

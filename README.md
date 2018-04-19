@@ -41,15 +41,11 @@ version 1.007000
 
     # Use the 'chargeback' method. The chargeback api does not return
     # any content from the server.
-    
-    use Try::Tiny;
-    try { 
-      $client->chargeback( $request );
-      say 'Successfully submitted chargeback';
-    } 
-    catch { 
-      say "Error: $_";
-    };
+
+    my $chargeback = $client->chargeback( $request );
+    if ( $chargeback->isa('WebService::MinFraud::Model::Chargeback')) {
+       say 'Successfully submitted chargeback';
+    }
 
 # DESCRIPTION
 

@@ -47,7 +47,7 @@ __END__
   my $factors = $client->factors( $request );
   say $factors->subscores->ip_tenure;
 
-  # For the chargeback service, the request HashRef must contain an 'ip_address' key 
+  # For the chargeback service, the request HashRef must contain an 'ip_address' key
   # with a valid IPv4 or IPv6 address.
   # All other keys/values are optional; see other modules in minFraud Perl API
   # distribution for details.
@@ -56,15 +56,11 @@ __END__
 
   # Use the 'chargeback' method. The chargeback api does not return
   # any content from the server.
-    
-  use Try::Tiny;
-  try { 
-    $client->chargeback( $request );
+
+  my $chargeback = $client->chargeback( $request );
+  if ($chargeback->isa('WebService::MinFraud::Model::Chargeback')) {
     say 'Successfully submitted chargeback';
-  } 
-  catch { 
-    say "Error: $_";
-  };
+  }
 
 =head1 DESCRIPTION
 
