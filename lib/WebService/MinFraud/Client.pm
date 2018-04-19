@@ -171,8 +171,10 @@ sub _response_for {
     $self->_validator->validate_request( $content, $path );
     my $request = HTTP::Request->new(
         'POST', $uri,
-        HTTP::Headers->new( Accept => 'application/json',
-            'Content-Type' => 'application/json' ),
+        HTTP::Headers->new(
+            Accept         => 'application/json',
+            'Content-Type' => 'application/json'
+        ),
         $self->_json->encode($content)
     );
 
