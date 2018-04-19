@@ -349,35 +349,6 @@ sub _get_service_info {
     return $service_lookup->{$service};
 }
 
-sub _run_chargeback_request {
-    my $args = shift || {};
-
-    my $request = $args->{requests} || { ip_address => '1.1.1.1' };
-
-    my $ua = Test::LWP::UserAgent->new;
-    $ua->map_response(
-        sub {
-            $_[0]->uri eq 'https://minfraud.maxmind.com/minfraud/chargeback';
-        },
-        HTTP::Response->new(
-            $args->{status_code} || '204',
-            'No Content',
-            [
-                'Content-Type' => 'application/json; charset=UTF-8'
-                    || $args->{content_type}
-            ],
-            $args->{response_content} || undef
-        )
-    );
-
-    return WebService::MinFraud::Client->new(
-        account_id  => 42,
-        license_key => 'abcdef123456',
-        ua          => $ua,
-        %{ $args->{client_args} || {} }
-    )->chargeback($request);
-}
-
 sub _uri_for {
     'https://minfraud.maxmind.com/minfraud/v2.0/' . $_[0];
 }
