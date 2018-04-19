@@ -3,9 +3,40 @@ package WebService::MinFraud::Validator::FraudService;
 use Moo;
 use namespace::autoclean;
 
+use WebService::MinFraud::Data::Rx::Type::CCToken;
+use WebService::MinFraud::Data::Rx::Type::CustomInputs;
+use WebService::MinFraud::Data::Rx::Type::DateTime::RFC3339;
+use WebService::MinFraud::Data::Rx::Type::Enum;
+use WebService::MinFraud::Data::Rx::Type::Hex32;
+use WebService::MinFraud::Data::Rx::Type::Hostname;
+use WebService::MinFraud::Data::Rx::Type::IPAddress;
+use WebService::MinFraud::Data::Rx::Type::WebURI;
+
 our $VERSION = '1.007001';
 
 extends 'WebService::MinFraud::Validator::Base';
+
+sub _build_rx_plugins {
+    Data::Rx->new(
+        {
+            prefix => {
+                maxmind => 'tag:maxmind.com,MAXMIND:rx/',
+            },
+            type_plugins => [
+                qw(
+                    WebService::MinFraud::Data::Rx::Type::CCToken
+                    WebService::MinFraud::Data::Rx::Type::CustomInputs
+                    WebService::MinFraud::Data::Rx::Type::DateTime::RFC3339
+                    WebService::MinFraud::Data::Rx::Type::Enum
+                    WebService::MinFraud::Data::Rx::Type::Hex32
+                    WebService::MinFraud::Data::Rx::Type::Hostname
+                    WebService::MinFraud::Data::Rx::Type::IPAddress
+                    WebService::MinFraud::Data::Rx::Type::WebURI
+                    )
+            ],
+        },
+    );
+}
 
 sub _build_request_schema_definition {
     return {

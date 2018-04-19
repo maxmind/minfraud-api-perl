@@ -10,14 +10,6 @@ use Carp;
 use Data::Rx;
 use Try::Tiny;
 use Types::Standard qw( HashRef InstanceOf Object );
-use WebService::MinFraud::Data::Rx::Type::CCToken;
-use WebService::MinFraud::Data::Rx::Type::CustomInputs;
-use WebService::MinFraud::Data::Rx::Type::DateTime::RFC3339;
-use WebService::MinFraud::Data::Rx::Type::Enum;
-use WebService::MinFraud::Data::Rx::Type::Hex32;
-use WebService::MinFraud::Data::Rx::Type::Hostname;
-use WebService::MinFraud::Data::Rx::Type::IPAddress;
-use WebService::MinFraud::Data::Rx::Type::WebURI;
 
 has _request_schema_definition => (
     is      => 'lazy',
@@ -28,27 +20,7 @@ has _request_schema_definition => (
 has _rx => (
     is      => 'lazy',
     isa     => InstanceOf ['Data::Rx'],
-    builder => sub {
-        Data::Rx->new(
-            {
-                prefix => {
-                    maxmind => 'tag:maxmind.com,MAXMIND:rx/',
-                },
-                type_plugins => [
-                    qw(
-                        WebService::MinFraud::Data::Rx::Type::CCToken
-                        WebService::MinFraud::Data::Rx::Type::CustomInputs
-                        WebService::MinFraud::Data::Rx::Type::DateTime::RFC3339
-                        WebService::MinFraud::Data::Rx::Type::Enum
-                        WebService::MinFraud::Data::Rx::Type::Hex32
-                        WebService::MinFraud::Data::Rx::Type::Hostname
-                        WebService::MinFraud::Data::Rx::Type::IPAddress
-                        WebService::MinFraud::Data::Rx::Type::WebURI
-                        )
-                ],
-            },
-        );
-    },
+    builder => '_build_rx_plugins',
 );
 
 has _schema => (
@@ -65,6 +37,11 @@ has _schema => (
 
 sub _build_request_schema_definition {
     croak 'Abstract Base Class. This method is implemented in subclasses';
+}
+
+sub _build_rx_plugins {
+    croak 'Abstract Base Class. This method is implemented in subclasses';
+
 }
 
 1;

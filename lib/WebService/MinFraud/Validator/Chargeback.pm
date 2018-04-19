@@ -3,9 +3,28 @@ package WebService::MinFraud::Validator::Chargeback;
 use Moo;
 use namespace::autoclean;
 
+use WebService::MinFraud::Data::Rx::Type::Enum;
+use WebService::MinFraud::Data::Rx::Type::IPAddress;
+
 our $VERSION = '1.007001';
 
 extends 'WebService::MinFraud::Validator::Base';
+
+sub _build_rx_plugins {
+    Data::Rx->new(
+        {
+            prefix => {
+                maxmind => 'tag:maxmind.com,MAXMIND:rx/',
+            },
+            type_plugins => [
+                qw(
+                    WebService::MinFraud::Data::Rx::Type::Enum
+                    WebService::MinFraud::Data::Rx::Type::IPAddress
+                    )
+            ],
+        },
+    );
+}
 
 sub _build_request_schema_definition {
     return {
