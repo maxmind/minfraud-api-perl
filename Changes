@@ -1,5 +1,26 @@
 {{$NEXT}}
 
+1.008000 2018-05-03
+
+[ENHANCEMENTS]
+
+- Added a new Model for WebService::MinFraud::Chargebacks
+- Updated WebService::MinFraud::Client to support API calls to
+   chargebacks
+  - Added chargeback subroutine
+- Updated How WebService::MinFraud::Validator works
+  - Validation for individual api end points moved to
+    WebService::MinFraud::Validator::*
+  - Added Validators for existing Fraud Services
+  - Added Validation for Chargebacks
+  - Validator now checks for the endpoint it needs to validate
+  - Validator interface preserved.
+
+[ BUGFIXES ]
+
+- Corrected Autovivification bug in WebService::MinFraud::Clinet->_fix_booleans.
+- Fixed Test exception in xt/author-basic.t
+
 1.007000 2018-04-11
 
 - Renamed the WebService::MinFraud::Client constructor argument user_id
