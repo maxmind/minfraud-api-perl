@@ -365,7 +365,7 @@ __END__
   my $factors = $client->factors( $request );
   say $factors->subscores->ip_tenure;
 
-  
+
   # Request HashRef must contain an 'ip_address' key containing  a valid
   # IPv4 or IPv6 address. All other keys/values are optional; see other modules
   # in minFraud Perl API distribution for details.
@@ -383,8 +383,8 @@ __END__
 =head1 DESCRIPTION
 
 This class provides a client API for the MaxMind minFraud Score, Insights
-Factors web services, and the Chargeback web service. The B<Insights> 
-service returns more data about a transaction than the B<Score> service. 
+Factors web services, and the Chargeback web service. The B<Insights>
+service returns more data about a transaction than the B<Score> service.
 See the L<API documentation|https://dev.maxmind.com/minfraud/>
 for more details.
 
@@ -527,10 +527,10 @@ All of the fraud service request methods require a device ip_address. See the
 L<API documentation for fraud services|https://dev.maxmind.com/minfraud/>
 for details on all the values that can be part of the request. Portions of the
 request hash with undefined and empty string values are automatically removed
-from the request. 
+from the request.
 
 The chargeback request method requires an ip_address. See the
-L<API documentation for changeback|https:://dev.maxmind.com/minfraud/chargeback/>
+L<API documentation for chargeback|https:://dev.maxmind.com/minfraud/chargeback/>
 for details on all the values that can be part of the request.
 
 =head2 score
@@ -550,7 +550,7 @@ L<WebService::MinFraud::Model::Factors> object.
 
 =head2 chargeback
 
-This method calls the minFraud Chargeback web service. It returns a 
+This method calls the minFraud Chargeback web service. It returns a
 L<WebService::MinFraud::Model::Chargeback> object.
 
 =head1 User-Agent HEADER
