@@ -4,7 +4,7 @@ use warnings;
 use Test::More 0.88;
 use WebService::MinFraud::Model::Chargeback;
 
-subtest 'Can created a chargeback object' => sub {
+subtest 'Can create a chargeback object' => sub {
     my $class = 'WebService::MinFraud::Model::Chargeback';
     my $model = $class->new;
 

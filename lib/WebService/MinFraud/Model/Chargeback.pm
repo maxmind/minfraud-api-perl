@@ -22,7 +22,7 @@ __END__
       license_key => 'abcdef123456',
   );
 
-  my $request = { device => { ip_address => '24.24.24.24' } };
+  my $request = { ip_address => '24.24.24.24' } ;
   my $chargeback = $client->chargeback($request);
 
   say $chargeback->isa('WebService::MinFraud::Model::Chargeback');

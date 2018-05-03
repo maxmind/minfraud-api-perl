@@ -365,12 +365,27 @@ __END__
   my $factors = $client->factors( $request );
   say $factors->subscores->ip_tenure;
 
+  
+  # Request HashRef must contain an 'ip_address' key containing  a valid
+  # IPv4 or IPv6 address. All other keys/values are optional; see other modules
+  # in minFraud Perl API distribution for details.
+
+  $request = { ip_address => '24.24.24.24' };
+
+  # Use the chargeback client method to submit an IP address back to Maxmind.
+  # The chargeback api does not return any content from the server.
+
+  my $chargeback = $client->chargeback( $request );
+  if ($chargeback->isa('WebService::MinFraud::Model::Chargeback')) {
+    say 'Successfully submitted chargeback';
+  }
+
 =head1 DESCRIPTION
 
-This class provides a client API for the MaxMind minFraud Score, Insights, and
-Factors web services. The B<Insights> service returns more data about a
-transaction than the B<Score> service. See the
-L<API documentation|https://dev.maxmind.com/minfraud/>
+This class provides a client API for the MaxMind minFraud Score, Insights
+Factors web services, and the Chargeback web service. The B<Insights> 
+service returns more data about a transaction than the B<Score> service. 
+See the L<API documentation|https://dev.maxmind.com/minfraud/>
 for more details.
 
 Each web service is represented by a different model class, and
@@ -501,18 +516,22 @@ described below.
 
 The request methods are passed a HashRef as the only argument. See the L</SYNOPSIS> and L<WebService::MinFraud::Example> for detailed usage examples. Some important notes regarding values passed to the minFraud web service via the Perl API are described below.
 
-=head2 device => ip_address
+=head2 device => ip_address or ip_address
 
 This must be a valid IPv4 or IPv6 address in presentation format, i.e.,
 dotted-quad notation or the IPv6 hexadecimal-colon notation.
 
 =head1 REQUEST METHODS
 
-All of the request methods require a device ip_address. See the
-L<API documentation|https://dev.maxmind.com/minfraud/>
+All of the fraud service request methods require a device ip_address. See the
+L<API documentation for fraud services|https://dev.maxmind.com/minfraud/>
 for details on all the values that can be part of the request. Portions of the
 request hash with undefined and empty string values are automatically removed
-from the request.
+from the request. 
+
+The chargeback request method requires an ip_address. See the
+L<API documentation for changeback|https:://dev.maxmind.com/minfraud/chargeback/>
+for details on all the values that can be part of the request.
 
 =head2 score
 
@@ -528,6 +547,11 @@ L<WebService::MinFraud::Model::Insights> object.
 
 This method calls the minFraud Factors web service. It returns a
 L<WebService::MinFraud::Model::Factors> object.
+
+=head2 chargeback
+
+This method calls the minFraud Chargeback web service. It returns a 
+L<WebService::MinFraud::Model::Chargeback> object.
 
 =head1 User-Agent HEADER
 

@@ -5,10 +5,8 @@ use namespace::autoclean;
 
 our $VERSION = '1.007001';
 
-use Data::Delete 0.05;
 use Carp;
 use Data::Rx;
-use Try::Tiny;
 use Types::Standard qw( HashRef InstanceOf Object );
 
 has _request_schema_definition => (

@@ -50,11 +50,11 @@ sub _build_request_schema_definition {
             },
             maxmind_id => {
                 type   => '//str',
-                length => { 'min' => 1, 'max' => 8 },
+                length => { 'min' => 8, 'max' => 8 },
             },
             minfraud_id => {
                 type   => '//str',
-                length => { 'min' => 1, 'max' => 36 },
+                length => { 'min' => 36, 'max' => 36 },
             },
             transaction_id => '//str',
         },
