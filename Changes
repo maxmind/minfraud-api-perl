@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+1.008000 2018-05-14
+
 [ENHANCEMENTS]
 
 - Added a new model for WebService::MinFraud::Chargebacks

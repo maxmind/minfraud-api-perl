@@ -4,7 +4,7 @@ WebService::MinFraud - API for MaxMind's minFraud Score, Insights, and Factors s
 
 # VERSION
 
-version 1.007001
+version 1.008000
 
 # SYNOPSIS
 
@@ -44,7 +44,7 @@ version 1.007001
     # All other keys/values are optional; see other modules in minFraud Perl API
     # distribution for details.
 
-    my $request = { ip_address => '24.24.24.24' };
+    $request = { ip_address => '24.24.24.24' };
 
     # Use the 'chargeback' method. The chargeback api does not return
     # any content from the server.
