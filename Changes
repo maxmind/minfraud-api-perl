@@ -2,22 +2,22 @@
 
 [ENHANCEMENTS]
 
-- Added a new Model for WebService::MinFraud::Chargebacks
+- Added a new model for WebService::MinFraud::Chargebacks
 - Updated WebService::MinFraud::Client to support API calls to
    chargebacks
   - Added chargeback subroutine
 - Updated How WebService::MinFraud::Validator works
-  - Validation for individual api end points moved to
+  - Validation for individual API end points moved to
     WebService::MinFraud::Validator::*
-  - Added Validators for existing Fraud Services
-  - Added Validation for Chargebacks
+  - Added validators for existing fraud services
+  - Added validation for chargebacks
   - Validator now checks for the endpoint it needs to validate
-  - Validator interface preserved.
+  - Validator interface preserved
 
 [ BUGFIXES ]
 
-- Corrected Autovivification bug in WebService::MinFraud::Clinet->_fix_booleans.
-- Fixed Test exception in xt/author-basic.t
+- Corrected autovivification bug in WebService::MinFraud::Client->_fix_booleans
+- Fixed test exception in xt/author-basic.t
 
 
 1.007000 2018-04-11
