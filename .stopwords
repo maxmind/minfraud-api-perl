@@ -3,6 +3,7 @@ API
 APIs
 ASN
 AVS
+BR
 chargeback
 CN
 contentDeliveryNetwork
@@ -13,6 +14,7 @@ de
 dialup
 downloadable
 en
+es
 ergument
 fr
 FraudServices
@@ -36,6 +38,7 @@ ja
 Knop
 libmaxminddb
 lookup
+MasterCard
 maxmind
 MaxMind
 MaxMind's
@@ -59,6 +62,7 @@ URI
 versioning
 VERSIONING
 VPN
+Yahoo
 YYY
 YYYY
 YYYZZZ
