@@ -3,7 +3,7 @@ package WebService::MinFraud::Validator::Insights;
 use Moo;
 use namespace::autoclean;
 
-our $VERSION = '1.008000';
+our $VERSION = '1.008001';
 
 extends 'WebService::MinFraud::Validator::FraudService';
 

@@ -12,7 +12,7 @@ use WebService::MinFraud::Data::Rx::Type::Hostname;
 use WebService::MinFraud::Data::Rx::Type::IPAddress;
 use WebService::MinFraud::Data::Rx::Type::WebURI;
 
-our $VERSION = '1.008000';
+our $VERSION = '1.008001';
 
 extends 'WebService::MinFraud::Validator::Base';
 
