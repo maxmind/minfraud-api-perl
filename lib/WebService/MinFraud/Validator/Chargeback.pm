@@ -6,7 +6,7 @@ use namespace::autoclean;
 use WebService::MinFraud::Data::Rx::Type::Enum;
 use WebService::MinFraud::Data::Rx::Type::IPAddress;
 
-our $VERSION = '1.007001';
+our $VERSION = '1.008000';
 
 extends 'WebService::MinFraud::Validator::Base';
 

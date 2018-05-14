@@ -3,7 +3,7 @@ package WebService::MinFraud::Role::Record::Address;
 use Moo::Role;
 use namespace::autoclean;
 
-our $VERSION = '1.007001';
+our $VERSION = '1.008000';
 
 use WebService::MinFraud::Types qw( Bool BoolCoercion Num);
 

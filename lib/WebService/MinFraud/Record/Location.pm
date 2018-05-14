@@ -3,7 +3,7 @@ package WebService::MinFraud::Record::Location;
 use Moo;
 use namespace::autoclean;
 
-our $VERSION = '1.007001';
+our $VERSION = '1.008000';
 
 use WebService::MinFraud::Types qw( Str );
 
