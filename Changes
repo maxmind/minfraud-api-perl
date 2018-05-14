@@ -1,7 +1,5 @@
 {{$NEXT}}
 
-1.008000 2018-05-03
-
 [ENHANCEMENTS]
 
 - Added a new Model for WebService::MinFraud::Chargebacks
@@ -21,6 +19,7 @@
 - Corrected Autovivification bug in WebService::MinFraud::Clinet->_fix_booleans.
 - Fixed Test exception in xt/author-basic.t
 
+
 1.007000 2018-04-11
 
 - Renamed the WebService::MinFraud::Client constructor argument user_id
@@ -36,6 +35,7 @@
 - Added the /device/local_time output.
 - Added the /credit_card/is_virtual output.
 
+
 1.006000 2018-01-18
 
 - Updated GeoIP2 dependency to GeoIP2 2.005000. This adds the
@@ -46,6 +46,7 @@
   - cybersource
   - transact_pro
   - wirecard
+
 
 1.005001 2017-10-30
 
