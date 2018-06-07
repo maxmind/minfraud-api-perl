@@ -1,5 +1,10 @@
 {{$NEXT}}
 
+- Added the following new values to the /payment/processor validation:
+  - payeezy
+  - payment_express
+
+
 1.008000 2018-05-14
 
 [ENHANCEMENTS]
