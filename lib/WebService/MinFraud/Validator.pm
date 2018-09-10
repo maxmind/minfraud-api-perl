@@ -3,7 +3,7 @@ package WebService::MinFraud::Validator;
 use Moo;
 use namespace::autoclean;
 
-our $VERSION = '1.009000';
+our $VERSION = '1.009001';
 
 use Data::Delete 0.05;
 use Try::Tiny;

@@ -4,7 +4,7 @@ package WebService::MinFraud::Types;
 use strict;
 use warnings;
 
-our $VERSION = '1.009000';
+our $VERSION = '1.009001';
 
 use Sub::Quote qw( quote_sub );
 

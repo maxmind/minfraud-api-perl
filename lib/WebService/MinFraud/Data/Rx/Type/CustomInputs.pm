@@ -6,7 +6,7 @@ use strict;
 use warnings;
 use namespace::autoclean;
 
-our $VERSION = '1.009000';
+our $VERSION = '1.009001';
 
 use JSON::MaybeXS qw( is_bool );
 use Scalar::Util qw( looks_like_number );

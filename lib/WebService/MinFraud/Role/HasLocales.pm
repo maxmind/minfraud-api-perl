@@ -3,7 +3,7 @@ package WebService::MinFraud::Role::HasLocales;
 use Moo::Role;
 use namespace::autoclean;
 
-our $VERSION = '1.009000';
+our $VERSION = '1.009001';
 
 use Sub::Quote qw( quote_sub );
 use WebService::MinFraud::Types qw( LocalesArrayRef );
