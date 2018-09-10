@@ -10,7 +10,7 @@ use Sub::Quote qw( quote_sub );
 
 use namespace::clean;
 
-use GeoIP2::Types qw(
+use GeoIP2::Types 2.006001 qw(
     ArrayRef
     Bool
     BoolCoercion
