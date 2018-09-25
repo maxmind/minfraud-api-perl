@@ -3,8 +3,12 @@
 1.009000 2018-09-10
 
 - Added the following new values to the /payment/processor validation:
+  - datacash
+  - gocardless
   - payeezy
   - payment_express
+  - smartdebit
+  - synapsefi
 - Updated GeoIP2 dependency to GeoIP2 2.006001. This adds support for license
   keys longer than 12 characters.
 
