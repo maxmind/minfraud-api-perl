@@ -239,6 +239,7 @@ sub _build_request_schema_definition {
                                 'payeezy',
                                 'payfast',
                                 'paygate',
+                                'paylike',
                                 'payment_express',
                                 'paymentwall',
                                 'payone',
