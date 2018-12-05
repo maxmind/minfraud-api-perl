@@ -101,7 +101,7 @@ sub BUILD {
     ## no critic (RequireBlockTermination)
     my $self_version = try { 'v' . $self->VERSION() } || 'v?';
 
-    my $ua = $self->ua();
+    my $ua         = $self->ua();
     my $ua_version = try { 'v' . $ua->VERSION() } || 'v?';
     ## use critic
 
@@ -269,7 +269,7 @@ sub _handle_4xx_status {
     my $content = $response->decoded_content;
 
     my $has_body = defined $content && length $content;
-    my $body = try {
+    my $body     = try {
         $has_body
             && $response->content_type =~ /json/
             && $self->_json->decode($content)
