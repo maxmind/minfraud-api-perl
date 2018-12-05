@@ -3,6 +3,7 @@
 - Added the following new values to the /payment/processor validation:
   - datacash
   - gocardless
+  - paylike
   - smartdebit
   - synapsefi
 
