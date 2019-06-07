@@ -94,6 +94,9 @@ version of Perl available.
 
 =head1 SUPPORT
 
+This module is deprecated and will only receive fixes for major bugs and
+security vulnerabilities. New features and functionality will not be added.
+
 Please report all issues with this distribution using the GitHub issue tracker
 at L<https://github.com/maxmind/minfraud-api-perl/issues>.
 
