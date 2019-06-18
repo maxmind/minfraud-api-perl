@@ -3,6 +3,7 @@ package WebService::MinFraud::Validator::Chargeback;
 use Moo;
 use namespace::autoclean;
 
+use Data::Rx;
 use WebService::MinFraud::Data::Rx::Type::Enum;
 use WebService::MinFraud::Data::Rx::Type::IPAddress;
 
