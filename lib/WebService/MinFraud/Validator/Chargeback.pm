@@ -7,7 +7,7 @@ use Data::Rx;
 use WebService::MinFraud::Data::Rx::Type::Enum;
 use WebService::MinFraud::Data::Rx::Type::IPAddress;
 
-our $VERSION = '1.009001';
+our $VERSION = '1.009002';
 
 extends 'WebService::MinFraud::Validator::Base';
 
