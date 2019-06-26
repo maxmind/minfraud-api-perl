@@ -2,6 +2,7 @@
 
 1.009001 2019-06-18
 
+- Added deprecation notice
 - Added the following new values to the /payment/processor validation:
   - datacash
   - gocardless
