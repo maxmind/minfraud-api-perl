@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+1.010000 2020-05-04
+
 - You may now use a license key object that stringifies to the actual license
   key.
 

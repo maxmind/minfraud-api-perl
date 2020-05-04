@@ -4,7 +4,7 @@ WebService::MinFraud - API for MaxMind's minFraud Score, Insights, and Factors s
 
 # VERSION
 
-version 1.009001
+version 1.010000
 
 # SYNOPSIS
 
@@ -60,7 +60,7 @@ This distribution provides an API for the
 [MaxMind minFraud Score, Insights, and Factors web services](https://dev.maxmind.com/minfraud/)
 and the [MaxMind minFraud Chargeback web service](https://dev/maxmind.com/minfraud/chargeback/).
 
-See [WebService::MinFraud::Client](https://metacpan.org/pod/WebService::MinFraud::Client) for details on using the web service client
+See [WebService::MinFraud::Client](https://metacpan.org/pod/WebService%3A%3AMinFraud%3A%3AClient) for details on using the web service client
 API.
 
 # INSTALLATION
