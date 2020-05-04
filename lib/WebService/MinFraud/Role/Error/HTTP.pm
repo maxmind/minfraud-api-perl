@@ -3,7 +3,7 @@ package WebService::MinFraud::Role::Error::HTTP;
 use Moo::Role;
 use namespace::autoclean;
 
-our $VERSION = '1.009002';
+our $VERSION = '1.010000';
 
 use WebService::MinFraud::Types qw( HTTPStatus URIObject );
 
