@@ -117,7 +117,7 @@ Mateu Hunter <mhunter@maxmind.com>
 
 # COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2015 - 2019 by MaxMind, Inc.
+This software is copyright (c) 2015 - 2020 by MaxMind, Inc.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

@@ -20,7 +20,6 @@ use GeoIP2::Types 2.006001 qw(
     JSONObject
     LocalesArrayRef
     MaxMindID
-    MaxMindLicenseKey
     NonNegativeInt
     Num
     Str
@@ -43,7 +42,6 @@ our @EXPORT_OK = qw(
     JSONObject
     LocalesArrayRef
     MaxMindID
-    MaxMindLicenseKey
     NonNegativeInt
     NonNegativeNum
     Num

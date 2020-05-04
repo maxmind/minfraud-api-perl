@@ -1,5 +1,9 @@
 {{$NEXT}}
 
+- You may now use a license key object that stringifies to the actual license
+  key.
+
+
 1.009001 2019-06-18
 
 - Added deprecation notice
@@ -9,6 +13,7 @@
   - paylike
   - smartdebit
   - synapsefi
+
 
 1.009000 2018-09-10
 

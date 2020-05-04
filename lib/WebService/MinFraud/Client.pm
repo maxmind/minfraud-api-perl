@@ -13,7 +13,7 @@ use LWP::UserAgent;
 use Scalar::Util qw( blessed );
 use Sub::Quote qw( quote_sub );
 use Try::Tiny qw( catch try );
-use Types::Standard qw( InstanceOf );
+use Types::Standard qw( Defined InstanceOf );
 use URI ();
 use WebService::MinFraud::Error::Generic;
 use WebService::MinFraud::Error::HTTP;
@@ -22,8 +22,13 @@ use WebService::MinFraud::Model::Factors;
 use WebService::MinFraud::Model::Insights;
 use WebService::MinFraud::Model::Score;
 use WebService::MinFraud::Model::Chargeback;
-use WebService::MinFraud::Types
-    qw( JSONObject MaxMindID MaxMindLicenseKey Str URIObject UserAgentObject );
+use WebService::MinFraud::Types qw(
+    JSONObject
+    MaxMindID
+    Str
+    URIObject
+    UserAgentObject
+);
 use WebService::MinFraud::Validator;
 
 with 'WebService::MinFraud::Role::HasLocales';
@@ -56,7 +61,7 @@ has _json => (
 );
 has license_key => (
     is       => 'ro',
-    isa      => MaxMindLicenseKey,
+    isa      => Defined,
     required => 1,
 );
 
