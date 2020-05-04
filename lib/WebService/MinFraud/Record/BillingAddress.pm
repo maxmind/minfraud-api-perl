@@ -3,7 +3,7 @@ package WebService::MinFraud::Record::BillingAddress;
 use Moo;
 use namespace::autoclean;
 
-our $VERSION = '1.010000';
+our $VERSION = '1.010001';
 
 with 'WebService::MinFraud::Role::Record::Address';
 
