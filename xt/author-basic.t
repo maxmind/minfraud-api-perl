@@ -22,8 +22,8 @@ unless ( $ENV{MM_LICENSE_KEY} ) {
 }
 
 my $client = WebService::MinFraud::Client->new(
-    host       => $ENV{MM_MINFRAUD_HOST} || 'ct100-test.maxmind.com',
-    account_id => $ENV{MM_ACCOUNT_ID}    || 10,
+    host        => $ENV{MM_MINFRAUD_HOST} || 'ct100-test.maxmind.com',
+    account_id  => $ENV{MM_ACCOUNT_ID}    || 10,
     license_key => $ENV{MM_LICENSE_KEY},
 );
 

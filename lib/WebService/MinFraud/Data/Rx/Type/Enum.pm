@@ -27,7 +27,7 @@ sub guts_from_arg {
                     type     => '//rec',
                     required => {
                         type => '//str', # e.g. //int or //str. Really we only
-                             # want schemas that have a 'value' option
+                            # want schemas that have a 'value' option
                         values => {
                             type     => '//arr',
                             contents => '//def',
