@@ -512,7 +512,7 @@ subtest 'custom inputs' => sub {
         [ 'invalid key',             { InvalidKey  => 1 } ],
         [ 'string that is too long', { too_long    => 'x' x 256 } ],
         [ 'string with newline',     { has_newline => "test\n" } ],
-        [ 'arrayref custom inputs', [] ],
+        [ 'arrayref custom inputs',  [] ],
     ) {
         like(
             exception {

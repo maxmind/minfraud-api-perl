@@ -32,7 +32,7 @@ score.
            region             => 'CT',
            company            => 'Company',
            phone_country_code => '1',
-           phone_number       => '323-123-4321',
+           phone_number       => '123-456-7890',
            address            => '101 Address Rd.',
            last_name          => 'Last',
            country            => 'US',
@@ -43,11 +43,11 @@ score.
        credit_card => {
            bank_phone_country_code => '1',
            avs_result              => 'Y',
-           bank_phone_number       => '800-342-1232',
+           bank_phone_number       => '123-456-1234',
            last_4_digits           => '7643',
            cvv_result              => 'N',
            bank_name               => 'Bank of No Hope',
-           issuer_id_number        => '323132'
+           issuer_id_number        => '411111'
        },
        custom_inputs => {
            section                      => 'news',
@@ -57,7 +57,7 @@ score.
        },
        device => {
            accept_language => 'en-US,en;q=0.8',
-           ip_address      => '81.2.69.160',
+           ip_address      => '152.216.7.110',
            user_agent =>
                'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36',
        },
@@ -91,7 +91,7 @@ score.
            postal             => '73003',
            last_name          => 'ShipLast',
            country            => 'US',
-           phone_number       => '403-321-2323',
+           phone_number       => '123-456-7890',
            delivery_speed     => 'same_day',
            address_2          => 'St. 43',
            phone_country_code => '1',
