@@ -66,7 +66,7 @@ __END__
 
 This distribution provides an API for the
 L<MaxMind minFraud Score, Insights, and Factors web services|https://dev.maxmind.com/minfraud/>
-and the L<MaxMind minFraud Chargeback web service|https://dev/maxmind.com/minfraud/chargeback/>.
+and the L<MaxMind minFraud Report Transaction web service|https://dev.maxmind.com/minfraud/report-a-transaction>.
 
 See L<WebService::MinFraud::Client> for details on using the web service client
 API.
