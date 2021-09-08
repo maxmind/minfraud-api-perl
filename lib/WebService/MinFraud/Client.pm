@@ -390,7 +390,7 @@ __END__
 This class provides a client API for the MaxMind minFraud Score, Insights
 Factors web services, and the Chargeback web service. The B<Insights>
 service returns more data about a transaction than the B<Score> service.
-See the L<API documentation|https://dev.maxmind.com/minfraud/>
+See the L<API documentation|https://dev.maxmind.com/minfraud?lang=en>
 for more details.
 
 Each web service is represented by a different model class, and
@@ -529,7 +529,7 @@ dotted-quad notation or the IPv6 hexadecimal-colon notation.
 =head1 REQUEST METHODS
 
 All of the fraud service request methods require a device ip_address. See the
-L<API documentation for fraud services|https://dev.maxmind.com/minfraud/>
+L<API documentation for fraud services|https://dev.maxmind.com/minfraud?lang=en>
 for details on all the values that can be part of the request. Portions of the
 request hash with undefined and empty string values are automatically removed
 from the request.
@@ -571,7 +571,7 @@ support policies for dependencies and Perl itself.
 
 For details on the possible errors returned by the web service itself, please
 refer to the
-L<API documentation|https://dev.maxmind.com/minfraud/>.
+L<API documentation|https://dev.maxmind.com/minfraud?lang=en>.
 
 Prior to making the request to the web service, the request HashRef is passed
 to L<WebService::MinFraud::Validator> for checks. If the request fails
@@ -600,7 +600,7 @@ sort of (hopefully) useful error message.
 =head1 WHAT DATA IS RETURNED?
 
 Please see the
-L<API documentation|https://dev.maxmind.com/minfraud/>
+L<API documentation|https://dev.maxmind.com/minfraud?lang=en>
 for details on what data each web service may return.
 
 Every record class attribute has a corresponding predicate method so that you
