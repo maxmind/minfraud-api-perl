@@ -490,7 +490,9 @@ The default value for this argument is C<['en']>.
 
 The hostname of the minFraud web service used when making requests. This
 defaults to C<minfraud.maxmind.com>. In most cases, you do not need to set this
-explicitly.
+explicitly. However, during testing and development, you can set this option to
+'sandbox.maxmind.com' to use the Sandbox environment's host. The sandbox allows 
+you to experiment with the API without affecting your production data.
 
 =item * ua
 

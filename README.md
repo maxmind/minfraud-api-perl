@@ -20,6 +20,14 @@ version 1.010000
         license_key => 'abcdef123456',
     );
 
+    To use the Sandbox web service instead of the production web service, 
+    you can provide the host argument:
+    my $client = WebService::MinFraud::Client->new(
+        account_id  => 42,
+        license_key => 'abcdef123456',
+        host => 'sandbox.maxmind.com',
+    );
+
     # For the fraud services, the request HashRef must contain a 'device' key, with a value that is a
     # HashRef containing an 'ip_address' key with a valid IPv4 or IPv6 address.
     # All other keys/values are optional; see other modules in minFraud Perl API
